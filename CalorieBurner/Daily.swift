@@ -21,6 +21,13 @@ class Daily: NSManagedObject {
         return request
     }
     
+    public class func tableFetchRequest() -> NSFetchRequest<Daily> {
+        let request = NSFetchRequest<Daily>(entityName: "Daily")
+        request.sortDescriptors = [NSSortDescriptor(key: "year", ascending: false), NSSortDescriptor(key: "month", ascending: false), NSSortDescriptor(key: "day", ascending: false)]
+        
+        return request
+    }
+    
     static let dateFormatter: DateFormatter = {
         let fmt = DateFormatter()
         fmt.dateFormat = "YYYY-MM-DD"
