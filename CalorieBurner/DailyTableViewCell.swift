@@ -8,13 +8,45 @@
 
 import UIKit
 
+enum DailyItemType { case mass, energy }
+
 protocol DailyCellDelegate: class {
-    func didCancelEditing(cell: DailyTableViewCell, item: DailyTableViewCell.ItemType)
-    func didEndEditing(cell: DailyTableViewCell, item: DailyTableViewCell.ItemType, value: Double)
+    func didCancelEditing(cell: DailyTableViewCell, item: DailyItemType)
+    func didEndEditing(cell: DailyTableViewCell, with value: Measurement<UnitMass>)
+    func didEndEditing(cell: DailyTableViewCell, with value: Measurement<UnitEnergy>)
 }
 
-class DailyTableViewCell: UITableViewCell {
-    enum ItemType { case mass, energy }
+struct DailyItemMultipliers {
+    // TODO: - make this not hardcoded
+    
+    static let massMultipliers = [0.25, 0.5, 1, 2.5, 5, 10]
+    static var massSelectedMultiplier: Int? {
+        didSet {
+            guard let multiplier = massSelectedMultiplier else { return }
+            massValues = [Double](stride(from: 40, through: 250, by: massMultipliers[multiplier]))
+        }
+    }
+    static var massValues = [Double](stride(from: 40, through: 250, by: 1))
+    
+    static let energyMultipliers = [25.0, 50, 100, 250, 500]
+    static var energySelectedMultiplier: Int? {
+        didSet {
+            guard let multiplier = energySelectedMultiplier else { return }
+            energyValues = [Double](stride(from: 1000, through: 15000, by: energyMultipliers[multiplier]))
+        }
+    }
+    static var energyValues = [Double](stride(from: 1000, through: 15000, by: 100))
+}
+
+protocol DailyViewModel {
+    var massTextField: UITextField! { get set }
+    var energyTextField: UITextField! { get set }
+    
+    var mass: Measurement<UnitMass>? { get set }
+    var energy: Measurement<UnitEnergy>? { get set }
+}
+
+class DailyTableViewCell: UITableViewCell, DailyViewModel {
     
     private static let measurementFormatter: MeasurementFormatter = {
         let fmt = MeasurementFormatter()
@@ -31,26 +63,6 @@ class DailyTableViewCell: UITableViewCell {
 
         return fmt
     }()
-    
-    // TODO: - make this not hardcoded
-    
-    private static let massMultipliers = [0.25, 0.5, 1, 2.5, 5, 10]
-    private static var massSelectedMultiplier: Int? {
-        didSet {
-            guard let multiplier = massSelectedMultiplier else { return }
-            massValues = [Double](stride(from: 40, through: 250, by: massMultipliers[multiplier]))
-        }
-    }
-    private static var massValues = [Double](stride(from: 40, through: 250, by: 1))
-
-    private static let energyMultipliers = [25, 50, 100, 250, 500]
-    private static var energySelectedMultiplier: Int? {
-        didSet {
-            guard let multiplier = energySelectedMultiplier else { return }
-            energyValues = [Int](stride(from: 1000, through: 15000, by: energyMultipliers[multiplier]))
-        }
-    }
-    private static var energyValues = [Int](stride(from: 1000, through: 15000, by: 100))
 
     weak var cellDelegate: DailyCellDelegate?
     
@@ -81,7 +93,7 @@ class DailyTableViewCell: UITableViewCell {
                 title: "Cancel",
                 style: .plain,
                 target: self,
-                action: #selector(didCancelEditing(_:))
+                action: #selector(didCancelEditingMass(_:))
             )
             let flexibleButton = UIBarButtonItem(
                 barButtonSystemItem: .flexibleSpace,
@@ -92,7 +104,7 @@ class DailyTableViewCell: UITableViewCell {
                 title: "Next",
                 style: .done,
                 target: self,
-                action: #selector(setNextInput)
+                action: #selector(didEndEditingMass(_:))
             )
             toolbar.setItems(
                 [cancelButton, flexibleButton, nextButton],
@@ -128,7 +140,7 @@ class DailyTableViewCell: UITableViewCell {
                 title: "Cancel",
                 style: .plain,
                 target: self,
-                action: #selector(didCancelEditing(_:))
+                action: #selector(didCancelEditingEnergy(_:))
             )
             let flexibleButton = UIBarButtonItem(
                 barButtonSystemItem: .flexibleSpace,
@@ -139,7 +151,7 @@ class DailyTableViewCell: UITableViewCell {
                 title: "Done",
                 style: .done,
                 target: self,
-                action: #selector(didEndEditing(_:))
+                action: #selector(didEndEditingEnergy(_:))
             )
             toolbar.setItems(
                 [cancelButton, flexibleButton, doneButton],
@@ -152,7 +164,6 @@ class DailyTableViewCell: UITableViewCell {
     
     @IBOutlet weak var massTextField: UITextField!
     @IBOutlet weak var energyTextField: UITextField!
-    private var activeTextField: UITextField?
     
     /// Makes the input views display "No data"
     public func setEmpty() {
@@ -160,36 +171,30 @@ class DailyTableViewCell: UITableViewCell {
         energyTextField.text = "No data"
     }
     
-    @objc private func setNextInput(_ sender: AnyObject) {
-//        guard let selectedRow = massPickerView?.selectedRow(inComponent: 1) else
-//        { return }
-//
-//        let value = DailyTableViewCell.massValues[selectedRow]
-//
-//        cellDelegate?.didEndEditing(cell: self, item: .mass, value: value)
-        didEndEditing(sender)
-    }
-    
-    @objc private func didCancelEditing(_ sender: AnyObject) {
-        resignFirstResponder()
+    @objc private func didCancelEditingMass(_ sender: UIBarButtonItem) {
         endEditing(true)
-        print("canceled")
+        massBuffer = nil
+        cellDelegate?.didCancelEditing(cell: self, item: .mass)
     }
     
-    @objc private func didEndEditing(_ sender: AnyObject) {
-        resignFirstResponder()
+    @objc private func didCancelEditingEnergy(_ sender: UIBarButtonItem) {
         endEditing(true)
-        print("ended")
+        energyBuffer = nil
+        cellDelegate?.didCancelEditing(cell: self, item: .energy)
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    @objc private func didEndEditingMass(_ sender: UIBarButtonItem) {
+        endEditing(true)
+        mass = massBuffer
+        cellDelegate?.didEndEditing(cell: self, with: mass!)
         
-//        massPickerView = UIPickerView()
-//        massPickerToolbar = UIToolbar()
-//
-//        energyPickerView = UIPickerView()
-//        energyPickerToolbar = UIToolbar()
+        energyTextField.becomeFirstResponder()
+    }
+    
+    @objc private func didEndEditingEnergy(_ sender: UIBarButtonItem) {
+        endEditing(true)
+        energy = energyBuffer
+        cellDelegate?.didEndEditing(cell: self, with: energy!)
     }
     
     // TODO: - make units user selectable
@@ -201,11 +206,33 @@ class DailyTableViewCell: UITableViewCell {
             }
         }
     }
+    private var massBuffer: Measurement<UnitMass>? {
+        didSet {
+            if let buffer = massBuffer {
+                massTextField.text = DailyTableViewCell.measurementFormatter.string(from: buffer)
+            } else if let mass = mass {
+                massTextField.text = DailyTableViewCell.measurementFormatter.string(from: mass)
+            } else {
+                massTextField.text = "No data"
+            }
+        }
+    }
     
     public var energy: Measurement<UnitEnergy>? {
         didSet {
             if let energy = energy {
                 energyTextField.text = DailyTableViewCell.measurementFormatter.string(from: energy)
+            }
+        }
+    }
+    private var energyBuffer: Measurement<UnitEnergy>? {
+        didSet {
+            if let buffer = energyBuffer {
+                energyTextField.text = DailyTableViewCell.measurementFormatter.string(from: buffer)
+            } else if let energy = energy {
+                energyTextField.text = DailyTableViewCell.measurementFormatter.string(from: energy)
+            } else {
+                massTextField.text = "No data"
             }
         }
     }
@@ -218,9 +245,9 @@ extension DailyTableViewCell: UIPickerViewDataSource, UIPickerViewDelegate {
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == massPickerView {
-            return component == 0 ? DailyTableViewCell.massMultipliers.count : DailyTableViewCell.massValues.count
+            return component == 0 ? DailyItemMultipliers.massMultipliers.count : DailyItemMultipliers.massValues.count
         } else if pickerView == energyPickerView {
-            return component == 0 ? DailyTableViewCell.energyMultipliers.count : DailyTableViewCell.energyValues.count
+            return component == 0 ? DailyItemMultipliers.energyMultipliers.count : DailyItemMultipliers.energyValues.count
         }
 
         return 0
@@ -229,16 +256,16 @@ extension DailyTableViewCell: UIPickerViewDataSource, UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == massPickerView {
             if component == 0 {
-                return DailyTableViewCell.numberFormatter.string(from: DailyTableViewCell.massMultipliers[row] as NSNumber)
+                return DailyTableViewCell.numberFormatter.string(from: DailyItemMultipliers.massMultipliers[row] as NSNumber)
             }
 
-            return DailyTableViewCell.numberFormatter.string(from: DailyTableViewCell.massValues[row] as NSNumber)
+            return DailyTableViewCell.numberFormatter.string(from: DailyItemMultipliers.massValues[row] as NSNumber)
         } else if pickerView == energyPickerView {
             if component == 0 {
-                return DailyTableViewCell.numberFormatter.string(from: DailyTableViewCell.energyMultipliers[row] as NSNumber)
+                return DailyTableViewCell.numberFormatter.string(from: DailyItemMultipliers.energyMultipliers[row] as NSNumber)
             }
 
-            return DailyTableViewCell.numberFormatter.string(from: DailyTableViewCell.energyValues[row] as NSNumber)
+            return DailyTableViewCell.numberFormatter.string(from: DailyItemMultipliers.energyValues[row] as NSNumber)
         }
 
         return "Pero kvržica" // wtf
@@ -247,20 +274,19 @@ extension DailyTableViewCell: UIPickerViewDataSource, UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
             if pickerView == massPickerView {
-                DailyTableViewCell.massSelectedMultiplier = row
+                DailyItemMultipliers.massSelectedMultiplier = row
                 massPickerView?.reloadComponent(1)
             } else if pickerView == energyPickerView {
                 energyPickerView?.reloadComponent(1)
-                DailyTableViewCell.energySelectedMultiplier = row
+                DailyItemMultipliers.energySelectedMultiplier = row
             }
         } else if component == 1 {
             if pickerView == massPickerView {
-                mass = Measurement<UnitMass>(value: DailyTableViewCell.massValues[row], unit: .kilograms)
+                massBuffer = Measurement<UnitMass>(value: DailyItemMultipliers.massValues[row], unit: .kilograms)
             } else if pickerView == energyPickerView {
-                energy = Measurement<UnitEnergy>(value: Double(DailyTableViewCell.energyValues[row]), unit: .kilocalories)
+                energyBuffer = Measurement<UnitEnergy>(value: Double(DailyItemMultipliers.energyValues[row]), unit: .kilocalories)
             }
         }
     }
 }
-
 
