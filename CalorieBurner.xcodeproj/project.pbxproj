@@ -16,7 +16,7 @@
 		841B5AB920436FA300ACAD15 /* Daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AB820436FA300ACAD15 /* Daily.swift */; };
 		841B5ABB20445D2300ACAD15 /* DailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5ABA20445D2300ACAD15 /* DailyTableViewCell.swift */; };
 		841B5ABD204460D300ACAD15 /* DailyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5ABC204460D300ACAD15 /* DailyTableViewController.swift */; };
-		84EE818F2045B31000E15A74 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE818E2045B31000E15A74 /* PickerViewController.swift */; };
+		84EE818F2045B31000E15A74 /* DailyItemPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE818E2045B31000E15A74 /* DailyItemPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +31,7 @@
 		841B5AB820436FA300ACAD15 /* Daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daily.swift; sourceTree = "<group>"; };
 		841B5ABA20445D2300ACAD15 /* DailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewCell.swift; sourceTree = "<group>"; };
 		841B5ABC204460D300ACAD15 /* DailyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewController.swift; sourceTree = "<group>"; };
-		84EE818E2045B31000E15A74 /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
+		84EE818E2045B31000E15A74 /* DailyItemPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyItemPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +64,7 @@
 		841B5AA220436E7300ACAD15 /* CalorieBurner */ = {
 			isa = PBXGroup;
 			children = (
-				84EE818E2045B31000E15A74 /* PickerViewController.swift */,
+				84EE818E2045B31000E15A74 /* DailyItemPickerView.swift */,
 				841B5AA320436E7300ACAD15 /* AppDelegate.swift */,
 				841B5AA520436E7300ACAD15 /* ViewController.swift */,
 				841B5AA720436E7300ACAD15 /* Main.storyboard */,
@@ -156,7 +156,7 @@
 				841B5AB920436FA300ACAD15 /* Daily.swift in Sources */,
 				841B5AA420436E7300ACAD15 /* AppDelegate.swift in Sources */,
 				841B5AAC20436E7300ACAD15 /* CalorieBurner.xcdatamodeld in Sources */,
-				84EE818F2045B31000E15A74 /* PickerViewController.swift in Sources */,
+				84EE818F2045B31000E15A74 /* DailyItemPickerView.swift in Sources */,
 				841B5ABD204460D300ACAD15 /* DailyTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

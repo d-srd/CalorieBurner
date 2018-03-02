@@ -112,18 +112,14 @@ class DailyTableViewController: UITableViewController {
         } else {
             cell.setEmpty()
         }
-        
-//        let massPicker = UIPickerView()
-//        let massT = UIToolbar()
 
-        cell.massPickerView = UIPickerView()
-        cell.energyPickerView = UIPickerView()
-        cell.massPickerToolbar = UIToolbar()
-        cell.energyPickerToolbar = UIToolbar()
+        cell.massPickerView = DailyMassPickerView()
+        cell.energyPickerView = DailyEnergyPickerView()
+        cell.massPickerToolbar = DailyMassPickerToolbar()
+        cell.energyPickerToolbar = DailyEnergyPickerToolbar()
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "kita"
         
         let date = Calendar.current.date(byAdding: .day, value: section, to: startingDate)!
         

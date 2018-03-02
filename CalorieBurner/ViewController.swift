@@ -9,12 +9,72 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController {
+extension Notification.Name {
+    static let UnitMassChanged = Notification.Name("unitMassChanged")
+    static let UnitEnergyChanged = Notification.Name("unitEnergyChanged")
+}
+
+extension UserDefaults {
+    
+    var mass: UnitMass? {
+        get {
+            guard let encodedMassUnit = self.data(forKey: "massUnit") else { return nil }
+            return NSKeyedUnarchiver.unarchiveObject(with: encodedMassUnit) as? UnitMass
+        }
+        set {
+            guard let massUnit = newValue else { return }
+            let encodedMassUnit = NSKeyedArchiver.archivedData(withRootObject: massUnit)
+            self.set(encodedMassUnit, forKey: "massUnit")
+        }
+    }
+    
+    var energy: UnitEnergy? {
+        get {
+            guard let encodedEnergyUnit = self.data(forKey: "energyUnit") else {
+                return nil
+            }
+            return NSKeyedUnarchiver.unarchiveObject(with: encodedEnergyUnit) as? UnitEnergy
+        }
+        set {
+            guard let energyUnit = newValue else { return }
+            let encodedEnergyUnit = NSKeyedArchiver.archivedData(withRootObject: energyUnit)
+            self.set(encodedEnergyUnit, forKey: "energyUnit")
+        }
+    }
+//    func get(_ item: DailyItemType) -> Unit {
+//        switch item {
+//        case .mass:
+//            return self.data(forKey: "massUnit")
+//        case .energy:
+//            return self.data(forKey: "energyUnit")
+//        }
+//    }
+}
+
+class CRUDViewController: UIViewController {
     private enum DatabaseActionType { case add, delete, print }
 
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var massTextField: UITextField!
     @IBOutlet weak var energyTextField: UITextField!
+    
+    @IBAction func massUnitChanged(_ sender: UISegmentedControl) {
+        let unit = massUnits[sender.selectedSegmentIndex]
+//        let unitData = Data(bytes: , count: <#T##Int#>)
+        
+        UserDefaults.standard.mass = unit
+        NotificationCenter.default.post(name: .UnitMassChanged, object: unit)
+    }
+    
+    @IBAction func energyUnitChanged(_ sender: UISegmentedControl) {
+        let unit = energyUnits[sender.selectedSegmentIndex]
+        
+        UserDefaults.standard.energy = unit
+        NotificationCenter.default.post(name: .UnitEnergyChanged, object: unit)
+    }
+    
+    private let massUnits = [UnitMass.kilograms, .pounds, .stones]
+    private let energyUnits = [UnitEnergy.kilocalories, .kilojoules]
     
     let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -97,16 +157,32 @@ class ViewController: UIViewController {
         }
     }
     
+//    @objc func userDefaultsDidChange(_ notification: Notification) {
+//        let mass = UserDefaults.standard.string(forKey: "massUnit")
+//        let energy = UserDefaults.standard.string(forKey: "energyUnit")
+//
+//        let newMass = UnitMass(symbol: mass!)
+//        let x = Unit(symbol: mass!)
+//        let newEnergy = UnitEnergy(symbol: energy!)
+//        let y = Unit(symbol: energy!)
+//
+//        print(measurementFormatter.string(from: newMass), measurementFormatter.string(from: newEnergy),
+//              measurementFormatter.string(from: x), measurementFormatter.string(from: y)
+//              )
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+//        NotificationCenter.default.addObserver(
+//            self,
+//            selector: #selector(userDefaultsDidChange(_:)),
+//            name: UserDefaults.didChangeNotification,
+//            object: nil
+//        )
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
+    
+//    deinit {
+//        NotificationCenter.default.removeObserver(self, name: UserDefaults.didChangeNotification, object: nil)
+//    }
 }
-
