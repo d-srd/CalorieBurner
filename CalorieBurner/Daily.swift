@@ -30,7 +30,7 @@ class Daily: NSManagedObject {
     
     static let dateFormatter: DateFormatter = {
         let fmt = DateFormatter()
-        fmt.dateFormat = "YYYY-MM-DD"
+        fmt.dateFormat = "yyyy-MM-dd"
         
         return fmt
     }()

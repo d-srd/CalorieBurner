@@ -9,20 +9,16 @@
 import Foundation
 import CoreData
 
-//extension Dictionary {
-//    func contains(keyWhere predicate: (Key) -> Bool) -> Bool {
-//
-//    }
-//}
-
 class DailyFetchedResultsController {
     private var fetchRequest: NSFetchRequest<Daily>
     private var managedObjectContext: NSManagedObjectContext
     private let startingDate: Date
     private let endingDate: Date
     private var objects: [Daily]?
-    private var objectCache: [IndexPath : Daily]?
-    private var dateCache: [Date : IndexPath]?
+    
+    private var objectCache: [IndexPath : Daily] = [:]
+    private var dateCache: [Date : IndexPath] = [:]
+    
     private let prettyDateFormatter: DateFormatter = {
         let fmt = DateFormatter()
         fmt.dateStyle = .long
@@ -82,9 +78,9 @@ class DailyFetchedResultsController {
             deletes.count > 0
         {
             for object in deletes {
-                guard let indexPath = dateCache?[object.created] else { continue }
-                objectCache?[indexPath] = nil
-                dateCache?[object.created] = nil
+                guard let indexPath = dateCache[object.created] else { continue }
+                objectCache[indexPath] = nil
+                dateCache[object.created] = nil
             }
         }
     }
@@ -101,9 +97,11 @@ class DailyFetchedResultsController {
     }
     
     private func cache(_ object: Daily) {
-        guard let _indexPath = indexPath(for: object.created) else { return }
-        dateCache?[object.created] = _indexPath
-        objectCache?[_indexPath] = object
+        guard let _indexPath = indexPath(for: object.created) else {
+            return
+        }
+        dateCache[object.created] = _indexPath
+        objectCache[_indexPath] = object
     }
     
     func indexPath(for date: Date) -> IndexPath? {
@@ -111,10 +109,9 @@ class DailyFetchedResultsController {
             return nil
         }
         
-        guard let indexPath = dateCache?[date] else {
+        guard let indexPath = dateCache[date] else {
             let dayComponent = Calendar.current.dateComponents([.day], from: startingDate, to: date).day!
             
-            print("# sections: \(numberOfSections)\nSelected: \(dayComponent)")
             return IndexPath(row: 0, section: dayComponent)
         }
         
@@ -123,14 +120,14 @@ class DailyFetchedResultsController {
     }
     
     func object(at indexPath: IndexPath) -> Daily? {
-        return objectCache?[indexPath]
+        return objectCache[indexPath]
     }
     
     func indexPath(for object: Daily) -> IndexPath? {
         assert(
             startingDate <= object.created && object.created <= endingDate,
             "Invalid date bounds set")
-        guard let indexPath = dateCache?[object.created] else {
+        guard let indexPath = dateCache[object.created] else {
             return nil
         }
         

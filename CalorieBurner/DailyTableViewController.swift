@@ -13,7 +13,7 @@ class DailyTableViewController: UITableViewController {
     
     private let longDateFormatter: DateFormatter = {
         let fmt = DateFormatter()
-        fmt.dateFormat = "YYYY-MM-dd"
+        fmt.dateFormat = "yyyy-MM-dd"
         
         return fmt
     }()
@@ -44,6 +44,8 @@ class DailyTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        try? fetchedResultsController.performFetch()
         
         tableView.rowHeight = 100
         tableView.sectionHeaderHeight = 44
