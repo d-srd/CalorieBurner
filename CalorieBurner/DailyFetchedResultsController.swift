@@ -14,10 +14,10 @@ class DailyFetchedResultsController {
     private var managedObjectContext: NSManagedObjectContext
     private let startingDate: Date
     private let endingDate: Date
-    private var objects: [Daily]?
     
-    private var objectCache: [IndexPath : Daily] = [:]
-    private var dateCache: [Date : IndexPath] = [:]
+    private var objects: [Daily]?
+    private let objectCache = NSCache<NSIndexPath, Daily>()
+    private let dateCache = NSCache<NSDate, NSIndexPath>()
     
     private let prettyDateFormatter: DateFormatter = {
         let fmt = DateFormatter()
@@ -33,7 +33,7 @@ class DailyFetchedResultsController {
         managedObjectContext: NSManagedObjectContext,
         dateBounds: (start: Date, end: Date))
     {
-        self.dateCache = [:]
+//        self.dateCache = [:]
         self.fetchRequest = fetchRequest
         self.managedObjectContext = managedObjectContext
         self.startingDate = dateBounds.start
@@ -78,9 +78,14 @@ class DailyFetchedResultsController {
             deletes.count > 0
         {
             for object in deletes {
-                guard let indexPath = dateCache[object.created] else { continue }
-                objectCache[indexPath] = nil
-                dateCache[object.created] = nil
+                guard let indexPath = dateCache.object(forKey: object.created as NSDate) else {
+                    continue
+                }
+//                guard let indexPath = dateCache[object.created] else { continue }
+                objectCache.removeObject(forKey: indexPath)
+//                objectCache[indexPath] = nil
+//                dateCache[object.created] = nil
+                dateCache.removeObject(forKey: object.created as NSDate)
             }
         }
     }
@@ -100,8 +105,10 @@ class DailyFetchedResultsController {
         guard let _indexPath = indexPath(for: object.created) else {
             return
         }
-        dateCache[object.created] = _indexPath
-        objectCache[_indexPath] = object
+        dateCache.setObject(_indexPath as NSIndexPath, forKey: object.created as NSDate)
+//        dateCache[object.created] = _indexPath
+        objectCache.setObject(object, forKey: _indexPath as NSIndexPath)
+//        objectCache[_indexPath] = object
     }
     
     func indexPath(for date: Date) -> IndexPath? {
@@ -109,7 +116,8 @@ class DailyFetchedResultsController {
             return nil
         }
         
-        guard let indexPath = dateCache[date] else {
+//        guard let indexPath = dateCache[date] else {
+        guard let indexPath = dateCache.object(forKey: date as NSDate) as IndexPath? else {
             let dayComponent = Calendar.current.dateComponents([.day], from: startingDate, to: date).day!
             
             return IndexPath(row: 0, section: dayComponent)
@@ -120,14 +128,16 @@ class DailyFetchedResultsController {
     }
     
     func object(at indexPath: IndexPath) -> Daily? {
-        return objectCache[indexPath]
+        return objectCache.object(forKey: indexPath as NSIndexPath)
+//        return objectCache[indexPath]
     }
     
     func indexPath(for object: Daily) -> IndexPath? {
         assert(
             startingDate <= object.created && object.created <= endingDate,
             "Invalid date bounds set")
-        guard let indexPath = dateCache[object.created] else {
+//        guard let indexPath = dateCache[object.created] else {
+        guard let indexPath = dateCache.object(forKey: object.created as NSDate) as IndexPath? else {
             return nil
         }
         
