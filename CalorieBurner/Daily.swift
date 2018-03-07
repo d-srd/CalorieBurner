@@ -8,6 +8,9 @@
 
 import CoreData
 
+typealias Mass = Measurement<UnitMass>
+typealias Energy = Measurement<UnitEnergy>
+
 /// Representation of a single day containing a mass and an energy
 class Daily: NSManagedObject {
     public class func makeFetchRequest() -> NSFetchRequest<Daily> {
@@ -59,5 +62,10 @@ class Daily: NSManagedObject {
             
             print("\(year)-\(month)-\(day)")
         }
+    }
+    
+    convenience init(context: NSManagedObjectContext, date: Date) {
+        self.init(context: context)
+        created = date
     }
 }

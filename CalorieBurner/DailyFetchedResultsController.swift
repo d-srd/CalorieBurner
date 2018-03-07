@@ -19,6 +19,10 @@ class DailyFetchedResultsController {
     private let objectCache = NSCache<NSIndexPath, Daily>()
     private let dateCache = NSCache<NSDate, NSIndexPath>()
     
+    // used only for the function to get date from indexpath
+    
+    private var inverseDateCache = [IndexPath : Date]()
+    
     private let prettyDateFormatter: DateFormatter = {
         let fmt = DateFormatter()
         fmt.dateStyle = .long
@@ -86,6 +90,7 @@ class DailyFetchedResultsController {
 //                objectCache[indexPath] = nil
 //                dateCache[object.created] = nil
                 dateCache.removeObject(forKey: object.created as NSDate)
+                inverseDateCache[indexPath as IndexPath] = nil
             }
         }
     }
@@ -106,6 +111,7 @@ class DailyFetchedResultsController {
             return
         }
         dateCache.setObject(_indexPath as NSIndexPath, forKey: object.created as NSDate)
+        inverseDateCache[_indexPath] = object.created
 //        dateCache[object.created] = _indexPath
         objectCache.setObject(object, forKey: _indexPath as NSIndexPath)
 //        objectCache[_indexPath] = object
@@ -142,6 +148,12 @@ class DailyFetchedResultsController {
         }
         
         return indexPath
+    }
+    
+    
+    // TODO: - move this out of here
+    func date(for indexPath: IndexPath) -> Date? {
+        return Calendar.current.date(byAdding: .day, value: indexPath.section, to: startingDate)
     }
     
     func titleForSection(_ section: Int) -> String? {

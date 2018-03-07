@@ -47,10 +47,26 @@ class DailyTableViewController: UITableViewController {
         
         try? fetchedResultsController.performFetch()
         
-        tableView.rowHeight = 100
+        tableView.rowHeight = 151
         tableView.sectionHeaderHeight = 44
 //        print(fetchedResultsController.indexPath(for: Date()))
         scrollToItem(at: Date(), animated: false)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(unitsChanged(_:)),
+            name: .UnitMassChanged,
+            object: nil
+        )
+    }
+    
+    @objc private func unitsChanged(_ sender: Any) {
+        tableView.reloadData()
+        scrollToItem(at: Date(), animated: false)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .UnitMassChanged, object: nil)
     }
 
     // MARK: - Table view data source
@@ -74,8 +90,8 @@ class DailyTableViewController: UITableViewController {
         guard let cell = cell as? DailyTableViewCell else { return }
         
         if let object = fetchedResultsController.object(at: indexPath) {
-            cell.mass = object.mass
-            cell.energy = object.energy
+            cell.mass = object.mass?.converted(to: UserDefaults.standard.mass ?? .kilograms)
+            cell.energy = object.energy?.converted(to: UserDefaults.standard.energy ?? .kilocalories)
         } else {
             cell.setEmpty()
         }
@@ -84,6 +100,7 @@ class DailyTableViewController: UITableViewController {
         cell.energyPickerView = DailyEnergyPickerView()
         cell.massPickerToolbar = DailyMassPickerToolbar()
         cell.energyPickerToolbar = DailyEnergyPickerToolbar()
+        cell.cellDelegate = self
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -108,3 +125,38 @@ class DailyTableViewController: UITableViewController {
 //    }
 }
 
+extension DailyTableViewController: DailyCellDelegate {
+    func didCancelEditing(cell: DailyTableViewCell, item: DailyItemType) {
+        print("canceled, OH NO")
+    }
+    
+    func didEndEditing(cell: DailyTableViewCell, with value: Measurement<UnitMass>) {
+        guard let indexPath = tableView.indexPath(for: cell)
+        else { print("error"); return }
+        
+        guard let date = fetchedResultsController.date(for: indexPath) else {
+            print("error2"); return
+        }
+
+        
+        do {
+            let entry = try CoreDataStack.shared.updateOrCreate(at: date, mass: value, energy: nil)
+        } catch {
+            print((error as NSError).localizedDescription)
+        }
+    }
+    
+    func didEndEditing(cell: DailyTableViewCell, with value: Measurement<UnitEnergy>) {
+        guard let indexPath = tableView.indexPath(for: cell),
+            let date = fetchedResultsController.date(for: indexPath)
+        else { print("error"); return }
+        
+        do {
+            let entry = try CoreDataStack.shared.updateOrCreate(at: date, mass: nil, energy: value)
+        } catch {
+            print((error as NSError).localizedDescription)
+        }
+    }
+    
+    
+}

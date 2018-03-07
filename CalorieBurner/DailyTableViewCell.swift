@@ -33,6 +33,12 @@ class DailyTableViewCell: UITableViewCell, DailyViewModel {
         let fmt = MeasurementFormatter()
         fmt.unitOptions = .providedUnit
         fmt.unitStyle = .medium
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+        
+        fmt.numberFormatter = numberFormatter
 
         return fmt
     }()
@@ -97,7 +103,7 @@ class DailyTableViewCell: UITableViewCell, DailyViewModel {
             if let mass = mass {
                 massTextField.text = DailyTableViewCell.measurementFormatter.string(from: mass)
             } else {
-                massTextField.text = "No data"
+                massTextField.placeholder = "No data"
             }
         }
     }
@@ -108,7 +114,7 @@ class DailyTableViewCell: UITableViewCell, DailyViewModel {
             } else if let mass = mass {
                 massTextField.text = DailyTableViewCell.measurementFormatter.string(from: mass)
             } else {
-                massTextField.text = "No data"
+                massTextField.placeholder = "No data"
             }
         }
     }
@@ -118,7 +124,7 @@ class DailyTableViewCell: UITableViewCell, DailyViewModel {
             if let energy = energy {
                 energyTextField.text = DailyTableViewCell.measurementFormatter.string(from: energy)
             } else {
-                energyTextField.text = "No data"
+                energyTextField.placeholder = "No data"
             }
         }
     }
@@ -129,7 +135,7 @@ class DailyTableViewCell: UITableViewCell, DailyViewModel {
             } else if let energy = energy {
                 energyTextField.text = DailyTableViewCell.measurementFormatter.string(from: energy)
             } else {
-                energyTextField.text = "No data"
+                energyTextField.placeholder = "No data"
             }
         }
     }
@@ -138,9 +144,9 @@ class DailyTableViewCell: UITableViewCell, DailyViewModel {
 extension DailyTableViewCell: DailyItemPickerDelegate {
     func dailyPicker(_ picker: UIPickerView, valueDidChangeTo: Double) {
         if picker == massPickerView {
-            massBuffer = Measurement<UnitMass>(value: valueDidChangeTo, unit: UserDefaults.standard.mass!)
+            massBuffer = Measurement<UnitMass>(value: valueDidChangeTo, unit: UserDefaults.standard.mass ?? .kilograms)
         } else {
-            energyBuffer = Measurement<UnitEnergy>(value: valueDidChangeTo, unit: UserDefaults.standard.energy!)
+            energyBuffer = Measurement<UnitEnergy>(value: valueDidChangeTo, unit: UserDefaults.standard.energy ?? .kilocalories)
         }
         
         print(valueDidChangeTo)

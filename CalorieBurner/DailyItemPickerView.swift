@@ -8,6 +8,7 @@
 
 import UIKit
 
+// TODO: - make this a bit less... stupid
 /// Used for DailyPickerView datasource and delegate methods
 class DailyItemMultipliers {
     // TODO: - make this not hardcoded
