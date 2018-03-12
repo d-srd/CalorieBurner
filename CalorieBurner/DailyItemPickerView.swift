@@ -152,16 +152,12 @@ class DailyMassPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDel
     
     var selectedMass: Double {
         return DailyMassPickerDataSource.shared.steps[selectedStepper][selectedRow(inComponent: 1)]
-//        return DailyItemMultipliers.massValues[selectedRow(inComponent: 1)]
     }
     
-    var selectedStepper = 0 {
-        didSet {
-            let rowToBeSelected = DailyMassPickerDataSource.shared.indexOfClosest(
-                value: selectedRow(inComponent: 1),
-                from: oldValue, to: selectedStepper)
-            selectRow(rowToBeSelected, inComponent: 1, animated: false)
-        }
+    var selectedStepper = 0
+    
+    private func getClosest(_ index: Int, from oldStepperIndex: Int, to currentStepperIndex: Int) -> Int {
+        return DailyMassPickerDataSource.shared.indexOfClosest(value: index, from: oldStepperIndex, to: currentStepperIndex)
     }
     
     override init(frame: CGRect) {
@@ -197,21 +193,19 @@ class DailyMassPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDel
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0 {
             let multiplier = DailyMassPickerDataSource.shared.stepper[row]
-//            let multiplier = DailyItemMultipliers.massMultipliers[row]
             return DailyMassPickerView.numberFormatter.string(from: multiplier as NSNumber)
         } else {
             let value = DailyMassPickerDataSource.shared.steps[selectedStepper][row]
-//            let value = DailyItemMultipliers.massValues[row]
             return DailyMassPickerView.numberFormatter.string(from: value as NSNumber)
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
+            let newIndex = getClosest(selectedRow(inComponent: 1), from: selectedStepper, to: row)
             selectedStepper = row
-//            DailyItemMultipliers.massSelectedMultiplier = row
             reloadComponent(1)
-//            selectRow(1, inComponent: 1, animated: false)
+            selectRow(newIndex, inComponent: 1, animated: false)
         } else {
             dailyDelegate?.dailyPicker(self, valueDidChangeTo: selectedMass)
         }
@@ -290,17 +284,13 @@ class DailyEnergyPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewD
     
     var selectedEnergy: Double {
         return DailyEnergyPickerDataSource.shared.steps[selectedStepper][selectedRow(inComponent: 1)]
-//        return DailyItemMultipliers.energyValues[selectedRow(inComponent: 1)]
     }
-        
-    var selectedStepper = 0 {
-        didSet {
-            let rowToBeSelected = DailyEnergyPickerDataSource.shared.indexOfClosest(
-                value: selectedRow(inComponent: 1),
-                from: oldValue, to: selectedStepper)
-            selectRow(rowToBeSelected, inComponent: 1, animated: false)
-        }
+    
+    private func getClosest(_ index: Int, from oldStepperIndex: Int, to currentStepperIndex: Int) -> Int {
+        return DailyEnergyPickerDataSource.shared.indexOfClosest(value: index, from: oldStepperIndex, to: currentStepperIndex)
     }
+    
+    var selectedStepper = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -327,32 +317,29 @@ class DailyEnergyPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewD
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0 {
             return DailyEnergyPickerDataSource.shared.stepper.count
-//            return DailyItemMultipliers.energyMultipliers.count
         } else {
             return DailyEnergyPickerDataSource.shared.steps[selectedStepper].count
-//            return DailyItemMultipliers.energyValues.count
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0 {
             let multiplier = DailyEnergyPickerDataSource.shared.stepper[row]
-//            let multiplier = DailyItemMultipliers.energyMultipliers[row]
             return DailyEnergyPickerView.numberFormatter.string(from: multiplier as NSNumber)
         } else {
             let value = DailyEnergyPickerDataSource.shared.steps[selectedStepper][row]
-//            let value = DailyItemMultipliers.energyValues[row]
             return DailyEnergyPickerView.numberFormatter.string(from: value as NSNumber)
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
+            let newIndex = getClosest(selectedRow(inComponent: 1), from: selectedStepper, to: row)
             selectedStepper = row
             reloadComponent(1)
+            selectRow(newIndex, inComponent: 1, animated: false)
         } else {
-//            selectedEnergy = DailyItemMultipliers.energyValues[row]
-            dailyDelegate?.dailyPicker(self, valueDidChangeTo: Double(selectedEnergy))
+            dailyDelegate?.dailyPicker(self, valueDidChangeTo: selectedEnergy)
         }
     }
 }
