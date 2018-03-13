@@ -14,9 +14,9 @@ import UIKit
 }
 
 protocol DailyCellDelegate: class {
-    func didCancelEditing(cell: DailyTableViewCell, item: DailyItemType)
-    func didEndEditing(cell: DailyTableViewCell, with value: Measurement<UnitMass>)
-    func didEndEditing(cell: DailyTableViewCell, with value: Measurement<UnitEnergy>)
+    func didCancelEditing(cell: DailyCollectionViewCell, item: DailyItemType)
+    func didEndEditing(cell: DailyCollectionViewCell, with value: Measurement<UnitMass>)
+    func didEndEditing(cell: DailyCollectionViewCell, with value: Measurement<UnitEnergy>)
 }
 
 protocol DailyViewModel {
@@ -27,7 +27,7 @@ protocol DailyViewModel {
     var energy: Measurement<UnitEnergy>? { get set }
 }
 
-class DailyTableViewCell: UITableViewCell, DailyViewModel {
+class DailyCollectionViewCell: UICollectionViewCell, DailyViewModel {
     
     private static let measurementFormatter: MeasurementFormatter = {
         let fmt = MeasurementFormatter()
@@ -101,20 +101,20 @@ class DailyTableViewCell: UITableViewCell, DailyViewModel {
     public var mass: Measurement<UnitMass>? {
         didSet {
             if let mass = mass {
-                massTextField.text = DailyTableViewCell.measurementFormatter.string(from: mass)
+                massTextField.text = DailyCollectionViewCell.measurementFormatter.string(from: mass)
             } else {
-                massTextField.placeholder = "No data"
+                massTextField.text = "No data"
             }
         }
     }
     private var massBuffer: Measurement<UnitMass>? {
         didSet {
             if let buffer = massBuffer {
-                massTextField.text = DailyTableViewCell.measurementFormatter.string(from: buffer)
+                massTextField.text = DailyCollectionViewCell.measurementFormatter.string(from: buffer)
             } else if let mass = mass {
-                massTextField.text = DailyTableViewCell.measurementFormatter.string(from: mass)
+                massTextField.text = DailyCollectionViewCell.measurementFormatter.string(from: mass)
             } else {
-                massTextField.placeholder = "No data"
+                massTextField.text = "No data"
             }
         }
     }
@@ -122,26 +122,26 @@ class DailyTableViewCell: UITableViewCell, DailyViewModel {
     public var energy: Measurement<UnitEnergy>? {
         didSet {
             if let energy = energy {
-                energyTextField.text = DailyTableViewCell.measurementFormatter.string(from: energy)
+                energyTextField.text = DailyCollectionViewCell.measurementFormatter.string(from: energy)
             } else {
-                energyTextField.placeholder = "No data"
+                energyTextField.text = "No data"
             }
         }
     }
     private var energyBuffer: Measurement<UnitEnergy>? {
         didSet {
             if let buffer = energyBuffer {
-                energyTextField.text = DailyTableViewCell.measurementFormatter.string(from: buffer)
+                energyTextField.text = DailyCollectionViewCell.measurementFormatter.string(from: buffer)
             } else if let energy = energy {
-                energyTextField.text = DailyTableViewCell.measurementFormatter.string(from: energy)
+                energyTextField.text = DailyCollectionViewCell.measurementFormatter.string(from: energy)
             } else {
-                energyTextField.placeholder = "No data"
+                energyTextField.text = "No data"
             }
         }
     }
 }
 
-extension DailyTableViewCell: DailyItemPickerDelegate {
+extension DailyCollectionViewCell: DailyItemPickerDelegate {
     func dailyPicker(_ picker: UIPickerView, valueDidChangeTo: Double) {
         if picker == massPickerView {
             massBuffer = Measurement<UnitMass>(value: valueDidChangeTo, unit: UserDefaults.standard.mass ?? .kilograms)
@@ -153,7 +153,7 @@ extension DailyTableViewCell: DailyItemPickerDelegate {
     }
 }
 
-extension DailyTableViewCell: DailyToolbarDelegate {
+extension DailyCollectionViewCell: DailyToolbarDelegate {
     func didCancelEditing(_ type: DailyItemType) {
         endEditing(true)
         
