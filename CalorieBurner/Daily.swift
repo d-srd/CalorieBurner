@@ -8,11 +8,22 @@
 
 import CoreData
 
+extension Date {
+    var startOfDay: Date {
+        return Calendar.current.startOfDay(for: self)
+    }
+    
+    var endOfDay: Date {
+        let components = DateComponents(day: 1, second: -1)
+        return Calendar.current.date(byAdding: components, to: self)!
+    }
+}
+
 typealias Mass = Measurement<UnitMass>
 typealias Energy = Measurement<UnitEnergy>
 
 /// Representation of a single day containing a mass and an energy
-class Daily: NSManagedObject {
+public class Daily: NSManagedObject {
     public class func makeFetchRequest() -> NSFetchRequest<Daily> {
         return NSFetchRequest<Daily>(entityName: "Daily")
     }
@@ -24,48 +35,123 @@ class Daily: NSManagedObject {
         return request
     }
     
+    public class func fetchRequest(in dateRange: (start: Date, end: Date)) -> NSFetchRequest<Daily> {
+        let request = NSFetchRequest<Daily>(entityName: "Daily")
+        request.predicate = NSPredicate(
+            format: "created >= %@ AND created <= %@",
+            argumentArray: [dateRange.start.startOfDay, dateRange.end.endOfDay]
+        )
+        request.sortDescriptors = [NSSortDescriptor(key: "created", ascending: false)]
+        
+        return request
+    }
+    
+    public class func dictionaryFetchRequest(
+        in dateRange: (start: Date, end: Date),
+        properties: [String]
+        ) -> NSFetchRequest<NSDictionary>
+    {
+        let request = NSFetchRequest<NSDictionary>(entityName: "Daily")
+        request.resultType = .dictionaryResultType
+        request.propertiesToFetch = properties
+        request.predicate = isInDateBetweenPredicate(start: dateRange.start, end: dateRange.end)
+        
+        return request
+    }
+    
     public class func tableFetchRequest() -> NSFetchRequest<Daily> {
         let request = NSFetchRequest<Daily>(entityName: "Daily")
-        request.sortDescriptors = [NSSortDescriptor(key: "year", ascending: false), NSSortDescriptor(key: "month", ascending: false), NSSortDescriptor(key: "day", ascending: false)]
+        request.sortDescriptors = [NSSortDescriptor(key: "created", ascending: false)]
         
         return request
     }
     
     static let dateFormatter: DateFormatter = {
         let fmt = DateFormatter()
-        fmt.dateFormat = "yyyy-MM-dd"
+        fmt.dateFormat = "YYYY-MM-dd"
         
         return fmt
     }()
     
     public class func isInSameDayPredicate(as date: Date) -> NSPredicate {
-        let newYear = Calendar.current.component(.year, from: date)
-        let newMonth = Calendar.current.component(.month, from: date)
-        let newDay = Calendar.current.component(.day, from: date)
+        let startOfDay = date.startOfDay
+        let endOfDay = date.endOfDay
         
-        return NSPredicate(format: "year == %@ AND month == %@ AND day == %@", argumentArray: [newYear, newMonth, newDay])
+        return NSPredicate(
+            format: "created >= %@ AND created <= %@",
+            argumentArray: [startOfDay, endOfDay]
+        )
     }
     
-    public var created: Date {
-        get {
-            let dateString = "\(year)-\(month)-\(day)"
-            return Daily.dateFormatter.date(from: dateString)!
-        }
-        set {
-            let newYear = Calendar.current.component(.year, from: newValue)
-            let newMonth = Calendar.current.component(.month, from: newValue)
-            let newDay = Calendar.current.component(.day, from: newValue)
-//            let newDate = Calendar.current.dateComponents([.year, .month, .day], from: newValue)
-            year = Int16(newYear)
-            month = Int16(newMonth)
-            day = Int16(newDay)
-            
-            print("\(year)-\(month)-\(day)")
-        }
+    public class func isInDateBetweenPredicate(start: Date, end: Date) -> NSPredicate {
+        let startDate = start.startOfDay
+        let endDate = end.endOfDay
+        
+        return NSPredicate(
+            format: "created >= %@ AND created <= %@",
+            argumentArray: [startDate, endDate]
+        )
     }
     
     convenience init(context: NSManagedObjectContext, date: Date) {
         self.init(context: context)
         created = date
     }
+    
+    var mass: Mass? {
+        get {
+            if let massValue = massValue {
+                return Mass(value: massValue.doubleValue, unit: .kilograms)
+            }
+            return nil
+        }
+        set {
+            if let mass = newValue {
+                massValue =  NSDecimalNumber(value: mass.converted(to: .kilograms).value)
+            } else {
+                massValue = nil
+            }
+        }
+    }
+    
+    var energy: Energy? {
+        get {
+            if let energyValue = energyValue {
+                return Energy(value: energyValue.doubleValue, unit: .kilocalories)
+            }
+            return nil
+        }
+        set {
+            if let energy = newValue {
+                energyValue = NSDecimalNumber(value:  energy.converted(to: .kilocalories).value)
+            } else {
+                energyValue = nil
+            }
+        }
+    }
+    
+    public static var massExpression = NSExpression(forKeyPath: "massValue")
+    public static var energyExpression = NSExpression(forKeyPath: "energyValue")
+    
+    public static var averageMassDescription: NSExpressionDescription = {
+        let description = NSExpressionDescription()
+        let avgExpression = NSExpression(forFunction: "average:", arguments: [massExpression])
+        description.expression = avgExpression
+        description.name = "avgMass"
+        description.expressionResultType = .doubleAttributeType
+        
+        return description
+    }()
+    
+    public static var totalEnergyDescription: NSExpressionDescription = {
+        let description = NSExpressionDescription()
+        let sumExpression = NSExpression(forFunction: "sum:", arguments: [energyExpression])
+        description.expression = sumExpression
+        description.name = "sumEnergy"
+        description.expressionResultType = .doubleAttributeType
+        
+        return description
+    }()
+    
+    public static var dateSortDescriptor = NSSortDescriptor(key: "created", ascending: false)
 }

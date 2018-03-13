@@ -37,8 +37,12 @@ class CoreDataStack {
         
         do {
             if let daily = try viewContext.fetch(request).first {
-                if mass != nil { daily.mass = mass }
-                if energy != nil { daily.energy = energy }
+                if mass != nil {
+                    daily.mass = mass!
+                }
+                if energy != nil {
+                    daily.energy = energy!
+                }
                 try viewContext.save()
                 
                 return daily
@@ -52,6 +56,16 @@ class CoreDataStack {
                 
                 return daily
             }
+        } catch {
+            throw error
+        }
+    }
+    
+    func fetchAll() throws -> [Daily] {
+        let request = Daily.tableFetchRequest()
+        
+        do {
+            return try viewContext.fetch(request)
         } catch {
             throw error
         }
