@@ -71,6 +71,7 @@ open class DesignableView: GradientView {
     }
 }
 
+// this is horrible
 @IBDesignable
 open class ShadowView: UIView {
     open override var bounds: CGRect {

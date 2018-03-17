@@ -16,8 +16,8 @@ class DailyFetchedResultsController {
     private let endingDate: Date
     
     private var objects: [Daily]?
-    private let objectCache = NSCache<NSIndexPath, Daily>()
-    private let dateCache = NSCache<NSDate, NSIndexPath>()
+    private var objectCache = [IndexPath : Daily]()
+    private var dateCache = [Date : IndexPath]()
     
     // used only for the function to get date from indexpath
     
@@ -82,15 +82,14 @@ class DailyFetchedResultsController {
             deletes.count > 0
         {
             for object in deletes {
-                guard let indexPath = dateCache.object(forKey: object.created as NSDate) else {
+                guard let indexPath = dateCache[object.created!] else {
                     continue
                 }
-//                guard let indexPath = dateCache[object.created] else { continue }
-                objectCache.removeObject(forKey: indexPath)
+                objectCache[indexPath] = nil
 //                objectCache[indexPath] = nil
 //                dateCache[object.created] = nil
-                dateCache.removeObject(forKey: object.created as NSDate)
-                inverseDateCache[indexPath as IndexPath] = nil
+                dateCache[object.created!] = nil
+                inverseDateCache[indexPath] = nil
             }
         }
     }
@@ -107,14 +106,14 @@ class DailyFetchedResultsController {
     }
     
     private func cache(_ object: Daily) {
-        guard let _indexPath = indexPath(for: object.created) else {
+        guard let _indexPath = indexPath(for: object.created!) else {
             return
         }
-        dateCache.setObject(_indexPath as NSIndexPath, forKey: object.created as NSDate)
+        dateCache[object.created!] = _indexPath
         inverseDateCache[_indexPath] = object.created
 //        dateCache[object.created] = _indexPath
-        objectCache.setObject(object, forKey: _indexPath as NSIndexPath)
-//        objectCache[_indexPath] = object
+//        objectCache.setObject(object, forKey: _indexPath as NSIndexPath)
+        objectCache[_indexPath] = object
     }
     
     func indexPath(for date: Date) -> IndexPath? {
@@ -122,28 +121,27 @@ class DailyFetchedResultsController {
             return nil
         }
         
-//        guard let indexPath = dateCache[date] else {
-        guard let indexPath = dateCache.object(forKey: date as NSDate) as IndexPath? else {
+        guard let indexPath = dateCache[date] else {
+//        guard let indexPath = dateCache.object(forKey: date as NSDate) as IndexPath? else {
             let dayComponent = Calendar.current.dateComponents([.day], from: startingDate, to: date).day!
             
             return IndexPath(row: 0, section: dayComponent)
         }
         
-        print(indexPath)
         return indexPath
     }
     
     func object(at indexPath: IndexPath) -> Daily? {
-        return objectCache.object(forKey: indexPath as NSIndexPath)
-//        return objectCache[indexPath]
+//        return objectCache.object(forKey: indexPath as NSIndexPath)
+        return objectCache[indexPath]
     }
     
     func indexPath(for object: Daily) -> IndexPath? {
         assert(
-            startingDate <= object.created && object.created <= endingDate,
+            startingDate <= object.created! && object.created! <= endingDate,
             "Invalid date bounds set")
-//        guard let indexPath = dateCache[object.created] else {
-        guard let indexPath = dateCache.object(forKey: object.created as NSDate) as IndexPath? else {
+        guard let indexPath = dateCache[object.created!] else {
+//        guard let indexPath = dateCache.object(forKey: object.created as NSDate) as IndexPath? else {
             return nil
         }
         
@@ -153,7 +151,8 @@ class DailyFetchedResultsController {
     
     // TODO: - move this out of here
     func date(for indexPath: IndexPath) -> Date? {
-        return Calendar.current.date(byAdding: .day, value: indexPath.section, to: startingDate)
+        let d = Calendar.current.date(byAdding: .day, value: indexPath.section, to: startingDate)
+        return d
     }
     
     func titleForSection(_ section: Int) -> String? {

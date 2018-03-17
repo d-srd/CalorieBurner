@@ -135,7 +135,7 @@ class CRUDViewController: UIViewController {
                 guard let mass = daily.mass, let energy = daily.energy else {
                     return
                 }
-                print(Daily.dateFormatter.string(from: daily.created))
+                print(Daily.dateFormatter.string(from: daily.created!))
                 print(measurementFormatter.string(from: mass))
                 print(measurementFormatter.string(from: energy))
             } else {
@@ -157,6 +157,28 @@ class CRUDViewController: UIViewController {
         }
     }
     
+    @IBAction func printLiterallyEveryhing(_ sender: UIButton) {
+        mediator.avg(.mass)
+        
+//        if let things = try? CoreDataStack.shared.fetchAll() {
+//            for thing in things { print(thing.created) }
+//        }
+        
+        
+//        if let stuff = try? CoreDataStack.shared.fetchAll() {
+//            for thing in stuff {
+//                print(thing.created)
+//                if thing.mass != nil {
+//                    print(measurementFormatter.string(from: thing.mass!))
+//                }
+//                if thing.energy != nil {
+//                    print(measurementFormatter.string(from: thing.energy!))
+//                }
+//                print(thing.isFromHealthKit)
+//            }
+//        }
+    }
+    
 //    @objc func userDefaultsDidChange(_ notification: Notification) {
 //        let mass = UserDefaults.standard.string(forKey: "massUnit")
 //        let energy = UserDefaults.standard.string(forKey: "energyUnit")
@@ -171,8 +193,12 @@ class CRUDViewController: UIViewController {
 //              )
 //    }
     
+    let mediator = TDEEMediator(startDate: Calendar.current.date(from: DateComponents(year: 2000, month: 01, day: 01))!, endDate: Calendar.current.date(from: DateComponents(year: 2030, month: 12, day: 31))!)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        mediator.sum(.energy)
         
 //        NotificationCenter.default.addObserver(
 //            self,
