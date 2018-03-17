@@ -125,18 +125,28 @@ extension MonthlyCalendarViewController: JTAppleCalendarViewDelegate {
         // text
         cell.dayLabel.text = cellState.text
         
-        // selection view
-        cell.selectionView.isHidden = !calendarView.selectedDates.contains(cellState.date)
-        
-        // color
+        // handle cell selection
         if calendarView.selectedDates.contains(cellState.date) {
-            cell.dayLabel.textColor = Colors.selected
-        } else if Calendar.current.isDateInToday(cellState.date) {
-            cell.dayLabel.textColor = Colors.today
-        } else if cellState.dateBelongsTo == .thisMonth {
-            cell.dayLabel.textColor = Colors.currentMonth
+            cell.selectionView.isHidden = false
+            
+            UIView.animate(withDuration: 0.2) {
+                cell.selectionView.alpha = 1
+                cell.dayLabel.textColor = Colors.selected
+            }
         } else {
-            cell.dayLabel.textColor = Colors.outMonth
+            UIView.animate(
+                withDuration: 0.2,
+                animations: { cell.selectionView.alpha = 0 },
+                completion: { _ in cell.selectionView.isHidden = true }
+            )
+            
+            if Calendar.current.isDateInToday(cellState.date) {
+                cell.dayLabel.textColor = Colors.today
+            } else if cellState.dateBelongsTo == .thisMonth {
+                cell.dayLabel.textColor = Colors.currentMonth
+            } else {
+                cell.dayLabel.textColor = Colors.outMonth
+            }
         }
     }
     
