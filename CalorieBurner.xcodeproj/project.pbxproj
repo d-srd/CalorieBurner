@@ -26,6 +26,8 @@
 		84FC53952057C85200D20B3C /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC53942057C85200D20B3C /* Calendar.swift */; };
 		84FC53B9205940E900D20B3C /* DayViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC53B8205940E900D20B3C /* DayViewCell.swift */; };
 		84FC53BC205AFA4700D20B3C /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC53BB205AFA4700D20B3C /* Array.swift */; };
+		84FC53BF205CA16B00D20B3C /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC53BE205CA16B00D20B3C /* UserDefaults.swift */; };
+		84FC53C1205CA18900D20B3C /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC53C0205CA18900D20B3C /* Notification.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		84FC53942057C85200D20B3C /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		84FC53B8205940E900D20B3C /* DayViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewCell.swift; sourceTree = "<group>"; };
 		84FC53BB205AFA4700D20B3C /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		84FC53BE205CA16B00D20B3C /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		84FC53C0205CA18900D20B3C /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		E19C0DDB6453A57268ABC1B2 /* Pods_CalorieBurner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CalorieBurner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8DD6BD79DC0601A73B5382D /* Pods-CalorieBurner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalorieBurner.release.xcconfig"; path = "Pods/Target Support Files/Pods-CalorieBurner/Pods-CalorieBurner.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +148,8 @@
 			isa = PBXGroup;
 			children = (
 				84FC53BB205AFA4700D20B3C /* Array.swift */,
+				84FC53BE205CA16B00D20B3C /* UserDefaults.swift */,
+				84FC53C0205CA18900D20B3C /* Notification.swift */,
 			);
 			path = "Standard library";
 			sourceTree = "<group>";
@@ -300,6 +306,7 @@
 				84FC53B9205940E900D20B3C /* DayViewCell.swift in Sources */,
 				841B5ABB20445D2300ACAD15 /* DailyCollectionViewCell.swift in Sources */,
 				84FC53912057C79900D20B3C /* MonthlyCalendarViewController.swift in Sources */,
+				84FC53BF205CA16B00D20B3C /* UserDefaults.swift in Sources */,
 				842525462054E32F00CA0122 /* DailyCollectionView.swift in Sources */,
 				84B49848204EB3F800DCFA05 /* GradientView.swift in Sources */,
 				84FC53BC205AFA4700D20B3C /* Array.swift in Sources */,
@@ -311,6 +318,7 @@
 				841B5AA420436E7300ACAD15 /* AppDelegate.swift in Sources */,
 				841B5AAC20436E7300ACAD15 /* CalorieBurner.xcdatamodeld in Sources */,
 				84EE818F2045B31000E15A74 /* DailyItemPickerView.swift in Sources */,
+				84FC53C1205CA18900D20B3C /* Notification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
