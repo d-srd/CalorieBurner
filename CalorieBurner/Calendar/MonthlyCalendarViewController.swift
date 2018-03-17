@@ -14,17 +14,24 @@ protocol DailyCalendarDelegate {
 }
 
 class MonthlyCalendarViewController: UIViewController {
-    @IBOutlet weak var calendarView: JTAppleCalendarView!
-    @IBOutlet weak var monthLabel: UILabel!
-    @IBOutlet weak var yearLabel: UILabel!
-    @IBOutlet var weekdayLabels: [UILabel]!
+    
+    // MARK: Private objects
     
     struct Colors {
         static let today = #colorLiteral(red: 0.9549999833, green: 0.3140000105, blue: 0.4199999869, alpha: 1)
         static let currentMonth = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         static let outMonth = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
-        static let selected = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        static let selected = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
+    
+    // MARK: IB Outlets
+    
+    @IBOutlet weak var calendarView: JTAppleCalendarView!
+    @IBOutlet weak var monthLabel: UILabel!
+    @IBOutlet weak var yearLabel: UILabel!
+    @IBOutlet var weekdayLabels: [UILabel]!
+    
+    // MARK: Properties
     
     // used for month, year, and days of week labels
     private let dateFormatter: DateFormatter = {
@@ -46,6 +53,8 @@ class MonthlyCalendarViewController: UIViewController {
             calendarView.scrollToDate(today)
         }
     }
+    
+    // MARK: Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,6 +105,7 @@ class MonthlyCalendarViewController: UIViewController {
     }
 }
 
+// MARK: JTAppleCalendarViewDataSource
 extension MonthlyCalendarViewController: JTAppleCalendarViewDataSource {
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         return ConfigurationParameters(
@@ -107,24 +117,31 @@ extension MonthlyCalendarViewController: JTAppleCalendarViewDataSource {
     }
 }
 
+// MARK: JTAppleCalendarViewDelegate
 extension MonthlyCalendarViewController: JTAppleCalendarViewDelegate {
-    func configure(cell: DayViewCell, cellState: CellState) {
+    func configure(cell: DayViewCell?, cellState: CellState) {
+        guard let cell = cell else { return }
+        
         // text
         cell.dayLabel.text = cellState.text
         
         // selection view
-        cell.selectionView.isHidden = !cellState.isSelected
+        cell.selectionView.isHidden = !calendarView.selectedDates.contains(cellState.date)
         
         // color
-        if Calendar.current.isDateInToday(cellState.date) {
+        if calendarView.selectedDates.contains(cellState.date) {
+            cell.dayLabel.textColor = Colors.selected
+        } else if Calendar.current.isDateInToday(cellState.date) {
             cell.dayLabel.textColor = Colors.today
         } else if cellState.dateBelongsTo == .thisMonth {
             cell.dayLabel.textColor = Colors.currentMonth
-        } else if cellState.isSelected {
-            cell.dayLabel.textColor = Colors.selected
         } else {
             cell.dayLabel.textColor = Colors.outMonth
         }
+    }
+    
+    func map(_ cell: JTAppleCell?) -> DayViewCell? {
+        return cell as? DayViewCell
     }
     
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
@@ -147,5 +164,21 @@ extension MonthlyCalendarViewController: JTAppleCalendarViewDelegate {
         guard let date = visibleDates.monthDates.first?.date else { return }
         
         setDateLabels(to: date)
+    }
+    
+    func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
+        guard cellState.dateBelongsTo == .thisMonth else {
+            return false
+        }
+        
+        return true
+    }
+    
+    func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+        configure(cell: map(cell), cellState: cellState)
+    }
+    
+    func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+        configure(cell: map(cell), cellState: cellState)
     }
 }
