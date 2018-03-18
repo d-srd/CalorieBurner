@@ -8,8 +8,13 @@
 
 import UIKit
 
+protocol DailyCollectionViewDelegate: class {
+    func dailyView(_ dailyView: UICollectionView, didScrollToItemAt date: Date)
+}
+
 class DailyCollectionViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
+    weak var delegate: DailyCollectionViewDelegate?
     
     private let cellWidth: CGFloat = 320
     private let cellHeight: CGFloat = 120
@@ -144,5 +149,12 @@ extension DailyCollectionViewController: DailyCellDelegate {
         }
     }
     
-    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        guard let dailyView = scrollView as? UICollectionView,
+              let currentCellIndexPath = dailyView.indexPathsForVisibleItems.first,
+              let date = fetchedResultsController.date(for: currentCellIndexPath)
+        else { return }
+        
+        delegate?.dailyView(dailyView, didScrollToItemAt: date)
+    }
 }

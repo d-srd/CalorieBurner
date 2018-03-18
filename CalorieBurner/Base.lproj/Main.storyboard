@@ -116,10 +116,10 @@
             </objects>
             <point key="canvasLocation" x="815.20000000000005" y="107.49625187406298"/>
         </scene>
-        <!--Monthly Calendar View Controller-->
+        <!--Daily Calendar View Controller-->
         <scene sceneID="226-EW-jx6">
             <objects>
-                <viewController id="Efq-7c-Ufg" customClass="MonthlyCalendarViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Efq-7c-Ufg" customClass="DailyCalendarViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A5E-ry-26j">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -298,18 +298,28 @@
                                     <action selector="setFirstDayOfWeek:" destination="Efq-7c-Ufg" eventType="touchUpInside" id="eWi-4B-lQQ"/>
                                 </connections>
                             </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ix1-Ej-r7C">
+                                <rect key="frame" x="12" y="497" width="390" height="219"/>
+                                <connections>
+                                    <segue destination="bgE-bC-Cek" kind="embed" id="ycT-JH-ZOu"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="4rG-8P-rfh" firstAttribute="leading" secondItem="XOt-no-MNE" secondAttribute="leading" id="2HD-NP-EoT"/>
+                            <constraint firstItem="Ix1-Ej-r7C" firstAttribute="leading" secondItem="6cn-KD-Kcl" secondAttribute="leading" constant="12" id="Abx-1p-8vf"/>
                             <constraint firstItem="Szb-81-UER" firstAttribute="leading" secondItem="A5E-ry-26j" secondAttribute="leadingMargin" id="DV6-XV-JoZ"/>
                             <constraint firstItem="4rG-8P-rfh" firstAttribute="leading" secondItem="6cn-KD-Kcl" secondAttribute="leading" constant="12" id="JKm-eE-blH"/>
                             <constraint firstItem="Szb-81-UER" firstAttribute="top" secondItem="6cn-KD-Kcl" secondAttribute="top" id="MoT-Fl-NUn"/>
                             <constraint firstItem="4rG-8P-rfh" firstAttribute="top" secondItem="XOt-no-MNE" secondAttribute="bottom" constant="8" symbolic="YES" id="Xd2-Iz-jwf"/>
                             <constraint firstItem="4rG-8P-rfh" firstAttribute="trailing" secondItem="6cn-KD-Kcl" secondAttribute="trailing" constant="-12" id="fvs-BU-xIj"/>
                             <constraint firstItem="XOt-no-MNE" firstAttribute="top" secondItem="Szb-81-UER" secondAttribute="bottom" constant="48.329999999999998" id="jsP-nB-dPJ"/>
+                            <constraint firstItem="Ix1-Ej-r7C" firstAttribute="top" secondItem="4rG-8P-rfh" secondAttribute="bottom" constant="8" symbolic="YES" id="nI5-Xd-WCU"/>
                             <constraint firstItem="4rG-8P-rfh" firstAttribute="trailing" secondItem="XOt-no-MNE" secondAttribute="trailing" id="rht-ce-MSJ"/>
                             <constraint firstItem="XOt-no-MNE" firstAttribute="width" secondItem="4rG-8P-rfh" secondAttribute="width" id="sjV-1g-R24"/>
+                            <constraint firstItem="6cn-KD-Kcl" firstAttribute="bottom" secondItem="Ix1-Ej-r7C" secondAttribute="bottom" constant="20" id="uNi-Xn-ZGf"/>
+                            <constraint firstItem="6cn-KD-Kcl" firstAttribute="trailing" secondItem="Ix1-Ej-r7C" secondAttribute="trailing" constant="12" id="umS-M2-HDU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6cn-KD-Kcl"/>
                     </view>
@@ -728,8 +738,127 @@
             </objects>
             <point key="canvasLocation" x="86" y="1695"/>
         </scene>
+        <!--Daily Collection View Controller-->
+        <scene sceneID="7uF-Ca-6g0">
+            <objects>
+                <viewController id="bgE-bC-Cek" customClass="DailyCollectionViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1DZ-Tj-gq9">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="219"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="w8i-HS-6E0">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="219"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Srf-0k-VF7">
+                                    <size key="itemSize" width="320" height="120"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DailyCell" id="MOi-Sf-Loq" customClass="DailyCollectionViewCell" customModule="CalorieBurner" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="49.666666666666664" width="320" height="120"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="4EI-Ck-uWW">
+                                                    <rect key="frame" x="35" y="32.666666666666671" width="250" height="54.666666666666671"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="B2J-1X-g7d">
+                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="20.333333333333332"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mass" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UQD-eD-oyc">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="121" height="20.333333333333332"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="czg-Pc-ogX" customClass="BottomBorderTextField" customModule="CalorieBurner" customModuleProvider="target">
+                                                                    <rect key="frame" x="129" y="0.0" width="121" height="20.333333333333332"/>
+                                                                    <nil key="textColor"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <textInputTraits key="textInputTraits"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                            <real key="value" value="4"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </textField>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="eU9-cy-o4f">
+                                                            <rect key="frame" x="0.0" y="34.333333333333336" width="250" height="20.333333333333336"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Energy" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XL1-PQ-Mag">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="125" height="20.333333333333332"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="32a-su-8wh" customClass="BottomBorderTextField" customModule="CalorieBurner" customModuleProvider="target">
+                                                                    <rect key="frame" x="125" y="0.0" width="125" height="20.333333333333332"/>
+                                                                    <nil key="textColor"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <textInputTraits key="textInputTraits"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                            <real key="value" value="1"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </textField>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="250" id="w8A-Uu-VAU"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" name="Healthy Red"/>
+                                        <constraints>
+                                            <constraint firstItem="4EI-Ck-uWW" firstAttribute="centerX" secondItem="MOi-Sf-Loq" secondAttribute="centerX" id="NrM-mk-19g"/>
+                                            <constraint firstItem="4EI-Ck-uWW" firstAttribute="centerY" secondItem="MOi-Sf-Loq" secondAttribute="centerY" id="r9w-Dz-kan"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="energyTextField" destination="32a-su-8wh" id="TXa-Pz-6EV"/>
+                                            <outlet property="massTextField" destination="czg-Pc-ogX" id="yBT-6V-ApO"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="zsU-m6-mcy" firstAttribute="bottom" secondItem="w8i-HS-6E0" secondAttribute="bottom" id="EVr-zj-VLw"/>
+                            <constraint firstItem="w8i-HS-6E0" firstAttribute="top" secondItem="zsU-m6-mcy" secondAttribute="top" id="PB0-Ek-ejm"/>
+                            <constraint firstItem="w8i-HS-6E0" firstAttribute="leading" secondItem="zsU-m6-mcy" secondAttribute="leading" id="gTe-zm-05t"/>
+                            <constraint firstItem="zsU-m6-mcy" firstAttribute="trailing" secondItem="w8i-HS-6E0" secondAttribute="trailing" id="oTf-7M-Db7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zsU-m6-mcy"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="1AX-hs-3di"/>
+                    <connections>
+                        <outlet property="collectionView" destination="w8i-HS-6E0" id="YmC-Ch-tlD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WvT-Xk-GIi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2297" y="276"/>
+        </scene>
     </scenes>
     <resources>
+        <namedColor name="Healthy Red">
+            <color red="0.95499998330000002" green="0.31400001049999998" blue="0.41999998690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Healthy Red">
             <color red="0.95499998330000002" green="0.31400001049999998" blue="0.41999998690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

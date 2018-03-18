@@ -13,7 +13,7 @@ protocol DailyCalendarDelegate {
     func doesItemExist(at date: Date) -> Bool
 }
 
-class MonthlyCalendarViewController: UIViewController {
+class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelegate, JTAppleCalendarViewDataSource {
     
     // MARK: Private objects
     
@@ -103,10 +103,10 @@ class MonthlyCalendarViewController: UIViewController {
         yearLabel.text = dateFormatter.string(from: date)
         
     }
-}
+    
 
-// MARK: JTAppleCalendarViewDataSource
-extension MonthlyCalendarViewController: JTAppleCalendarViewDataSource {
+    // MARK: JTAppleCalendarViewDataSource
+    
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         return ConfigurationParameters(
                     startDate: startDate,
@@ -115,10 +115,10 @@ extension MonthlyCalendarViewController: JTAppleCalendarViewDataSource {
                     firstDayOfWeek: firstDayOfWeek
                 )
     }
-}
+    
 
-// MARK: JTAppleCalendarViewDelegate
-extension MonthlyCalendarViewController: JTAppleCalendarViewDelegate {
+    // MARK: JTAppleCalendarViewDelegate
+    
     func configure(cell: DayViewCell?, cellState: CellState) {
         guard let cell = cell else { return }
         
