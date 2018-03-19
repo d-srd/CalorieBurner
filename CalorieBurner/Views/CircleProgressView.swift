@@ -14,21 +14,21 @@ class CircleProgressView: UIView {
     @IBInspectable
     var width: CGFloat = 4 {
         didSet {
-            setNeedsDisplay()
+            progressLayer.width = width
         }
     }
     
     @IBInspectable
     var outerColor: UIColor = .gray {
         didSet {
-            setNeedsDisplay()
+            progressLayer.outerColor = outerColor.cgColor
         }
     }
     
     @IBInspectable
     var innerColor: UIColor = .orange {
         didSet {
-            setNeedsDisplay()
+            progressLayer.innerColor = innerColor.cgColor
         }
     }
     
@@ -43,18 +43,12 @@ class CircleProgressView: UIView {
         return layer as! CircleProgressLayer
     }
     
-    override func draw(_ rect: CGRect) {
-        progressLayer.outerColor = outerColor.cgColor
-        progressLayer.innerColor = innerColor.cgColor
-        progressLayer.width = width
-    }
-    
     override func action(for layer: CALayer, forKey event: String) -> CAAction? {
         if event == #keyPath(CircleProgressLayer.progress),
             let action = action(for: layer, forKey: #keyPath(backgroundColor)) as? CAAnimation
         {
-            let animation = CABasicAnimation()
-            animation.keyPath = #keyPath(CircleProgressLayer.progress)
+            let animation = CABasicAnimation(keyPath: #keyPath(CircleProgressLayer.progress))
+//            animation.keyPath = #keyPath(CircleProgressLayer.progress)
             animation.fromValue = progressLayer.progress
             animation.toValue = progress
             animation.beginTime = action.beginTime
@@ -80,10 +74,16 @@ class CircleProgressView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        layer.shouldRasterize = true
+        layer.contentsScale = UIScreen.main.scale
+        layer.rasterizationScale = UIScreen.main.scale
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        layer.shouldRasterize = true
+        layer.contentsScale = UIScreen.main.scale
+        layer.rasterizationScale = UIScreen.main.scale
     }
 }
 
