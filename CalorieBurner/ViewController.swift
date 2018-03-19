@@ -15,6 +15,7 @@ class CRUDViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var massTextField: UITextField!
     @IBOutlet weak var energyTextField: UITextField!
+    @IBOutlet weak var circleProgressView: CircleProgressView!
     
     @IBAction func massUnitChanged(_ sender: UISegmentedControl) {
         let unit = massUnits[sender.selectedSegmentIndex]
@@ -112,6 +113,18 @@ class CRUDViewController: UIViewController {
             performAction(.print, context: viewContext)
         default:
             print("Unsupported action")
+        }
+    }
+    
+    @IBAction func addProgress(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.5) {
+            self.circleProgressView.progress += 0.1
+        }
+    }
+    
+    @IBAction func subProgress(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.5) {
+            self.circleProgressView.progress -= 0.1
         }
     }
     
