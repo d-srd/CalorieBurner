@@ -12,7 +12,8 @@ extension UserDefaults {
     var mass: UnitMass? {
         get {
             guard let encodedMassUnit = self.data(forKey: "massUnit") else { return nil }
-            return NSKeyedUnarchiver.unarchiveObject(with: encodedMassUnit) as? UnitMass
+            let archive = NSKeyedUnarchiver(forReadingWith: encodedMassUnit)
+            return UnitMass(coder: archive)
         }
         set {
             guard let massUnit = newValue else { return }
@@ -23,10 +24,9 @@ extension UserDefaults {
     
     var energy: UnitEnergy? {
         get {
-            guard let encodedEnergyUnit = self.data(forKey: "energyUnit") else {
-                return nil
-            }
-            return NSKeyedUnarchiver.unarchiveObject(with: encodedEnergyUnit) as? UnitEnergy
+            guard let encodedEnergyUnit = self.data(forKey: "energyUnit") else { return nil }
+            let archive = NSKeyedUnarchiver(forReadingWith: encodedEnergyUnit)
+            return UnitEnergy(coder: archive)
         }
         set {
             guard let energyUnit = newValue else { return }
