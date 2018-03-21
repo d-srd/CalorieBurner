@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CocoaControls
 
 class CRUDViewController: UIViewController {
     private enum DatabaseActionType { case add, delete, print }
@@ -117,15 +118,23 @@ class CRUDViewController: UIViewController {
     }
     
     @IBAction func addProgress(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.5) {
+//        UIView.animate(withDuration: 0.5, options: .curveEaseInOut) {
+//            self.circleProgressView.progress += 0.1
+//        }
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
             self.circleProgressView.progress += 0.1
-        }
+        }, completion: nil)
     }
     
     @IBAction func subProgress(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.5) {
+//        UIView.animate(withDuration: 0.5) {
+//            self.circleProgressView.progress -= 0.1
+//        }
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
             self.circleProgressView.progress -= 0.1
-        }
+        }, completion: nil)
     }
     
     @IBAction func printLiterallyEveryhing(_ sender: UIButton) {
