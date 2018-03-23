@@ -146,7 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				84FC53BD205C9F8F00D20B3C /* Daily Collection */,
-				84FC53BA205AFA2700D20B3C /* Standard library */,
+				84FC53BA205AFA2700D20B3C /* Extensions */,
 				84FC538F2057C78400D20B3C /* Calendar */,
 				84FC538E2057C71000D20B3C /* Core Data */,
 				84FC538D2057C6F100D20B3C /* Supporting files */,
@@ -190,14 +190,14 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
-		84FC53BA205AFA2700D20B3C /* Standard library */ = {
+		84FC53BA205AFA2700D20B3C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				84FC53BB205AFA4700D20B3C /* Array.swift */,
 				84FC53BE205CA16B00D20B3C /* UserDefaults.swift */,
 				84FC53C0205CA18900D20B3C /* Notification.swift */,
 			);
-			path = "Standard library";
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		84FC53BD205C9F8F00D20B3C /* Daily Collection */ = {
@@ -315,10 +315,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CalorieBurner/Pods-CalorieBurner-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,6 +6,7 @@ target 'CalorieBurner' do
   use_frameworks!
 
   pod 'JTAppleCalendar', '~> 7.0'
+  pod 'IQKeyboardManager'
 
   # Pods for CalorieBurner
 
