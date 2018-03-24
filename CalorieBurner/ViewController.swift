@@ -16,7 +16,11 @@ class CRUDViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var massTextField: UITextField!
     @IBOutlet weak var energyTextField: UITextField!
-    @IBOutlet weak var circleProgressView: CircleProgressView!
+    @IBOutlet weak var weightDelta: WeightDeltaView! {
+        didSet {
+            weightDelta.delegate = self
+        }
+    }
     
     @IBAction func massUnitChanged(_ sender: UISegmentedControl) {
         let unit = massUnits[sender.selectedSegmentIndex]
@@ -117,26 +121,6 @@ class CRUDViewController: UIViewController {
         }
     }
     
-    @IBAction func addProgress(_ sender: UIButton) {
-//        UIView.animate(withDuration: 0.5, options: .curveEaseInOut) {
-//            self.circleProgressView.progress += 0.1
-//        }
-        
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-            self.circleProgressView.progress += 0.1
-        }, completion: nil)
-    }
-    
-    @IBAction func subProgress(_ sender: UIButton) {
-//        UIView.animate(withDuration: 0.5) {
-//            self.circleProgressView.progress -= 0.1
-//        }
-        
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-            self.circleProgressView.progress -= 0.1
-        }, completion: nil)
-    }
-    
     @IBAction func printLiterallyEveryhing(_ sender: UIButton) {
         mediator.avg(.mass)
         
@@ -178,6 +162,7 @@ class CRUDViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
 //        mediator.sum(.energy)
         
 //        NotificationCenter.default.addObserver(
@@ -188,7 +173,31 @@ class CRUDViewController: UIViewController {
 //        )
     }
     
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        
+//        weightDelta.reloadData()
+//    }
+    
 //    deinit {
 //        NotificationCenter.default.removeObserver(self, name: UserDefaults.didChangeNotification, object: nil)
 //    }
+}
+
+extension CRUDViewController: WeightDeltaDelegate {
+    func startingWeight(_ weightDeltaView: WeightDeltaView) -> Mass {
+        return Mass(value: 70, unit: .kilograms)
+    }
+    
+    func currentWeight(_ weightDeltaView: WeightDeltaView) -> Mass {
+        return Mass(value: 72, unit: .kilograms)
+    }
+    
+    func initialGoalWeight(_ weightDeltaView: WeightDeltaView) -> Mass {
+        return Mass(value: 85, unit: .kilograms)
+    }
+    
+    func goalWeightDidChange(_ weightDeltaView: WeightDeltaView, to value: Mass) {
+        print("goal changed to: ", value)
+    }
 }

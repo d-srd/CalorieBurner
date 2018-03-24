@@ -10,6 +10,7 @@
 		1B959C6650F57E66DCDB7644 /* Pods_CalorieBurner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E19C0DDB6453A57268ABC1B2 /* Pods_CalorieBurner.framework */; };
 		840C6F8D206237DB00535787 /* CocoaControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 840C6F852062319E00535787 /* CocoaControls.framework */; };
 		840C6F8E206237DB00535787 /* CocoaControls.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 840C6F852062319E00535787 /* CocoaControls.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		840C6F9920651ECD00535787 /* WeightDeltaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C6F9820651ECD00535787 /* WeightDeltaView.swift */; };
 		841B5AA420436E7300ACAD15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AA320436E7300ACAD15 /* AppDelegate.swift */; };
 		841B5AA620436E7300ACAD15 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AA520436E7300ACAD15 /* ViewController.swift */; };
 		841B5AA920436E7300ACAD15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841B5AA720436E7300ACAD15 /* Main.storyboard */; };
@@ -67,6 +68,7 @@
 		2D0B5669E4F66811DDE97938 /* Pods-CalorieBurner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalorieBurner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CalorieBurner/Pods-CalorieBurner.debug.xcconfig"; sourceTree = "<group>"; };
 		840C6F802062319E00535787 /* CocoaControls.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocoaControls.xcodeproj; path = ../CocoaControls/CocoaControls.xcodeproj; sourceTree = "<group>"; };
 		840C6F862062320D00535787 /* CocoaControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaControls.framework; path = "../../../Library/Developer/Xcode/DerivedData/CocoaControls-ezcniktufftancgvouvrcyaolfpa/Build/Products/Debug-iphonesimulator/CocoaControls.framework"; sourceTree = "<group>"; };
+		840C6F9820651ECD00535787 /* WeightDeltaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDeltaView.swift; sourceTree = "<group>"; };
 		841B5AA020436E7300ACAD15 /* CalorieBurner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalorieBurner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		841B5AA320436E7300ACAD15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		841B5AA520436E7300ACAD15 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +125,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		840C6F9720651EB700535787 /* Weight Delta */ = {
+			isa = PBXGroup;
+			children = (
+				840C6F9820651ECD00535787 /* WeightDeltaView.swift */,
+			);
+			path = "Weight Delta";
+			sourceTree = "<group>";
+		};
 		841B5A9720436E7300ACAD15 = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +155,7 @@
 		841B5AA220436E7300ACAD15 /* CalorieBurner */ = {
 			isa = PBXGroup;
 			children = (
+				840C6F9720651EB700535787 /* Weight Delta */,
 				84FC53BD205C9F8F00D20B3C /* Daily Collection */,
 				84FC53BA205AFA2700D20B3C /* Extensions */,
 				84FC538F2057C78400D20B3C /* Calendar */,
@@ -375,6 +386,7 @@
 				84FC53BF205CA16B00D20B3C /* UserDefaults.swift in Sources */,
 				842525462054E32F00CA0122 /* DailyCollectionView.swift in Sources */,
 				84FC53BC205AFA4700D20B3C /* Array.swift in Sources */,
+				840C6F9920651ECD00535787 /* WeightDeltaView.swift in Sources */,
 				84696D8620499FF8002F31B4 /* DailyFetchedResultsController.swift in Sources */,
 				84B4984A205163A800DCFA05 /* TDEE.swift in Sources */,
 				84B49846204DC64C00DCFA05 /* CoreDataStack.swift in Sources */,
