@@ -27,13 +27,14 @@ class DailyCollectionViewController: UIViewController {
     
     private lazy var fetchedResultsController: DailyFetchedResultsController = {
         let request = Daily.tableFetchRequest()
-        return DailyFetchedResultsController(
+        let controller = DailyFetchedResultsController(
             fetchRequest: request,
             managedObjectContext: viewContext,
             dateBounds: (startDate, endDate)
         )
+        return controller
     }()
-    
+        
     func scrollToItem(at date: Date, animated: Bool) {
         guard let indexPath = fetchedResultsController.indexPath(for: date) else {
             return
@@ -47,6 +48,10 @@ class DailyCollectionViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        try? fetchedResultsController.performFetch()
+        
+        collectionView.reloadData()
     }
 }
 
@@ -76,6 +81,15 @@ extension DailyCollectionViewController: UICollectionViewDataSource {
 }
 
 extension DailyCollectionViewController: UICollectionViewDelegateFlowLayout {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        guard let dailyView = scrollView as? UICollectionView,
+            let currentCellIndexPath = dailyView.indexPathsForVisibleItems.first,
+            let date = fetchedResultsController.date(for: currentCellIndexPath)
+            else { return }
+        
+        delegate?.dailyView(dailyView, didScrollToItemAt: date)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? DailyCollectionViewCell else { return }
         
@@ -121,40 +135,32 @@ extension DailyCollectionViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension DailyCollectionViewController: DailyCellDelegate {
-    func didCancelEditing(cell: DailyCollectionViewCell, item: DailyItemType) {
-        
+    func didCancelEditing(cell: DailyCollectionViewCell, for item: DailyItemType) {
     }
     
-    func didEndEditing(cell: DailyCollectionViewCell, with value: Measurement<UnitMass>) {
+    func didEndEditing(cell: DailyCollectionViewCell, mass: Measurement<UnitMass>) {
         guard let indexPath = collectionView.indexPath(for: cell),
               let date = fetchedResultsController.date(for: indexPath)
         else { return }
         
         do {
-            try CoreDataStack.shared.updateOrCreate(at: date, mass: value, energy: nil)
+            try CoreDataStack.shared.updateOrCreate(at: date, mass: mass, energy: nil)
         } catch {
             print((error as NSError).localizedDescription)
         }
     }
     
-    func didEndEditing(cell: DailyCollectionViewCell, with value: Measurement<UnitEnergy>) {
+    func didEndEditing(cell: DailyCollectionViewCell, energy: Measurement<UnitEnergy>) {
         guard let indexPath = collectionView.indexPath(for: cell),
             let date = fetchedResultsController.date(for: indexPath)
             else { return }
         
         do {
-            try CoreDataStack.shared.updateOrCreate(at: date, mass: nil, energy: value)
+            try CoreDataStack.shared.updateOrCreate(at: date, mass: nil, energy: energy)
         } catch {
             print((error as NSError).localizedDescription)
         }
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        guard let dailyView = scrollView as? UICollectionView,
-              let currentCellIndexPath = dailyView.indexPathsForVisibleItems.first,
-              let date = fetchedResultsController.date(for: currentCellIndexPath)
-        else { return }
-        
-        delegate?.dailyView(dailyView, didScrollToItemAt: date)
-    }
+    
 }

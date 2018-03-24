@@ -242,7 +242,7 @@ class DailyMassPickerToolbar: UIToolbar {
     
     func commonInit() {
         barStyle = .default
-        isTranslucent = true
+        isTranslucent = false
         sizeToFit()
         isUserInteractionEnabled = true
         
@@ -369,7 +369,7 @@ class DailyEnergyPickerToolbar: UIToolbar {
     
     func commonInit() {
         barStyle = .default
-        isTranslucent = true
+        isTranslucent = false
         sizeToFit()
         isUserInteractionEnabled = true
         

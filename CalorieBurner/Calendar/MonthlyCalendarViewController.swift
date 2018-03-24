@@ -59,7 +59,7 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        calendarView.sectionInset = UIEdgeInsets(top: 15, left: 0, bottom: 15, right: 0)
+//        calendarView.sectionInset = UIEdgeInsets(top: 15, left: 0, bottom: 15, right: 0)
         calendarView.calendarDelegate = self
         calendarView.calendarDataSource = self
         calendarView.scrollingMode = .stopAtEachSection
@@ -68,6 +68,7 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
         setDateLabels(to: today)
         
         calendarView.scrollToDate(today)
+        
     }
     
     // don't think about this one for too long
@@ -90,8 +91,11 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
         // why is this 8 - day.rawValue? Nobody knows. it works.
         let startDayDistance = 8 - firstDayOfWeek.rawValue
         
-        for (index, label) in weekdayLabels.rotatedRight(by: startDayDistance).enumerated() {
-            label.text = daySymbols[index]
+//        for (index, label) in weekdayLabels.rotatedRight(by: startDayDistance).enumerated() {
+//            label.text = daySymbols[index]
+//        }
+        for (index, daySymbol) in daySymbols.rotatedRight(by: startDayDistance).enumerated() {
+            weekdayLabels[index].text = daySymbol
         }
     }
     

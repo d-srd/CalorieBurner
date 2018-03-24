@@ -14,9 +14,10 @@ import UIKit
 }
 
 protocol DailyCellDelegate: class {
-    func didCancelEditing(cell: DailyCollectionViewCell, item: DailyItemType)
-    func didEndEditing(cell: DailyCollectionViewCell, with value: Measurement<UnitMass>)
-    func didEndEditing(cell: DailyCollectionViewCell, with value: Measurement<UnitEnergy>)
+    func didCancelEditing(cell: DailyCollectionViewCell, for itemType: DailyItemType)
+    func didEndEditing(cell: DailyCollectionViewCell, mass: Measurement<UnitMass>)
+    func didEndEditing(cell: DailyCollectionViewCell, energy: Measurement<UnitEnergy>)
+    
 }
 
 protocol DailyViewModel {
@@ -164,7 +165,7 @@ extension DailyCollectionViewCell: DailyToolbarDelegate {
             energyBuffer = nil
         }
         
-        cellDelegate?.didCancelEditing(cell: self, item: type)
+        cellDelegate?.didCancelEditing(cell: self, for: type)
     }
     
     func didEndEditing(_ type: DailyItemType) {
@@ -173,11 +174,11 @@ extension DailyCollectionViewCell: DailyToolbarDelegate {
         switch type {
         case .mass:
             mass = massBuffer
-            cellDelegate?.didEndEditing(cell: self, with: mass!)
+            cellDelegate?.didEndEditing(cell: self, mass: mass!)
             energyTextField.becomeFirstResponder()
         case .energy:
             energy = energyBuffer
-            cellDelegate?.didEndEditing(cell: self, with: energy!)
+            cellDelegate?.didEndEditing(cell: self, energy: energy!)
         }
     }
 }
