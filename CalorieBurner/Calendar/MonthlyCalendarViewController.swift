@@ -27,9 +27,55 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     // MARK: IB Outlets
     
     @IBOutlet weak var calendarView: JTAppleCalendarView!
-    @IBOutlet weak var monthLabel: UILabel!
-    @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet var weekdayLabels: [UILabel]!
+    
+    var labelFrame: CGRect {
+        return CGRect(origin: .zero, size: CGSize(width: 200, height: 40))
+    }
+    
+    var doubleLabelFrame: CGRect {
+        return CGRect(origin: .zero, size: CGSize(width: 200, height: 160))
+    }
+    
+    private lazy var currentMonthString: NSMutableAttributedString = {
+        dateFormatter.dateFormat = "MMMM"
+        let dateString = dateFormatter.string(from: today)
+        let font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        return NSMutableAttributedString(string: dateString, attributes: [.font : font])
+    }()
+    
+    private lazy var currentYearString: NSMutableAttributedString = {
+        dateFormatter.dateFormat = "yyyy"
+        let dateString = dateFormatter.string(from: today)
+        let font = UIFont.preferredFont(forTextStyle: .headline)
+        return NSMutableAttributedString(string: dateString, attributes: [.font : font])
+    }()
+    
+    private lazy var newLine = NSAttributedString(string: "\n")
+    
+    private var fullYearMonthString: NSMutableAttributedString {
+        let mySillyString = NSMutableAttributedString()
+        mySillyString.append(currentMonthString)
+        mySillyString.append(newLine)
+        mySillyString.append(currentYearString)
+        
+        return mySillyString
+    }
+    
+    private func makeTitleView() -> UIView {
+        let fullTitleString = fullYearMonthString
+        let size = fullTitleString.size()
+        let width = size.width
+        let height = (navigationController?.navigationBar.frame.size.height)!
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        label.attributedText = fullTitleString
+        label.numberOfLines = 0
+        label.textAlignment = .left
+//        label.intrinsicContentSize = UILayoutFittingExpandedSize
+        
+        return label
+    }
     
     // MARK: Properties
     
@@ -42,8 +88,14 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     }()
     private let today = Date()
     
-    lazy var startDate = dateFormatter.date(from: "2000-01-01")!
-    lazy var endDate = dateFormatter.date(from: "2030-12-31")!
+    lazy var startDate: Date = {
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.date(from: "2000-01-01")!
+    }()
+    lazy var endDate: Date = {
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.date(from: "2030-12-31")!
+    }()
     
     // offset from `Calendar.firstWeekday` by -1
     var firstDayOfWeek: DaysOfWeek = .monday {
@@ -58,6 +110,14 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        let _view = UIView(frame: doubleLabelFrame)
+//        _view.backgroundColor = UIColor.cyan
+//        _view.addSubview(monthLabel)
+//        _view.addSubview(yearLabel)
+//        _view.intrinsicContentSize = UILayoutFittingExpandedSize
+        
+        navigationItem.titleView = makeTitleView()
         
 //        calendarView.sectionInset = UIEdgeInsets(top: 15, left: 0, bottom: 15, right: 0)
         calendarView.calendarDelegate = self
@@ -101,10 +161,12 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     
     private func setDateLabels(to date: Date) {
         dateFormatter.dateFormat = "MMMM"
-        monthLabel.text = dateFormatter.string(from: date)
+        currentMonthString.mutableString.setString(dateFormatter.string(from: date))
+//        monthLabel?.text = dateFormatter.string(from: date)
         
         dateFormatter.dateFormat = "yyyy"
-        yearLabel.text = dateFormatter.string(from: date)
+        currentYearString.mutableString.setString(dateFormatter.string(from: date))
+//        yearLabel?.text = dateFormatter.string(from: date)
         
     }
     

@@ -14,6 +14,7 @@ import UIKit
 }
 
 protocol DailyCellDelegate: class {
+    func willCancelEditing(cell: DailyCollectionViewCell, for itemType: DailyItemType)
     func didCancelEditing(cell: DailyCollectionViewCell, for itemType: DailyItemType)
     func didEndEditing(cell: DailyCollectionViewCell, mass: Measurement<UnitMass>)
     func didEndEditing(cell: DailyCollectionViewCell, energy: Measurement<UnitEnergy>)
@@ -156,6 +157,8 @@ extension DailyCollectionViewCell: DailyItemPickerDelegate {
 
 extension DailyCollectionViewCell: DailyToolbarDelegate {
     func didCancelEditing(_ type: DailyItemType) {
+        cellDelegate?.willCancelEditing(cell: self, for: type)
+        
         endEditing(true)
         
         switch type {

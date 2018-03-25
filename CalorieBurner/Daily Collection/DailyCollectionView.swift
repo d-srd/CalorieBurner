@@ -25,6 +25,8 @@ class DailyCollectionViewController: UIViewController {
     private let endDate = Calendar.current.date(from: DateComponents(year: 2030, month: 12, day: 31))!
     private lazy var dayCount = Calendar.current.dateComponents([.day], from: startDate, to: endDate).day!
     
+    private(set) var isCancellingEditing = false
+    
     private lazy var fetchedResultsController: DailyFetchedResultsController = {
         let request = Daily.tableFetchRequest()
         let controller = DailyFetchedResultsController(
@@ -102,30 +104,36 @@ extension DailyCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        guard let layout = collectionViewLayout as? UICollectionViewFlowLayout,
-              let dataSourceCount = collectionView.dataSource?.collectionView(collectionView, numberOfItemsInSection: section),
-              dataSourceCount > 0
-        else { return .zero }
+        guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else { return .zero }
+        let cellWidth = layout.itemSize.width
+        let contentWidth = collectionView.frame.width
+        let padding = (contentWidth - cellWidth) / 2
         
-        // only 1 cell per section
-        assert(collectionView.numberOfItems(inSection: section) <= 1, "More than one item in section")
-        let cellCount = CGFloat(dataSourceCount)
-        let itemSpacing = layout.minimumInteritemSpacing
-        let cellWidth = layout.itemSize.width + itemSpacing
-        var insets = layout.sectionInset
-        
-        let totalCellWidth = (cellWidth * cellCount) - itemSpacing
-        let contentWidth = collectionView.frame.size.width - collectionView.contentInset.left - collectionView.contentInset.right
-        
-        guard totalCellWidth < contentWidth else {
-            return insets
-        }
-        
-        let padding = (contentWidth - totalCellWidth) / 2
-        insets.left = padding
-        insets.right = padding
-        
-        return insets
+        return UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
+//        guard let layout = collectionViewLayout as? UICollectionViewFlowLayout,
+//              let dataSourceCount = collectionView.dataSource?.collectionView(collectionView, numberOfItemsInSection: section),
+//              dataSourceCount > 0
+//        else { return .zero }
+//
+//        // only 1 cell per section
+//        assert(collectionView.numberOfItems(inSection: section) <= 1, "More than one item in section")
+//        let cellCount = CGFloat(dataSourceCount)
+//        let itemSpacing = layout.minimumInteritemSpacing
+//        let cellWidth = layout.itemSize.width + itemSpacing
+//        var insets = layout.sectionInset
+//
+//        let totalCellWidth = (cellWidth * cellCount) - itemSpacing
+//        let contentWidth = collectionView.frame.size.width - collectionView.contentInset.left - collectionView.contentInset.right
+//
+//        guard totalCellWidth < contentWidth else {
+//            return insets
+//        }
+//
+//        let padding = (contentWidth - totalCellWidth) / 2
+//        insets.left = padding
+//        insets.right = padding
+//
+//        return insets
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -135,7 +143,12 @@ extension DailyCollectionViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension DailyCollectionViewController: DailyCellDelegate {
+    func willCancelEditing(cell: DailyCollectionViewCell, for itemType: DailyItemType) {
+        isCancellingEditing = true
+    }
+    
     func didCancelEditing(cell: DailyCollectionViewCell, for item: DailyItemType) {
+        isCancellingEditing = false
     }
     
     func didEndEditing(cell: DailyCollectionViewCell, mass: Measurement<UnitMass>) {

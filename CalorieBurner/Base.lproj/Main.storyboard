@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Efq-7c-Ufg">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zyn-E8-fk1">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -18,11 +20,11 @@
             <objects>
                 <viewController title="CRUD" id="BYZ-38-t0r" customClass="CRUDViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker hidden="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="cNj-KH-hqg">
-                                <rect key="frame" x="0.0" y="20" width="375" height="162"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="541344892.35260701">
                                     <!--2018-02-26 13:34:52 +0000-->
@@ -185,27 +187,10 @@
             <objects>
                 <viewController id="Efq-7c-Ufg" customClass="DailyCalendarViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A5E-ry-26j">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Szb-81-UER" userLabel="Date">
-                                <rect key="frame" x="16" y="20" width="100.5" height="89"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Month" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3y-HE-t1F">
-                                        <rect key="frame" x="0.0" y="0.0" width="100.5" height="54.5"/>
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Year" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8uF-Hp-0Nr">
-                                        <rect key="frame" x="0.0" y="62.5" width="100.5" height="26.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="textColor" white="0.52666558159722221" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="19d-hw-jap">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="19d-hw-jap">
                                 <rect key="frame" x="128" y="41" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="mon"/>
@@ -213,7 +198,7 @@
                                     <action selector="setFirstDayOfWeek:" destination="Efq-7c-Ufg" eventType="touchUpInside" id="wKl-XM-REg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hK-RH-lqL">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hK-RH-lqL">
                                 <rect key="frame" x="166" y="41" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="tue"/>
@@ -221,7 +206,7 @@
                                     <action selector="setFirstDayOfWeek:" destination="Efq-7c-Ufg" eventType="touchUpInside" id="ijt-xZ-FvR"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pR8-Bb-m2L">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pR8-Bb-m2L">
                                 <rect key="frame" x="204" y="41" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="wed"/>
@@ -229,7 +214,7 @@
                                     <action selector="setFirstDayOfWeek:" destination="Efq-7c-Ufg" eventType="touchUpInside" id="Smf-I0-HGU"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wN1-qD-oFR">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wN1-qD-oFR">
                                 <rect key="frame" x="242" y="41" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="thu"/>
@@ -237,7 +222,7 @@
                                     <action selector="setFirstDayOfWeek:" destination="Efq-7c-Ufg" eventType="touchUpInside" id="LjM-DP-3O8"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rc-7s-f4x">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rc-7s-f4x">
                                 <rect key="frame" x="280" y="41" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="fri"/>
@@ -245,7 +230,7 @@
                                     <action selector="setFirstDayOfWeek:" destination="Efq-7c-Ufg" eventType="touchUpInside" id="R8u-qC-q9g"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="62g-gU-Pot">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="62g-gU-Pot">
                                 <rect key="frame" x="318" y="41" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="sat"/>
@@ -253,7 +238,7 @@
                                     <action selector="setFirstDayOfWeek:" destination="Efq-7c-Ufg" eventType="touchUpInside" id="rcc-YD-CbH"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i9m-js-kNv">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i9m-js-kNv">
                                 <rect key="frame" x="356" y="41" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="sun"/>
@@ -262,57 +247,60 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9Hj-ei-YUA" userLabel="Calendar and Dailies">
-                                <rect key="frame" x="12" y="145" width="351" height="506"/>
+                                <rect key="frame" x="12" y="126" width="390" height="594"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="XOt-no-MNE" userLabel="Weekdays">
-                                        <rect key="frame" x="0.0" y="0.0" width="351" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="22"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Fh-DZ-1T3">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="55.666666666666664" height="22"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLa-AI-3Q8">
-                                                <rect key="frame" x="50" y="0.0" width="50.5" height="20.5"/>
+                                                <rect key="frame" x="55.666666666666671" y="0.0" width="55.666666666666671" height="22"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2Y-6T-n92">
-                                                <rect key="frame" x="100.5" y="0.0" width="50" height="20.5"/>
+                                                <rect key="frame" x="111.33333333333333" y="0.0" width="55.666666666666671" height="22"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTG-EB-Vi1">
-                                                <rect key="frame" x="150.5" y="0.0" width="50" height="20.5"/>
+                                                <rect key="frame" x="167" y="0.0" width="56" height="22"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddK-q2-8om">
-                                                <rect key="frame" x="200.5" y="0.0" width="50" height="20.5"/>
+                                                <rect key="frame" x="223" y="0.0" width="55.666666666666686" height="22"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1w-tl-MnF">
-                                                <rect key="frame" x="250.5" y="0.0" width="50.5" height="20.5"/>
+                                                <rect key="frame" x="278.66666666666669" y="0.0" width="55.666666666666686" height="22"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JrY-4P-3ya">
-                                                <rect key="frame" x="301" y="0.0" width="50" height="20.5"/>
+                                                <rect key="frame" x="334.33333333333331" y="0.0" width="55.666666666666686" height="22"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="iHy-GZ-RP0"/>
+                                        </constraints>
                                     </stackView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4rG-8P-rfh" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
-                                        <rect key="frame" x="0.0" y="28.5" width="351" height="320"/>
+                                        <rect key="frame" x="0.0" y="30" width="390" height="320"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="320" id="8ku-j6-TKU"/>
@@ -332,7 +320,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="42l-7C-VoS">
-                                                            <rect key="frame" x="10" y="9.5" width="30" height="30"/>
+                                                            <rect key="frame" x="10" y="9.6666666666666643" width="30" height="30"/>
                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="30" id="ONC-Nb-GGK"/>
@@ -345,7 +333,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v0l-gc-tju">
-                                                            <rect key="frame" x="19" y="14.5" width="11" height="21"/>
+                                                            <rect key="frame" x="19" y="14.666666666666664" width="11" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -366,10 +354,7 @@
                                         </cells>
                                     </collectionView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ix1-Ej-r7C">
-                                        <rect key="frame" x="0.0" y="356.5" width="351" height="149.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="149.5" id="e5G-Zr-HAy"/>
-                                        </constraints>
+                                        <rect key="frame" x="0.0" y="358" width="390" height="236"/>
                                         <connections>
                                             <segue destination="bgE-bC-Cek" kind="embed" id="ycT-JH-ZOu"/>
                                         </connections>
@@ -379,19 +364,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Szb-81-UER" firstAttribute="leading" secondItem="A5E-ry-26j" secondAttribute="leadingMargin" id="DV6-XV-JoZ"/>
-                            <constraint firstItem="9Hj-ei-YUA" firstAttribute="top" secondItem="Szb-81-UER" secondAttribute="bottom" constant="36" id="MUL-2L-Kte"/>
-                            <constraint firstItem="Szb-81-UER" firstAttribute="top" secondItem="6cn-KD-Kcl" secondAttribute="top" id="MoT-Fl-NUn"/>
                             <constraint firstItem="6cn-KD-Kcl" firstAttribute="bottom" secondItem="9Hj-ei-YUA" secondAttribute="bottom" constant="16" id="Y53-3i-h12"/>
                             <constraint firstItem="9Hj-ei-YUA" firstAttribute="leading" secondItem="6cn-KD-Kcl" secondAttribute="leading" constant="12" id="iI8-pt-SDM"/>
+                            <constraint firstItem="9Hj-ei-YUA" firstAttribute="topMargin" secondItem="6cn-KD-Kcl" secondAttribute="top" constant="10" id="yDI-h0-8Zd"/>
                             <constraint firstItem="6cn-KD-Kcl" firstAttribute="trailing" secondItem="9Hj-ei-YUA" secondAttribute="trailing" constant="12" id="zKi-zY-pr5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6cn-KD-Kcl"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Ch9-7a-R0L"/>
                     <connections>
                         <outlet property="calendarView" destination="4rG-8P-rfh" id="FTV-tH-ibf"/>
-                        <outlet property="monthLabel" destination="d3y-HE-t1F" id="3wm-f4-b3K"/>
-                        <outlet property="yearLabel" destination="8uF-Hp-0Nr" id="4Pf-Lw-tSi"/>
                         <outletCollection property="weekdayLabels" destination="BTG-EB-Vi1" collectionClass="NSMutableArray" id="VGI-ep-TBX"/>
                         <outletCollection property="weekdayLabels" destination="a1w-tl-MnF" collectionClass="NSMutableArray" id="oco-Ce-0tu"/>
                         <outletCollection property="weekdayLabels" destination="x2Y-6T-n92" collectionClass="NSMutableArray" id="Zma-aR-eQZ"/>
@@ -403,22 +385,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xvw-fn-NUF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2203" y="107"/>
+            <point key="canvasLocation" x="2541.5999999999999" y="106.59670164917542"/>
         </scene>
         <!--History-->
         <scene sceneID="ZIb-mK-2zo">
             <objects>
                 <tableViewController title="History" id="Miw-1K-Wkv" customClass="DailyTableViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="0ex-3g-8OJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DailyCell" rowHeight="420" id="QMC-Vz-AXL" customClass="DailyCollectionViewCell" customModule="CalorieBurner" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="420"/>
+                                <rect key="frame" x="0.0" y="55.333333333333336" width="414" height="420"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QMC-Vz-AXL" id="zbT-xH-SI4" customClass="DailyCollectionViewCell" customModule="CalorieBurner" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="420"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="420"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pzt-iO-AHZ" customClass="ShadowView" customModule="CalorieBurner" customModuleProvider="target">
@@ -613,7 +595,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="rV2-5U-UN6"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xSf-li-fCb">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -651,7 +633,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="F74-3b-3JI"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vaf-0t-zFf">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -668,11 +650,11 @@
             <objects>
                 <viewController id="FyU-SO-1dI" customClass="DailyCollectionViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SVZ-hB-U51">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9dr-Uh-nsR">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gCv-yk-Q5s">
                                     <size key="itemSize" width="320" height="120"/>
@@ -692,16 +674,16 @@
                                                     <rect key="frame" x="35" y="32.666666666666671" width="250" height="54.666666666666671"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qca-N0-crh">
-                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="20.333333333333332"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mass" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCu-fY-aVA">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="121" height="20.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="121" height="20.333333333333332"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ud1-SL-m6j" customClass="BottomBorderTextField" customModule="CalorieBurner" customModuleProvider="target">
-                                                                    <rect key="frame" x="129" y="0.0" width="121" height="20.5"/>
+                                                                    <rect key="frame" x="129" y="0.0" width="121" height="20.333333333333332"/>
                                                                     <nil key="textColor"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits"/>
@@ -717,16 +699,16 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bt3-zT-XJG">
-                                                            <rect key="frame" x="0.0" y="34.5" width="250" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="34.333333333333336" width="250" height="20.333333333333336"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Energy" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nvz-1k-ogf">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="125" height="20.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="125" height="20.333333333333332"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FdD-a3-0YO" customClass="BottomBorderTextField" customModule="CalorieBurner" customModuleProvider="target">
-                                                                    <rect key="frame" x="125" y="0.0" width="125" height="20.5"/>
+                                                                    <rect key="frame" x="125" y="0.0" width="125" height="20.333333333333332"/>
                                                                     <nil key="textColor"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits"/>
@@ -784,11 +766,11 @@
             <objects>
                 <viewController id="aQd-wn-jnj" customClass="PickerViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8sp-xy-2Mu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fFT-Mg-SWb">
-                                <rect key="frame" x="0.0" y="279" width="375" height="162"/>
+                                <rect key="frame" x="0.0" y="279" width="414" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
                         </subviews>
@@ -808,11 +790,11 @@
             <objects>
                 <viewController id="bgE-bC-Cek" customClass="DailyCollectionViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1DZ-Tj-gq9">
-                        <rect key="frame" x="0.0" y="0.0" width="351" height="149.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="236"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="w8i-HS-6E0">
-                                <rect key="frame" x="0.0" y="0.0" width="351" height="149.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="236"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Srf-0k-VF7">
                                     <size key="itemSize" width="320" height="120"/>
@@ -822,7 +804,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DailyCell" id="MOi-Sf-Loq" customClass="DailyCollectionViewCell" customModule="CalorieBurner" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="15" width="320" height="120"/>
+                                        <rect key="frame" x="0.0" y="58" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
@@ -837,17 +819,17 @@
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rye-Oj-rue" userLabel="MassView" customClass="ShadowView" customModule="CocoaControls">
                                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                                                     <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Eex-Vm-eJX">
-                                                                            <rect key="frame" x="102.5" y="16" width="115" height="19"/>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="firstBaseline" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Eex-Vm-eJX">
+                                                                            <rect key="frame" x="102.66666666666666" y="15" width="114.66666666666666" height="21"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mass" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UQD-eD-oyc">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="53.5" height="19"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="53.333333333333336" height="21"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="czg-Pc-ogX" customClass="BottomBorderTextField" customModule="CalorieBurner" customModuleProvider="target">
-                                                                                    <rect key="frame" x="61.5" y="0.0" width="53.5" height="19"/>
+                                                                                    <rect key="frame" x="61.333333333333329" y="-356" width="53.333333333333329" height="17"/>
                                                                                     <nil key="textColor"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                     <textInputTraits key="textInputTraits"/>
@@ -862,7 +844,7 @@
                                                                                 </textField>
                                                                             </subviews>
                                                                             <constraints>
-                                                                                <constraint firstItem="czg-Pc-ogX" firstAttribute="baseline" secondItem="UQD-eD-oyc" secondAttribute="baseline" id="HET-fB-DXO"/>
+                                                                                <constraint firstItem="czg-Pc-ogX" firstAttribute="firstBaseline" secondItem="UQD-eD-oyc" secondAttribute="baseline" id="HET-fB-DXO"/>
                                                                             </constraints>
                                                                         </stackView>
                                                                     </subviews>
@@ -889,17 +871,17 @@
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cXg-TT-OcM" userLabel="EnergyView" customClass="ShadowView" customModule="CocoaControls">
                                                                     <rect key="frame" x="0.0" y="69" width="320" height="51"/>
                                                                     <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MoS-bF-go8">
-                                                                            <rect key="frame" x="102.5" y="16" width="115" height="19"/>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="firstBaseline" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MoS-bF-go8">
+                                                                            <rect key="frame" x="102.66666666666666" y="15.333333333333327" width="114.66666666666666" height="20.333333333333329"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Energy" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XL1-PQ-Mag">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="53.5" height="19"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="53.333333333333336" height="20.333333333333332"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="32a-su-8wh" customClass="BottomBorderTextField" customModule="CalorieBurner" customModuleProvider="target">
-                                                                                    <rect key="frame" x="61.5" y="0.0" width="53.5" height="19"/>
+                                                                                    <rect key="frame" x="61.333333333333329" y="3" width="53.333333333333329" height="17"/>
                                                                                     <nil key="textColor"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                     <textInputTraits key="textInputTraits"/>
@@ -914,7 +896,7 @@
                                                                                 </textField>
                                                                             </subviews>
                                                                             <constraints>
-                                                                                <constraint firstItem="32a-su-8wh" firstAttribute="baseline" secondItem="XL1-PQ-Mag" secondAttribute="baseline" id="RUZ-F3-Um7"/>
+                                                                                <constraint firstItem="32a-su-8wh" firstAttribute="firstBaseline" secondItem="XL1-PQ-Mag" secondAttribute="baseline" id="RUZ-F3-Um7"/>
                                                                             </constraints>
                                                                         </stackView>
                                                                     </subviews>
@@ -999,7 +981,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WvT-Xk-GIi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2925" y="107"/>
+            <point key="canvasLocation" x="3263.1999999999998" y="106.14692653673164"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="aEf-rz-CZA">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zyn-E8-fk1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Wel-rl-5kT">
+                        <rect key="frame" x="0.0" y="20" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Efq-7c-Ufg" kind="relationship" relationship="rootViewController" id="duQ-WZ-nIm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rei-my-XIn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1775" y="107"/>
         </scene>
     </scenes>
     <resources>

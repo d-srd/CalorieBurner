@@ -66,7 +66,7 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
         
         // this is the most genius line of code. ever.
         guard let cell = dailyCollectionViewController?.collectionView.visibleCells.first as? DailyCollectionViewCell,
-              !cell.massTextField.isEditing
+              dailyCollectionViewController!.isCancellingEditing || !cell.massTextField.isEditing
         else { return }
         
         UIView.animate(withDuration: 0.25) {
