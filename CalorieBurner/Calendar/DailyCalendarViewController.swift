@@ -178,17 +178,9 @@ extension DailyCalendarViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        //        return .zero
-        
-        //        let sideInset = (collectionView.frame.size.width - cellWidth) / 2
-        //        return UIEdgeInsets(top: 0, left: sideInset, bottom: 0, right: sideInset)
-        guard let layout = collectionViewLayout as? UICollectionViewFlowLayout
-            //              let dataSourceCount = collectionView.dataSource?.collectionView(collectionView, numberOfItemsInSection: section),
-            //              dataSourceCount > 0
-            else { return .zero }
+        guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else { return .zero }
         
         // only 1 cell per section
-        //        assert(collectionView.numberOfItems(inSection: section) <= 1, "More than one item in section")
         let cellCount: CGFloat = 1
         let itemSpacing = layout.minimumInteritemSpacing
         let widthOfCell = cellWidth + itemSpacing
@@ -196,13 +188,8 @@ extension DailyCalendarViewController: UICollectionViewDelegateFlowLayout {
         
         let totalCellWidth = (widthOfCell * cellCount) - itemSpacing
         let contentWidth = collectionView.frame.size.width - collectionView.contentInset.left - collectionView.contentInset.right
-        
-        //        guard totalCellWidth < contentWidth else {
-        //            return insets
-        //        }
-        
         let padding = (contentWidth - totalCellWidth) / 2
-                insets.top = padding / 2
+        insets.top = padding / 2
         insets.left = padding
         insets.right = padding
         
