@@ -50,6 +50,7 @@ class DailyCollectionViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.contentInset.top = 15
         
         try? fetchedResultsController.performFetch()
         
@@ -103,43 +104,58 @@ extension DailyCollectionViewController: UICollectionViewDelegateFlowLayout {
         }
     }
     
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        return 120
+//    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+//        return self.collectionView(collectionView, layout: collectionViewLayout, insetForSectionAt: section).left * 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else { return .zero }
-        let cellWidth = layout.itemSize.width
-        let contentWidth = collectionView.frame.width
-        let padding = (contentWidth - cellWidth) / 2
+//        return .zero
         
-        return UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
-//        guard let layout = collectionViewLayout as? UICollectionViewFlowLayout,
+//        let sideInset = (collectionView.frame.size.width - cellWidth) / 2
+//        return UIEdgeInsets(top: 0, left: sideInset, bottom: 0, right: sideInset)
+        guard let layout = collectionViewLayout as? UICollectionViewFlowLayout
 //              let dataSourceCount = collectionView.dataSource?.collectionView(collectionView, numberOfItemsInSection: section),
 //              dataSourceCount > 0
-//        else { return .zero }
-//
-//        // only 1 cell per section
+        else { return .zero }
+
+        // only 1 cell per section
 //        assert(collectionView.numberOfItems(inSection: section) <= 1, "More than one item in section")
-//        let cellCount = CGFloat(dataSourceCount)
-//        let itemSpacing = layout.minimumInteritemSpacing
-//        let cellWidth = layout.itemSize.width + itemSpacing
-//        var insets = layout.sectionInset
-//
-//        let totalCellWidth = (cellWidth * cellCount) - itemSpacing
-//        let contentWidth = collectionView.frame.size.width - collectionView.contentInset.left - collectionView.contentInset.right
-//
+        let cellCount: CGFloat = 1
+        let itemSpacing = layout.minimumInteritemSpacing
+        let widthOfCell = cellWidth + itemSpacing
+        var insets = layout.sectionInset
+
+        let totalCellWidth = (widthOfCell * cellCount) - itemSpacing
+        let contentWidth = collectionView.frame.size.width - collectionView.contentInset.left - collectionView.contentInset.right
+
 //        guard totalCellWidth < contentWidth else {
 //            return insets
 //        }
-//
-//        let padding = (contentWidth - totalCellWidth) / 2
-//        insets.left = padding
-//        insets.right = padding
-//
-//        return insets
+
+        let padding = (contentWidth - totalCellWidth) / 2
+//        insets.top = padding / 2
+        insets.left = padding
+        insets.right = padding
+
+        return insets
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: cellWidth, height: cellHeight)
+        let margin: CGFloat = 40
+        let width = collectionView.bounds.width - (margin * 2)
+        
+        
+        return CGSize(width: width, height: cellHeight)
     }
-
 }
 
 extension DailyCollectionViewController: DailyCellDelegate {

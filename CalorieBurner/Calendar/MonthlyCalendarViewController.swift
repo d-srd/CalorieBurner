@@ -27,54 +27,10 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     // MARK: IB Outlets
     
     @IBOutlet weak var calendarView: JTAppleCalendarView!
-    @IBOutlet var weekdayLabels: [UILabel]!
+    @IBOutlet weak var weekdaysStackView: UIStackView!
     
-    var labelFrame: CGRect {
-        return CGRect(origin: .zero, size: CGSize(width: 200, height: 40))
-    }
-    
-    var doubleLabelFrame: CGRect {
-        return CGRect(origin: .zero, size: CGSize(width: 200, height: 160))
-    }
-    
-    private lazy var currentMonthString: NSMutableAttributedString = {
-        dateFormatter.dateFormat = "MMMM"
-        let dateString = dateFormatter.string(from: today)
-        let font = UIFont.preferredFont(forTextStyle: .largeTitle)
-        return NSMutableAttributedString(string: dateString, attributes: [.font : font])
-    }()
-    
-    private lazy var currentYearString: NSMutableAttributedString = {
-        dateFormatter.dateFormat = "yyyy"
-        let dateString = dateFormatter.string(from: today)
-        let font = UIFont.preferredFont(forTextStyle: .headline)
-        return NSMutableAttributedString(string: dateString, attributes: [.font : font])
-    }()
-    
-    private lazy var newLine = NSAttributedString(string: "\n")
-    
-    private var fullYearMonthString: NSMutableAttributedString {
-        let mySillyString = NSMutableAttributedString()
-        mySillyString.append(currentMonthString)
-        mySillyString.append(newLine)
-        mySillyString.append(currentYearString)
-        
-        return mySillyString
-    }
-    
-    private func makeTitleView() -> UIView {
-        let fullTitleString = fullYearMonthString
-        let size = fullTitleString.size()
-        let width = size.width
-        let height = (navigationController?.navigationBar.frame.size.height)!
-        
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
-        label.attributedText = fullTitleString
-        label.numberOfLines = 0
-        label.textAlignment = .left
-//        label.intrinsicContentSize = UILayoutFittingExpandedSize
-        
-        return label
+    private var weekdayLabels: [UILabel] {
+        return weekdaysStackView.subviews.map { $0 as! UILabel }
     }
     
     // MARK: Properties
@@ -111,13 +67,11 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let _view = UIView(frame: doubleLabelFrame)
-//        _view.backgroundColor = UIColor.cyan
-//        _view.addSubview(monthLabel)
-//        _view.addSubview(yearLabel)
-//        _view.intrinsicContentSize = UILayoutFittingExpandedSize
-        
-        navigationItem.titleView = makeTitleView()
+        let tap = UIGestureRecognizer(target: self, action: #selector(weekdayTapped(_:)))
+        for label in weekdayLabels {
+            label.isUserInteractionEnabled = true
+            label.addGestureRecognizer(tap)
+        }
         
 //        calendarView.sectionInset = UIEdgeInsets(top: 15, left: 0, bottom: 15, right: 0)
         calendarView.calendarDelegate = self
@@ -125,10 +79,17 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
         calendarView.scrollingMode = .stopAtEachSection
         
         setWeekdayLabels()
-        setDateLabels(to: today)
+//        setDateLabels(to: today)
         
         calendarView.scrollToDate(today)
         
+        print("ULTIMATE SCREEN WIDTH: ", UIScreen.main.bounds.width)
+        print("ULTIMATE SELF WIDTH: ", view.frame.width)
+        
+    }
+    
+    @objc private func weekdayTapped(_ sender: UITapGestureRecognizer) {
+        print("hi there")
     }
     
     // don't think about this one for too long
@@ -151,25 +112,13 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
         // why is this 8 - day.rawValue? Nobody knows. it works.
         let startDayDistance = 8 - firstDayOfWeek.rawValue
         
-//        for (index, label) in weekdayLabels.rotatedRight(by: startDayDistance).enumerated() {
-//            label.text = daySymbols[index]
-//        }
-        for (index, daySymbol) in daySymbols.rotatedRight(by: startDayDistance).enumerated() {
-            weekdayLabels[index].text = daySymbol
+        for (index, label) in weekdayLabels.rotatedRight(by: startDayDistance).enumerated() {
+            label.text = daySymbols[index]
         }
+//        for (index, daySymbol) in daySymbols.rotatedRight(by: startDayDistance).enumerated() {
+//            weekdayLabels[index].text = daySymbol
+//        }
     }
-    
-    private func setDateLabels(to date: Date) {
-        dateFormatter.dateFormat = "MMMM"
-        currentMonthString.mutableString.setString(dateFormatter.string(from: date))
-//        monthLabel?.text = dateFormatter.string(from: date)
-        
-        dateFormatter.dateFormat = "yyyy"
-        currentYearString.mutableString.setString(dateFormatter.string(from: date))
-//        yearLabel?.text = dateFormatter.string(from: date)
-        
-    }
-    
 
     // MARK: JTAppleCalendarViewDataSource
     
@@ -239,7 +188,7 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
         guard let date = visibleDates.monthDates.first?.date else { return }
         
-        setDateLabels(to: date)
+//        setDateLabels(to: date)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {

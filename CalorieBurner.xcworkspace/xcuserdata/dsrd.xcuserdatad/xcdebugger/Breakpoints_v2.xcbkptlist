@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/Calendar/MonthlyCalendarViewController.swift"
-            timestampString = "543648426.6770279"
+            timestampString = "543658556.401095"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "calendar(_:willDisplay:forItemAt:cellState:indexPath:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,27 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/Calendar/MonthlyCalendarViewController.swift"
-            timestampString = "543648426.677232"
+            timestampString = "543658556.40119"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
-            landmarkName = "calendar(_:didSelectDate:cell:cellState:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CalorieBurner/Calendar/MonthlyCalendarViewController.swift"
-            timestampString = "543648426.677386"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "configure(cell:cellState:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -76,7 +60,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/Weight Delta/WeightDeltaView.swift"
-            timestampString = "543648426.677551"
+            timestampString = "543658556.401268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"
@@ -108,7 +92,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/Weight Delta/WeightDeltaView.swift"
-            timestampString = "543648426.67785"
+            timestampString = "543658556.401365"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "90"
@@ -124,11 +108,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/Calendar/DailyCalendarViewController.swift"
-            timestampString = "543648426.677971"
+            timestampString = "543660980.27606"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "keyboardWillHide(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -140,11 +124,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/Calendar/DailyCalendarViewController.swift"
-            timestampString = "543648426.678489"
+            timestampString = "543660980.276509"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "keyboardWillHide(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -156,13 +140,93 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/Daily Collection/DailyCollectionView.swift"
-            timestampString = "543648426.678808"
+            timestampString = "543660980.276794"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
             endingLineNumber = "37"
             landmarkName = "fetchedResultsController"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalorieBurner/Calendar/MonthlyCalendarViewController.swift"
+            timestampString = "543658556.402025"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalorieBurner/Calendar/MonthlyCalendarViewController.swift"
+            timestampString = "543658556.4020849"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "calendar(_:didSelectDate:cell:cellState:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalorieBurner/Calendar/MonthlyCalendarViewController.swift"
+            timestampString = "543658556.402138"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
+            landmarkName = "calendar(_:shouldSelectDate:cell:cellState:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalorieBurner/Calendar/MonthlyCalendarViewController.swift"
+            timestampString = "543658556.402186"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
+            landmarkName = "MonthlyCalendarViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalorieBurner/Daily Collection/DailyCollectionView.swift"
+            timestampString = "543660980.276917"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "scrollViewDidEndDecelerating(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
