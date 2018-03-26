@@ -16,8 +16,8 @@ class DailyCalendarViewCell: DayViewCell {
 class DailyCalendarViewController: MonthlyCalendarViewController {
     @IBOutlet weak var dailyCollectionView: UICollectionView!
     
-    private let cellWidth: CGFloat = 320
-    private let cellHeight: CGFloat = 120
+    private lazy var cellWidth: CGFloat = dailyCollectionView.frame.width * 0.8
+    private lazy var cellHeight: CGFloat = dailyCollectionView.frame.height * 0.8
     
     private lazy var viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private lazy var dayCount = Calendar.current.dateComponents([.day], from: startDate, to: endDate).day!
