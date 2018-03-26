@@ -13,43 +13,29 @@ class DailyCalendarViewCell: DayViewCell {
     @IBOutlet weak var existingItemView: UIView!
 }
 
-class DailyCalendarViewController: MonthlyCalendarViewController {
-    @IBOutlet weak var dailyCollectionView: UICollectionView!
+class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectionViewDelegate {
+    @IBOutlet weak var containerView: UIView!
+    var dailyCollectionViewController: DailyCollectionViewController!
     
-    private lazy var cellWidth: CGFloat = dailyCollectionView.frame.width * 0.8
-    private lazy var cellHeight: CGFloat = dailyCollectionView.frame.height * 0.8
-    
-    private lazy var viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    private lazy var dayCount = Calendar.current.dateComponents([.day], from: startDate, to: endDate).day!
-    private(set) var isCancellingEditing = false
-    
-    func scrollToItem(at date: Date, animated: Bool) {
-        guard let indexPath = fetchedResultsController.indexPath(for: date) else {
-            return
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dailyCollection = segue.destination as? DailyCollectionViewController {
+            dailyCollectionViewController = dailyCollection
+            dailyCollectionViewController.delegate = self
+//            dailyCollectionViewController.cellWidth = containerView.frame.width * 0.8
+//            dailyCollectionViewController.cellHeight = containerView.frame.height * 0.8
         }
-        
-        dailyCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
     }
     
-    private lazy var fetchedResultsController: DailyFetchedResultsController = {
-        let request = Daily.tableFetchRequest()
-        let controller = DailyFetchedResultsController(
-            fetchRequest: request,
-            managedObjectContext: viewContext,
-            dateBounds: (startDate, endDate)
-        )
-        return controller
-    }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        dailyCollectionViewController.cellWidth = containerView.frame.width * 0.6
+        dailyCollectionViewController.cellHeight = containerView.frame.height * 0.9
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        dailyCollectionView.delegate = self
-        dailyCollectionView.dataSource = self
-        
-        try? fetchedResultsController.performFetch()
-        
-        dailyCollectionView.reloadData()
         
         NotificationCenter.default.addObserver(
             self,
@@ -63,6 +49,8 @@ class DailyCalendarViewController: MonthlyCalendarViewController {
             name: .UIKeyboardWillHide,
             object: nil
         )
+        
+//        dailyCollectionViewController
     }
     
     deinit {
@@ -89,8 +77,8 @@ class DailyCalendarViewController: MonthlyCalendarViewController {
         guard self.view.frame.origin.y != 0 else { return }
         
         // this is the most genius line of code. ever.
-        guard let cell = dailyCollectionView.visibleCells.first as? DailyCollectionViewCell,
-              isCancellingEditing || !cell.massTextField.isEditing,
+        guard let cell = dailyCollectionViewController.collectionView.visibleCells.first as? DailyCollectionViewCell,
+              dailyCollectionViewController.isCancellingEditing || !cell.massTextField.isEditing,
               let keyboardAnimationDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
         else { return }
         
@@ -106,133 +94,12 @@ class DailyCalendarViewController: MonthlyCalendarViewController {
     override func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         super.calendar(calendar, didSelectDate: date, cell: cell, cellState: cellState)
         
-        scrollToItem(at: date, animated: true)
+        dailyCollectionViewController.scrollToItem(at: date, animated: true)
     }
     
-    private func dailyDidScroll(toDate date: Date) {
+    func dailyView(_ dailyView: UICollectionView, didScrollToItemAt date: Date) {
         calendarView.scrollToDate(date)
         calendarView.deselectAllDates()
         calendarView.selectDates([date])
     }
-}
-
-extension DailyCalendarViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return fetchedResultsController.numberOfSections
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DailyCell", for: indexPath) as? DailyCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        
-        cell.cellDelegate = self
-        
-        cell.massPickerView = DailyMassPickerView()
-        cell.energyPickerView = DailyEnergyPickerView()
-        cell.massPickerToolbar = DailyMassPickerToolbar()
-        cell.energyPickerToolbar = DailyEnergyPickerToolbar()
-        
-        return cell
-    }
-}
-
-extension DailyCalendarViewController: UICollectionViewDelegateFlowLayout {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        guard let dailyView = scrollView as? UICollectionView,
-            let currentCellIndexPath = dailyView.indexPathsForVisibleItems.first,
-            let date = fetchedResultsController.date(for: currentCellIndexPath)
-            else { return }
-        
-//        delegate?.dailyView(dailyView, didScrollToItemAt: date)
-        
-        dailyDidScroll(toDate: date)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? DailyCollectionViewCell else { return }
-        
-        if let object = fetchedResultsController.object(at: indexPath) {
-            cell.mass = object.mass?.converted(to: UserDefaults.standard.mass ?? .kilograms)
-            cell.energy = object.energy?.converted(to: UserDefaults.standard.energy ?? .kilocalories)
-        } else {
-            cell.setEmpty()
-        }
-    }
-    
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    //        return 120
-    //    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-        //        return self.collectionView(collectionView, layout: collectionViewLayout, insetForSectionAt: section).left * 2
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else { return .zero }
-        
-        // only 1 cell per section
-        let cellCount: CGFloat = 1
-        let itemSpacing = layout.minimumInteritemSpacing
-        let widthOfCell = cellWidth + itemSpacing
-        var insets = layout.sectionInset
-        
-        let totalCellWidth = (widthOfCell * cellCount) - itemSpacing
-        let contentWidth = collectionView.frame.size.width - collectionView.contentInset.left - collectionView.contentInset.right
-        let padding = (contentWidth - totalCellWidth) / 2
-        insets.top = padding / 2
-        insets.left = padding
-        insets.right = padding
-        
-        return insets
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: cellWidth, height: cellHeight)
-    }
-}
-
-extension DailyCalendarViewController: DailyCellDelegate {
-    func willCancelEditing(cell: DailyCollectionViewCell, for itemType: DailyItemType) {
-        isCancellingEditing = true
-    }
-    
-    func didCancelEditing(cell: DailyCollectionViewCell, for item: DailyItemType) {
-        isCancellingEditing = false
-    }
-    
-    func didEndEditing(cell: DailyCollectionViewCell, mass: Measurement<UnitMass>) {
-        guard let indexPath = dailyCollectionView.indexPath(for: cell),
-            let date = fetchedResultsController.date(for: indexPath)
-            else { return }
-        
-        do {
-            try CoreDataStack.shared.updateOrCreate(at: date, mass: mass, energy: nil)
-        } catch {
-            print((error as NSError).localizedDescription)
-        }
-    }
-    
-    func didEndEditing(cell: DailyCollectionViewCell, energy: Measurement<UnitEnergy>) {
-        guard let indexPath = dailyCollectionView.indexPath(for: cell),
-            let date = fetchedResultsController.date(for: indexPath)
-            else { return }
-        
-        do {
-            try CoreDataStack.shared.updateOrCreate(at: date, mass: nil, energy: energy)
-        } catch {
-            print((error as NSError).localizedDescription)
-        }
-    }
-    
-    
 }

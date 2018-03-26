@@ -16,8 +16,8 @@ class DailyCollectionViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     weak var delegate: DailyCollectionViewDelegate?
     
-    private let cellWidth: CGFloat = 320
-    private let cellHeight: CGFloat = 120
+    lazy var cellWidth: CGFloat! = collectionView.frame.width * 0.8
+    lazy var cellHeight: CGFloat! = collectionView.frame.height * 0.8
     
     private lazy var viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -150,11 +150,7 @@ extension DailyCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let margin: CGFloat = 40
-        let width = collectionView.bounds.width - (margin * 2)
-        
-        
-        return CGSize(width: width, height: cellHeight)
+        return CGSize(width: cellWidth, height: cellHeight)
     }
 }
 
