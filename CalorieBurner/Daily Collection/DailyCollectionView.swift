@@ -45,12 +45,20 @@ class DailyCollectionViewController: UIViewController {
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
     }
     
+    func doesItemExist(at date: Date) -> Bool {
+        guard let indexPath = fetchedResultsController.indexPath(for: date),
+              fetchedResultsController.object(at: indexPath) != nil
+        else { return false }
+        
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.contentInset.top = 15
+//        collectionView.contentInset.top = 15
         
         try? fetchedResultsController.performFetch()
         

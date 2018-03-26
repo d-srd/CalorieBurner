@@ -30,8 +30,8 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        dailyCollectionViewController.cellWidth = containerView.frame.width * 0.6
-        dailyCollectionViewController.cellHeight = containerView.frame.height * 0.9
+        dailyCollectionViewController.cellWidth = containerView.frame.width * 0.7
+        dailyCollectionViewController.cellHeight = 140 /* containerView.frame.height * 0.9 */
     }
     
     override func viewDidLoad() {
@@ -87,8 +87,19 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
         }
     }
     
+    func map(_ cell: DayViewCell?) -> DailyCalendarViewCell? {
+        return cell as? DailyCalendarViewCell
+    }
+    
     override func configure(cell: DayViewCell?, cellState: CellState) {
         super.configure(cell: cell, cellState: cellState)
+        let cell = map(cell)
+        
+        if dailyCollectionViewController.doesItemExist(at: cellState.date) {
+            cell?.existingItemView.isHidden = false
+        } else {
+            cell?.existingItemView.isHidden = true
+        }
     }
     
     override func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
