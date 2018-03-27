@@ -21,8 +21,6 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
         if let dailyCollection = segue.destination as? DailyCollectionViewController {
             dailyCollectionViewController = dailyCollection
             dailyCollectionViewController.delegate = self
-//            dailyCollectionViewController.cellWidth = containerView.frame.width * 0.8
-//            dailyCollectionViewController.cellHeight = containerView.frame.height * 0.8
         }
     }
     
@@ -49,8 +47,6 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
             name: .UIKeyboardWillHide,
             object: nil
         )
-        
-//        dailyCollectionViewController
     }
     
     deinit {
@@ -91,14 +87,31 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
         return cell as? DailyCalendarViewCell
     }
     
-    override func configure(cell: DayViewCell?, cellState: CellState) {
-        super.configure(cell: cell, cellState: cellState)
+    override func configure(cell: DayViewCell?, cellState: CellState, animated: Bool) {
+        super.configure(cell: cell, cellState: cellState, animated: animated)
         let cell = map(cell)
         
         if dailyCollectionViewController.doesItemExist(at: cellState.date) {
             cell?.existingItemView.isHidden = false
+
+            if animated {
+                UIView.animate(withDuration: animationSelectionDuration) {
+                    cell?.existingItemView.alpha = 1
+                }
+            } else {
+                cell?.existingItemView.alpha = 1
+            }
         } else {
-            cell?.existingItemView.isHidden = true
+            if animated {
+                UIView.animate(
+                    withDuration: animationSelectionDuration,
+                    animations: { cell?.existingItemView.alpha = 0 },
+                    completion: { _ in cell?.existingItemView.isHidden = true }
+                )
+            } else {
+                cell?.existingItemView.alpha = 0
+                cell?.existingItemView.isHidden = true
+            }
         }
     }
     
@@ -109,8 +122,10 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
     }
     
     func dailyView(_ dailyView: UICollectionView, didScrollToItemAt date: Date) {
-        calendarView.scrollToDate(date)
-        calendarView.deselectAllDates()
-        calendarView.selectDates([date])
+        if !calendarView.selectedDates.contains(date) {
+            calendarView.scrollToDate(date)
+            calendarView.deselectAllDates()
+            calendarView.selectDates([date])
+        }
     }
 }

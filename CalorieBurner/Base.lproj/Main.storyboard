@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zyn-E8-fk1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cIY-jh-N91">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -18,7 +18,7 @@
         <!--CRUD-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="CRUD" id="BYZ-38-t0r" customClass="CRUDViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="CRUD" id="BYZ-38-t0r" customClass="CRUDViewController" customModule="CalorieBurner" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -180,7 +180,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="813.60000000000002" y="106.59670164917542"/>
+            <point key="canvasLocation" x="936" y="107"/>
         </scene>
         <!--Daily Calendar View Controller-->
         <scene sceneID="226-EW-jx6">
@@ -247,7 +247,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9Hj-ei-YUA" userLabel="Calendar and Dailies">
-                                <rect key="frame" x="12" y="74" width="390" height="646"/>
+                                <rect key="frame" x="12" y="74" width="390" height="597"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="XOt-no-MNE" userLabel="Weekdays">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="22"/>
@@ -301,7 +301,7 @@
                                         </constraints>
                                     </stackView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4rG-8P-rfh" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
-                                        <rect key="frame" x="0.0" y="30" width="390" height="458"/>
+                                        <rect key="frame" x="0.0" y="30" width="390" height="409"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Gdm-K2-Rw5">
                                             <size key="itemSize" width="60" height="60"/>
@@ -371,7 +371,7 @@
                                         </cells>
                                     </collectionView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mpe-8Y-h6S">
-                                        <rect key="frame" x="0.0" y="496" width="390" height="150"/>
+                                        <rect key="frame" x="0.0" y="447" width="390" height="150"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="4n5-gX-6KZ"/>
                                         </constraints>
@@ -401,7 +401,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xvw-fn-NUF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="saq-wV-iXI"/>
             </objects>
-            <point key="canvasLocation" x="2338" y="107"/>
+            <point key="canvasLocation" x="3717" y="-103"/>
         </scene>
         <!--Item-->
         <scene sceneID="hOS-ix-c9O">
@@ -574,7 +574,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oNh-S9-9Yz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="886.95652173913049" y="901.63043478260875"/>
+            <point key="canvasLocation" x="710" y="958"/>
         </scene>
         <!--Picker View Controller-->
         <scene sceneID="GFF-HD-dWK">
@@ -795,12 +795,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WvT-Xk-GIi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3067" y="107"/>
+            <point key="canvasLocation" x="4446" y="-103"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Item-->
         <scene sceneID="aEf-rz-CZA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zyn-E8-fk1" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="rfG-Wo-5uL"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Wel-rl-5kT">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
@@ -813,7 +814,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rei-my-XIn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1597" y="106"/>
+            <point key="canvasLocation" x="2975" y="-104"/>
         </scene>
         <!--Daily Collection View Controller-->
         <scene sceneID="0aX-9q-VeM">
@@ -1011,7 +1012,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5cv-rr-vOc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4299" y="64"/>
+            <point key="canvasLocation" x="1613" y="-761"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="YSt-tY-lFl">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="cIY-jh-N91" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Mag-9Y-w5h">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="zyn-E8-fk1" kind="relationship" relationship="viewControllers" id="b8h-cA-gYd"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N1Z-8w-qKu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2177" y="503"/>
         </scene>
     </scenes>
     <resources>

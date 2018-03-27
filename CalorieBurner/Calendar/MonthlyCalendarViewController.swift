@@ -15,7 +15,7 @@ protocol DailyCalendarDelegate {
 
 class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelegate, JTAppleCalendarViewDataSource {
     
-    // MARK: Private objects
+    // MARK: Types
     
     struct Colors {
         static let today = #colorLiteral(red: 0.9549999833, green: 0.3140000105, blue: 0.4199999869, alpha: 1)
@@ -34,6 +34,8 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     }
     
     // MARK: Properties
+    
+    let animationSelectionDuration = 0.3
     
     // used for month, year, and days of week labels
     private let dateFormatter: DateFormatter = {
@@ -77,15 +79,12 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
         calendarView.calendarDelegate = self
         calendarView.calendarDataSource = self
         calendarView.scrollingMode = .stopAtEachSection
+        calendarView.allowsDateCellStretching = false
         
         setWeekdayLabels()
 //        setDateLabels(to: today)
         
         calendarView.scrollToDate(today)
-        
-        print("ULTIMATE SCREEN WIDTH: ", UIScreen.main.bounds.width)
-        print("ULTIMATE SELF WIDTH: ", view.frame.width)
-        
     }
     
     @objc private func weekdayTapped(_ sender: UITapGestureRecognizer) {
@@ -134,33 +133,67 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
 
     // MARK: JTAppleCalendarViewDelegate
     
-    func configure(cell: DayViewCell?, cellState: CellState) {
+    func configure(cell: DayViewCell?, cellState: CellState, animated: Bool) {
         guard let cell = cell else { return }
         
         // text
         cell.dayLabel.text = cellState.text
         
-        // handle cell selection
+        // handle cell selection and animation
         if calendarView.selectedDates.contains(cellState.date) {
             cell.selectionView.isHidden = false
-            
-            UIView.animate(withDuration: 0.2) {
+
+            if animated {
+                UIView.animate(withDuration: animationSelectionDuration) {
+                    cell.selectionView.alpha = 1
+                }
+                
+                // UILabel text color cannot be implicitly animated, therefore we use the block below
+                UIView.transition(
+                    with: cell.dayLabel,
+                    duration: animationSelectionDuration,
+                    options: .curveEaseInOut,
+                    animations: { cell.dayLabel.textColor = Colors.selected },
+                    completion: nil
+                )
+            } else {
                 cell.selectionView.alpha = 1
                 cell.dayLabel.textColor = Colors.selected
             }
         } else {
-            UIView.animate(
-                withDuration: 0.2,
-                animations: { cell.selectionView.alpha = 0 },
-                completion: { _ in cell.selectionView.isHidden = true }
-            )
-            
-            if Calendar.current.isDateInToday(cellState.date) {
-                cell.dayLabel.textColor = Colors.today
-            } else if cellState.dateBelongsTo == .thisMonth {
-                cell.dayLabel.textColor = Colors.currentMonth
+            if animated {
+                UIView.animate(
+                    withDuration: animationSelectionDuration,
+                    animations: { cell.selectionView.alpha = 0 },
+                    completion: { _ in cell.selectionView.isHidden = true }
+                )
+                
+                UIView.transition(
+                    with: cell.dayLabel,
+                    duration: animationSelectionDuration,
+                    options: .curveEaseInOut,
+                    animations: {
+                        if Calendar.current.isDateInToday(cellState.date) {
+                            cell.dayLabel.textColor = Colors.today
+                        } else if cellState.dateBelongsTo == .thisMonth {
+                            cell.dayLabel.textColor = Colors.currentMonth
+                        } else {
+                            cell.dayLabel.textColor = Colors.outMonth
+                        }
+                    },
+                    completion: nil
+                )
             } else {
-                cell.dayLabel.textColor = Colors.outMonth
+                cell.selectionView.alpha = 0
+                cell.selectionView.isHidden = true
+                
+                if Calendar.current.isDateInToday(cellState.date) {
+                    cell.dayLabel.textColor = Colors.today
+                } else if cellState.dateBelongsTo == .thisMonth {
+                    cell.dayLabel.textColor = Colors.currentMonth
+                } else {
+                    cell.dayLabel.textColor = Colors.outMonth
+                }
             }
         }
     }
@@ -172,7 +205,7 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         guard let cell = cell as? DayViewCell else { return }
         
-        configure(cell: cell, cellState: cellState)
+        configure(cell: cell, cellState: cellState, animated: false)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
@@ -180,7 +213,7 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
             return JTAppleCell()
         }
         
-        configure(cell: cell, cellState: cellState)
+        configure(cell: cell, cellState: cellState, animated: false)
         
         return cell
     }
@@ -192,18 +225,14 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     }
     
     func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
-        guard cellState.dateBelongsTo == .thisMonth else {
-            return false
-        }
-        
-        return true
+        return cellState.dateBelongsTo == .thisMonth
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-        configure(cell: map(cell), cellState: cellState)
+        configure(cell: map(cell), cellState: cellState, animated: true)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-        configure(cell: map(cell), cellState: cellState)
+        configure(cell: map(cell), cellState: cellState, animated: true)
     }
 }
