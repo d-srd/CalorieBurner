@@ -24,10 +24,12 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
         }
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // why is this method here? well at this point the all
+        // frames and constraints are initialized, and we
+        // can inject properties for the cells
         dailyCollectionViewController.cellWidth = containerView.frame.width * 0.7
         dailyCollectionViewController.cellHeight = 140 /* containerView.frame.height * 0.9 */
     }

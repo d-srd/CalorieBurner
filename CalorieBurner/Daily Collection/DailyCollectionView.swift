@@ -64,6 +64,10 @@ class DailyCollectionViewController: UIViewController {
         
         collectionView.reloadData()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
 }
 
 extension DailyCollectionViewController: UICollectionViewDataSource {
