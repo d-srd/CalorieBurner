@@ -19,7 +19,7 @@ protocol WeightDeltaDelegate: class {
 class WeightDeltaView: UIView {
     @IBOutlet weak var progressView: CircleProgressView! {
         didSet {
-            updateProgressView()
+            updateProgressView(animated: false)
         }
     }
     @IBOutlet weak var currentWeightLabel: UILabel! {
@@ -70,20 +70,48 @@ class WeightDeltaView: UIView {
             if let goalMass = goalMass {
                 delegate?.goalWeightDidChange(self, to: goalMass)
             }
-            updateProgressView()
+            updateProgressView(animated: true)
         }
     }
-    var initialMass: Mass? {
+    private var initialMass: Mass? {
         return delegate?.startingWeight(self)
     }
-    var currentMass: Mass? {
+    private var currentMass: Mass? {
         return delegate?.currentWeight(self)
     }
     
-    private func updateProgressView() {
+    var animationDuration = 0.4
+    
+    // IM = 70
+    // CM = 75
+    // GM = 80
+    // completion = 50%
+    //
+    // IM = 90
+    // CM = 85
+    // GM = 80
+    // completion = 50%
+    //
+    // IM = 90
+    // CM = 95
+    // GM = 80
+    // completion = 0%
+    //
+    // IM = 70
+    // CM = 65
+    // GM = 80
+    // completion = 0%
+    private func updateProgressView(animated: Bool) {
         if let initialMass = initialMass, let currentMass = currentMass, let goalMass = goalMass {
-            let completion = (currentMass.value - initialMass.value) / (goalMass.value - initialMass.value)
-            progressView.progress = CGFloat(completion)
+            let completion = abs((currentMass.value - initialMass.value)) / abs((goalMass.value - initialMass.value))
+            
+            if animated {
+                UIView.animate(withDuration: animationDuration) {
+                    self.progressView.progress = CGFloat(completion)
+                }
+            } else {
+                progressView.progress = CGFloat(completion)
+            }
         }
     }
     
@@ -92,26 +120,29 @@ class WeightDeltaView: UIView {
             currentWeightLabel.text = measurementFormatter.string(from: currentMass)
         }
         
-        if let goalMass = goalMass, let currentMass = currentMass {
-            let completion = currentMass.value / goalMass.value
-            UIView.animate(withDuration: 0.5) { [weak self] in
-                self?.progressView.progress = CGFloat(completion)
-            }
-        }
+        updateProgressView(animated: true)
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        massPickerView = DailyMassPickerView()
-        massPickerToolbar = DailyMassPickerToolbar()
+        goalWeightTextField.inputView = {
+            let picker = DailyMassPickerView()
+            picker.dailyDelegate = self
+            
+            return picker
+        }()
         
-        massPickerView?.dailyDelegate = self
-        massPickerToolbar?.dailyDelegate = self
-        massPickerToolbar?.items?.last?.title = "Done"
-        
-        goalWeightTextField.inputView = massPickerView
-        goalWeightTextField.inputAccessoryView = massPickerToolbar
+        goalWeightTextField.inputAccessoryView = {
+            let toolbar = DailyMassPickerToolbar()
+            toolbar.dailyDelegate = self
+            
+            // the default title is "next" because the toolbar is used as an input accessory view in
+            // daily collection view and there is another picker view right after it
+            toolbar.items?.last?.title = "Done"
+            
+            return toolbar
+        }()
         
         reloadData()
     }

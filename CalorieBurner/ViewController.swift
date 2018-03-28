@@ -186,15 +186,15 @@ class CRUDViewController: UIViewController {
 
 extension CRUDViewController: WeightDeltaDelegate {
     func startingWeight(_ weightDeltaView: WeightDeltaView) -> Mass {
-        return Mass(value: 70, unit: .kilograms)
+        return Mass(value: 90, unit: .kilograms)
     }
     
     func currentWeight(_ weightDeltaView: WeightDeltaView) -> Mass {
-        return Mass(value: 72, unit: .kilograms)
+        return Mass(value: 85, unit: .kilograms)
     }
     
     func initialGoalWeight(_ weightDeltaView: WeightDeltaView) -> Mass {
-        return Mass(value: 85, unit: .kilograms)
+        return Mass(value: 80, unit: .kilograms)
     }
     
     func goalWeightDidChange(_ weightDeltaView: WeightDeltaView, to value: Mass) {
