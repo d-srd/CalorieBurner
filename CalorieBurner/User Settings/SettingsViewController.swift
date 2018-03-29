@@ -148,6 +148,7 @@ class SettingsViewController: UITableViewController {
     private let measurementFormatter: MeasurementFormatter = {
         let fmt = MeasurementFormatter()
         fmt.unitStyle = .long
+        fmt.unitOptions = .providedUnit
         return fmt
     }()
     private let dateFormatter: DateFormatter = {
@@ -183,8 +184,19 @@ class SettingsViewController: UITableViewController {
         }
     }
     
-//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        cell.selectionStyle = .none
-//    }
+    // disable selection of health kit cell
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if healthKitUsageCell == tableView.cellForRow(at: indexPath) {
+            return nil
+        }
+        
+        return indexPath
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cell == healthKitUsageCell {
+            cell.selectionStyle = .none
+        }
+    }
 
 }
