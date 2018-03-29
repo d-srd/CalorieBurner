@@ -14,9 +14,7 @@ class CoreDataStack {
     
     lazy var persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
     lazy var viewContext = persistentContainer.viewContext
-    
-    private init() { }
-    
+        
     func getOrCreate(at day: Date) throws -> Daily {
         let request = Daily.fetchRequest(in: day)
         
