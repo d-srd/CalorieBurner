@@ -36,6 +36,10 @@ class DailyCSV {
         self.items.append(contentsOf: dailies)
     }
     
+    func addItems(_ dailies: [Daily]) {
+        self.items.append(contentsOf: dailies)
+    }
+    
     private func stringify() -> String {
         return items.flatMap(convert).joined(separator: "\n")
     }
@@ -43,6 +47,7 @@ class DailyCSV {
     func export() -> Data {
         return items
             .flatMap(convert)
+            .prepending(header)
             .joined(separator: "\n")
             .data(using: .utf8)!
     }
