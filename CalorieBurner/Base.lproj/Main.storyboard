@@ -1220,8 +1220,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="p9b-ho-1UA"/>
                     <connections>
+                        <outlet property="exportDataCell" destination="J2S-gQ-0Yz" id="q4U-KR-5w9"/>
                         <outlet property="firstDayOfWeekCell" destination="cXm-BX-7P9" id="rvb-Lv-cCM"/>
                         <outlet property="firstDayOfWeekLabel" destination="h9J-r7-vYD" id="ry1-zo-1uX"/>
+                        <outlet property="healthKitUsageCell" destination="3IV-xf-b3L" id="cZh-9h-P92"/>
+                        <outlet property="importDataCell" destination="2gH-r6-azd" id="LjU-8H-fiB"/>
                         <outlet property="unitEnergyCell" destination="xJP-UB-vWP" id="eUT-Gk-dJJ"/>
                         <outlet property="unitEnergyLabel" destination="y5J-1o-S9g" id="iR8-uC-Fpu"/>
                         <outlet property="unitMassCell" destination="kIT-s5-Jhd" id="NgC-t6-rFN"/>

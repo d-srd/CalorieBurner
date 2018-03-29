@@ -159,7 +159,6 @@
 		841B5AA220436E7300ACAD15 /* CalorieBurner */ = {
 			isa = PBXGroup;
 			children = (
-				84F08542206A499900E47042 /* CSV */,
 				84F0853E206A27B000E47042 /* User Settings */,
 				840C6F9720651EB700535787 /* Weight Delta */,
 				84FC53BD205C9F8F00D20B3C /* Daily Collection */,
@@ -178,6 +177,8 @@
 			isa = PBXGroup;
 			children = (
 				84F0853F206A27BE00E47042 /* SettingsViewController.swift */,
+				84FC53BE205CA16B00D20B3C /* UserDefaults.swift */,
+				84FC53C0205CA18900D20B3C /* Notification.swift */,
 			);
 			path = "User Settings";
 			sourceTree = "<group>";
@@ -204,6 +205,7 @@
 		84FC538E2057C71000D20B3C /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				84F08542206A499900E47042 /* CSV */,
 				84B49845204DC64C00DCFA05 /* CoreDataStack.swift */,
 				84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */,
 				841B5AAA20436E7300ACAD15 /* CalorieBurner.xcdatamodeld */,
@@ -227,8 +229,6 @@
 			isa = PBXGroup;
 			children = (
 				84FC53BB205AFA4700D20B3C /* Array.swift */,
-				84FC53BE205CA16B00D20B3C /* UserDefaults.swift */,
-				84FC53C0205CA18900D20B3C /* Notification.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";

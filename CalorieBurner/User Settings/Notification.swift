@@ -11,4 +11,5 @@ import Foundation
 extension Notification.Name {
     static let UnitMassChanged = Notification.Name("unitMassChanged")
     static let UnitEnergyChanged = Notification.Name("unitEnergyChanged")
+    static let FirstDayOfWeekDidChange = Notification.Name("firstDayOfWeekDidChange")
 }
