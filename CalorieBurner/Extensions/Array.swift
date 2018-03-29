@@ -39,4 +39,11 @@ extension Array {
         
         return rightSide + leftSide
     }
+    
+    func prepending(_ element: Element) -> Array<Element> {
+        var newSelf = self
+        newSelf.insert(element, at: 0)
+        
+        return newSelf
+    }
 }
