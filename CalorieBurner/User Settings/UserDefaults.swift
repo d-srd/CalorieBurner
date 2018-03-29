@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension UserDefaults {
-    /// User's prefered mass unit.
-    var mass: UnitMass? {
+public extension UserDefaults {
+    /// User's prefered mass unit. Used in displaying diary entries.
+    public var mass: UnitMass? {
         get {
             guard let encodedUnit = self.object(forKey: "massUnit") as? Data else { return nil }
             return NSKeyedUnarchiver.unarchiveObject(with: encodedUnit) as? UnitMass
@@ -23,8 +23,8 @@ extension UserDefaults {
         }
     }
     
-    /// User's preferred energy unit.
-    var energy: UnitEnergy? {
+    /// User's preferred energy unit. Used in displaying diary entries.
+    public var energy: UnitEnergy? {
         get {
             guard let encodedUnit = self.object(forKey: "energyUnit") as? Data else { return nil }
             return NSKeyedUnarchiver.unarchiveObject(with: encodedUnit) as? UnitEnergy
@@ -33,13 +33,16 @@ extension UserDefaults {
             guard let energyUnit = newValue else { return }
             let encodedUnit = NSKeyedArchiver.archivedData(withRootObject: energyUnit)
             self.set(encodedUnit, forKey: "energyUnit")
+            
+            // maybe move this somewhere else?
             NotificationCenter.default.post(name: .UnitEnergyChanged, object: nil)
         }
     }
     
-    /// User's preferred first day of week, represented numerically.
+    /// User's preferred first day of week, represented numerically. It's the job of the caller to
+    /// make sure that the value this property is set to is valid.
     /// e.g. in USA localization: Sunday - 1, Monday - 2, ... Saturday - 7
-    var firstDayOfWeek: Int {
+    public var firstDayOfWeek: Int {
         get {
             return self.integer(forKey: "firstDayOfWeek")
         } set {

@@ -20,6 +20,8 @@
 		841B5AB920436FA300ACAD15 /* Daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AB820436FA300ACAD15 /* Daily.swift */; };
 		841B5ABB20445D2300ACAD15 /* DailyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5ABA20445D2300ACAD15 /* DailyCollectionViewCell.swift */; };
 		842525462054E32F00CA0122 /* DailyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842525452054E32F00CA0122 /* DailyCollectionView.swift */; };
+		8436A897206D410000946C32 /* CalorieBurnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436A896206D410000946C32 /* CalorieBurnerTests.swift */; };
+		8436A89F206D425C00946C32 /* UserDefautsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436A89E206D425C00946C32 /* UserDefautsTests.swift */; };
 		843BD0A1205E239D0049DD77 /* DailyCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843BD0A0205E239D0049DD77 /* DailyCalendarViewController.swift */; };
 		84696D8620499FF8002F31B4 /* DailyFetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */; };
 		84B49846204DC64C00DCFA05 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B49845204DC64C00DCFA05 /* CoreDataStack.swift */; };
@@ -49,6 +51,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 840C6F6C2062316300535787;
 			remoteInfo = CocoaControls;
+		};
+		8436A899206D410000946C32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 841B5A9820436E7300ACAD15 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 841B5A9F20436E7300ACAD15;
+			remoteInfo = CalorieBurner;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -82,6 +91,10 @@
 		841B5AB820436FA300ACAD15 /* Daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daily.swift; sourceTree = "<group>"; };
 		841B5ABA20445D2300ACAD15 /* DailyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionViewCell.swift; sourceTree = "<group>"; };
 		842525452054E32F00CA0122 /* DailyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionView.swift; sourceTree = "<group>"; };
+		8436A894206D410000946C32 /* CalorieBurnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalorieBurnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8436A896206D410000946C32 /* CalorieBurnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieBurnerTests.swift; sourceTree = "<group>"; };
+		8436A898206D410000946C32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8436A89E206D425C00946C32 /* UserDefautsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefautsTests.swift; sourceTree = "<group>"; };
 		843BD0A0205E239D0049DD77 /* DailyCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCalendarViewController.swift; sourceTree = "<group>"; };
 		84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFetchedResultsController.swift; sourceTree = "<group>"; };
 		84B49845204DC64C00DCFA05 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -106,6 +119,13 @@
 			files = (
 				840C6F8D206237DB00535787 /* CocoaControls.framework in Frameworks */,
 				1B959C6650F57E66DCDB7644 /* Pods_CalorieBurner.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8436A891206D410000946C32 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +162,7 @@
 			children = (
 				840C6F802062319E00535787 /* CocoaControls.xcodeproj */,
 				841B5AA220436E7300ACAD15 /* CalorieBurner */,
+				8436A895206D410000946C32 /* CalorieBurnerTests */,
 				841B5AA120436E7300ACAD15 /* Products */,
 				C6C0A0F43BFF89F3841E8340 /* Pods */,
 				6D4A4B85674B185AA1C4F1EA /* Frameworks */,
@@ -152,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				841B5AA020436E7300ACAD15 /* CalorieBurner.app */,
+				8436A894206D410000946C32 /* CalorieBurnerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -171,6 +193,16 @@
 				841B5AA720436E7300ACAD15 /* Main.storyboard */,
 			);
 			path = CalorieBurner;
+			sourceTree = "<group>";
+		};
+		8436A895206D410000946C32 /* CalorieBurnerTests */ = {
+			isa = PBXGroup;
+			children = (
+				8436A896206D410000946C32 /* CalorieBurnerTests.swift */,
+				8436A89E206D425C00946C32 /* UserDefautsTests.swift */,
+				8436A898206D410000946C32 /* Info.plist */,
+			);
+			path = CalorieBurnerTests;
 			sourceTree = "<group>";
 		};
 		84F0853E206A27B000E47042 /* User Settings */ = {
@@ -277,6 +309,24 @@
 			productReference = 841B5AA020436E7300ACAD15 /* CalorieBurner.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8436A893206D410000946C32 /* CalorieBurnerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8436A89D206D410000946C32 /* Build configuration list for PBXNativeTarget "CalorieBurnerTests" */;
+			buildPhases = (
+				8436A890206D410000946C32 /* Sources */,
+				8436A891206D410000946C32 /* Frameworks */,
+				8436A892206D410000946C32 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8436A89A206D410000946C32 /* PBXTargetDependency */,
+			);
+			name = CalorieBurnerTests;
+			productName = CalorieBurnerTests;
+			productReference = 8436A894206D410000946C32 /* CalorieBurnerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -290,6 +340,11 @@
 					841B5A9F20436E7300ACAD15 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+					};
+					8436A893206D410000946C32 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 841B5A9F20436E7300ACAD15;
 					};
 				};
 			};
@@ -313,6 +368,7 @@
 			projectRoot = "";
 			targets = (
 				841B5A9F20436E7300ACAD15 /* CalorieBurner */,
+				8436A893206D410000946C32 /* CalorieBurnerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -335,6 +391,13 @@
 				841B5AB120436E7300ACAD15 /* LaunchScreen.storyboard in Resources */,
 				841B5AAE20436E7300ACAD15 /* Assets.xcassets in Resources */,
 				841B5AA920436E7300ACAD15 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8436A892206D410000946C32 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +487,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8436A890206D410000946C32 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8436A897206D410000946C32 /* CalorieBurnerTests.swift in Sources */,
+				8436A89F206D425C00946C32 /* UserDefautsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -431,6 +503,11 @@
 			isa = PBXTargetDependency;
 			name = CocoaControls;
 			targetProxy = 840C6F8F206237DB00535787 /* PBXContainerItemProxy */;
+		};
+		8436A89A206D410000946C32 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 841B5A9F20436E7300ACAD15 /* CalorieBurner */;
+			targetProxy = 8436A899206D410000946C32 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -603,6 +680,38 @@
 			};
 			name = Release;
 		};
+		8436A89B206D410000946C32 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RW5YX8CCC9;
+				INFOPLIST_FILE = CalorieBurnerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.dinosrdoc.CalorieBurnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CalorieBurner.app/CalorieBurner";
+			};
+			name = Debug;
+		};
+		8436A89C206D410000946C32 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RW5YX8CCC9;
+				INFOPLIST_FILE = CalorieBurnerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.dinosrdoc.CalorieBurnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CalorieBurner.app/CalorieBurner";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -620,6 +729,15 @@
 			buildConfigurations = (
 				841B5AB620436E7300ACAD15 /* Debug */,
 				841B5AB720436E7300ACAD15 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8436A89D206D410000946C32 /* Build configuration list for PBXNativeTarget "CalorieBurnerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8436A89B206D410000946C32 /* Debug */,
+				8436A89C206D410000946C32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
