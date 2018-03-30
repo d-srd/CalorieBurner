@@ -150,7 +150,7 @@ class WeightDeltaView: UIView {
 
 extension WeightDeltaView: DailyItemPickerDelegate {
     func dailyPicker(_ picker: UIPickerView, valueDidChangeTo value: Double) {
-        goalMassBuffer = Mass(value: value, unit: UserDefaults.standard.mass ?? .kilograms)
+        goalMassBuffer = Mass(value: value, unit: UserDefaults.standard.mass)
     }
 }
 

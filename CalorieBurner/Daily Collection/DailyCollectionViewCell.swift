@@ -146,9 +146,9 @@ class DailyCollectionViewCell: UICollectionViewCell, DailyViewModel {
 extension DailyCollectionViewCell: DailyItemPickerDelegate {
     func dailyPicker(_ picker: UIPickerView, valueDidChangeTo: Double) {
         if picker == massPickerView {
-            massBuffer = Measurement<UnitMass>(value: valueDidChangeTo, unit: UserDefaults.standard.mass ?? .kilograms)
+            massBuffer = Measurement<UnitMass>(value: valueDidChangeTo, unit: UserDefaults.standard.mass)
         } else {
-            energyBuffer = Measurement<UnitEnergy>(value: valueDidChangeTo, unit: UserDefaults.standard.energy ?? .kilocalories)
+            energyBuffer = Measurement<UnitEnergy>(value: valueDidChangeTo, unit: UserDefaults.standard.energy)
         }
         
         print(valueDidChangeTo)

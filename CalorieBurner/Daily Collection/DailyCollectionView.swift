@@ -109,8 +109,8 @@ extension DailyCollectionViewController: UICollectionViewDelegateFlowLayout {
         guard let cell = cell as? DailyCollectionViewCell else { return }
         
         if let object = fetchedResultsController.object(at: indexPath) {
-            cell.mass = object.mass?.converted(to: UserDefaults.standard.mass ?? .kilograms)
-            cell.energy = object.energy?.converted(to: UserDefaults.standard.energy ?? .kilocalories)
+            cell.mass = object.mass?.converted(to: UserDefaults.standard.mass)
+            cell.energy = object.energy?.converted(to: UserDefaults.standard.energy)
         } else {
             cell.setEmpty()
         }
@@ -181,7 +181,7 @@ extension DailyCollectionViewController: DailyCellDelegate {
         else { return }
         
         do {
-            try CoreDataStack.shared.updateOrCreate(at: date, mass: mass, energy: nil)
+            _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: mass, energy: nil)
         } catch {
             print((error as NSError).localizedDescription)
         }
@@ -193,7 +193,7 @@ extension DailyCollectionViewController: DailyCellDelegate {
             else { return }
         
         do {
-            try CoreDataStack.shared.updateOrCreate(at: date, mass: nil, energy: energy)
+            _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: nil, energy: energy)
         } catch {
             print((error as NSError).localizedDescription)
         }

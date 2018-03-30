@@ -10,28 +10,26 @@ import Foundation
 
 public extension UserDefaults {
     /// User's prefered mass unit. Used in displaying diary entries.
-    public var mass: UnitMass? {
+    public var mass: UnitMass {
         get {
-            guard let encodedUnit = self.object(forKey: "massUnit") as? Data else { return nil }
-            return NSKeyedUnarchiver.unarchiveObject(with: encodedUnit) as? UnitMass
+            let encodedUnit = self.object(forKey: "massUnit") as! Data
+            return NSKeyedUnarchiver.unarchiveObject(with: encodedUnit) as! UnitMass
         }
         set {
-            guard let massUnit = newValue else { return }
-            let encodedUnit = NSKeyedArchiver.archivedData(withRootObject: massUnit)
+            let encodedUnit = NSKeyedArchiver.archivedData(withRootObject: newValue)
             self.set(encodedUnit, forKey: "massUnit")
             NotificationCenter.default.post(name: .UnitMassChanged, object: nil)
         }
     }
     
     /// User's preferred energy unit. Used in displaying diary entries.
-    public var energy: UnitEnergy? {
+    public var energy: UnitEnergy {
         get {
-            guard let encodedUnit = self.object(forKey: "energyUnit") as? Data else { return nil }
-            return NSKeyedUnarchiver.unarchiveObject(with: encodedUnit) as? UnitEnergy
+            let encodedUnit = self.object(forKey: "energyUnit") as! Data
+            return NSKeyedUnarchiver.unarchiveObject(with: encodedUnit) as! UnitEnergy
         }
         set {
-            guard let energyUnit = newValue else { return }
-            let encodedUnit = NSKeyedArchiver.archivedData(withRootObject: energyUnit)
+            let encodedUnit = NSKeyedArchiver.archivedData(withRootObject: newValue)
             self.set(encodedUnit, forKey: "energyUnit")
             
             // maybe move this somewhere else?

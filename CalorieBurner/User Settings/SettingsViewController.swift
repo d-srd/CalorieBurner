@@ -128,7 +128,7 @@ class SettingsViewController: UITableViewController {
     
     private var massUnit: UnitMass {
         get {
-            return UserDefaults.standard.mass ?? .kilograms
+            return UserDefaults.standard.mass
         } set(unit) {
             UserDefaults.standard.mass = unit
             unitMassLabel.text = measurementFormatter.string(from: unit).capitalized
@@ -137,7 +137,7 @@ class SettingsViewController: UITableViewController {
     
     private var energyUnit: UnitEnergy {
         get {
-            return UserDefaults.standard.energy ?? .kilocalories
+            return UserDefaults.standard.energy
         }
         set(unit) {
             UserDefaults.standard.energy = unit

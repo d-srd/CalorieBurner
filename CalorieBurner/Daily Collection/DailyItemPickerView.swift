@@ -58,7 +58,7 @@ final class DailyMassPickerDataSource: DailyItemUnitDataSource {
             .pounds : (100, 800),
             .stones : (6, 60)
         ]
-        currentUnit = UserDefaults.standard.mass ?? .kilograms
+        currentUnit = UserDefaults.standard.mass
         stepper = steppersPerUnit[currentUnit]!
         
         let (min, max) = bounds[currentUnit]!
@@ -73,8 +73,7 @@ final class DailyMassPickerDataSource: DailyItemUnitDataSource {
     }
     
     @objc private func unitDidChange(_ sender: Any) {
-        guard let unit = UserDefaults.standard.mass else { return }
-        currentUnit = unit
+        currentUnit = UserDefaults.standard.mass
     }
     
     deinit {
@@ -108,7 +107,7 @@ final class DailyEnergyPickerDataSource: DailyItemUnitDataSource {
             .kilocalories : (1_000, 15_000),
             .kilojoules : (4_000, 60_000)
         ]
-        currentUnit = UserDefaults.standard.energy ?? .kilocalories
+        currentUnit = UserDefaults.standard.energy
         stepper = steppersPerUnit[currentUnit]!
         
         let (min, max) = bounds[currentUnit]!
@@ -123,8 +122,7 @@ final class DailyEnergyPickerDataSource: DailyItemUnitDataSource {
     }
     
     @objc private func unitDidChange(_ sender: Any) {
-        guard let unit = UserDefaults.standard.energy else { return }
-        currentUnit = unit
+        currentUnit = UserDefaults.standard.energy
     }
     
     deinit {
@@ -160,19 +158,7 @@ class DailyMassPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDel
         return DailyMassPickerDataSource.shared.indexOfClosest(value: index, from: oldStepperIndex, to: currentStepperIndex)
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        commonInit()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        commonInit()
-    }
-    
-    func commonInit() {
+    override func awakeFromNib() {
         delegate = self
         dataSource = self
         showsSelectionIndicator = true

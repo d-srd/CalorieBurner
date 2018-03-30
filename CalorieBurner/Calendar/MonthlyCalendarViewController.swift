@@ -219,7 +219,7 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
-        guard let date = visibleDates.monthDates.first?.date else { return }
+        guard let _ = visibleDates.monthDates.first?.date else { return }
         
 //        setDateLabels(to: date)
     }

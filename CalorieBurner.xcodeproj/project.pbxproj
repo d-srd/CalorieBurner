@@ -24,6 +24,7 @@
 		8436A89F206D425C00946C32 /* UserDefautsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436A89E206D425C00946C32 /* UserDefautsTests.swift */; };
 		843BD0A1205E239D0049DD77 /* DailyCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843BD0A0205E239D0049DD77 /* DailyCalendarViewController.swift */; };
 		84696D8620499FF8002F31B4 /* DailyFetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */; };
+		84AA5E1D206E256C00D1BE55 /* DefaultSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84AA5E1C206E256C00D1BE55 /* DefaultSettings.plist */; };
 		84B49846204DC64C00DCFA05 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B49845204DC64C00DCFA05 /* CoreDataStack.swift */; };
 		84B4984A205163A800DCFA05 /* TDEE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B49849205163A800DCFA05 /* TDEE.swift */; };
 		84EE818F2045B31000E15A74 /* DailyItemPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE818E2045B31000E15A74 /* DailyItemPickerView.swift */; };
@@ -97,6 +98,8 @@
 		8436A89E206D425C00946C32 /* UserDefautsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefautsTests.swift; sourceTree = "<group>"; };
 		843BD0A0205E239D0049DD77 /* DailyCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCalendarViewController.swift; sourceTree = "<group>"; };
 		84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFetchedResultsController.swift; sourceTree = "<group>"; };
+		84AA5E1C206E256C00D1BE55 /* DefaultSettings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DefaultSettings.plist; sourceTree = "<group>"; };
+		84AA5E1E206E27FF00D1BE55 /* GeneratePlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePlist.swift; sourceTree = "<group>"; };
 		84B49845204DC64C00DCFA05 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		84B49849205163A800DCFA05 /* TDEE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDEE.swift; sourceTree = "<group>"; };
 		84EE818E2045B31000E15A74 /* DailyItemPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyItemPickerView.swift; sourceTree = "<group>"; };
@@ -141,6 +144,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		84081C16206E735A007FA279 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				84AA5E1E206E27FF00D1BE55 /* GeneratePlist.swift */,
+			);
+			path = Scripts;
+			sourceTree = "<group>";
+		};
 		840C6F812062319E00535787 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +192,7 @@
 		841B5AA220436E7300ACAD15 /* CalorieBurner */ = {
 			isa = PBXGroup;
 			children = (
+				84081C16206E735A007FA279 /* Scripts */,
 				84F0853E206A27B000E47042 /* User Settings */,
 				840C6F9720651EB700535787 /* Weight Delta */,
 				84FC53BD205C9F8F00D20B3C /* Daily Collection */,
@@ -230,6 +242,7 @@
 				841B5AAD20436E7300ACAD15 /* Assets.xcassets */,
 				841B5AAF20436E7300ACAD15 /* LaunchScreen.storyboard */,
 				841B5AB220436E7300ACAD15 /* Info.plist */,
+				84AA5E1C206E256C00D1BE55 /* DefaultSettings.plist */,
 			);
 			path = "Supporting files";
 			sourceTree = "<group>";
@@ -389,6 +402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				841B5AB120436E7300ACAD15 /* LaunchScreen.storyboard in Resources */,
+				84AA5E1D206E256C00D1BE55 /* DefaultSettings.plist in Resources */,
 				841B5AAE20436E7300ACAD15 /* Assets.xcassets in Resources */,
 				841B5AA920436E7300ACAD15 /* Main.storyboard in Resources */,
 			);
