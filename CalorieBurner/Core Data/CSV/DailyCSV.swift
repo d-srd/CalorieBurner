@@ -43,7 +43,7 @@ class DailyCSV {
     
     func export() -> Data {
         return items
-            .flatMap(convert)
+            .compactMap(convert)
             .prepending(header)
             .joined(separator: "\n")
             .data(using: .utf8)!

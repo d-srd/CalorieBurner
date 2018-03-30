@@ -10,7 +10,7 @@ import Foundation
 
 extension Array {
     /// see Array.rotatedRight(by:)
-    mutating func rotateRight(by amount: IndexDistance) {
+    mutating func rotateRight(by amount: Int) {
         let rotations = amount % count + count
         
         guard count > 1, rotations != 0 else { return }
@@ -29,7 +29,7 @@ extension Array {
     ///
     ///     [1, 2, 3, 4, 5] == [1, 2, 3, 4, 5].rotatedRight(by: 25)
     ///     // true
-    func rotatedRight(by amount: IndexDistance) -> [Element] {
+    func rotatedRight(by amount: Int) -> [Element] {
         let rotations = (amount % count + count) % count
         
         guard count > 1, rotations != 0 else { return self }
