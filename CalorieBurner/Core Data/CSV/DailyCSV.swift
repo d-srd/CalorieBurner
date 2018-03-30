@@ -22,10 +22,11 @@ class DailyCSV {
     
     // EU uses ";", USA uses ", "
     private let separator = "; "
+    // what do we display when there isn't a mass or energy value
     private let missingData = "missing data"
     private let measurementFormatter: MeasurementFormatter
     
-    private var items: [Daily]
+    public var items: [Daily]
     
     init(measurementFormatter: MeasurementFormatter, items: [Daily]) {
         self.measurementFormatter = measurementFormatter
@@ -38,10 +39,6 @@ class DailyCSV {
     
     func addItems(_ dailies: [Daily]) {
         self.items.append(contentsOf: dailies)
-    }
-    
-    private func stringify() -> String {
-        return items.flatMap(convert).joined(separator: "\n")
     }
     
     func export() -> Data {
