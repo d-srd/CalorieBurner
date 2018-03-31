@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B959C6650F57E66DCDB7644 /* Pods_CalorieBurner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E19C0DDB6453A57268ABC1B2 /* Pods_CalorieBurner.framework */; };
 		840C6F8D206237DB00535787 /* CocoaControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 840C6F852062319E00535787 /* CocoaControls.framework */; };
 		840C6F8E206237DB00535787 /* CocoaControls.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 840C6F852062319E00535787 /* CocoaControls.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		840C6F9920651ECD00535787 /* WeightDeltaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C6F9820651ECD00535787 /* WeightDeltaView.swift */; };
@@ -19,7 +18,7 @@
 		841B5AB120436E7300ACAD15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841B5AAF20436E7300ACAD15 /* LaunchScreen.storyboard */; };
 		841B5AB920436FA300ACAD15 /* Daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AB820436FA300ACAD15 /* Daily.swift */; };
 		841B5ABB20445D2300ACAD15 /* DailyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5ABA20445D2300ACAD15 /* DailyCollectionViewCell.swift */; };
-		842525462054E32F00CA0122 /* DailyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842525452054E32F00CA0122 /* DailyCollectionView.swift */; };
+		842525462054E32F00CA0122 /* DailyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842525452054E32F00CA0122 /* DailyCollectionViewController.swift */; };
 		8436A897206D410000946C32 /* CalorieBurnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436A896206D410000946C32 /* CalorieBurnerTests.swift */; };
 		8436A89F206D425C00946C32 /* UserDefautsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436A89E206D425C00946C32 /* UserDefautsTests.swift */; };
 		843BD0A1205E239D0049DD77 /* DailyCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843BD0A0205E239D0049DD77 /* DailyCalendarViewController.swift */; };
@@ -27,6 +26,7 @@
 		84AA51A4206F79F600494049 /* TDEEMediatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA51A3206F79F600494049 /* TDEEMediatorTests.swift */; };
 		84AA51A6206F7B6800494049 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA51A5206F7B6800494049 /* CoreDataTests.swift */; };
 		84AA51A7206F7E5500494049 /* CalorieBurner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AAA20436E7300ACAD15 /* CalorieBurner.xcdatamodeld */; };
+		84AA51AC206FD89F00494049 /* DailyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA51AB206FD89F00494049 /* DailyCollectionView.swift */; };
 		84B49846204DC64C00DCFA05 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B49845204DC64C00DCFA05 /* CoreDataStack.swift */; };
 		84B4984A205163A800DCFA05 /* TDEE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B49849205163A800DCFA05 /* TDEE.swift */; };
 		84EE818F2045B31000E15A74 /* DailyItemPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE818E2045B31000E15A74 /* DailyItemPickerView.swift */; };
@@ -38,6 +38,7 @@
 		84FC53BC205AFA4700D20B3C /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC53BB205AFA4700D20B3C /* Array.swift */; };
 		84FC53BF205CA16B00D20B3C /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC53BE205CA16B00D20B3C /* UserDefaults.swift */; };
 		84FC53C1205CA18900D20B3C /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC53C0205CA18900D20B3C /* Notification.swift */; };
+		D1F4FCCEE0F9AC90744BD605 /* Pods_CalorieBurner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119A6DC4BC7977D94DBA1F0C /* Pods_CalorieBurner.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,7 +80,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2D0B5669E4F66811DDE97938 /* Pods-CalorieBurner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalorieBurner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CalorieBurner/Pods-CalorieBurner.debug.xcconfig"; sourceTree = "<group>"; };
+		08AF3E2415CF65BCB46B7C49 /* Pods-CalorieBurner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalorieBurner.release.xcconfig"; path = "Pods/Target Support Files/Pods-CalorieBurner/Pods-CalorieBurner.release.xcconfig"; sourceTree = "<group>"; };
+		119A6DC4BC7977D94DBA1F0C /* Pods_CalorieBurner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CalorieBurner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		840C6F802062319E00535787 /* CocoaControls.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocoaControls.xcodeproj; path = ../CocoaControls/CocoaControls.xcodeproj; sourceTree = "<group>"; };
 		840C6F862062320D00535787 /* CocoaControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaControls.framework; path = "../../../Library/Developer/Xcode/DerivedData/CocoaControls-ezcniktufftancgvouvrcyaolfpa/Build/Products/Debug-iphonesimulator/CocoaControls.framework"; sourceTree = "<group>"; };
 		840C6F9820651ECD00535787 /* WeightDeltaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDeltaView.swift; sourceTree = "<group>"; };
@@ -93,7 +95,7 @@
 		841B5AB220436E7300ACAD15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		841B5AB820436FA300ACAD15 /* Daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daily.swift; sourceTree = "<group>"; };
 		841B5ABA20445D2300ACAD15 /* DailyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionViewCell.swift; sourceTree = "<group>"; };
-		842525452054E32F00CA0122 /* DailyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionView.swift; sourceTree = "<group>"; };
+		842525452054E32F00CA0122 /* DailyCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionViewController.swift; sourceTree = "<group>"; };
 		8436A894206D410000946C32 /* CalorieBurnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalorieBurnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8436A896206D410000946C32 /* CalorieBurnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieBurnerTests.swift; sourceTree = "<group>"; };
 		8436A898206D410000946C32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 		84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFetchedResultsController.swift; sourceTree = "<group>"; };
 		84AA51A3206F79F600494049 /* TDEEMediatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDEEMediatorTests.swift; sourceTree = "<group>"; };
 		84AA51A5206F7B6800494049 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
+		84AA51AB206FD89F00494049 /* DailyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionView.swift; sourceTree = "<group>"; };
 		84B49845204DC64C00DCFA05 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		84B49849205163A800DCFA05 /* TDEE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDEE.swift; sourceTree = "<group>"; };
 		84EE818E2045B31000E15A74 /* DailyItemPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyItemPickerView.swift; sourceTree = "<group>"; };
@@ -113,8 +116,7 @@
 		84FC53BB205AFA4700D20B3C /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		84FC53BE205CA16B00D20B3C /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		84FC53C0205CA18900D20B3C /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
-		E19C0DDB6453A57268ABC1B2 /* Pods_CalorieBurner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CalorieBurner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E8DD6BD79DC0601A73B5382D /* Pods-CalorieBurner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalorieBurner.release.xcconfig"; path = "Pods/Target Support Files/Pods-CalorieBurner/Pods-CalorieBurner.release.xcconfig"; sourceTree = "<group>"; };
+		F492F8D6740FB7A78A15CA64 /* Pods-CalorieBurner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalorieBurner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CalorieBurner/Pods-CalorieBurner.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				840C6F8D206237DB00535787 /* CocoaControls.framework in Frameworks */,
-				1B959C6650F57E66DCDB7644 /* Pods_CalorieBurner.framework in Frameworks */,
+				D1F4FCCEE0F9AC90744BD605 /* Pods_CalorieBurner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				840C6F862062320D00535787 /* CocoaControls.framework */,
-				E19C0DDB6453A57268ABC1B2 /* Pods_CalorieBurner.framework */,
+				119A6DC4BC7977D94DBA1F0C /* Pods_CalorieBurner.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -176,8 +178,8 @@
 				841B5AA220436E7300ACAD15 /* CalorieBurner */,
 				8436A895206D410000946C32 /* CalorieBurnerTests */,
 				841B5AA120436E7300ACAD15 /* Products */,
-				C6C0A0F43BFF89F3841E8340 /* Pods */,
 				6D4A4B85674B185AA1C4F1EA /* Frameworks */,
+				EC361288838167601122D6E4 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -285,16 +287,17 @@
 			children = (
 				84EE818E2045B31000E15A74 /* DailyItemPickerView.swift */,
 				841B5ABA20445D2300ACAD15 /* DailyCollectionViewCell.swift */,
-				842525452054E32F00CA0122 /* DailyCollectionView.swift */,
+				842525452054E32F00CA0122 /* DailyCollectionViewController.swift */,
+				84AA51AB206FD89F00494049 /* DailyCollectionView.swift */,
 			);
 			path = "Daily Collection";
 			sourceTree = "<group>";
 		};
-		C6C0A0F43BFF89F3841E8340 /* Pods */ = {
+		EC361288838167601122D6E4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2D0B5669E4F66811DDE97938 /* Pods-CalorieBurner.debug.xcconfig */,
-				E8DD6BD79DC0601A73B5382D /* Pods-CalorieBurner.release.xcconfig */,
+				F492F8D6740FB7A78A15CA64 /* Pods-CalorieBurner.debug.xcconfig */,
+				08AF3E2415CF65BCB46B7C49 /* Pods-CalorieBurner.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -306,13 +309,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 841B5AB520436E7300ACAD15 /* Build configuration list for PBXNativeTarget "CalorieBurner" */;
 			buildPhases = (
-				8F7F4E9D478CA04C9A060ED7 /* [CP] Check Pods Manifest.lock */,
+				242D233C3B9BB169789E7BDD /* [CP] Check Pods Manifest.lock */,
 				841B5A9C20436E7300ACAD15 /* Sources */,
 				841B5A9D20436E7300ACAD15 /* Frameworks */,
 				841B5A9E20436E7300ACAD15 /* Resources */,
-				7F58FBB13B3603D697EEDCB6 /* [CP] Embed Pods Frameworks */,
-				8E9EC3348D0B492709C1A5F3 /* [CP] Copy Pods Resources */,
 				840C6F91206237DB00535787 /* Embed Frameworks */,
+				D590E20AEDB7F0F5454FCD05 /* [CP] Embed Pods Frameworks */,
+				D7F2C59967C0A73F71DC1CF2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -349,7 +352,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Dino Srdoč";
 				TargetAttributes = {
 					841B5A9F20436E7300ACAD15 = {
@@ -419,42 +422,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7F58FBB13B3603D697EEDCB6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CalorieBurner/Pods-CalorieBurner-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
-				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CalorieBurner/Pods-CalorieBurner-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8E9EC3348D0B492709C1A5F3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CalorieBurner/Pods-CalorieBurner-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8F7F4E9D478CA04C9A060ED7 /* [CP] Check Pods Manifest.lock */ = {
+		242D233C3B9BB169789E7BDD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -472,6 +440,39 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D590E20AEDB7F0F5454FCD05 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CalorieBurner/Pods-CalorieBurner-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CalorieBurner/Pods-CalorieBurner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D7F2C59967C0A73F71DC1CF2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CalorieBurner/Pods-CalorieBurner-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -486,7 +487,7 @@
 				84FC53912057C79900D20B3C /* MonthlyCalendarViewController.swift in Sources */,
 				84FC53BF205CA16B00D20B3C /* UserDefaults.swift in Sources */,
 				84F08540206A27BE00E47042 /* SettingsViewController.swift in Sources */,
-				842525462054E32F00CA0122 /* DailyCollectionView.swift in Sources */,
+				842525462054E32F00CA0122 /* DailyCollectionViewController.swift in Sources */,
 				84FC53BC205AFA4700D20B3C /* Array.swift in Sources */,
 				840C6F9920651ECD00535787 /* WeightDeltaView.swift in Sources */,
 				84696D8620499FF8002F31B4 /* DailyFetchedResultsController.swift in Sources */,
@@ -499,6 +500,7 @@
 				841B5AAC20436E7300ACAD15 /* CalorieBurner.xcdatamodeld in Sources */,
 				84EE818F2045B31000E15A74 /* DailyItemPickerView.swift in Sources */,
 				84FC53C1205CA18900D20B3C /* Notification.swift in Sources */,
+				84AA51AC206FD89F00494049 /* DailyCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +565,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -570,6 +573,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -620,6 +624,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -627,6 +632,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -658,7 +664,7 @@
 		};
 		841B5AB620436E7300ACAD15 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2D0B5669E4F66811DDE97938 /* Pods-CalorieBurner.debug.xcconfig */;
+			baseConfigurationReference = F492F8D6740FB7A78A15CA64 /* Pods-CalorieBurner.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -679,7 +685,7 @@
 		};
 		841B5AB720436E7300ACAD15 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E8DD6BD79DC0601A73B5382D /* Pods-CalorieBurner.release.xcconfig */;
+			baseConfigurationReference = 08AF3E2415CF65BCB46B7C49 /* Pods-CalorieBurner.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
