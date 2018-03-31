@@ -19,8 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.shared().isEnabled = false
         
-        // load default user preferences
-        UserDefaults.standard.register(defaults: loadPreferences())
+        // lol
+        let defaultUserDefaults: [String : Any] = [
+            UserDefaults.massKey : NSKeyedArchiver.archivedData(withRootObject: UnitMass.kilograms),
+            UserDefaults.energyKey : NSKeyedArchiver.archivedData(withRootObject: UnitEnergy.kilocalories),
+            UserDefaults.dayOfWeekKey : 1
+        ]
+        UserDefaults.standard.register(defaults: defaultUserDefaults)
         
         return true
     }
@@ -92,17 +97,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
-    }
-    
-    // MARK: - Default user preferences
-    
-    func loadPreferences() -> [String : Any] {
-        let filePath = Bundle.main.path(forResource: "DefaultSettings", ofType: "plist")!
-        
-        let contents = FileManager.default.contents(atPath: filePath)!
-        var propertyListFormat = PropertyListSerialization.PropertyListFormat.xml
-        
-        return try! PropertyListSerialization.propertyList(from: contents, options: .mutableContainersAndLeaves, format: &propertyListFormat) as! [String : Any]
     }
 
 }
