@@ -24,6 +24,9 @@
 		8436A89F206D425C00946C32 /* UserDefautsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436A89E206D425C00946C32 /* UserDefautsTests.swift */; };
 		843BD0A1205E239D0049DD77 /* DailyCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843BD0A0205E239D0049DD77 /* DailyCalendarViewController.swift */; };
 		84696D8620499FF8002F31B4 /* DailyFetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */; };
+		84AA51A4206F79F600494049 /* TDEEMediatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA51A3206F79F600494049 /* TDEEMediatorTests.swift */; };
+		84AA51A6206F7B6800494049 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA51A5206F7B6800494049 /* CoreDataTests.swift */; };
+		84AA51A7206F7E5500494049 /* CalorieBurner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AAA20436E7300ACAD15 /* CalorieBurner.xcdatamodeld */; };
 		84B49846204DC64C00DCFA05 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B49845204DC64C00DCFA05 /* CoreDataStack.swift */; };
 		84B4984A205163A800DCFA05 /* TDEE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B49849205163A800DCFA05 /* TDEE.swift */; };
 		84EE818F2045B31000E15A74 /* DailyItemPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE818E2045B31000E15A74 /* DailyItemPickerView.swift */; };
@@ -97,6 +100,8 @@
 		8436A89E206D425C00946C32 /* UserDefautsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefautsTests.swift; sourceTree = "<group>"; };
 		843BD0A0205E239D0049DD77 /* DailyCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCalendarViewController.swift; sourceTree = "<group>"; };
 		84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFetchedResultsController.swift; sourceTree = "<group>"; };
+		84AA51A3206F79F600494049 /* TDEEMediatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDEEMediatorTests.swift; sourceTree = "<group>"; };
+		84AA51A5206F7B6800494049 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 		84B49845204DC64C00DCFA05 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		84B49849205163A800DCFA05 /* TDEE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDEE.swift; sourceTree = "<group>"; };
 		84EE818E2045B31000E15A74 /* DailyItemPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyItemPickerView.swift; sourceTree = "<group>"; };
@@ -206,6 +211,8 @@
 		8436A895206D410000946C32 /* CalorieBurnerTests */ = {
 			isa = PBXGroup;
 			children = (
+				84AA51A5206F7B6800494049 /* CoreDataTests.swift */,
+				84AA51A3206F79F600494049 /* TDEEMediatorTests.swift */,
 				8436A896206D410000946C32 /* CalorieBurnerTests.swift */,
 				8436A89E206D425C00946C32 /* UserDefautsTests.swift */,
 				8436A898206D410000946C32 /* Info.plist */,
@@ -499,6 +506,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84AA51A6206F7B6800494049 /* CoreDataTests.swift in Sources */,
+				84AA51A4206F79F600494049 /* TDEEMediatorTests.swift in Sources */,
+				84AA51A7206F7E5500494049 /* CalorieBurner.xcdatamodeld in Sources */,
 				8436A897206D410000946C32 /* CalorieBurnerTests.swift in Sources */,
 				8436A89F206D425C00946C32 /* UserDefautsTests.swift in Sources */,
 			);

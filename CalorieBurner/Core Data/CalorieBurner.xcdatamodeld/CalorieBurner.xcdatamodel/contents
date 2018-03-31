@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D102" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Daily" representedClassName=".Daily" syncable="YES" codeGenerationType="category">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Daily" representedClassName="Daily" syncable="YES">
         <attribute name="created" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="energyValue" optional="YES" attributeType="Decimal" customClassName="Measurement&lt;UnitEnergy&gt;" syncable="YES"/>
         <attribute name="isFromHealthKit" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>

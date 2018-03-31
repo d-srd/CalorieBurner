@@ -12,10 +12,21 @@ import CoreData
 class CoreDataStack {
     static let shared = CoreDataStack()
     
-    lazy var persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+    init(container: NSPersistentContainer) {
+        persistentContainer = container
+        persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
+    }
+    
+    convenience init() {
+        let container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+        self.init(container: container)
+    }
+    
+    let persistentContainer: NSPersistentContainer
     lazy var viewContext = persistentContainer.viewContext
+    lazy var backgroundContext = persistentContainer.newBackgroundContext()
         
-    func getOrCreate(at day: Date) throws -> Daily {
+    func fetchOrCreate(at day: Date) throws -> Daily {
         let request = Daily.fetchRequest(in: day)
         
         do {
@@ -30,6 +41,7 @@ class CoreDataStack {
         
     }
     
+    /// If a Daily does not exist in the specified date, it is created with the provided values. Otherwise, it is updated with the provided values. Pass nil to not update a single value.
     func updateOrCreate(at day: Date, mass: Mass?, energy: Energy?) throws -> Daily {
         let request = Daily.fetchRequest(in: day)
         
@@ -66,6 +78,21 @@ class CoreDataStack {
             return try viewContext.fetch(request)
         } catch {
             throw error
+        }
+    }
+    
+    func remove(with objectID: NSManagedObjectID) {
+        let daily = viewContext.object(with: objectID)
+        viewContext.delete(daily)
+    }
+    
+    func save() {
+        if backgroundContext.hasChanges {
+            do {
+                try backgroundContext.save()
+            } catch {
+                print("Error saving background context: \(error)")
+            }
         }
     }
 }

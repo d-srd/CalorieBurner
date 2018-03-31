@@ -40,7 +40,7 @@ class CRUDViewController: UIViewController {
     private let massUnits = [UnitMass.kilograms, .pounds, .stones]
     private let energyUnits = [UnitEnergy.kilocalories, .kilojoules]
     
-    let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    lazy var viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     private let measurementFormatter: MeasurementFormatter = {
         let fmt = MeasurementFormatter()
@@ -122,7 +122,7 @@ class CRUDViewController: UIViewController {
     }
     
     @IBAction func printLiterallyEveryhing(_ sender: UIButton) {
-        mediator.avg(.mass)
+        mediator.avgMass()
         
 //        if let things = try? CoreDataStack.shared.fetchAll() {
 //            for thing in things { print(thing.created) }
@@ -157,7 +157,7 @@ class CRUDViewController: UIViewController {
 //              )
 //    }
     
-    let mediator = TDEEMediator(startDate: Calendar.current.date(from: DateComponents(year: 2000, month: 01, day: 01))!, endDate: Calendar.current.date(from: DateComponents(year: 2030, month: 12, day: 31))!)
+    lazy var mediator = TDEEMediator(startDate: Calendar.current.date(from: DateComponents(year: 2000, month: 01, day: 01))!, endDate: Calendar.current.date(from: DateComponents(year: 2030, month: 12, day: 31))!, context: viewContext)
     
     override func viewDidLoad() {
         super.viewDidLoad()

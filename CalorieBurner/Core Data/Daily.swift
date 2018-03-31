@@ -23,7 +23,17 @@ typealias Mass = Measurement<UnitMass>
 typealias Energy = Measurement<UnitEnergy>
 
 /// Representation of a single day containing a mass and an energy
+@objc(Daily)
 public class Daily: NSManagedObject {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Daily> {
+        return NSFetchRequest<Daily>(entityName: "Daily")
+    }
+    
+    @NSManaged public var created: Date?
+    @NSManaged public var massValue: NSDecimalNumber?
+    @NSManaged public var energyValue: NSDecimalNumber?
+    @NSManaged public var isFromHealthKit: Bool
+    
     public class func makeFetchRequest() -> NSFetchRequest<Daily> {
         return NSFetchRequest<Daily>(entityName: "Daily")
     }
@@ -130,14 +140,19 @@ public class Daily: NSManagedObject {
         }
     }
     
-    public static var massExpression = NSExpression(forKeyPath: "massValue")
-    public static var energyExpression = NSExpression(forKeyPath: "energyValue")
+    public static let massExpressionKey = "massValue"
+    public static var massExpression = NSExpression(forKeyPath: massExpressionKey)
+    public static let averageMassKey = "avgMass"
+    
+    public static let energyExpressionKey = "energyValue"
+    public static var energyExpression = NSExpression(forKeyPath: energyExpressionKey)
+    public static let totalEnergyKey = "sumEnergy"
     
     public static var averageMassDescription: NSExpressionDescription = {
         let description = NSExpressionDescription()
         let avgExpression = NSExpression(forFunction: "average:", arguments: [massExpression])
         description.expression = avgExpression
-        description.name = "avgMass"
+        description.name = averageMassKey
         description.expressionResultType = .doubleAttributeType
         
         return description
@@ -147,7 +162,7 @@ public class Daily: NSManagedObject {
         let description = NSExpressionDescription()
         let sumExpression = NSExpression(forFunction: "sum:", arguments: [energyExpression])
         description.expression = sumExpression
-        description.name = "sumEnergy"
+        description.name = totalEnergyKey
         description.expressionResultType = .doubleAttributeType
         
         return description

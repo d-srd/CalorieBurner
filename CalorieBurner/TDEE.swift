@@ -8,61 +8,53 @@
 
 import Foundation
 import CoreData
-import UIKit
 
-
-class TDEEMediator {
-    let startDate: Date
-    let endDate: Date
+public class TDEEMediator {
+    var startDate: Date
+    var endDate: Date
 //    let request: NSFetchRequest
     let context: NSManagedObjectContext
     
 //    lazy var request = Daily.fetchRequest(in: (startDate, endDate))
     
-    init(startDate: Date, endDate: Date) {
+    init(startDate: Date, endDate: Date, context: NSManagedObjectContext) {
         self.startDate = startDate
         self.endDate = endDate
-        self.context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        self.context = context
 //        request = Daily.fetchRequest(in: (startDate, endDate))
     }
     
-    func avg(_ itemType: DailyItemType) {
-        if itemType == .mass {
-            let request = Daily.dictionaryFetchRequest(in: (startDate, endDate), properties: ["massValue"])
-            request.propertiesToFetch = [Daily.averageMassDescription]
-            request.resultType = .dictionaryResultType
-            
-            let things = try! context.fetch(request)
-            let dict = things[0] as! [String : Double]
-            let value = dict["avgMass"]!
-            
-            print(value)
-        }
+    func avgMass() -> Double {
+        let request = Daily.dictionaryFetchRequest(in: (startDate, endDate), properties: [Daily.massExpressionKey])
+        request.propertiesToFetch = [Daily.averageMassDescription]
+        request.resultType = .dictionaryResultType
+        
+        let things = try! context.fetch(request)
+        let dict = things[0] as! [String : Double]
+        let value = dict[Daily.averageMassKey]!
+        
+        print(value)
+        
+        return value
     }
     
-    func sum(_ itemType: DailyItemType) /* -> Double */ {
-        switch itemType {
-        case .mass:
-            fatalError("wtf")
-        case .energy:
-            let request = Daily.dictionaryFetchRequest(in: (startDate, endDate), properties: ["energyValue"])
-//            request.returnsObjectsAsFaults = false
-            request.propertiesToFetch = [Daily.totalEnergyDescription]
-//            request.propertiesToGroupBy = ["energy"]
-            request.resultType = .dictionaryResultType
-//            request.returnsDistinctResults = true
-            
-            do {
-                let things = try context.fetch(request)
-                
-                for thing in things {
-                    print(thing)
-                }
-            } catch {
-                print(error)
-            }
-            
-        }
+    func sumEnergy() -> Double {
+        
+        let request = Daily.dictionaryFetchRequest(in: (startDate, endDate), properties: [Daily.energyExpressionKey])
+        //            request.returnsObjectsAsFaults = false
+        request.propertiesToFetch = [Daily.totalEnergyDescription]
+        //            request.propertiesToGroupBy = ["energy"]
+        request.resultType = .dictionaryResultType
+        //            request.returnsDistinctResults = true
+        
+        let things = try! context.fetch(request)
+        let dict = things[0] as! [String : Double]
+        let value = dict[Daily.totalEnergyKey]!
+        
+        print(value)
+        
+        return value
+        
     }
 }
 
