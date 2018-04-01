@@ -37,7 +37,6 @@ class DailyFetchedResultsController {
         managedObjectContext: NSManagedObjectContext,
         dateBounds: (start: Date, end: Date))
     {
-//        self.dateCache = [:]
         self.fetchRequest = fetchRequest
         self.managedObjectContext = managedObjectContext
         self.startingDate = dateBounds.start

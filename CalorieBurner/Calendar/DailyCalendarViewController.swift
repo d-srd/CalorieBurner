@@ -13,14 +13,15 @@ class DailyCalendarViewCell: DayViewCell {
     @IBOutlet weak var existingItemView: UIView!
 }
 
-class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectionViewDelegate {
+class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectionViewScrollDelegate {
+    
+    
     @IBOutlet weak var containerView: UIView!
     var dailyCollectionViewController: DailyCollectionViewController!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dailyCollection = segue.destination as? DailyCollectionViewController {
             dailyCollectionViewController = dailyCollection
-            dailyCollectionViewController.delegate = self
         }
     }
     
@@ -30,8 +31,16 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
         // why is this method here? well at this point the all
         // frames and constraints are initialized, and we
         // can inject properties for the cells
-        dailyCollectionViewController.cellWidth = containerView.frame.width * 0.7
-        dailyCollectionViewController.cellHeight = 140 /* containerView.frame.height * 0.9 */
+//        dailyCollectionViewController.cellWidth = containerView.frame.width * 0.7
+//        dailyCollectionViewController.cellHeight = 140
+        dailyCollectionViewController.dailyView.dailyScrollDelegate = self
+
+        let width = containerView.frame.width
+        
+        dailyCollectionViewController.dailyView.itemSize = {
+            return CGSize(width: width * 0.7, height: 140)
+        }()
+        /* containerView.frame.height * 0.9 */
     }
     
     override func viewDidLoad() {
@@ -75,7 +84,7 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
         guard self.view.frame.origin.y != 0 else { return }
         
         // this is the most genius line of code. ever.
-        guard let cell = dailyCollectionViewController.collectionView.visibleCells.first as? DailyCollectionViewCell,
+        guard let cell = dailyCollectionViewController.dailyView.visibleCells.first as? DailyCollectionViewCell,
               dailyCollectionViewController.isCancellingEditing || !cell.massTextField.isEditing,
               let keyboardAnimationDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
         else { return }
@@ -123,7 +132,15 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
         dailyCollectionViewController.scrollToItem(at: date, animated: true)
     }
     
-    func dailyView(_ dailyView: UICollectionView, didScrollToItemAt date: Date) {
+    func dailyView(_ dailyView: DailyCollectionView, willScrollToItemAt date: Date) {
+        if !calendarView.selectedDates.contains(date) {
+            calendarView.scrollToDate(date)
+            calendarView.deselectAllDates()
+            calendarView.selectDates([date])
+        }
+    }
+    
+    func dailyView(_ dailyView: DailyCollectionView, didScrollToItemAt date: Date) {
         if !calendarView.selectedDates.contains(date) {
             calendarView.scrollToDate(date)
             calendarView.deselectAllDates()

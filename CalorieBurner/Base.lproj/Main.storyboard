@@ -608,7 +608,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="150"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="w8i-HS-6E0">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="w8i-HS-6E0" customClass="DailyCollectionView" customModule="CalorieBurner" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" sectionInsetReference="safeArea" id="Srf-0k-VF7">
@@ -790,7 +790,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="1AX-hs-3di"/>
                     <connections>
-                        <outlet property="collectionView" destination="w8i-HS-6E0" id="YmC-Ch-tlD"/>
+                        <outlet property="dailyView" destination="w8i-HS-6E0" id="dXE-3o-MSa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WvT-Xk-GIi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1052,7 +1052,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="1d0-Bh-2aJ">
-                                                    <rect key="frame" x="20" y="6.3333333333333304" width="374" height="31"/>
+                                                    <rect key="frame" x="20" y="6.3333333333333286" width="374" height="31"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Health" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcI-Kh-3Tz">
                                                             <rect key="frame" x="0.0" y="0.0" width="84.666666666666671" height="31"/>
