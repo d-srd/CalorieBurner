@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // lol
         let defaultUserDefaults: [String : Any] = [
-            UserDefaults.massKey : NSKeyedArchiver.archivedData(withRootObject: UnitMass.kilograms),
-            UserDefaults.energyKey : NSKeyedArchiver.archivedData(withRootObject: UnitEnergy.kilocalories),
+            UserDefaults.massKey : UserDefaults.massToKey(UnitMass.kilograms),
+            UserDefaults.energyKey : UserDefaults.energyToKey(UnitEnergy.kilocalories),
             UserDefaults.dayOfWeekKey : 1
         ]
         UserDefaults.standard.register(defaults: defaultUserDefaults)
