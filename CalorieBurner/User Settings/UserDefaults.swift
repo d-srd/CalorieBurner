@@ -17,9 +17,13 @@ public extension UserDefaults {
     public var mass: UnitMass {
         get {
             let encodedUnit = self.object(forKey: UserDefaults.massKey) as! Data
+            let className = String(describing: type(of: UnitMass.self))
+            NSKeyedUnarchiver.setClass(UnitMass.self, forClassName: className)
             return NSKeyedUnarchiver.unarchiveObject(with: encodedUnit) as! UnitMass
         }
         set {
+            let className = String(describing: type(of: UnitMass.self))
+            NSKeyedArchiver.setClassName(className, for: UnitMass.self)
             let encodedUnit = NSKeyedArchiver.archivedData(withRootObject: newValue)
             self.set(encodedUnit, forKey: UserDefaults.massKey)
             NotificationCenter.default.post(name: .UnitMassChanged, object: nil)
@@ -30,9 +34,13 @@ public extension UserDefaults {
     public var energy: UnitEnergy {
         get {
             let encodedUnit = self.object(forKey: UserDefaults.energyKey) as! Data
+            let className = String(describing: type(of: UnitEnergy.self))
+            NSKeyedUnarchiver.setClass(UnitEnergy.self, forClassName: className)
             return NSKeyedUnarchiver.unarchiveObject(with: encodedUnit) as! UnitEnergy
         }
         set {
+            let className = String(describing: type(of: UnitEnergy.self))
+            NSKeyedArchiver.setClassName(className, for: UnitEnergy.self)
             let encodedUnit = NSKeyedArchiver.archivedData(withRootObject: newValue)
             self.set(encodedUnit, forKey: UserDefaults.energyKey)
             
