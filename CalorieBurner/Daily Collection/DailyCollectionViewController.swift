@@ -43,7 +43,7 @@ class DailyCollectionViewController: UIViewController {
     }
     
     func doesItemExist(at date: Date) -> Bool {
-        guard let indexPath = fetchedResultsController.indexPath(for: date),
+        guard let indexPath = dailyView.indexPathProvider?.indexPath(for: date),
               fetchedResultsController.object(at: indexPath) != nil
         else { return false }
         

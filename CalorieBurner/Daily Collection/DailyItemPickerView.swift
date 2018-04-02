@@ -158,7 +158,19 @@ class DailyMassPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDel
         return DailyMassPickerDataSource.shared.indexOfClosest(value: index, from: oldStepperIndex, to: currentStepperIndex)
     }
     
-    override func awakeFromNib() {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        commonInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        commonInit()
+    }
+    
+    func commonInit() {
         delegate = self
         dataSource = self
         showsSelectionIndicator = true

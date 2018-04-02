@@ -8,35 +8,6 @@
 
 import UIKit
 
-protocol DailyIndexPathProvider: class {
-    func indexPath(for date: Date) -> IndexPath?
-    func date(for indexPath: IndexPath) -> Date?
-}
-
-protocol DailyCollectionViewDelegate: class {
-//    func dailyView(_ dailyView: DailyCollectionView, sizeForItemAt date: Date) -> CGSize
-    func dailyView(_ dailyView: DailyCollectionView, willDisplay cell: DailyCollectionViewCell, forItemAt indexPath: IndexPath)
-//    func doesItemExist(at date: Date) -> Bool
-    
-    func willCancelEditing(cell: DailyCollectionViewCell, at date: Date, for itemType: DailyItemType)
-    func didCancelEditing(cell: DailyCollectionViewCell, at date: Date, for itemType: DailyItemType)
-    func didEndEditing(cell: DailyCollectionViewCell, at date: Date, mass: Mass)
-    func didEndEditing(cell: DailyCollectionViewCell, at date: Date, energy: Energy)
-}
-
-protocol DailyCollectionViewDataSource: class {
-    var startDate: Date { get }
-    var endDate: Date { get }
-    var dayCount: Int { get }
-    
-    func dailyView(_ dailyView: DailyCollectionView, cellForItemAt indexPath: IndexPath) -> DailyCollectionViewCell
-}
-
-protocol DailyCollectionViewScrollDelegate: class {
-    func dailyView(_ dailyView: DailyCollectionView, didScrollToItemAt date: Date)
-    func dailyView(_ dailyView: DailyCollectionView, willScrollToItemAt date: Date)
-}
-
 class DailyCollectionView: UICollectionView {
     weak var dailyDelegate: DailyCollectionViewDelegate?
     weak var dailyDataSource: DailyCollectionViewDataSource?
