@@ -25,14 +25,6 @@ typealias Energy = Measurement<UnitEnergy>
 /// Representation of a single day containing a mass and an energy
 @objc(Daily)
 public class Daily: NSManagedObject {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Daily> {
-        return NSFetchRequest<Daily>(entityName: "Daily")
-    }
-    
-    @NSManaged public var created: Date?
-    @NSManaged public var massValue: NSDecimalNumber?
-    @NSManaged public var energyValue: NSDecimalNumber?
-    @NSManaged public var isFromHealthKit: Bool
     
     public class func makeFetchRequest() -> NSFetchRequest<Daily> {
         return NSFetchRequest<Daily>(entityName: "Daily")
@@ -108,37 +100,37 @@ public class Daily: NSManagedObject {
         created = date
     }
     
-    var mass: Mass? {
-        get {
-            if let massValue = massValue {
-                return Mass(value: massValue.doubleValue, unit: .kilograms)
-            }
-            return nil
-        }
-        set {
-            if let mass = newValue {
-                massValue =  NSDecimalNumber(value: mass.converted(to: .kilograms).value)
-            } else {
-                massValue = nil
-            }
-        }
-    }
-    
-    var energy: Energy? {
-        get {
-            if let energyValue = energyValue {
-                return Energy(value: energyValue.doubleValue, unit: .kilocalories)
-            }
-            return nil
-        }
-        set {
-            if let energy = newValue {
-                energyValue = NSDecimalNumber(value:  energy.converted(to: .kilocalories).value)
-            } else {
-                energyValue = nil
-            }
-        }
-    }
+//    var mass: Mass? {
+//        get {
+//            if let massValue = massValue {
+//                return Mass(value: massValue.doubleValue, unit: .kilograms)
+//            }
+//            return nil
+//        }
+//        set {
+//            if let mass = newValue {
+//                massValue =  NSDecimalNumber(value: mass.converted(to: .kilograms).value)
+//            } else {
+//                massValue = nil
+//            }
+//        }
+//    }
+//    
+//    var energy: Energy? {
+//        get {
+//            if let energyValue = energyValue {
+//                return Energy(value: energyValue.doubleValue, unit: .kilocalories)
+//            }
+//            return nil
+//        }
+//        set {
+//            if let energy = newValue {
+//                energyValue = NSDecimalNumber(value:  energy.converted(to: .kilocalories).value)
+//            } else {
+//                energyValue = nil
+//            }
+//        }
+//    }
     
     public static let massExpressionKey = "massValue"
     public static var massExpression = NSExpression(forKeyPath: massExpressionKey)

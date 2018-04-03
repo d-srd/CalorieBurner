@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Daily" representedClassName="Daily" syncable="YES">
+    <entity name="Daily" representedClassName="Daily" syncable="YES" codeGenerationType="category">
         <attribute name="created" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="energyValue" optional="YES" attributeType="Decimal" customClassName="Measurement&lt;UnitEnergy&gt;" syncable="YES"/>
+        <attribute name="energy" optional="YES" attributeType="Transformable" customClassName="Measurement&lt;UnitEnergy&gt;" syncable="YES"/>
         <attribute name="isFromHealthKit" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="massValue" optional="YES" attributeType="Decimal" customClassName="Measurement&lt;UnitMass&gt;" syncable="YES"/>
+        <attribute name="mass" optional="YES" attributeType="Transformable" customClassName="Measurement&lt;UnitMass&gt;" syncable="YES"/>
     </entity>
     <elements>
         <element name="Daily" positionX="-63" positionY="-18" width="128" height="105"/>
