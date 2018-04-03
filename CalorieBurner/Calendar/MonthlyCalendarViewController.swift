@@ -44,7 +44,7 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
         
         return fmt
     }()
-    private let today = Date()
+    let today = Date()
     
     lazy var startDate: Date = {
         dateFormatter.dateFormat = "yyyy-MM-dd"

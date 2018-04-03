@@ -19,6 +19,8 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
     @IBOutlet weak var containerView: UIView!
     var dailyCollectionViewController: DailyCollectionViewController!
     
+    private var initialTabBarFrame: CGRect?
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dailyCollection = segue.destination as? DailyCollectionViewController {
             dailyCollectionViewController = dailyCollection
@@ -37,10 +39,27 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
 
         let width = containerView.frame.width
         
-        dailyCollectionViewController.dailyView.itemSize = {
-            return CGSize(width: width * 0.7, height: 140)
-        }()
+        initialTabBarFrame = tabBarController?.tabBar.frame
+        
+        dailyCollectionViewController.dailyView.itemSize =
+            CGSize(width: width * 0.7, height: 140)
+        
+//        dailyCollectionViewController.scrollToItem(at: today, animated: false)
         /* containerView.frame.height * 0.9 */
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.dailyCollectionViewController.scrollToItem(at: self.today, animated: false)
+//        }
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//            UIView.animate(withDuration: 2) {
+//                self.tabBarController?.tabBar.frame.origin.y += self.tabBarController?.tabBar.frame.height ?? 0
+//            }
+//        }
     }
     
     override func viewDidLoad() {
@@ -58,11 +77,19 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
             name: .UIKeyboardWillHide,
             object: nil
         )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardDidHide(_:)),
+            name: NSNotification.Name.UIKeyboardDidHide,
+            object: nil
+        )
+        
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardDidHide, object: nil)
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
@@ -74,9 +101,10 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
         else { return }
 
         let keyboardSize = view.convert(_keyboardSize, from: view.window)
-
+        
         UIView.animate(withDuration: keyboardAnimationDuration) {
             self.view.frame.origin.y -= keyboardSize.height
+            self.tabBarController?.tabBar.frame.origin.y += self.tabBarController?.tabBar.frame.height ?? 0
         }
     }
 
@@ -89,8 +117,17 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
               let keyboardAnimationDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
         else { return }
         
+
         UIView.animate(withDuration: keyboardAnimationDuration) {
             self.view.frame.origin.y = 0
+        }
+    }
+    
+    @objc private func keyboardDidHide(_ notification: Notification) {
+        guard let keyboardAnimationDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double else { return }
+        
+        UIView.animate(withDuration: keyboardAnimationDuration) {
+            self.tabBarController?.tabBar.frame.origin.y = self.initialTabBarFrame?.origin.y ?? 0
         }
     }
     

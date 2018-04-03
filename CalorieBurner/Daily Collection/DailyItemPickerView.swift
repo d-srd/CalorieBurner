@@ -152,7 +152,7 @@ class DailyMassPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDel
         return DailyMassPickerDataSource.shared.steps[selectedStepper][selectedRow(inComponent: 1)]
     }
     
-    var selectedStepper = 0
+    var selectedStepper = DailyMassPickerDataSource.shared.stepper.count / 2
     
     private func getClosest(_ index: Int, from oldStepperIndex: Int, to currentStepperIndex: Int) -> Int {
         return DailyMassPickerDataSource.shared.indexOfClosest(value: index, from: oldStepperIndex, to: currentStepperIndex)
