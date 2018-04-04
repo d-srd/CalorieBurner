@@ -81,8 +81,8 @@ extension DailyCollectionViewController: DailyCollectionViewDataSource {
 extension DailyCollectionViewController: DailyCollectionViewDelegate {
     func dailyView(_ dailyView: DailyCollectionView, willDisplay cell: DailyCollectionViewCell, forItemAt indexPath: IndexPath) {
         if let object = fetchedResultsController.object(at: indexPath) {
-            cell.mass = object.mass
-            cell.energy = object.energy
+            cell.mass = object.mass?.converted(to: UserDefaults.standard.mass)
+            cell.energy = object.energy?.converted(to: UserDefaults.standard.energy)
         } else {
             cell.setEmpty()
         }

@@ -8,23 +8,9 @@
 
 import CoreData
 
-extension Date {
-    var startOfDay: Date {
-        return Calendar.current.startOfDay(for: self)
-    }
-    
-    var endOfDay: Date {
-        let components = DateComponents(day: 1, second: -1)
-        return Calendar.current.date(byAdding: components, to: self)!
-    }
-}
-
-typealias Mass = Measurement<UnitMass>
-typealias Energy = Measurement<UnitEnergy>
-
 /// Representation of a single day containing a mass and an energy
-@objc(Daily)
-public class Daily: NSManagedObject {
+//@objc(Daily)
+class Daily: NSManagedObject {
     
     public class func makeFetchRequest() -> NSFetchRequest<Daily> {
         return NSFetchRequest<Daily>(entityName: "Daily")
@@ -102,16 +88,16 @@ public class Daily: NSManagedObject {
     
 //    var mass: Mass? {
 //        get {
-//            if let massValue = massValue {
+//            if let massValue = self.massValue {
 //                return Mass(value: massValue.doubleValue, unit: .kilograms)
 //            }
 //            return nil
 //        }
 //        set {
 //            if let mass = newValue {
-//                massValue =  NSDecimalNumber(value: mass.converted(to: .kilograms).value)
+//                self.massValue = NSDecimalNumber(value: mass.converted(to: .kilograms).value)
 //            } else {
-//                massValue = nil
+//                self.massValue = nil
 //            }
 //        }
 //    }

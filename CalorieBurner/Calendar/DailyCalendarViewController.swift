@@ -24,6 +24,8 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dailyCollection = segue.destination as? DailyCollectionViewController {
             dailyCollectionViewController = dailyCollection
+            dailyCollectionViewController.view.autoresizingMask = []
+            dailyCollectionViewController.view.frame = containerView.bounds
         }
     }
     
@@ -42,7 +44,7 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
         initialTabBarFrame = tabBarController?.tabBar.frame
         
         dailyCollectionViewController.dailyView.itemSize =
-            CGSize(width: width * 0.7, height: 140)
+            CGSize(width: width * 0.7, height: 130)
         
 //        dailyCollectionViewController.scrollToItem(at: today, animated: false)
         /* containerView.frame.height * 0.9 */
@@ -51,15 +53,8 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.dailyCollectionViewController.scrollToItem(at: self.today, animated: false)
-//        }
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-//            UIView.animate(withDuration: 2) {
-//                self.tabBarController?.tabBar.frame.origin.y += self.tabBarController?.tabBar.frame.height ?? 0
-//            }
-//        }
+        dailyCollectionViewController.scrollToItem(at: self.today, animated: false)
+        calendarView.selectDates([today])
     }
     
     override func viewDidLoad() {
@@ -83,6 +78,18 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
             name: NSNotification.Name.UIKeyboardDidHide,
             object: nil
         )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(unitsDidChange(_:)),
+            name: NSNotification.Name.UnitMassChanged,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(unitsDidChange(_:)),
+            name: NSNotification.Name.UnitEnergyChanged,
+            object: nil
+        )
         
     }
     
@@ -90,20 +97,27 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UnitMassChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UnitEnergyChanged, object: nil)
+    }
+    
+    @objc private func unitsDidChange(_ notification: Notification) {
+        dailyCollectionViewController.dailyView.reloadData()
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
 
         // ugliest line of code I've written in this entire project
         guard let _keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue,
-            let keyboardAnimationDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double,
-              self.view.frame.origin.y == 0
+            let keyboardAnimationDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
         else { return }
 
         let keyboardSize = view.convert(_keyboardSize, from: view.window)
         
         UIView.animate(withDuration: keyboardAnimationDuration) {
-            self.view.frame.origin.y -= keyboardSize.height
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
             self.tabBarController?.tabBar.frame.origin.y += self.tabBarController?.tabBar.frame.height ?? 0
         }
     }

@@ -30,6 +30,8 @@
 		84AA51AC206FD89F00494049 /* DailyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA51AB206FD89F00494049 /* DailyCollectionView.swift */; };
 		84B49846204DC64C00DCFA05 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B49845204DC64C00DCFA05 /* CoreDataStack.swift */; };
 		84B4984A205163A800DCFA05 /* TDEE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B49849205163A800DCFA05 /* TDEE.swift */; };
+		84DF1B8A2074EE890024D924 /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DF1B892074EE890024D924 /* Measurement.swift */; };
+		84DF1B8C2074EEA50024D924 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DF1B8B2074EEA50024D924 /* Date.swift */; };
 		84EE818F2045B31000E15A74 /* DailyItemPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE818E2045B31000E15A74 /* DailyItemPickerView.swift */; };
 		84F08540206A27BE00E47042 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0853F206A27BE00E47042 /* SettingsViewController.swift */; };
 		84F08544206A4A0300E47042 /* DailyCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F08543206A4A0300E47042 /* DailyCSV.swift */; };
@@ -109,6 +111,8 @@
 		84AA51AB206FD89F00494049 /* DailyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionView.swift; sourceTree = "<group>"; };
 		84B49845204DC64C00DCFA05 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		84B49849205163A800DCFA05 /* TDEE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDEE.swift; sourceTree = "<group>"; };
+		84DF1B892074EE890024D924 /* Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
+		84DF1B8B2074EEA50024D924 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		84EE818E2045B31000E15A74 /* DailyItemPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyItemPickerView.swift; sourceTree = "<group>"; };
 		84F0853F206A27BE00E47042 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		84F08543206A4A0300E47042 /* DailyCSV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCSV.swift; sourceTree = "<group>"; };
@@ -256,10 +260,10 @@
 			isa = PBXGroup;
 			children = (
 				84F08542206A499900E47042 /* CSV */,
+				841B5AB820436FA300ACAD15 /* Daily.swift */,
 				84B49845204DC64C00DCFA05 /* CoreDataStack.swift */,
 				84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */,
 				841B5AAA20436E7300ACAD15 /* Database.xcdatamodeld */,
-				841B5AB820436FA300ACAD15 /* Daily.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -279,6 +283,8 @@
 			children = (
 				84FC53BB205AFA4700D20B3C /* Array.swift */,
 				843E47072072365A0041BECB /* Unit.swift */,
+				84DF1B892074EE890024D924 /* Measurement.swift */,
+				84DF1B8B2074EEA50024D924 /* Date.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -483,6 +489,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84F08544206A4A0300E47042 /* DailyCSV.swift in Sources */,
+				84DF1B8A2074EE890024D924 /* Measurement.swift in Sources */,
 				843E470A207237BD0041BECB /* DailyCollectionViewProtocols.swift in Sources */,
 				841B5AA620436E7300ACAD15 /* ViewController.swift in Sources */,
 				84FC53B9205940E900D20B3C /* DayViewCell.swift in Sources */,
@@ -500,6 +507,7 @@
 				841B5AA420436E7300ACAD15 /* AppDelegate.swift in Sources */,
 				843BD0A1205E239D0049DD77 /* DailyCalendarViewController.swift in Sources */,
 				843E47082072365A0041BECB /* Unit.swift in Sources */,
+				84DF1B8C2074EEA50024D924 /* Date.swift in Sources */,
 				841B5AAC20436E7300ACAD15 /* Database.xcdatamodeld in Sources */,
 				84EE818F2045B31000E15A74 /* DailyItemPickerView.swift in Sources */,
 				84FC53C1205CA18900D20B3C /* Notification.swift in Sources */,

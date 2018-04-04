@@ -29,6 +29,15 @@ protocol DailyViewModel {
     var energy: Measurement<UnitEnergy>? { get set }
 }
 
+//private extension MeasurementFormatter {
+//    func string(from measurement: Measurement<Unit>?) -> String? {
+//        if let measurement = measurement {
+//            return self.string(from: measurement)
+//        }
+//        return nil
+//    }
+//}
+
 class DailyCollectionViewCell: UICollectionViewCell, DailyViewModel {
     
     private static let measurementFormatter: MeasurementFormatter = {
@@ -39,6 +48,9 @@ class DailyCollectionViewCell: UICollectionViewCell, DailyViewModel {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.roundingMode = .halfUp
+        numberFormatter.isLenient = true
+        numberFormatter.maximumFractionDigits = 1
+        numberFormatter.roundingIncrement = 0.25
         
         fmt.numberFormatter = numberFormatter
 
@@ -94,51 +106,39 @@ class DailyCollectionViewCell: UICollectionViewCell, DailyViewModel {
     
     /// Makes the input views display "No data"
     public func setEmpty() {
-        mass = nil
-        energy = nil
+        massTextField.text = "No data"
+        energyTextField.text = "No data"
+    }
+    
+    private func fillTextField<T: Unit>(with value: Measurement<T>?) {
+        if T.self == UnitMass.self {
+            massTextField.text = value.flatMap(DailyCollectionViewCell.measurementFormatter.string) ?? "No data"
+        } else if T.self == UnitEnergy.self {
+            energyTextField.text = value.flatMap(DailyCollectionViewCell.measurementFormatter.string) ?? "No data"
+        }
     }
     
     // TODO: - make units user selectable
     
     public var mass: Measurement<UnitMass>? {
         didSet {
-            if let mass = mass {
-                massTextField.text = DailyCollectionViewCell.measurementFormatter.string(from: mass)
-            } else {
-                massTextField.text = "No data"
-            }
+            fillTextField(with: mass)
         }
     }
     private var massBuffer: Measurement<UnitMass>? {
         didSet {
-            if let buffer = massBuffer {
-                massTextField.text = DailyCollectionViewCell.measurementFormatter.string(from: buffer)
-            } else if let mass = mass {
-                massTextField.text = DailyCollectionViewCell.measurementFormatter.string(from: mass)
-            } else {
-                massTextField.text = "No data"
-            }
+            fillTextField(with: massBuffer ?? mass)
         }
     }
     
     public var energy: Measurement<UnitEnergy>? {
         didSet {
-            if let energy = energy {
-                energyTextField.text = DailyCollectionViewCell.measurementFormatter.string(from: energy)
-            } else {
-                energyTextField.text = "No data"
-            }
+            fillTextField(with: energy)
         }
     }
     private var energyBuffer: Measurement<UnitEnergy>? {
         didSet {
-            if let buffer = energyBuffer {
-                energyTextField.text = DailyCollectionViewCell.measurementFormatter.string(from: buffer)
-            } else if let energy = energy {
-                energyTextField.text = DailyCollectionViewCell.measurementFormatter.string(from: energy)
-            } else {
-                energyTextField.text = "No data"
-            }
+            fillTextField(with: energyBuffer ?? energy)
         }
     }
 }
