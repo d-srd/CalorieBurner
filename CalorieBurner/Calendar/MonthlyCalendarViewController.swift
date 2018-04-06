@@ -82,6 +82,7 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
         calendarView.allowsDateCellStretching = false
         
         setWeekdayLabels()
+//        navigationItem.titleView = weekdaysStackView
 //        setDateLabels(to: today)
         
         calendarView.scrollToDate(today)
@@ -152,7 +153,7 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
                 UIView.transition(
                     with: cell.dayLabel,
                     duration: animationSelectionDuration,
-                    options: .curveEaseInOut,
+                    options: .transitionCrossDissolve,
                     animations: { cell.dayLabel.textColor = Colors.selected },
                     completion: nil
                 )
@@ -171,7 +172,7 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
                 UIView.transition(
                     with: cell.dayLabel,
                     duration: animationSelectionDuration,
-                    options: .curveEaseInOut,
+                    options: .transitionCrossDissolve,
                     animations: {
                         if Calendar.current.isDateInToday(cellState.date) {
                             cell.dayLabel.textColor = Colors.today
@@ -219,7 +220,10 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
-        guard let _ = visibleDates.monthDates.first?.date else { return }
+        guard let date = visibleDates.monthDates.first?.date else { return }
+        
+        dateFormatter.dateFormat = "MMMM yyyy"
+        navigationItem.title = dateFormatter.string(from: date)
         
 //        setDateLabels(to: date)
     }

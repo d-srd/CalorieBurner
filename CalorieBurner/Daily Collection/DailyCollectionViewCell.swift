@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CocoaControls
 
 @objc enum DailyItemType: Int {
     case mass
@@ -29,16 +30,9 @@ protocol DailyViewModel {
     var energy: Measurement<UnitEnergy>? { get set }
 }
 
-//private extension MeasurementFormatter {
-//    func string(from measurement: Measurement<Unit>?) -> String? {
-//        if let measurement = measurement {
-//            return self.string(from: measurement)
-//        }
-//        return nil
-//    }
-//}
-
 class DailyCollectionViewCell: UICollectionViewCell, DailyViewModel {
+    @IBOutlet weak var massView: ShadowView!
+    @IBOutlet weak var energyView: ShadowView!
     
     private static let measurementFormatter: MeasurementFormatter = {
         let fmt = MeasurementFormatter()
@@ -140,6 +134,27 @@ class DailyCollectionViewCell: UICollectionViewCell, DailyViewModel {
         didSet {
             fillTextField(with: energyBuffer ?? energy)
         }
+    }
+    
+    @objc private func massTextFieldShouldBecomeFirstResponder(_ sender: Any) {
+        massTextField.becomeFirstResponder()
+    }
+    
+    @objc private func energyTextFieldShouldBecomeFirstResponder(_ sender: Any) {
+        energyTextField.becomeFirstResponder()
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        let massGesture = UITapGestureRecognizer(target: self, action: #selector(massTextFieldShouldBecomeFirstResponder(_:)))
+        massGesture.cancelsTouchesInView = false
+        
+        let energyGesture = UITapGestureRecognizer(target: self, action: #selector(energyTextFieldShouldBecomeFirstResponder(_:)))
+        energyGesture.cancelsTouchesInView = false
+        
+        massView.addGestureRecognizer(massGesture)
+        energyView.addGestureRecognizer(energyGesture)
     }
 }
 

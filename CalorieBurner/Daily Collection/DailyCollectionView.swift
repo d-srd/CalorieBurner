@@ -8,6 +8,12 @@
 
 import UIKit
 
+private extension UIEdgeInsets {
+    var horizontal: CGFloat {
+        return self.left + self.right
+    }
+}
+
 class DailyCollectionView: UICollectionView {
     weak var dailyDelegate: DailyCollectionViewDelegate?
     weak var dailyDataSource: DailyCollectionViewDataSource?
@@ -35,21 +41,26 @@ class DailyCollectionView: UICollectionView {
         
         super.dataSource = self
         super.delegate = self
+        collectionViewLayout.invalidateLayout()
     }
 }
 
 extension DailyCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
         guard let count = dailyDataSource?.dayCount else {
             fatalError("number of days invalid")
         }
         
         return count
     }
+    
+//    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        guard let count = dailyDataSource?.dayCount else {
+//            fatalError("number of days invalid")
+//        }
+//        
+//        return count
+//    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = dailyDataSource?.dailyView(self, cellForItemAt: indexPath)
@@ -64,13 +75,39 @@ extension DailyCollectionView: UICollectionViewDataSource {
 }
 
 extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        let itemWidth = (collectionViewLayout as! UICollectionViewFlowLayout).itemSize.width
+        let contentWidth = collectionView.bounds.width
+
+        return (contentWidth - itemWidth)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        guard let dailyView = scrollView as? DailyCollectionView,
+              let visibleCell = dailyView.visibleCells.first as? DailyCollectionViewCell,
+              let indexPath = dailyView.indexPath(for: visibleCell),
+              let date = dailyView.indexPathProvider?.date(for: indexPath)
+        else { return }
+        
+        let itemType: DailyItemType = visibleCell.massTextField.isEditing ? .mass : .energy
+        
+        dailyDelegate?.willCancelEditing(cell: visibleCell, at: date, for: itemType)
+    }
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         guard let dailyView = scrollView as? DailyCollectionView,
-              let visibleCellIndexPath = dailyView.visibleCells.compactMap(dailyView.indexPath).first,
-              let date = dailyView.indexPathProvider?.date(for: visibleCellIndexPath)
+              let visibleCell = dailyView.visibleCells.first as? DailyCollectionViewCell,
+              let indexPath = dailyView.indexPath(for: visibleCell),
+              let date = dailyView.indexPathProvider?.date(for: indexPath)
         else { return }
         
         dailyScrollDelegate?.dailyView(self, didScrollToItemAt: date)
+        dailyDelegate?.didCancelEditing(cell: visibleCell, at: date, for: .mass)
+
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -91,6 +128,15 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
             dailyScrollDelegate?.dailyView(self, willScrollToItemAt: date)
             print("scrolling daily view to the right")
         }
+        
+//        targetContentOffset.pointee = scrollView.contentOffset
+//        var factor: CGFloat = 0.5
+//        if velocity.x < 0 {
+//            factor = -factor
+//        }
+//        
+//        let indexPath = IndexPath(row: 0, section: Int((scrollView.contentOffset.x/itemSize!.width + factor).rounded()))
+//        (scrollView as! UICollectionView).scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -115,30 +161,11 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        guard let dailyView = collectionView as? DailyCollectionView,
-              let layout = collectionViewLayout as? UICollectionViewFlowLayout,
-              let dataSourceCount = dailyView.dataSource?.collectionView(dailyView, numberOfItemsInSection: section),
-              dataSourceCount == 1,
-              let itemSize = itemSize
-        else { return .zero }
-
-        let itemSpacing = layout.minimumInteritemSpacing
-        let cellWidth = itemSize.width + itemSpacing
-        let cellCount = CGFloat(dailyView.numberOfSections(in: dailyView))
-        var insets = layout.sectionInset
-
-        let totalCellWidth = cellWidth - itemSpacing
-        let contentWidth = dailyView.frame.size.width -
-            dailyView.contentInset.left -
-            dailyView.contentInset.right
-
-        guard totalCellWidth < contentWidth else { return insets }
-
-        let padding = (contentWidth - totalCellWidth) / 2
-        insets.left = padding
-        insets.right = padding
-
-        return insets
+        let itemWidth = (collectionViewLayout as! UICollectionViewFlowLayout).itemSize.width
+        let contentWidth = collectionView.bounds.width
+        let inset = (contentWidth - itemWidth) / 2
+        
+        return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
     }
 }
 

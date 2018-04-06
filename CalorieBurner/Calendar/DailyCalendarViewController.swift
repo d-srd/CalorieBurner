@@ -37,28 +37,38 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
         // can inject properties for the cells
 //        dailyCollectionViewController.cellWidth = containerView.frame.width * 0.7
 //        dailyCollectionViewController.cellHeight = 140
-        dailyCollectionViewController.dailyView.dailyScrollDelegate = self
-
-        let width = containerView.frame.width
-        
-        initialTabBarFrame = tabBarController?.tabBar.frame
-        
-        dailyCollectionViewController.dailyView.itemSize =
-            CGSize(width: width * 0.7, height: 130)
-        
+//        dailyCollectionViewController.dailyView.dailyScrollDelegate = self
+//
+//        let width = containerView.frame.width
+//
+//        initialTabBarFrame = tabBarController?.tabBar.frame
+//
+//        dailyCollectionViewController.dailyView.itemSize =
+//            CGSize(width: width * 0.7, height: 130)
+//
 //        dailyCollectionViewController.scrollToItem(at: today, animated: false)
         /* containerView.frame.height * 0.9 */
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
-        dailyCollectionViewController.scrollToItem(at: self.today, animated: false)
-        calendarView.selectDates([today])
+        initialTabBarFrame = tabBarController?.tabBar.frame
+
+        dailyCollectionViewController.dailyView.itemSize =
+            CGSize(width: containerView.frame.width * 0.7, height: 130)
+        dailyCollectionViewController.dailyView.collectionViewLayout.invalidateLayout()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // UICollectionView needs an initial size 
+        dailyCollectionViewController.dailyView.itemSize =
+            CGSize(width: containerView.frame.width * 0.7, height: 130)
+        dailyCollectionViewController.dailyView.dailyScrollDelegate = self
+        dailyCollectionViewController.scrollToItem(at: self.today, animated: false)
+        calendarView.selectDates([today])
         
         NotificationCenter.default.addObserver(
             self,
@@ -109,7 +119,7 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
 
         // ugliest line of code I've written in this entire project
         guard let _keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue,
-            let keyboardAnimationDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
+              let keyboardAnimationDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
         else { return }
 
         let keyboardSize = view.convert(_keyboardSize, from: view.window)

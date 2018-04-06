@@ -124,7 +124,7 @@ class DailyFetchedResultsController {
 //        guard let indexPath = dateCache.object(forKey: date as NSDate) as IndexPath? else {
             let dayComponent = Calendar.current.dateComponents([.day], from: startingDate, to: date).day!
             
-            return IndexPath(row: 0, section: dayComponent)
+            return IndexPath(row: dayComponent, section: 0)
         }
         
         return indexPath
@@ -150,7 +150,7 @@ class DailyFetchedResultsController {
     
     // TODO: - move this out of here
     func date(for indexPath: IndexPath) -> Date? {
-        let d = Calendar.current.date(byAdding: .day, value: indexPath.section, to: startingDate)
+        let d = Calendar.current.date(byAdding: .day, value: indexPath.row, to: startingDate)
         return d
     }
     
