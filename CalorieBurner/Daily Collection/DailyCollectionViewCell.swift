@@ -9,14 +9,9 @@
 import UIKit
 import CocoaControls
 
-@objc enum DailyItemType: Int {
-    case mass
-    case energy
-}
-
 protocol DailyCellDelegate: class {
-    func willCancelEditing(cell: DailyCollectionViewCell, for itemType: DailyItemType)
-    func didCancelEditing(cell: DailyCollectionViewCell, for itemType: DailyItemType)
+    func willCancelEditing(cell: DailyCollectionViewCell, for itemType: MeasurementItems)
+    func didCancelEditing(cell: DailyCollectionViewCell, for itemType: MeasurementItems)
     func didEndEditing(cell: DailyCollectionViewCell, mass: Measurement<UnitMass>)
     func didEndEditing(cell: DailyCollectionViewCell, energy: Measurement<UnitEnergy>)
     
@@ -171,7 +166,7 @@ extension DailyCollectionViewCell: DailyItemPickerDelegate {
 }
 
 extension DailyCollectionViewCell: DailyToolbarDelegate {
-    func didCancelEditing(_ type: DailyItemType) {
+    func didCancelEditing(_ type: MeasurementItems) {
         cellDelegate?.willCancelEditing(cell: self, for: type)
         
         endEditing(true)
@@ -186,7 +181,7 @@ extension DailyCollectionViewCell: DailyToolbarDelegate {
         cellDelegate?.didCancelEditing(cell: self, for: type)
     }
     
-    func didEndEditing(_ type: DailyItemType) {
+    func didEndEditing(_ type: MeasurementItems) {
         endEditing(true)
         
         switch type {

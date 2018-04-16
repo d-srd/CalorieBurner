@@ -8,129 +8,102 @@
 
 import UIKit
 
-protocol DailyItemUnitDataSource {
-    associatedtype Item: Hashable
-    typealias UnitBounds = (min: Double, max: Double)
-    typealias Bounds = [Item: UnitBounds]
-    typealias Steppers = [Item : [Double]]
+final class DailyMeasurementPickerDataSource {
+    typealias Bounds = (min: Double, max: Double)
     
-    var steppersPerUnit: [Item : [Double]] { get }
-    var bounds: [Item : UnitBounds] { get }
-    var currentUnit: Item { get set }
-    var steps: [[Double]] { get set }
+    enum AssociatedUnit: Hashable {
+        case mass(UnitMass)
+        case energy(UnitEnergy)
+    }
     
-    func indexOfClosest(value atIndex: Int, from sourceIndex: Int, to destinationIndex: Int) -> Int
-}
-
-extension DailyItemUnitDataSource {
+    var unit: AssociatedUnit {
+        didSet {
+            let (min, max) = bounds[unit]!
+            incrementer = incrementers[unit]!
+            allIncrements = incrementer.map { [Double](stride(from: min, through: max, by: $0)) }
+        }
+    }
+    
+    let incrementers: [AssociatedUnit : [Double]]
+    let bounds: [AssociatedUnit : Bounds]
+    
+    var incrementer: [Double]
+    var allIncrements: [[Double]]
+    
+    init(_ item: MeasurementItems) {
+        switch item {
+        case .mass:
+            self.unit = .mass(UserDefaults.standard.mass)
+            
+            self.incrementers = [
+                .mass(.kilograms) : [0.25, 0.5, 1, 2.5, 5, 10],
+                .mass(.pounds) : [1, 2.5, 5, 10, 25, 50],
+                .mass(.stones) : [0.25, 0.5, 1, 2.5, 5, 10]
+            ]
+            self.bounds = [
+                .mass(.kilograms) : (40, 250),
+                .mass(.pounds) : (100, 800),
+                .mass(.stones) : (6, 60)
+            ]
+            
+        case .energy:
+            self.unit = .energy(UserDefaults.standard.energy)
+            
+            self.incrementers = [
+                .energy(.kilocalories) : [10, 25, 50, 100, 250, 500],
+                .energy(.kilojoules) : [100, 250, 500, 1_000, 2_500, 5_000]
+            ]
+            self.bounds = [
+                .energy(.kilocalories) : (1_000, 15_000),
+                .energy(.kilojoules) : (4_000, 60_000)
+            ]
+        }
+        
+        let (min, max) = bounds[unit]!
+        incrementer = incrementers[unit]!
+        allIncrements = incrementer.map { [Double](stride(from: min, through: max, by: $0)) }
+        
+        switch item {
+        case .mass:
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(unitMassDidChange(_:)),
+                name: .UnitMassChanged,
+                object: nil
+            )
+        case .energy:
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(unitEnergyDidChange(_:)),
+                name: .UnitEnergyChanged,
+                object: nil
+            )
+        }
+    }
+    
     func indexOfClosest(value atIndex: Int, from sourceIndex: Int, to destinationIndex: Int) -> Int {
-        let previousStepperCount = steps[sourceIndex].count
-        let currentStepperCount = steps[destinationIndex].count
-        let scalingFactor = Double(currentStepperCount) / Double(previousStepperCount)
+        let countOfPreviousValues = allIncrements[sourceIndex].count
+        let countOfCurrentValues = allIncrements[destinationIndex].count
+        let scalingFactor = Double(countOfCurrentValues) / Double(countOfPreviousValues)
         let newIndex = Double(atIndex) * scalingFactor
         
         return Int(newIndex.rounded())
     }
-}
-
-final class DailyMassPickerDataSource: DailyItemUnitDataSource {
-    let steppersPerUnit: [UnitMass : [Double]]
-    let bounds: [UnitMass : UnitBounds]
     
-    var stepper: [Double]
-    var steps: [[Double]]
-    var currentUnit: UnitMass {
-        didSet {
-            let (min, max) = bounds[currentUnit]!
-            stepper = steppersPerUnit[currentUnit]!
-            steps = stepper.map { [Double](stride(from: min, through: max, by: $0)) }
-        }
+    @objc private func unitMassDidChange(_ sender: Any) {
+        unit = .mass(UserDefaults.standard.mass)
     }
     
-    private init() {
-        steppersPerUnit = [
-            .kilograms : [0.25, 0.5, 1, 2.5, 5, 10],
-            .pounds : [1, 2.5, 5, 10, 25, 50],
-            .stones : [0.25, 0.5, 1, 2.5, 5, 10]
-        ]
-        bounds = [
-            .kilograms : (40, 250),
-            .pounds : (100, 800),
-            .stones : (6, 60)
-        ]
-        currentUnit = UserDefaults.standard.mass
-        stepper = steppersPerUnit[currentUnit]!
-        
-        let (min, max) = bounds[currentUnit]!
-        steps = stepper.map { [Double](stride(from: min, through: max, by: $0)) }
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(unitDidChange(_:)),
-            name: .UnitMassChanged,
-            object: nil
-        )
-    }
-    
-    @objc private func unitDidChange(_ sender: Any) {
-        currentUnit = UserDefaults.standard.mass
+    @objc private func unitEnergyDidChange(_ sender: Any) {
+        unit = .energy(UserDefaults.standard.energy)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
-    static let shared = DailyMassPickerDataSource()
-    
-}
-
-final class DailyEnergyPickerDataSource: DailyItemUnitDataSource {
-    let steppersPerUnit: [UnitEnergy : [Double]]
-    let bounds: [UnitEnergy : UnitBounds]
-    
-    var stepper: [Double]
-    var steps: [[Double]]
-    var currentUnit: UnitEnergy {
-        didSet {
-            let (min, max) = bounds[currentUnit]!
-            stepper = steppersPerUnit[currentUnit]!
-            steps = stepper.map { [Double](stride(from: min, through: max, by: $0)) }
-        }
-    }
-    
-    private init() {
-        steppersPerUnit = [
-            .kilocalories : [10, 25, 50, 100, 250, 500],
-            .kilojoules : [100, 250, 500, 1_000, 2_500, 5_000]
-        ]
-        bounds = [
-            .kilocalories : (1_000, 15_000),
-            .kilojoules : (4_000, 60_000)
-        ]
-        currentUnit = UserDefaults.standard.energy
-        stepper = steppersPerUnit[currentUnit]!
-        
-        let (min, max) = bounds[currentUnit]!
-        steps = stepper.map { [Double](stride(from: min, through: max, by: $0)) }
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(unitDidChange(_:)),
-            name: .UnitEnergyChanged,
-            object: nil
-        )
-    }
-    
-    @objc private func unitDidChange(_ sender: Any) {
-        currentUnit = UserDefaults.standard.energy
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    static let shared = DailyEnergyPickerDataSource()
-    
+    static let mass = DailyMeasurementPickerDataSource(.mass)
+    static let energy = DailyMeasurementPickerDataSource(.energy)
 }
 
 protocol DailyItemPickerDelegate: class {
@@ -148,14 +121,16 @@ class DailyMassPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDel
     
     weak var dailyDelegate: DailyItemPickerDelegate?
     
-    var selectedMass: Double {
-        return DailyMassPickerDataSource.shared.steps[selectedStepper][selectedRow(inComponent: 1)]
+    var currentIncrement = 0
+    var currentMassIndex: Int {
+        return selectedRow(inComponent: 1)
+    }
+    var currentMass: Double {
+        return DailyMeasurementPickerDataSource.mass.allIncrements[currentIncrement][currentMassIndex]
     }
     
-    var selectedStepper = DailyMassPickerDataSource.shared.stepper.count / 2
-    
     private func getClosest(_ index: Int, from oldStepperIndex: Int, to currentStepperIndex: Int) -> Int {
-        return DailyMassPickerDataSource.shared.indexOfClosest(value: index, from: oldStepperIndex, to: currentStepperIndex)
+        return DailyMeasurementPickerDataSource.mass.indexOfClosest(value: index, from: oldStepperIndex, to: currentStepperIndex)
     }
     
     override init(frame: CGRect) {
@@ -182,37 +157,37 @@ class DailyMassPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDel
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0 {
-            return DailyMassPickerDataSource.shared.stepper.count
+            return DailyMeasurementPickerDataSource.mass.incrementer.count
         } else {
-            return DailyMassPickerDataSource.shared.steps[selectedStepper].count
+            return DailyMeasurementPickerDataSource.mass.allIncrements[currentIncrement].count
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0 {
-            let multiplier = DailyMassPickerDataSource.shared.stepper[row]
-            return DailyMassPickerView.numberFormatter.string(from: multiplier as NSNumber)
+            let increment = DailyMeasurementPickerDataSource.mass.incrementer[row]
+            return DailyMassPickerView.numberFormatter.string(from: increment as NSNumber)
         } else {
-            let value = DailyMassPickerDataSource.shared.steps[selectedStepper][row]
+            let value = DailyMeasurementPickerDataSource.mass.allIncrements[currentIncrement][row]
             return DailyMassPickerView.numberFormatter.string(from: value as NSNumber)
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
-            let newIndex = getClosest(selectedRow(inComponent: 1), from: selectedStepper, to: row)
-            selectedStepper = row
+            let newIndex = getClosest(selectedRow(inComponent: 1), from: currentIncrement, to: row)
+            currentIncrement = row
             reloadComponent(1)
             selectRow(newIndex, inComponent: 1, animated: false)
         } else {
-            dailyDelegate?.dailyPicker(self, valueDidChangeTo: selectedMass)
+            dailyDelegate?.dailyPicker(self, valueDidChangeTo: currentMass)
         }
     }
 }
 
 @objc protocol DailyToolbarDelegate: class {
-    @objc optional func didCancelEditing(_ type: DailyItemType)
-    @objc optional func didEndEditing(_ type: DailyItemType)
+    @objc optional func didCancelEditing(_ type: MeasurementItems)
+    @objc optional func didEndEditing(_ type: MeasurementItems)
 }
 
 class DailyMassPickerToolbar: UIToolbar {
@@ -280,15 +255,17 @@ class DailyEnergyPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewD
         return fmt
     }()
     
-    var selectedEnergy: Double {
-        return DailyEnergyPickerDataSource.shared.steps[selectedStepper][selectedRow(inComponent: 1)]
-    }
-    
     private func getClosest(_ index: Int, from oldStepperIndex: Int, to currentStepperIndex: Int) -> Int {
-        return DailyEnergyPickerDataSource.shared.indexOfClosest(value: index, from: oldStepperIndex, to: currentStepperIndex)
+        return DailyMeasurementPickerDataSource.energy.indexOfClosest(value: index, from: oldStepperIndex, to: currentStepperIndex)
     }
     
-    var selectedStepper = 0
+    var currentIncrement = 0
+    var currentEnergyIndex: Int {
+        return selectedRow(inComponent: 1)
+    }
+    var currentEnergy: Double {
+        return DailyMeasurementPickerDataSource.energy.allIncrements[currentIncrement][currentEnergyIndex]
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -314,30 +291,30 @@ class DailyEnergyPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewD
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0 {
-            return DailyEnergyPickerDataSource.shared.stepper.count
+            return DailyMeasurementPickerDataSource.energy.incrementer.count
         } else {
-            return DailyEnergyPickerDataSource.shared.steps[selectedStepper].count
+            return DailyMeasurementPickerDataSource.energy.allIncrements[currentIncrement].count
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0 {
-            let multiplier = DailyEnergyPickerDataSource.shared.stepper[row]
-            return DailyEnergyPickerView.numberFormatter.string(from: multiplier as NSNumber)
+            let increment = DailyMeasurementPickerDataSource.energy.incrementer[row]
+            return DailyEnergyPickerView.numberFormatter.string(from: increment as NSNumber)
         } else {
-            let value = DailyEnergyPickerDataSource.shared.steps[selectedStepper][row]
+            let value = DailyMeasurementPickerDataSource.energy.allIncrements[currentIncrement][row]
             return DailyEnergyPickerView.numberFormatter.string(from: value as NSNumber)
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
-            let newIndex = getClosest(selectedRow(inComponent: 1), from: selectedStepper, to: row)
-            selectedStepper = row
+            let newIndex = getClosest(selectedRow(inComponent: 1), from: currentIncrement, to: row)
+            currentIncrement = row
             reloadComponent(1)
             selectRow(newIndex, inComponent: 1, animated: false)
         } else {
-            dailyDelegate?.dailyPicker(self, valueDidChangeTo: selectedEnergy)
+            dailyDelegate?.dailyPicker(self, valueDidChangeTo: currentEnergy)
         }
     }
 }

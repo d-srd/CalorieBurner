@@ -29,27 +29,6 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // why is this method here? well at this point the all
-        // frames and constraints are initialized, and we
-        // can inject properties for the cells
-//        dailyCollectionViewController.cellWidth = containerView.frame.width * 0.7
-//        dailyCollectionViewController.cellHeight = 140
-//        dailyCollectionViewController.dailyView.dailyScrollDelegate = self
-//
-//        let width = containerView.frame.width
-//
-//        initialTabBarFrame = tabBarController?.tabBar.frame
-//
-//        dailyCollectionViewController.dailyView.itemSize =
-//            CGSize(width: width * 0.7, height: 130)
-//
-//        dailyCollectionViewController.scrollToItem(at: today, animated: false)
-        /* containerView.frame.height * 0.9 */
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -63,9 +42,10 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // UICollectionView needs an initial size 
+        // UICollectionView needs an initial size to lay out the cells. this code is ignored, the one in didLayoutSubviews is used.
         dailyCollectionViewController.dailyView.itemSize =
             CGSize(width: containerView.frame.width * 0.7, height: 130)
+        
         dailyCollectionViewController.dailyView.dailyScrollDelegate = self
         dailyCollectionViewController.scrollToItem(at: self.today, animated: false)
         calendarView.selectDates([today])

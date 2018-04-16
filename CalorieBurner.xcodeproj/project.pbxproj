@@ -204,7 +204,7 @@
 				84F0853E206A27B000E47042 /* User Settings */,
 				840C6F9720651EB700535787 /* Weight Delta */,
 				84FC53BD205C9F8F00D20B3C /* Daily Collection */,
-				84FC53BA205AFA2700D20B3C /* Extensions */,
+				84FC53BA205AFA2700D20B3C /* Convenience */,
 				84FC538F2057C78400D20B3C /* Calendar */,
 				84FC538E2057C71000D20B3C /* Core Data */,
 				84FC538D2057C6F100D20B3C /* Supporting files */,
@@ -278,7 +278,7 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
-		84FC53BA205AFA2700D20B3C /* Extensions */ = {
+		84FC53BA205AFA2700D20B3C /* Convenience */ = {
 			isa = PBXGroup;
 			children = (
 				84FC53BB205AFA4700D20B3C /* Array.swift */,
@@ -286,7 +286,7 @@
 				84DF1B892074EE890024D924 /* Measurement.swift */,
 				84DF1B8B2074EEA50024D924 /* Date.swift */,
 			);
-			path = Extensions;
+			path = Convenience;
 			sourceTree = "<group>";
 		};
 		84FC53BD205C9F8F00D20B3C /* Daily Collection */ = {

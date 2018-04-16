@@ -93,11 +93,11 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
         return dailyView.itemSize ?? itemSize?() ?? defaultItemSize
     }
     
-    func willCancelEditing(cell: DailyCollectionViewCell, at date: Date, for itemType: DailyItemType) {
+    func willCancelEditing(cell: DailyCollectionViewCell, at date: Date, for itemType: MeasurementItems) {
         isCancellingEditing = true
     }
     
-    func didCancelEditing(cell: DailyCollectionViewCell, at date: Date, for itemType: DailyItemType) {
+    func didCancelEditing(cell: DailyCollectionViewCell, at date: Date, for itemType: MeasurementItems) {
         isCancellingEditing = false
     }
     

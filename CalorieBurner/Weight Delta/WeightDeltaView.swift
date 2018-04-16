@@ -155,12 +155,12 @@ extension WeightDeltaView: DailyItemPickerDelegate {
 }
 
 extension WeightDeltaView: DailyToolbarDelegate {
-    func didCancelEditing(_ type: DailyItemType) {
+    func didCancelEditing(_ type: MeasurementItems) {
         endEditing(true)
         goalMassBuffer = nil
     }
     
-    func didEndEditing(_ type: DailyItemType) {
+    func didEndEditing(_ type: MeasurementItems) {
         endEditing(true)
         goalMass = goalMassBuffer
     }

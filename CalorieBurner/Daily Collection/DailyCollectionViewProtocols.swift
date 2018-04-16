@@ -22,8 +22,8 @@ protocol DailyIndexPathProvider: class {
 protocol DailyCollectionViewDelegate: class {
     func dailyView(_ dailyView: DailyCollectionView, willDisplay cell: DailyCollectionViewCell, forItemAt indexPath: IndexPath)
     
-    func willCancelEditing(cell: DailyCollectionViewCell, at date: Date, for itemType: DailyItemType)
-    func didCancelEditing(cell: DailyCollectionViewCell, at date: Date, for itemType: DailyItemType)
+    func willCancelEditing(cell: DailyCollectionViewCell, at date: Date, for itemType: MeasurementItems)
+    func didCancelEditing(cell: DailyCollectionViewCell, at date: Date, for itemType: MeasurementItems)
     func didEndEditing(cell: DailyCollectionViewCell, at date: Date, mass: Mass)
     func didEndEditing(cell: DailyCollectionViewCell, at date: Date, energy: Energy)
 }
@@ -34,6 +34,7 @@ protocol DailyCollectionViewDataSource: class, DateBoundaries {
     func dailyView(_ dailyView: DailyCollectionView, cellForItemAt indexPath: IndexPath) -> DailyCollectionViewCell
 }
 
+/// The object which responds to Daily Collection View's scrolling notifications.
 protocol DailyCollectionViewScrollDelegate: class {
     func dailyView(_ dailyView: DailyCollectionView, didScrollToItemAt date: Date)
     func dailyView(_ dailyView: DailyCollectionView, willScrollToItemAt date: Date)

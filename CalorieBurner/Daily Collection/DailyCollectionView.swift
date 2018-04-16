@@ -75,25 +75,18 @@ extension DailyCollectionView: UICollectionViewDataSource {
 }
 
 extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        let itemWidth = (collectionViewLayout as! UICollectionViewFlowLayout).itemSize.width
-        let contentWidth = collectionView.bounds.width
-
-        return (contentWidth - itemWidth)
-    }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
+    // MARK: - Scroll View Delegate
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        guard let dailyView = scrollView as? DailyCollectionView,
+        guard keyboardDismissMode == .onDrag,
+              let dailyView = scrollView as? DailyCollectionView,
               let visibleCell = dailyView.visibleCells.first as? DailyCollectionViewCell,
               let indexPath = dailyView.indexPath(for: visibleCell),
               let date = dailyView.indexPathProvider?.date(for: indexPath)
         else { return }
         
-        let itemType: DailyItemType = visibleCell.massTextField.isEditing ? .mass : .energy
+        let itemType: MeasurementItems = visibleCell.massTextField.isEditing ? .mass : .energy
         
         dailyDelegate?.willCancelEditing(cell: visibleCell, at: date, for: itemType)
     }
@@ -107,10 +100,12 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
         
         dailyScrollDelegate?.dailyView(self, didScrollToItemAt: date)
         dailyDelegate?.didCancelEditing(cell: visibleCell, at: date, for: .mass)
-
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        // detect scroll direction and send the appropriate delegate messages
+        
+        // scrolling to the left
         if velocity.x < 0 {
             guard let dailyView = scrollView as? DailyCollectionView,
                   let visibleCellIndexPath = dailyView.visibleCells.compactMap(dailyView.indexPath).first,
@@ -118,38 +113,38 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
             else { return }
             
             dailyScrollDelegate?.dailyView(self, willScrollToItemAt: date)
-            print("scrolling daily view to the left")
-        } else {
+        }
+            
+        // scrolling to the right
+        else {
             guard let dailyView = scrollView as? DailyCollectionView,
                   let visibleCellIndexPath = dailyView.visibleCells.compactMap(dailyView.indexPath).last,
                   let date = dailyView.indexPathProvider?.date(for: visibleCellIndexPath)
             else { return }
             
             dailyScrollDelegate?.dailyView(self, willScrollToItemAt: date)
-            print("scrolling daily view to the right")
         }
         
-//        targetContentOffset.pointee = scrollView.contentOffset
-//        var factor: CGFloat = 0.5
-//        if velocity.x < 0 {
-//            factor = -factor
-//        }
-//        
-//        let indexPath = IndexPath(row: 0, section: Int((scrollView.contentOffset.x/itemSize!.width + factor).rounded()))
-//        (scrollView as! UICollectionView).scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        guard keyboardDismissMode == .onDrag else { return }
+    }
+    
+    
+    // MARK: - Collection View Delegate
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        let itemWidth = (collectionViewLayout as! UICollectionViewFlowLayout).itemSize.width
+        let contentWidth = collectionView.bounds.width
+        
+        return (contentWidth - itemWidth)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let itemSize = itemSize else { fatalError("itemSize not implemented") }
         return itemSize
-//        guard itemSize == nil else { return itemSize! }
-//
-//        guard let dailyView = collectionView as? DailyCollectionView,
-//              let date = dailyView.indexPathProvider?.date(for: indexPath),
-//              let size = dailyView.dailyDelegate?.dailyView(dailyView, sizeForItemAt: date)
-//        else { fatalError("Size for item not implemented") }
-//
-//        return size
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -160,6 +155,7 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
         dailyView.dailyDelegate?.dailyView(self, willDisplay: cell, forItemAt: indexPath)
     }
     
+    // add an initial section inset such that the first and last cells are centered on screen
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let itemWidth = (collectionViewLayout as! UICollectionViewFlowLayout).itemSize.width
         let contentWidth = collectionView.bounds.width
@@ -170,7 +166,7 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
 }
 
 extension DailyCollectionView: DailyCellDelegate {
-    func willCancelEditing(cell: DailyCollectionViewCell, for itemType: DailyItemType) {
+    func willCancelEditing(cell: DailyCollectionViewCell, for itemType: MeasurementItems) {
         guard let indexPath = self.indexPath(for: cell),
               let date = indexPathProvider?.date(for: indexPath)
         else { return }
@@ -178,7 +174,7 @@ extension DailyCollectionView: DailyCellDelegate {
         dailyDelegate?.willCancelEditing(cell: cell, at: date, for: itemType)
     }
     
-    func didCancelEditing(cell: DailyCollectionViewCell, for itemType: DailyItemType) {
+    func didCancelEditing(cell: DailyCollectionViewCell, for itemType: MeasurementItems) {
         guard let indexPath = self.indexPath(for: cell),
               let date = indexPathProvider?.date(for: indexPath)
         else { return }
@@ -186,7 +182,7 @@ extension DailyCollectionView: DailyCellDelegate {
         dailyDelegate?.didCancelEditing(cell: cell, at: date, for: itemType)
     }
     
-    func didEndEditing(cell: DailyCollectionViewCell, mass: Measurement<UnitMass>) {
+    func didEndEditing(cell: DailyCollectionViewCell, mass: Mass) {
         guard let indexPath = self.indexPath(for: cell),
               let date = indexPathProvider?.date(for: indexPath)
         else { return }
@@ -194,7 +190,7 @@ extension DailyCollectionView: DailyCellDelegate {
         dailyDelegate?.didEndEditing(cell: cell, at: date, mass: mass)
     }
     
-    func didEndEditing(cell: DailyCollectionViewCell, energy: Measurement<UnitEnergy>) {
+    func didEndEditing(cell: DailyCollectionViewCell, energy: Energy) {
         guard let indexPath = self.indexPath(for: cell),
               let date = indexPathProvider?.date(for: indexPath)
         else { return }
