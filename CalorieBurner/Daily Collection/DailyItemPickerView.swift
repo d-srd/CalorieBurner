@@ -8,15 +8,19 @@
 
 import UIKit
 
+/// Provides two ranges of numerical values for mass/energy picker views.
+/// The selected value in the first range is used as a step value for the second range.
 final class DailyMeasurementPickerDataSource {
     typealias Bounds = (min: Double, max: Double)
     
+    // basically just used to avoid messing with generics and covariants
     enum AssociatedUnit: Hashable {
         case mass(UnitMass)
         case energy(UnitEnergy)
     }
     
-    var unit: AssociatedUnit {
+    // useful when the user switches units
+    private var unit: AssociatedUnit {
         didSet {
             let (min, max) = bounds[unit]!
             incrementer = incrementers[unit]!
@@ -24,12 +28,13 @@ final class DailyMeasurementPickerDataSource {
         }
     }
     
-    let incrementers: [AssociatedUnit : [Double]]
-    let bounds: [AssociatedUnit : Bounds]
+    private let incrementers: [AssociatedUnit : [Double]]
+    private let bounds: [AssociatedUnit : Bounds]
     
     var incrementer: [Double]
     var allIncrements: [[Double]]
     
+    // default values provided in here
     init(_ item: MeasurementItems) {
         switch item {
         case .mass:
@@ -81,6 +86,7 @@ final class DailyMeasurementPickerDataSource {
         }
     }
     
+    // used when the value in the first range changes — we can approximate a value in the second range that was close to the previous value
     func indexOfClosest(value atIndex: Int, from sourceIndex: Int, to destinationIndex: Int) -> Int {
         let countOfPreviousValues = allIncrements[sourceIndex].count
         let countOfCurrentValues = allIncrements[destinationIndex].count
