@@ -14,8 +14,6 @@ typealias Mass = Measurement<UnitMass>
 /// Convenience type for Measurement\<UnitEnergy\>
 typealias Energy = Measurement<UnitEnergy>
 
-/// 
 @objc enum MeasurementItems: Int {
-    case mass
-    case energy
+    case mass, energy
 }

@@ -85,8 +85,6 @@ class DailyFetchedResultsController {
                     continue
                 }
                 objectCache[indexPath] = nil
-//                objectCache[indexPath] = nil
-//                dateCache[object.created] = nil
                 dateCache[object.created!] = nil
                 inverseDateCache[indexPath] = nil
             }
@@ -110,8 +108,6 @@ class DailyFetchedResultsController {
         }
         dateCache[object.created!] = _indexPath
         inverseDateCache[_indexPath] = object.created
-//        dateCache[object.created] = _indexPath
-//        objectCache.setObject(object, forKey: _indexPath as NSIndexPath)
         objectCache[_indexPath] = object
     }
     
@@ -121,7 +117,6 @@ class DailyFetchedResultsController {
         }
         
         guard let indexPath = dateCache[date] else {
-//        guard let indexPath = dateCache.object(forKey: date as NSDate) as IndexPath? else {
             let dayComponent = Calendar.current.dateComponents([.day], from: startingDate, to: date).day!
             
             return IndexPath(row: dayComponent, section: 0)
@@ -131,7 +126,6 @@ class DailyFetchedResultsController {
     }
     
     func object(at indexPath: IndexPath) -> Daily? {
-//        return objectCache.object(forKey: indexPath as NSIndexPath)
         return objectCache[indexPath]
     }
     
@@ -140,7 +134,6 @@ class DailyFetchedResultsController {
             startingDate <= object.created! && object.created! <= endingDate,
             "Invalid date bounds set")
         guard let indexPath = dateCache[object.created!] else {
-//        guard let indexPath = dateCache.object(forKey: object.created as NSDate) as IndexPath? else {
             return nil
         }
         

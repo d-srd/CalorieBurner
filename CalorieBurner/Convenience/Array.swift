@@ -41,7 +41,7 @@ extension Array {
     }
     
     /// Prepend an element and return a new array.
-    func prepending(_ element: Element) -> Array<Element> {
+    func prepending(_ element: Element) -> [Element] {
         var newSelf = self
         newSelf.insert(element, at: 0)
         

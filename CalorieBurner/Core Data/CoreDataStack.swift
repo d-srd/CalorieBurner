@@ -87,9 +87,9 @@ class CoreDataStack {
     }
     
     func save() {
-        if backgroundContext.hasChanges {
+        if viewContext.hasChanges {
             do {
-                try backgroundContext.save()
+                try viewContext.save()
             } catch {
                 print("Error saving background context: \(error)")
             }

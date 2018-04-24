@@ -9,7 +9,6 @@
 import CoreData
 
 /// Representation of a single day containing a mass and an energy
-//@objc(Daily)
 class Daily: NSManagedObject {
     
     public class func makeFetchRequest() -> NSFetchRequest<Daily> {
@@ -85,38 +84,6 @@ class Daily: NSManagedObject {
         self.init(context: context)
         created = date
     }
-    
-//    var mass: Mass? {
-//        get {
-//            if let massValue = self.massValue {
-//                return Mass(value: massValue.doubleValue, unit: .kilograms)
-//            }
-//            return nil
-//        }
-//        set {
-//            if let mass = newValue {
-//                self.massValue = NSDecimalNumber(value: mass.converted(to: .kilograms).value)
-//            } else {
-//                self.massValue = nil
-//            }
-//        }
-//    }
-//    
-//    var energy: Energy? {
-//        get {
-//            if let energyValue = energyValue {
-//                return Energy(value: energyValue.doubleValue, unit: .kilocalories)
-//            }
-//            return nil
-//        }
-//        set {
-//            if let energy = newValue {
-//                energyValue = NSDecimalNumber(value:  energy.converted(to: .kilocalories).value)
-//            } else {
-//                energyValue = nil
-//            }
-//        }
-//    }
     
     public static let massExpressionKey = "massValue"
     public static var massExpression = NSExpression(forKeyPath: massExpressionKey)
