@@ -24,7 +24,7 @@ public extension UserDefaults {
         1 : UnitEnergy.kilojoules
     ]
     
-    private static func massToKey(_ unit: UnitMass) -> Int {
+    static func prepareMassForStorage(_ unit: UnitMass) -> Int {
         guard let index = massMap.first(where: { $1 == unit })?.key else {
             fatalError("no key for value")
         }
@@ -32,7 +32,7 @@ public extension UserDefaults {
         return index
     }
     
-    private static func energyToKey(_ unit: UnitEnergy) -> Int {
+    static func prepareEnergyForStorage(_ unit: UnitEnergy) -> Int {
         guard let index = energyMap.first(where: { $1 == unit })?.key else {
             fatalError("no key for value")
         }
@@ -49,7 +49,7 @@ public extension UserDefaults {
             return unit
         }
         set {
-            let index = UserDefaults.massToKey(newValue)
+            let index = UserDefaults.prepareMassForStorage(newValue)
             self.set(index, forKey: UserDefaults.massKey)
             
             NotificationCenter.default.post(name: .UnitMassChanged, object: nil)
@@ -64,7 +64,7 @@ public extension UserDefaults {
             return unit
         }
         set {
-            let index = UserDefaults.energyToKey(newValue)
+            let index = UserDefaults.prepareEnergyForStorage(newValue)
             self.set(index, forKey: UserDefaults.energyKey)
             
             // maybe move this somewhere else?

@@ -79,7 +79,7 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
         calendarView.calendarDelegate = self
         calendarView.calendarDataSource = self
         calendarView.scrollingMode = .stopAtEachSection
-        calendarView.allowsDateCellStretching = false
+//        calendarView.allowsDateCellStretching = false
         
         setWeekdayLabels()
 //        navigationItem.titleView = weekdaysStackView
@@ -123,12 +123,22 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     // MARK: JTAppleCalendarViewDataSource
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
+//        return ConfigurationParameters(
+//                    startDate: startDate,
+//                    endDate: endDate,
+//                    generateOutDates: .tillEndOfRow,
+//                    firstDayOfWeek: firstDayOfWeek
+//                )
+//
         return ConfigurationParameters(
-                    startDate: startDate,
-                    endDate: endDate,
-                    generateOutDates: .tillEndOfRow,
-                    firstDayOfWeek: firstDayOfWeek
-                )
+            startDate: startDate,
+            endDate: endDate,
+            numberOfRows: 1,
+            generateInDates: .forFirstMonthOnly,
+            generateOutDates: .off,
+            firstDayOfWeek: firstDayOfWeek,
+            hasStrictBoundaries: false
+        )
     }
     
 

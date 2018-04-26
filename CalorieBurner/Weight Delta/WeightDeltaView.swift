@@ -32,11 +32,11 @@ class WeightDeltaView: UIView {
     @IBOutlet weak var goalWeightTextField: UITextField! {
         didSet {
             goalWeightTextField.inputView = massPickerView
-            goalWeightTextField.inputAccessoryView = massPickerToolbar
+//            goalWeightTextField.inputAccessoryView = massPickerToolbar
         }
     }
     private var massPickerView: DailyMassPickerView?
-    private var massPickerToolbar: DailyMassPickerToolbar?
+//    private var massPickerToolbar: DailyMassPickerToolbar?
     
     weak var delegate: WeightDeltaDelegate? {
         didSet {
@@ -133,16 +133,16 @@ class WeightDeltaView: UIView {
             return picker
         }()
         
-        goalWeightTextField.inputAccessoryView = {
-            let toolbar = DailyMassPickerToolbar()
-            toolbar.dailyDelegate = self
-            
-            // the default title is "next" because the toolbar is used as an input accessory view in
-            // daily collection view and there is another picker view right after it
-            toolbar.items?.last?.title = "Done"
-            
-            return toolbar
-        }()
+//        goalWeightTextField.inputAccessoryView = {
+////            let toolbar = DailyMassPickerToolbar()
+//            toolbar.dailyDelegate = self
+//            
+//            // the default title is "next" because the toolbar is used as an input accessory view in
+//            // daily collection view and there is another picker view right after it
+//            toolbar.items?.last?.title = "Done"
+//            
+//            return toolbar
+//        }()
         
         reloadData()
     }
@@ -155,6 +155,18 @@ extension WeightDeltaView: DailyItemPickerDelegate {
 }
 
 extension WeightDeltaView: DailyToolbarDelegate {
+    func didPressArrowButton(toolbar: DailyItemPickerToolbar, to direction: DailyToolbarArrowDirection) {
+        
+    }
+    
+    func didFinishEditing(_ toolbar: DailyItemPickerToolbar) {
+        
+    }
+    
+    func isDirectionalArrowClickable(_ toolbar: DailyItemPickerToolbar, for direction: DailyToolbarArrowDirection) -> Bool {
+        return true
+    }
+    
     func didCancelEditing(_ type: MeasurementItems) {
         endEditing(true)
         goalMassBuffer = nil

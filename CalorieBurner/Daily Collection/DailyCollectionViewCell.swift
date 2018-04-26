@@ -8,26 +8,21 @@
 
 import UIKit
 import CocoaControls
+import IQKeyboardManager
 
 protocol DailyCellDelegate: class {
-    func willCancelEditing(cell: DailyCollectionViewCell, for itemType: MeasurementItems)
-    func didCancelEditing(cell: DailyCollectionViewCell, for itemType: MeasurementItems)
-    func didEndEditing(cell: DailyCollectionViewCell, mass: Measurement<UnitMass>)
-    func didEndEditing(cell: DailyCollectionViewCell, energy: Measurement<UnitEnergy>)
-    
+    func willBeginEditing(cell: DailyCollectionViewCell, with inputView: UIView)
+//    func willCancelEditing(cell: DailyCollectionViewCell, for itemType: MeasurementItems)
+//    func didCancelEditing(cell: DailyCollectionViewCell, for itemType: MeasurementItems)
+    func didEndEditing(cell: DailyCollectionViewCell, mass: Mass?)
+    func didEndEditing(cell: DailyCollectionViewCell, energy: Energy?)
+    func didPressArrowButton(cell: DailyCollectionViewCell, in direction: DailyToolbarArrowDirection)
 }
 
-protocol DailyViewModel {
-    var massTextField: UITextField! { get set }
-    var energyTextField: UITextField! { get set }
-    
-    var mass: Measurement<UnitMass>? { get set }
-    var energy: Measurement<UnitEnergy>? { get set }
-}
-
-class DailyCollectionViewCell: UICollectionViewCell, DailyViewModel {
+class DailyCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var massView: ShadowView!
     @IBOutlet weak var energyView: ShadowView!
+    @IBOutlet weak var notesView: ShadowView!
     
     private static let measurementFormatter: MeasurementFormatter = {
         let fmt = MeasurementFormatter()
@@ -38,7 +33,7 @@ class DailyCollectionViewCell: UICollectionViewCell, DailyViewModel {
         numberFormatter.numberStyle = .decimal
         numberFormatter.roundingMode = .halfUp
         numberFormatter.isLenient = true
-        numberFormatter.maximumFractionDigits = 1
+        numberFormatter.maximumFractionDigits = 2
         numberFormatter.roundingIncrement = 0.25
         
         fmt.numberFormatter = numberFormatter
@@ -50,7 +45,7 @@ class DailyCollectionViewCell: UICollectionViewCell, DailyViewModel {
     
     // TODO: - clean this up
     
-    weak var massPickerView: DailyMassPickerView? {
+    var massPickerView: DailyMassPickerView? {
         didSet {
             guard let picker = massPickerView else { return }
 
@@ -59,18 +54,8 @@ class DailyCollectionViewCell: UICollectionViewCell, DailyViewModel {
             massTextField.inputView = picker
         }
     }
-
-    weak var massPickerToolbar: DailyMassPickerToolbar? {
-        didSet {
-            guard let toolbar = massPickerToolbar else { return }
-
-            toolbar.dailyDelegate = self
-            
-            massTextField.inputAccessoryView = toolbar
-        }
-    }
-
-    weak var energyPickerView: DailyEnergyPickerView? {
+    
+    var energyPickerView: DailyEnergyPickerView? {
         didSet {
             guard let picker = energyPickerView else { return }
 
@@ -80,18 +65,9 @@ class DailyCollectionViewCell: UICollectionViewCell, DailyViewModel {
         }
     }
 
-    weak var energyPickerToolbar: DailyEnergyPickerToolbar? {
-        didSet {
-            guard let toolbar = energyPickerToolbar else { return }
-            
-            toolbar.dailyDelegate = self
-
-            energyTextField.inputAccessoryView = toolbar
-        }
-    }
-    
     @IBOutlet weak var massTextField: UITextField!
     @IBOutlet weak var energyTextField: UITextField!
+    @IBOutlet weak var notesTextView: UITextView!
     
     /// Makes the input views display "No data"
     public func setEmpty() {
@@ -139,6 +115,10 @@ class DailyCollectionViewCell: UICollectionViewCell, DailyViewModel {
         energyTextField.becomeFirstResponder()
     }
     
+    @objc private func notesTextViewShouldBecomeFirstResponder(_ sender: Any) {
+        notesTextView.becomeFirstResponder()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -148,8 +128,15 @@ class DailyCollectionViewCell: UICollectionViewCell, DailyViewModel {
         let energyGesture = UITapGestureRecognizer(target: self, action: #selector(energyTextFieldShouldBecomeFirstResponder(_:)))
         energyGesture.cancelsTouchesInView = false
         
+        let notesGesture = UITapGestureRecognizer(target: self, action: #selector(notesTextViewShouldBecomeFirstResponder(_:)))
+        notesGesture.cancelsTouchesInView = false
+        
         massView.addGestureRecognizer(massGesture)
         energyView.addGestureRecognizer(energyGesture)
+        notesView.addGestureRecognizer(notesGesture)
+        
+        massPickerView = DailyMassPickerView()
+        energyPickerView = DailyEnergyPickerView()
     }
 }
 
@@ -162,36 +149,5 @@ extension DailyCollectionViewCell: DailyItemPickerDelegate {
         }
         
         print(valueDidChangeTo)
-    }
-}
-
-extension DailyCollectionViewCell: DailyToolbarDelegate {
-    func didCancelEditing(_ type: MeasurementItems) {
-        cellDelegate?.willCancelEditing(cell: self, for: type)
-        
-        endEditing(true)
-        
-        switch type {
-        case .mass:
-            massBuffer = nil
-        case .energy:
-            energyBuffer = nil
-        }
-        
-        cellDelegate?.didCancelEditing(cell: self, for: type)
-    }
-    
-    func didEndEditing(_ type: MeasurementItems) {
-        endEditing(true)
-        
-        switch type {
-        case .mass:
-            mass = massBuffer
-            cellDelegate?.didEndEditing(cell: self, mass: mass!)
-            energyTextField.becomeFirstResponder()
-        case .energy:
-            energy = energyBuffer
-            cellDelegate?.didEndEditing(cell: self, energy: energy!)
-        }
     }
 }

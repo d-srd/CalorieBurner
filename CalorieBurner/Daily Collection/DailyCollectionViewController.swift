@@ -22,8 +22,6 @@ class DailyCollectionViewController: UIViewController {
     var itemSize: (() -> CGSize)?
     private let defaultItemSize = CGSize(width: 200, height: 88)
     
-    private(set) var isCancellingEditing = false
-    
     private lazy var fetchedResultsController: DailyFetchedResultsController = {
         let request = Daily.tableFetchRequest()
         let controller = DailyFetchedResultsController(
@@ -69,11 +67,6 @@ extension DailyCollectionViewController: DailyCollectionViewDataSource {
             fatalError("oopsie doopsie dequeeopsie")
         }
         
-        cell.massPickerView = DailyMassPickerView()
-        cell.energyPickerView = DailyEnergyPickerView()
-        cell.massPickerToolbar = DailyMassPickerToolbar()
-        cell.energyPickerToolbar = DailyEnergyPickerToolbar()
-        
         return cell
     }
 }
@@ -85,7 +78,7 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
             cell.energy = object.energy?.converted(to: UserDefaults.standard.energy)
         } else {
             cell.setEmpty()
-        }
+        }        
     }
     
     
@@ -93,12 +86,11 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
         return dailyView.itemSize ?? itemSize?() ?? defaultItemSize
     }
     
+    // TODO: fix saving Dailies
     func willCancelEditing(cell: DailyCollectionViewCell, at date: Date, for itemType: MeasurementItems) {
-        isCancellingEditing = true
     }
     
     func didCancelEditing(cell: DailyCollectionViewCell, at date: Date, for itemType: MeasurementItems) {
-        isCancellingEditing = false
     }
     
     func didEndEditing(cell: DailyCollectionViewCell, at date: Date, mass: Mass) {

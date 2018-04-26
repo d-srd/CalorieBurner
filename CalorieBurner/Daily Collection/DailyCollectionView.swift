@@ -54,14 +54,6 @@ extension DailyCollectionView: UICollectionViewDataSource {
         return count
     }
     
-//    func numberOfSections(in collectionView: UICollectionView) -> Int {
-//        guard let count = dailyDataSource?.dayCount else {
-//            fatalError("number of days invalid")
-//        }
-//        
-//        return count
-//    }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = dailyDataSource?.dailyView(self, cellForItemAt: indexPath)
         else {
@@ -166,6 +158,12 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
 }
 
 extension DailyCollectionView: DailyCellDelegate {
+    func didPressArrowButton(cell: DailyCollectionViewCell, in direction: DailyToolbarArrowDirection) {
+    }
+    
+    func willBeginEditing(cell: DailyCollectionViewCell, with inputView: UIView) {
+    }
+    
     func willCancelEditing(cell: DailyCollectionViewCell, for itemType: MeasurementItems) {
         guard let indexPath = self.indexPath(for: cell),
               let date = indexPathProvider?.date(for: indexPath)
@@ -182,17 +180,19 @@ extension DailyCollectionView: DailyCellDelegate {
         dailyDelegate?.didCancelEditing(cell: cell, at: date, for: itemType)
     }
     
-    func didEndEditing(cell: DailyCollectionViewCell, mass: Mass) {
+    func didEndEditing(cell: DailyCollectionViewCell, mass: Mass?) {
         guard let indexPath = self.indexPath(for: cell),
-              let date = indexPathProvider?.date(for: indexPath)
+              let date = indexPathProvider?.date(for: indexPath),
+              let mass = mass
         else { return }
         
         dailyDelegate?.didEndEditing(cell: cell, at: date, mass: mass)
     }
     
-    func didEndEditing(cell: DailyCollectionViewCell, energy: Energy) {
+    func didEndEditing(cell: DailyCollectionViewCell, energy: Energy?) {
         guard let indexPath = self.indexPath(for: cell),
-              let date = indexPathProvider?.date(for: indexPath)
+              let date = indexPathProvider?.date(for: indexPath),
+              let energy = energy
         else { return }
         
         dailyDelegate?.didEndEditing(cell: cell, at: date, energy: energy)

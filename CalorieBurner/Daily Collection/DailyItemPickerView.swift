@@ -116,6 +116,101 @@ protocol DailyItemPickerDelegate: class {
     func dailyPicker(_ picker: UIPickerView, valueDidChangeTo value: Double)
 }
 
+enum DailyToolbarArrowDirection {
+    case up, down
+}
+
+protocol DailyToolbarDelegate: class {
+    func didPressArrowButton(toolbar: DailyItemPickerToolbar, to direction: DailyToolbarArrowDirection)
+    func didFinishEditing(_ toolbar: DailyItemPickerToolbar)
+}
+
+class DailyItemPickerToolbar: UIToolbar {
+    
+    private let doneButton = UIBarButtonItem(
+        barButtonSystemItem: .done,
+        target: self,
+        action: #selector(didFinishEditing(_:))
+    )
+    private let arrowUp = UIBarButtonItem(
+        title: "☝︎",
+        style: .plain,
+        target: self,
+        action: #selector(shouldMoveUp(_:))
+    )
+    private let arrowDown = UIBarButtonItem(
+        title: "☟",
+        style: .plain,
+        target: self,
+        action: #selector(shouldMoveDown(_:))
+    )
+    private let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
+    
+    weak var dailyDelegate: DailyToolbarDelegate?
+
+    @objc private func didFinishEditing(_ sender: AnyObject) {
+        dailyDelegate?.didFinishEditing(self)
+    }
+    
+    @objc private func shouldMoveUp(_ sender: AnyObject) {
+        dailyDelegate?.didPressArrowButton(toolbar: self, to: .up)
+    }
+    
+    @objc private func shouldMoveDown(_ sender: AnyObject) {
+        dailyDelegate?.didPressArrowButton(toolbar: self, to: .down)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        commonInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        commonInit()
+    }
+    
+    public var isUpArrowClickable = true {
+        didSet { reloadData() }
+    }
+    
+    public var isDownArrowClickable = true {
+        didSet { reloadData() }
+    }
+    
+    func commonInit() {
+        barStyle = .default
+        sizeToFit()
+        isUserInteractionEnabled = true
+        tintColor = .black
+        
+        setItems([arrowDown, arrowUp, space, doneButton], animated: false)
+    }
+    
+    func reloadData() {
+        if isDownArrowClickable {
+            arrowDown.action = #selector(shouldMoveDown(_:))
+            arrowDown.tintColor = .black
+        } else {
+            arrowDown.action = nil
+            arrowDown.tintColor = .gray
+        }
+        
+        if isUpArrowClickable {
+            arrowUp.action = #selector(shouldMoveUp(_:))
+            arrowUp.tintColor = .black
+        } else {
+            arrowUp.action = nil
+            arrowUp.tintColor = .gray
+        }
+        
+        setItems([arrowDown, arrowUp, space, doneButton], animated: false)
+    }
+}
+
 class DailyMassPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
     static var numberFormatter: NumberFormatter = {
         let fmt = NumberFormatter()
@@ -191,65 +286,6 @@ class DailyMassPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDel
     }
 }
 
-@objc protocol DailyToolbarDelegate: class {
-    @objc optional func didCancelEditing(_ type: MeasurementItems)
-    @objc optional func didEndEditing(_ type: MeasurementItems)
-}
-
-class DailyMassPickerToolbar: UIToolbar {
-    weak var dailyDelegate: DailyToolbarDelegate?
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        commonInit()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        commonInit()
-    }
-    
-    @objc private func didCancelEditing(_ sender: AnyObject) {
-        dailyDelegate?.didCancelEditing?(.mass)
-    }
-    
-    @objc private func didEndEditing(_ sender: AnyObject) {
-        dailyDelegate?.didEndEditing?(.mass)
-    }
-    
-    func commonInit() {
-        barStyle = .default
-        isTranslucent = false
-        sizeToFit()
-        isUserInteractionEnabled = true
-        
-        let cancelButton = UIBarButtonItem(
-            title: "Cancel",
-            style: .plain,
-            target: self,
-            action: #selector(didCancelEditing(_:))
-        )
-        let flexibleButton = UIBarButtonItem(
-            barButtonSystemItem: .flexibleSpace,
-            target: self,
-            action: nil
-        )
-        let nextButton = UIBarButtonItem(
-            title: "Next",
-            style: .done,
-            target: self,
-            action: #selector(didEndEditing(_:))
-        )
-        
-        setItems(
-            [cancelButton, flexibleButton, nextButton],
-            animated: false
-        )
-    }
-}
-
 class DailyEnergyPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
     weak var dailyDelegate: DailyItemPickerDelegate?
     
@@ -322,59 +358,5 @@ class DailyEnergyPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewD
         } else {
             dailyDelegate?.dailyPicker(self, valueDidChangeTo: currentEnergy)
         }
-    }
-}
-
-class DailyEnergyPickerToolbar: UIToolbar {
-    weak var dailyDelegate: DailyToolbarDelegate?
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        commonInit()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        commonInit()
-    }
-    
-    @objc private func didCancelEditing(_ sender: AnyObject) {
-        dailyDelegate?.didCancelEditing?(.energy)
-    }
-    
-    @objc private func didEndEditing(_ sender: AnyObject) {
-        dailyDelegate?.didEndEditing?(.energy)
-    }
-    
-    func commonInit() {
-        barStyle = .default
-        isTranslucent = false
-        sizeToFit()
-        isUserInteractionEnabled = true
-        
-        let cancelButton = UIBarButtonItem(
-            title: "Cancel",
-            style: .plain,
-            target: self,
-            action: #selector(didCancelEditing(_:))
-        )
-        let flexibleButton = UIBarButtonItem(
-            barButtonSystemItem: .flexibleSpace,
-            target: self,
-            action: nil
-        )
-        let nextButton = UIBarButtonItem(
-            title: "Done",
-            style: .done,
-            target: self,
-            action: #selector(didEndEditing(_:))
-        )
-        
-        setItems(
-            [cancelButton, flexibleButton, nextButton],
-            animated: false
-        )
     }
 }

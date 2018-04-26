@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import IQKeyboardManager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,11 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // lol
         let defaultUserDefaults: [String : Any] = [
-            UserDefaults.massKey : UserDefaults.massToKey(UnitMass.kilograms),
-            UserDefaults.energyKey : UserDefaults.energyToKey(UnitEnergy.kilocalories),
+            UserDefaults.massKey : UserDefaults.prepareMassForStorage(UnitMass.kilograms),
+            UserDefaults.energyKey : UserDefaults.prepareEnergyForStorage(UnitEnergy.kilocalories),
             UserDefaults.dayOfWeekKey : 1
         ]
         UserDefaults.standard.register(defaults: defaultUserDefaults)
+        
+        IQKeyboardManager.shared().isEnabled = true
         
         return true
     }

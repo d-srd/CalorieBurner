@@ -14,12 +14,8 @@ class DailyCalendarViewCell: DayViewCell {
 }
 
 class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectionViewScrollDelegate {
-    
-    
     @IBOutlet weak var containerView: UIView!
     var dailyCollectionViewController: DailyCollectionViewController!
-    
-    private var initialTabBarFrame: CGRect?
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dailyCollection = segue.destination as? DailyCollectionViewController {
@@ -32,10 +28,9 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        initialTabBarFrame = tabBarController?.tabBar.frame
 
         dailyCollectionViewController.dailyView.itemSize =
-            CGSize(width: containerView.frame.width * 0.7, height: 130)
+            CGSize(width: containerView.frame.width * 0.8, height: 250)
         dailyCollectionViewController.dailyView.collectionViewLayout.invalidateLayout()
     }
     
@@ -44,30 +39,13 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
         
         // UICollectionView needs an initial size to lay out the cells. this code is ignored, the one in didLayoutSubviews is used.
         dailyCollectionViewController.dailyView.itemSize =
-            CGSize(width: containerView.frame.width * 0.7, height: 130)
-        
+            CGSize(width: containerView.frame.width * 0.8, height: 250)
+//        dailyCollectionViewController.dailyView.shouldIgnoreScrollingAdjustment = true
+//        calendarView.shouldIgnoreScrollingAdjustment = true
         dailyCollectionViewController.dailyView.dailyScrollDelegate = self
         dailyCollectionViewController.scrollToItem(at: self.today, animated: false)
         calendarView.selectDates([today])
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow(_:)),
-            name: .UIKeyboardWillShow,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide(_:)),
-            name: .UIKeyboardWillHide,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardDidHide(_:)),
-            name: NSNotification.Name.UIKeyboardDidHide,
-            object: nil
-        )
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(unitsDidChange(_:)),
@@ -84,55 +62,12 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardDidHide, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UnitMassChanged, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UnitEnergyChanged, object: nil)
     }
     
     @objc private func unitsDidChange(_ notification: Notification) {
         dailyCollectionViewController.dailyView.reloadData()
-    }
-    
-    @objc private func keyboardWillShow(_ notification: Notification) {
-
-        // ugliest line of code I've written in this entire project
-        guard let _keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue,
-              let keyboardAnimationDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
-        else { return }
-
-        let keyboardSize = view.convert(_keyboardSize, from: view.window)
-        
-        UIView.animate(withDuration: keyboardAnimationDuration) {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
-            }
-            self.tabBarController?.tabBar.frame.origin.y += self.tabBarController?.tabBar.frame.height ?? 0
-        }
-    }
-
-    @objc private func keyboardWillHide(_ notification: Notification) {
-        guard self.view.frame.origin.y != 0 else { return }
-        
-        // this is the most genius line of code. ever.
-        guard let cell = dailyCollectionViewController.dailyView.visibleCells.first as? DailyCollectionViewCell,
-              dailyCollectionViewController.isCancellingEditing || !cell.massTextField.isEditing,
-              let keyboardAnimationDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
-        else { return }
-        
-
-        UIView.animate(withDuration: keyboardAnimationDuration) {
-            self.view.frame.origin.y = 0
-        }
-    }
-    
-    @objc private func keyboardDidHide(_ notification: Notification) {
-        guard let keyboardAnimationDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double else { return }
-        
-        UIView.animate(withDuration: keyboardAnimationDuration) {
-            self.tabBarController?.tabBar.frame.origin.y = self.initialTabBarFrame?.origin.y ?? 0
-        }
     }
     
     func map(_ cell: DayViewCell?) -> DailyCalendarViewCell? {
