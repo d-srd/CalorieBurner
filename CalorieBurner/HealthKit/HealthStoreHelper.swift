@@ -35,7 +35,11 @@ class HealthStoreHelper {
         }
     }
     
-    func writeData(mass: HKQuantitySample, _ completion: @escaping (Bool, Error?) -> Void) {
-        store.save(mass, withCompletion: completion)
+    func enableMassBackgroundDelivery() {
+        
+    }
+    
+    func writeData(sample: HKQuantitySample, _ completion: @escaping (Bool, Error?) -> Void) {
+        store.save(sample, withCompletion: completion)
     }
 }

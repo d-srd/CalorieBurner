@@ -11,6 +11,7 @@ import HealthKit
 
 class HealthKitViewController: UIViewController {
     @IBOutlet weak var massTextField: UITextField!
+    @IBOutlet weak var energyTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,18 +21,31 @@ class HealthKitViewController: UIViewController {
         }
     }
     
-    @IBAction func saveDataToHealthKit(_ sender: Any) {
+    @IBAction func saveMassToHealthKit(_ sender: Any) {
         guard let massValue = massTextField.text.flatMap(Double.init) else { return }
         
         let mass = HKQuantitySample(
             type: HKObjectType.quantityType(forIdentifier: .bodyMass)!,
             quantity: HKQuantity(unit: HKUnit.gramUnit(with: .kilo), doubleValue: massValue),
-            start: Date().addingTimeInterval(-5), end: Date()
+            start: Date(), end: Date()
         )
         
-        HealthStoreHelper.shared.writeData(mass: mass) { (success, error) in
+        HealthStoreHelper.shared.writeData(sample: mass) { (success, error) in
             guard error == nil else { print("error saving: \(error)"); return }
             print("successfully saved mass")
+        }
+    }
+    
+    @IBAction func saveEnergyToHealthKit(_ sender: Any) {
+        guard let energyValue = energyTextField.text.flatMap(Double.init) else { return }
+        
+        let energy = HKQuantitySample(type: HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
+                                      quantity: HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: energyValue),
+                                      start: Date(), end: Date())
+        
+        HealthStoreHelper.shared.writeData(sample: energy) { (success, error) in
+            guard error == nil else { print("error saving: \(error)"); return }
+            print("successfully saved energy")
         }
     }
 }

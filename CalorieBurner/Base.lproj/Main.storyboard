@@ -828,7 +828,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="1d0-Bh-2aJ">
-                                                    <rect key="frame" x="20" y="6.6666666666666696" width="374" height="31"/>
+                                                    <rect key="frame" x="20" y="6.6666666666666714" width="374" height="31"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Health" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcI-Kh-3Tz">
                                                             <rect key="frame" x="0.0" y="0.0" width="84.666666666666671" height="31"/>
@@ -1020,7 +1020,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kVO-Qi-3mU">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="mass" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kVO-Qi-3mU">
                                 <rect key="frame" x="117" y="228" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
@@ -1028,11 +1028,26 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SrI-Zm-3cI">
-                                <rect key="frame" x="149" y="277" width="32" height="30"/>
+                                <rect key="frame" x="222" y="228" width="32" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="save"/>
                                 <connections>
-                                    <action selector="saveDataToHealthKit:" destination="iG8-tG-kpi" eventType="touchUpInside" id="co5-kO-Bcn"/>
+                                    <action selector="saveMassToHealthKit:" destination="iG8-tG-kpi" eventType="touchUpInside" id="34I-FM-R7U"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="energy" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eGa-XH-4A5">
+                                <rect key="frame" x="117" y="266" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6y1-UJ-Cp4">
+                                <rect key="frame" x="222" y="265" width="32" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="save"/>
+                                <connections>
+                                    <action selector="saveEnergyToHealthKit:" destination="iG8-tG-kpi" eventType="touchUpInside" id="v27-E3-lBs"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1040,6 +1055,7 @@
                         <viewLayoutGuide key="safeArea" id="D2V-D1-qN5"/>
                     </view>
                     <connections>
+                        <outlet property="energyTextField" destination="eGa-XH-4A5" id="X45-oS-4zM"/>
                         <outlet property="massTextField" destination="kVO-Qi-3mU" id="goo-UG-8jP"/>
                     </connections>
                 </viewController>
