@@ -11,15 +11,18 @@ import CocoaControls
 import IQKeyboardManager
 
 protocol DailyCellDelegate: class {
-    func willBeginEditing(cell: DailyCollectionViewCell, with inputView: UIView)
+    func willBeginEditing(cell: DailyDataCollectionViewCell, with inputView: UIView)
 //    func willCancelEditing(cell: DailyCollectionViewCell, for itemType: MeasurementItems)
 //    func didCancelEditing(cell: DailyCollectionViewCell, for itemType: MeasurementItems)
-    func didEndEditing(cell: DailyCollectionViewCell, mass: Mass?)
-    func didEndEditing(cell: DailyCollectionViewCell, energy: Energy?)
-    func didPressArrowButton(cell: DailyCollectionViewCell, in direction: DailyToolbarArrowDirection)
+    func didEndEditing(cell: DailyDataCollectionViewCell, mass: Mass?)
+    func didEndEditing(cell: DailyDataCollectionViewCell, energy: Energy?)
 }
 
-class DailyCollectionViewCell: UICollectionViewCell {
+class DailyCollectionViewCell: UICollectionViewCell { }
+
+class EmptyDailyCollectionViewCell: DailyCollectionViewCell { }
+
+class DailyDataCollectionViewCell: DailyCollectionViewCell {
     @IBOutlet weak var massView: ShadowView!
     @IBOutlet weak var energyView: ShadowView!
     @IBOutlet weak var notesView: ShadowView!
@@ -71,15 +74,15 @@ class DailyCollectionViewCell: UICollectionViewCell {
     
     /// Makes the input views display "No data"
     public func setEmpty() {
-        massTextField.text = "No data"
-        energyTextField.text = "No data"
+        massTextField.text = "Missing data"
+        energyTextField.text = "Missing data"
     }
     
     private func fillTextField<T: Unit>(with value: Measurement<T>?) {
         if T.self == UnitMass.self {
-            massTextField.text = value.flatMap(DailyCollectionViewCell.measurementFormatter.string) ?? "No data"
+            massTextField.text = value.flatMap(DailyDataCollectionViewCell.measurementFormatter.string) ?? "Missing data"
         } else if T.self == UnitEnergy.self {
-            energyTextField.text = value.flatMap(DailyCollectionViewCell.measurementFormatter.string) ?? "No data"
+            energyTextField.text = value.flatMap(DailyDataCollectionViewCell.measurementFormatter.string) ?? "Missing data"
         }
     }
     
@@ -140,14 +143,12 @@ class DailyCollectionViewCell: UICollectionViewCell {
     }
 }
 
-extension DailyCollectionViewCell: DailyItemPickerDelegate {
+extension DailyDataCollectionViewCell: DailyItemPickerDelegate {
     func dailyPicker(_ picker: UIPickerView, valueDidChangeTo: Double) {
         if picker == massPickerView {
             massBuffer = Measurement<UnitMass>(value: valueDidChangeTo, unit: UserDefaults.standard.mass)
         } else {
             energyBuffer = Measurement<UnitEnergy>(value: valueDidChangeTo, unit: UserDefaults.standard.energy)
         }
-        
-        print(valueDidChangeTo)
     }
 }

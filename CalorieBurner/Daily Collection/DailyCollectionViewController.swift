@@ -63,22 +63,33 @@ class DailyCollectionViewController: UIViewController {
 
 extension DailyCollectionViewController: DailyCollectionViewDataSource {
     func dailyView(_ dailyView: DailyCollectionView, cellForItemAt indexPath: IndexPath) -> DailyCollectionViewCell {
-        guard let cell = dailyView.dequeueReusableCell(withReuseIdentifier: "DailyCell", for: indexPath) as? DailyCollectionViewCell else {
-            fatalError("oopsie doopsie dequeeopsie")
+        if let object = fetchedResultsController.object(at: indexPath) {
+            let cell = dailyView.dequeueReusableCell(withReuseIdentifier: "DailyCell", for: indexPath) as! DailyDataCollectionViewCell
+            cell.mass = object.mass?.converted(to: UserDefaults.standard.mass)
+            cell.energy = object.energy?.converted(to: UserDefaults.standard.energy)
+            
+            return cell
         }
         
+        let cell = dailyView.dequeueReusableCell(withReuseIdentifier: "EmptyCell", for: indexPath) as! EmptyDailyCollectionViewCell
         return cell
+        
+//        guard let cell = dailyView.dequeueReusableCell(withReuseIdentifier: "DailyCell", for: indexPath) as? DailyDataCollectionViewCell else {
+//            fatalError("oopsie doopsie dequeeopsie")
+//        }
+//
+//        return cell
     }
 }
 
 extension DailyCollectionViewController: DailyCollectionViewDelegate {
     func dailyView(_ dailyView: DailyCollectionView, willDisplay cell: DailyCollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let object = fetchedResultsController.object(at: indexPath) {
-            cell.mass = object.mass?.converted(to: UserDefaults.standard.mass)
-            cell.energy = object.energy?.converted(to: UserDefaults.standard.energy)
-        } else {
-            cell.setEmpty()
-        }        
+        guard let cell = cell as? DailyDataCollectionViewCell,
+              let object = fetchedResultsController.object(at: indexPath)
+        else { return }
+        
+        cell.mass = object.mass?.converted(to: UserDefaults.standard.mass)
+        cell.energy = object.energy?.converted(to: UserDefaults.standard.energy)
     }
     
     
@@ -87,13 +98,13 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
     }
     
     // TODO: fix saving Dailies
-    func willCancelEditing(cell: DailyCollectionViewCell, at date: Date, for itemType: MeasurementItems) {
+    func willCancelEditing(cell: DailyDataCollectionViewCell, at date: Date, for itemType: MeasurementItems) {
     }
     
-    func didCancelEditing(cell: DailyCollectionViewCell, at date: Date, for itemType: MeasurementItems) {
+    func didCancelEditing(cell: DailyDataCollectionViewCell, at date: Date, for itemType: MeasurementItems) {
     }
     
-    func didEndEditing(cell: DailyCollectionViewCell, at date: Date, mass: Mass) {
+    func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, mass: Mass) {
         do {
             _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: mass, energy: nil)
         } catch {
@@ -101,7 +112,7 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
         }
     }
     
-    func didEndEditing(cell: DailyCollectionViewCell, at date: Date, energy: Energy) {
+    func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, energy: Energy) {
         do {
             _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: nil, energy: energy)
         } catch {
@@ -110,7 +121,7 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? DailyCollectionViewCell else { return }
+        guard let cell = cell as? DailyDataCollectionViewCell else { return }
         
         if let object = fetchedResultsController.object(at: indexPath) {
             cell.mass = object.mass?.converted(to: UserDefaults.standard.mass)

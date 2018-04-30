@@ -22,10 +22,10 @@ protocol DailyIndexPathProvider: class {
 protocol DailyCollectionViewDelegate: class {
     func dailyView(_ dailyView: DailyCollectionView, willDisplay cell: DailyCollectionViewCell, forItemAt indexPath: IndexPath)
     
-    func willCancelEditing(cell: DailyCollectionViewCell, at date: Date, for itemType: MeasurementItems)
-    func didCancelEditing(cell: DailyCollectionViewCell, at date: Date, for itemType: MeasurementItems)
-    func didEndEditing(cell: DailyCollectionViewCell, at date: Date, mass: Mass)
-    func didEndEditing(cell: DailyCollectionViewCell, at date: Date, energy: Energy)
+    func willCancelEditing(cell: DailyDataCollectionViewCell, at date: Date, for itemType: MeasurementItems)
+    func didCancelEditing(cell: DailyDataCollectionViewCell, at date: Date, for itemType: MeasurementItems)
+    func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, mass: Mass)
+    func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, energy: Energy)
 }
 
 protocol DailyCollectionViewDataSource: class, DateBoundaries {

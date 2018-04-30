@@ -23,6 +23,10 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
             dailyCollectionViewController.view.autoresizingMask = []
             dailyCollectionViewController.view.frame = containerView.bounds
         }
+        if segue.identifier == "DailyInputSegue" {
+            guard let dailyInputVC = segue.destination.childViewControllers.first as? DailyInputTableViewController else { return }
+            dailyInputVC.date = calendarView.selectedDates.first
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -43,8 +47,8 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
 //        dailyCollectionViewController.dailyView.shouldIgnoreScrollingAdjustment = true
 //        calendarView.shouldIgnoreScrollingAdjustment = true
         dailyCollectionViewController.dailyView.dailyScrollDelegate = self
-        dailyCollectionViewController.scrollToItem(at: self.today, animated: false)
-        calendarView.selectDates([today])
+//        dailyCollectionViewController.scrollToItem(at: self.today, animated: false)
+//        calendarView.selectDates([today])
         
         NotificationCenter.default.addObserver(
             self,
@@ -58,12 +62,24 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
             name: NSNotification.Name.UnitEnergyChanged,
             object: nil
         )
-        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: .UIKeyboardWillHide,
+            object: nil
+        )
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .UnitMassChanged, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UnitEnergyChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    // this is a hacky way to fix collection view's layout
+    // without it, the content inset would not change and the cell would stay on the upper side of the screen
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        dailyCollectionViewController.dailyView.collectionViewLayout.invalidateLayout()
     }
     
     @objc private func unitsDidChange(_ notification: Notification) {
@@ -109,11 +125,11 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
     }
     
     func dailyView(_ dailyView: DailyCollectionView, willScrollToItemAt date: Date) {
-        if !calendarView.selectedDates.contains(date) {
-            calendarView.scrollToDate(date)
-            calendarView.deselectAllDates()
-            calendarView.selectDates([date])
-        }
+//        if !calendarView.selectedDates.contains(date) {
+//            calendarView.scrollToDate(date)
+//            calendarView.deselectAllDates()
+//            calendarView.selectDates([date])
+//        }
     }
     
     func dailyView(_ dailyView: DailyCollectionView, didScrollToItemAt date: Date) {
@@ -122,5 +138,9 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
             calendarView.deselectAllDates()
             calendarView.selectDates([date])
         }
+    }
+    
+    @IBAction func showDailyInputViewController(_ sender: Any) {
+        performSegue(withIdentifier: "DailyInputSegue", sender: sender)
     }
 }

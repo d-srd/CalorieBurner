@@ -55,12 +55,11 @@ extension DailyCollectionView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = dailyDataSource?.dailyView(self, cellForItemAt: indexPath)
-        else {
-                fatalError("something went wrong while making a cell")
+        guard let cell = dailyDataSource?.dailyView(self, cellForItemAt: indexPath) else {
+            fatalError("something went wrong while making a cell")
         }
         
-        cell.cellDelegate = self
+        (cell as? DailyDataCollectionViewCell)?.cellDelegate = self
         
         return cell
     }
@@ -73,7 +72,7 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         guard keyboardDismissMode == .onDrag,
               let dailyView = scrollView as? DailyCollectionView,
-              let visibleCell = dailyView.visibleCells.first as? DailyCollectionViewCell,
+              let visibleCell = dailyView.visibleCells.first as? DailyDataCollectionViewCell,
               let indexPath = dailyView.indexPath(for: visibleCell),
               let date = dailyView.indexPathProvider?.date(for: indexPath)
         else { return }
@@ -91,7 +90,6 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
         else { return }
         
         dailyScrollDelegate?.dailyView(self, didScrollToItemAt: date)
-        dailyDelegate?.didCancelEditing(cell: visibleCell, at: date, for: .mass)
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -131,7 +129,7 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return collectionView.bounds.height / 2
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -141,7 +139,7 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let dailyView = collectionView as? DailyCollectionView,
-              let cell = cell as? DailyCollectionViewCell
+              let cell = cell as? DailyDataCollectionViewCell
         else { return }
         
         dailyView.dailyDelegate?.dailyView(self, willDisplay: cell, forItemAt: indexPath)
@@ -158,13 +156,10 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
 }
 
 extension DailyCollectionView: DailyCellDelegate {
-    func didPressArrowButton(cell: DailyCollectionViewCell, in direction: DailyToolbarArrowDirection) {
+    func willBeginEditing(cell: DailyDataCollectionViewCell, with inputView: UIView) {
     }
     
-    func willBeginEditing(cell: DailyCollectionViewCell, with inputView: UIView) {
-    }
-    
-    func willCancelEditing(cell: DailyCollectionViewCell, for itemType: MeasurementItems) {
+    func willCancelEditing(cell: DailyDataCollectionViewCell, for itemType: MeasurementItems) {
         guard let indexPath = self.indexPath(for: cell),
               let date = indexPathProvider?.date(for: indexPath)
         else { return }
@@ -172,7 +167,7 @@ extension DailyCollectionView: DailyCellDelegate {
         dailyDelegate?.willCancelEditing(cell: cell, at: date, for: itemType)
     }
     
-    func didCancelEditing(cell: DailyCollectionViewCell, for itemType: MeasurementItems) {
+    func didCancelEditing(cell: DailyDataCollectionViewCell, for itemType: MeasurementItems) {
         guard let indexPath = self.indexPath(for: cell),
               let date = indexPathProvider?.date(for: indexPath)
         else { return }
@@ -180,7 +175,7 @@ extension DailyCollectionView: DailyCellDelegate {
         dailyDelegate?.didCancelEditing(cell: cell, at: date, for: itemType)
     }
     
-    func didEndEditing(cell: DailyCollectionViewCell, mass: Mass?) {
+    func didEndEditing(cell: DailyDataCollectionViewCell, mass: Mass?) {
         guard let indexPath = self.indexPath(for: cell),
               let date = indexPathProvider?.date(for: indexPath),
               let mass = mass
@@ -189,7 +184,7 @@ extension DailyCollectionView: DailyCellDelegate {
         dailyDelegate?.didEndEditing(cell: cell, at: date, mass: mass)
     }
     
-    func didEndEditing(cell: DailyCollectionViewCell, energy: Energy?) {
+    func didEndEditing(cell: DailyDataCollectionViewCell, energy: Energy?) {
         guard let indexPath = self.indexPath(for: cell),
               let date = indexPathProvider?.date(for: indexPath),
               let energy = energy

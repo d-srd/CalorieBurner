@@ -153,27 +153,3 @@ extension WeightDeltaView: DailyItemPickerDelegate {
         goalMassBuffer = Mass(value: value, unit: UserDefaults.standard.mass)
     }
 }
-
-extension WeightDeltaView: DailyToolbarDelegate {
-    func didPressArrowButton(toolbar: DailyItemPickerToolbar, to direction: DailyToolbarArrowDirection) {
-        
-    }
-    
-    func didFinishEditing(_ toolbar: DailyItemPickerToolbar) {
-        
-    }
-    
-    func isDirectionalArrowClickable(_ toolbar: DailyItemPickerToolbar, for direction: DailyToolbarArrowDirection) -> Bool {
-        return true
-    }
-    
-    func didCancelEditing(_ type: MeasurementItems) {
-        endEditing(true)
-        goalMassBuffer = nil
-    }
-    
-    func didEndEditing(_ type: MeasurementItems) {
-        endEditing(true)
-        goalMass = goalMassBuffer
-    }
-}
