@@ -11,6 +11,7 @@
 		840C6F8E206237DB00535787 /* CocoaControls.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 840C6F852062319E00535787 /* CocoaControls.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		840C6F9920651ECD00535787 /* WeightDeltaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C6F9820651ECD00535787 /* WeightDeltaView.swift */; };
 		84123E952093CAF500F5639E /* DailyInputTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84123E942093CAF500F5639E /* DailyInputTableViewController.swift */; };
+		84123EA02097556300F5639E /* transparentPixel.png in Resources */ = {isa = PBXBuildFile; fileRef = 84123E9F2097556300F5639E /* transparentPixel.png */; };
 		841B5AA420436E7300ACAD15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AA320436E7300ACAD15 /* AppDelegate.swift */; };
 		841B5AA620436E7300ACAD15 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AA520436E7300ACAD15 /* ViewController.swift */; };
 		841B5AA920436E7300ACAD15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841B5AA720436E7300ACAD15 /* Main.storyboard */; };
@@ -90,6 +91,7 @@
 		840C6F862062320D00535787 /* CocoaControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaControls.framework; path = "../../../Library/Developer/Xcode/DerivedData/CocoaControls-ezcniktufftancgvouvrcyaolfpa/Build/Products/Debug-iphonesimulator/CocoaControls.framework"; sourceTree = "<group>"; };
 		840C6F9820651ECD00535787 /* WeightDeltaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDeltaView.swift; sourceTree = "<group>"; };
 		84123E942093CAF500F5639E /* DailyInputTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DailyInputTableViewController.swift; path = "CalorieBurner/Daily Collection/DailyInputTableViewController.swift"; sourceTree = SOURCE_ROOT; };
+		84123E9F2097556300F5639E /* transparentPixel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparentPixel.png; sourceTree = "<group>"; };
 		841B5AA020436E7300ACAD15 /* CalorieBurner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalorieBurner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		841B5AA320436E7300ACAD15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		841B5AA520436E7300ACAD15 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 		84FC538D2057C6F100D20B3C /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				84123E9F2097556300F5639E /* transparentPixel.png */,
 				8498914720908F7E00C0E2EA /* IQKeyboardManager.bundle */,
 				841B5AA320436E7300ACAD15 /* AppDelegate.swift */,
 				841B5AAD20436E7300ACAD15 /* Assets.xcassets */,
@@ -414,6 +417,7 @@
 			files = (
 				841B5AB120436E7300ACAD15 /* LaunchScreen.storyboard in Resources */,
 				841B5AAE20436E7300ACAD15 /* Assets.xcassets in Resources */,
+				84123EA02097556300F5639E /* transparentPixel.png in Resources */,
 				8498914820908F7E00C0E2EA /* IQKeyboardManager.bundle in Resources */,
 				841B5AA920436E7300ACAD15 /* Main.storyboard in Resources */,
 			);
