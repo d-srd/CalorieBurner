@@ -9,16 +9,19 @@
 import UIKit
 import CoreData
 import IQKeyboardManager
+import HealthKit
+
+// we need a singleton health store, as they are long lived objects
+public let healthStore = HKHealthStore()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        // lol
+        // put some default values in UserDefaults
         let defaultUserDefaults: [String : Any] = [
             UserDefaults.massKey : UserDefaults.prepareMassForStorage(UnitMass.kilograms),
             UserDefaults.energyKey : UserDefaults.prepareEnergyForStorage(UnitEnergy.kilocalories),
@@ -26,9 +29,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ]
         UserDefaults.standard.register(defaults: defaultUserDefaults)
         
+        // make the keyboard scared of any text fields
         IQKeyboardManager.shared().isEnabled = true
         
+        
+        
+        // register long running health observer queries
+        let massSample = HKObjectType.quantityType(forIdentifier: .bodyMass)!
+        let query = HKObserverQuery(sampleType: massSample, predicate: nil) { (query, completion, err) in
+            guard err == nil else {
+                print("** An error occurred whilst setting up mass observer query. \(err) Aborting. **")
+                abort()
+            }
+            
+            self.healthDidUpdate()
+            
+            completion()
+        }
+        
+        healthStore.execute(query)
+        
+        healthStore.enableBackgroundDelivery(for: massSample, frequency: HKUpdateFrequency.daily) { (success, error) in
+            guard error == nil else {
+                print("* error occured setting up background delivery. \(error).*")
+                abort()
+            }
+        }
+        
         return true
+    }
+    
+    private func healthDidUpdate() {
+        print("wahooooo health updated!!")
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

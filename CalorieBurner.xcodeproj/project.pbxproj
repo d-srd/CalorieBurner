@@ -11,6 +11,9 @@
 		840C6F8E206237DB00535787 /* CocoaControls.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 840C6F852062319E00535787 /* CocoaControls.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		840C6F9920651ECD00535787 /* WeightDeltaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C6F9820651ECD00535787 /* WeightDeltaView.swift */; };
 		84123E952093CAF500F5639E /* DailyInputTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84123E942093CAF500F5639E /* DailyInputTableViewController.swift */; };
+		84123E982096F92B00F5639E /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84123E972096F92B00F5639E /* HealthKit.framework */; };
+		84123E9B2096FBA900F5639E /* HealthStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84123E9A2096FBA900F5639E /* HealthStoreHelper.swift */; };
+		84123E9D20971C1900F5639E /* HealthKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84123E9C20971C1900F5639E /* HealthKitViewController.swift */; };
 		841B5AA420436E7300ACAD15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AA320436E7300ACAD15 /* AppDelegate.swift */; };
 		841B5AA620436E7300ACAD15 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AA520436E7300ACAD15 /* ViewController.swift */; };
 		841B5AA920436E7300ACAD15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841B5AA720436E7300ACAD15 /* Main.storyboard */; };
@@ -90,6 +93,10 @@
 		840C6F862062320D00535787 /* CocoaControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaControls.framework; path = "../../../Library/Developer/Xcode/DerivedData/CocoaControls-ezcniktufftancgvouvrcyaolfpa/Build/Products/Debug-iphonesimulator/CocoaControls.framework"; sourceTree = "<group>"; };
 		840C6F9820651ECD00535787 /* WeightDeltaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDeltaView.swift; sourceTree = "<group>"; };
 		84123E942093CAF500F5639E /* DailyInputTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DailyInputTableViewController.swift; path = "CalorieBurner/Daily Collection/DailyInputTableViewController.swift"; sourceTree = SOURCE_ROOT; };
+		84123E962096F92B00F5639E /* CalorieBurner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CalorieBurner.entitlements; sourceTree = "<group>"; };
+		84123E972096F92B00F5639E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		84123E9A2096FBA900F5639E /* HealthStoreHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthStoreHelper.swift; sourceTree = "<group>"; };
+		84123E9C20971C1900F5639E /* HealthKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitViewController.swift; sourceTree = "<group>"; };
 		841B5AA020436E7300ACAD15 /* CalorieBurner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalorieBurner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		841B5AA320436E7300ACAD15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		841B5AA520436E7300ACAD15 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84123E982096F92B00F5639E /* HealthKit.framework in Frameworks */,
 				840C6F8D206237DB00535787 /* CocoaControls.framework in Frameworks */,
 				D1F4FCCEE0F9AC90744BD605 /* Pods_CalorieBurner.framework in Frameworks */,
 			);
@@ -151,6 +159,7 @@
 		6D4A4B85674B185AA1C4F1EA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84123E972096F92B00F5639E /* HealthKit.framework */,
 				840C6F862062320D00535787 /* CocoaControls.framework */,
 				119A6DC4BC7977D94DBA1F0C /* Pods_CalorieBurner.framework */,
 			);
@@ -171,6 +180,15 @@
 				840C6F9820651ECD00535787 /* WeightDeltaView.swift */,
 			);
 			path = "Weight Delta";
+			sourceTree = "<group>";
+		};
+		84123E992096FB1500F5639E /* HealthKit */ = {
+			isa = PBXGroup;
+			children = (
+				84123E9A2096FBA900F5639E /* HealthStoreHelper.swift */,
+				84123E9C20971C1900F5639E /* HealthKitViewController.swift */,
+			);
+			path = HealthKit;
 			sourceTree = "<group>";
 		};
 		841B5A9720436E7300ACAD15 = {
@@ -197,7 +215,9 @@
 		841B5AA220436E7300ACAD15 /* CalorieBurner */ = {
 			isa = PBXGroup;
 			children = (
+				84123E962096F92B00F5639E /* CalorieBurner.entitlements */,
 				84F0853E206A27B000E47042 /* User Settings */,
+				84123E992096FB1500F5639E /* HealthKit */,
 				840C6F9720651EB700535787 /* Weight Delta */,
 				84FC53BD205C9F8F00D20B3C /* Daily Collection */,
 				84FC53BA205AFA2700D20B3C /* Convenience */,
@@ -364,6 +384,11 @@
 					841B5A9F20436E7300ACAD15 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 					8436A893206D410000946C32 = {
 						CreatedOnToolsVersion = 9.2;
@@ -512,6 +537,8 @@
 				84DF1B8C2074EEA50024D924 /* Date.swift in Sources */,
 				841B5AAC20436E7300ACAD15 /* Database.xcdatamodeld in Sources */,
 				84EE818F2045B31000E15A74 /* DailyItemPickerView.swift in Sources */,
+				84123E9D20971C1900F5639E /* HealthKitViewController.swift in Sources */,
+				84123E9B2096FBA900F5639E /* HealthStoreHelper.swift in Sources */,
 				84FC53C1205CA18900D20B3C /* Notification.swift in Sources */,
 				84AA51AC206FD89F00494049 /* DailyCollectionView.swift in Sources */,
 			);
@@ -680,6 +707,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CalorieBurner/CalorieBurner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RW5YX8CCC9;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -701,6 +729,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CalorieBurner/CalorieBurner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RW5YX8CCC9;
 				FRAMEWORK_SEARCH_PATHS = (
