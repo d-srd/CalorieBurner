@@ -191,10 +191,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XA3-tu-EsW" userLabel="Fake NavBar View">
-                                <rect key="frame" x="0.0" y="64" width="414" height="92"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="108"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VSi-y0-53I">
-                                        <rect key="frame" x="12" y="8" width="390" height="76"/>
+                                        <rect key="frame" x="12" y="8" width="390" height="78"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="XOt-no-MNE" userLabel="Weekdays">
                                                 <rect key="frame" x="0.0" y="0.0" width="390" height="22"/>
@@ -248,7 +248,7 @@
                                                 </constraints>
                                             </stackView>
                                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4rG-8P-rfh" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
-                                                <rect key="frame" x="0.0" y="22" width="390" height="54"/>
+                                                <rect key="frame" x="0.0" y="22" width="390" height="56"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Gdm-K2-Rw5">
                                                     <size key="itemSize" width="57" height="43"/>
@@ -258,7 +258,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DayViewCell" id="4ij-HO-AsO" customClass="DailyCalendarViewCell" customModule="CalorieBurner" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="5.666666666666667" width="57" height="43"/>
+                                                        <rect key="frame" x="0.0" y="6.666666666666667" width="57" height="43"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                             <rect key="frame" x="0.0" y="0.0" width="57" height="43"/>
@@ -319,8 +319,14 @@
                                             </collectionView>
                                         </subviews>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggL-fn-dEp">
+                                        <rect key="frame" x="0.0" y="88" width="414" height="18"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <color key="textColor" white="0.48017035590000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gtv-Ia-DND" userLabel="Hairline view">
-                                        <rect key="frame" x="0.0" y="91" width="414" height="1"/>
+                                        <rect key="frame" x="0.0" y="107" width="414" height="1"/>
                                         <color key="backgroundColor" red="0.68627450980392157" green="0.68627450980392157" blue="0.69411764705882351" alpha="0.64768835616438358" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="FCv-Km-lpx"/>
@@ -331,16 +337,19 @@
                                 <constraints>
                                     <constraint firstItem="VSi-y0-53I" firstAttribute="top" secondItem="XA3-tu-EsW" secondAttribute="top" constant="8" id="0fO-0w-iRf"/>
                                     <constraint firstItem="VSi-y0-53I" firstAttribute="leading" secondItem="XA3-tu-EsW" secondAttribute="leading" constant="12" id="E0e-aa-I2F"/>
-                                    <constraint firstAttribute="bottom" secondItem="VSi-y0-53I" secondAttribute="bottom" constant="8" id="Lr3-eN-wUN"/>
+                                    <constraint firstAttribute="bottom" secondItem="ggL-fn-dEp" secondAttribute="bottom" constant="2" id="Hqt-35-Tmn"/>
+                                    <constraint firstItem="ggL-fn-dEp" firstAttribute="top" secondItem="VSi-y0-53I" secondAttribute="bottom" constant="2" id="QQm-rl-a0k"/>
                                     <constraint firstAttribute="trailing" secondItem="gtv-Ia-DND" secondAttribute="trailing" id="Skv-nw-eJW"/>
                                     <constraint firstAttribute="bottom" secondItem="gtv-Ia-DND" secondAttribute="bottom" id="eog-aa-FsE"/>
-                                    <constraint firstAttribute="height" constant="92" id="kpo-XJ-Iau"/>
+                                    <constraint firstAttribute="height" constant="108" id="kpo-XJ-Iau"/>
                                     <constraint firstItem="gtv-Ia-DND" firstAttribute="leading" secondItem="XA3-tu-EsW" secondAttribute="leading" id="nkY-Ks-kLi"/>
+                                    <constraint firstAttribute="trailing" secondItem="ggL-fn-dEp" secondAttribute="trailing" id="q5B-JB-JcU"/>
+                                    <constraint firstItem="ggL-fn-dEp" firstAttribute="leading" secondItem="XA3-tu-EsW" secondAttribute="leading" id="uaq-Ry-Git"/>
                                     <constraint firstAttribute="trailing" secondItem="VSi-y0-53I" secondAttribute="trailing" constant="12" id="vC5-1C-L4z"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mpe-8Y-h6S">
-                                <rect key="frame" x="0.0" y="156" width="414" height="519"/>
+                                <rect key="frame" x="0.0" y="172" width="414" height="503"/>
                                 <connections>
                                     <segue destination="bgE-bC-Cek" kind="embed" id="bTL-KL-AjN"/>
                                 </connections>
@@ -369,6 +378,7 @@
                     <connections>
                         <outlet property="calendarView" destination="4rG-8P-rfh" id="FTV-tH-ibf"/>
                         <outlet property="containerView" destination="Mpe-8Y-h6S" id="gnp-IE-Ueb"/>
+                        <outlet property="fullDateLabel" destination="ggL-fn-dEp" id="ueG-R8-mvp"/>
                         <outlet property="weekdaysStackView" destination="XOt-no-MNE" id="urT-oc-DtI"/>
                         <segue destination="tRm-re-dZv" kind="presentation" identifier="DailyInputSegue" id="5zd-yq-hWa"/>
                     </connections>
@@ -726,11 +736,11 @@
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="currentContext" id="bgE-bC-Cek" customClass="DailyCollectionViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1DZ-Tj-gq9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="503"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="w8i-HS-6E0" customClass="DailyCollectionView" customModule="CalorieBurner" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="414" height="499"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="483"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RFM-DM-jge">
                                     <size key="itemSize" width="394" height="408"/>
@@ -740,7 +750,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DailyCell" id="MOi-Sf-Loq" customClass="DailyDataCollectionViewCell" customModule="CalorieBurner" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="45.666666666666664" width="394" height="408"/>
+                                        <rect key="frame" x="0.0" y="37.666666666666664" width="394" height="408"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="394" height="408"/>
@@ -888,7 +898,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EmptyCell" id="4Dm-2K-5yU" customClass="EmptyDailyCollectionViewCell" customModule="CalorieBurner" customModuleProvider="target">
-                                        <rect key="frame" x="404" y="45.666666666666664" width="394" height="408"/>
+                                        <rect key="frame" x="404" y="37.666666666666664" width="394" height="408"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="394" height="408"/>
@@ -1196,7 +1206,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="1d0-Bh-2aJ">
-                                                    <rect key="frame" x="20" y="6.6666666666666696" width="374" height="31"/>
+                                                    <rect key="frame" x="20" y="6.6666666666666714" width="374" height="31"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Health" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcI-Kh-3Tz">
                                                             <rect key="frame" x="0.0" y="0.0" width="84.666666666666671" height="31"/>

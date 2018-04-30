@@ -28,6 +28,7 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     @IBOutlet weak var weekdaysStackView: UIStackView!
+    @IBOutlet weak var fullDateLabel: UILabel!
     
     private var weekdayLabels: [UILabel] {
         return weekdaysStackView.subviews.map { $0 as! UILabel }
@@ -44,6 +45,10 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
         
         return fmt
     }()
+    
+    // used for fullDateLabel, i.e. the tiny label just under the calendar
+    private let fullDateFormat = "MMMM dd, YYYY"
+    
     let today = Date()
     
     lazy var startDate: Date = {
@@ -82,10 +87,16 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
 //        calendarView.allowsDateCellStretching = false
         
         setWeekdayLabels()
+        setCurrentDateLabel(to: today)
 //        navigationItem.titleView = weekdaysStackView
 //        setDateLabels(to: today)
         
         calendarView.scrollToDate(today)
+    }
+    
+    private func setCurrentDateLabel(to date: Date) {
+        dateFormatter.dateFormat = fullDateFormat
+        fullDateLabel.text = dateFormatter.string(from: date)
     }
     
     @objc private func weekdayTapped(_ sender: UITapGestureRecognizer) {
@@ -235,6 +246,8 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
         dateFormatter.dateFormat = "MMMM yyyy"
         navigationItem.title = dateFormatter.string(from: date)
         
+        setCurrentDateLabel(to: date)
+        
 //        setDateLabels(to: date)
     }
     
@@ -244,6 +257,7 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         configure(cell: map(cell), cellState: cellState, animated: true)
+        setCurrentDateLabel(to: date)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
