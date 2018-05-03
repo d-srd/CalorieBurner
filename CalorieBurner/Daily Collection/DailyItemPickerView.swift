@@ -28,7 +28,11 @@ final class DailyMeasurementPickerDataSource {
         }
     }
     
+    // all possible "steps" for a particular unit
+    // e.g. it makes sense for kilograms to go up in increments of 0.25, 0.5, 1, 2.5, etc.
     private let incrementers: [AssociatedUnit : [Double]]
+    
+    // minimum and maximum values that make sense for a particular unit - e.g. min 40 kgs, max 250 kgs
     private let bounds: [AssociatedUnit : Bounds]
     
     var incrementer: [Double]

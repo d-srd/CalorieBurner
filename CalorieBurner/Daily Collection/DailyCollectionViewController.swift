@@ -73,12 +73,6 @@ extension DailyCollectionViewController: DailyCollectionViewDataSource {
         
         let cell = dailyView.dequeueReusableCell(withReuseIdentifier: "EmptyCell", for: indexPath) as! EmptyDailyCollectionViewCell
         return cell
-        
-//        guard let cell = dailyView.dequeueReusableCell(withReuseIdentifier: "DailyCell", for: indexPath) as? DailyDataCollectionViewCell else {
-//            fatalError("oopsie doopsie dequeeopsie")
-//        }
-//
-//        return cell
     }
 }
 

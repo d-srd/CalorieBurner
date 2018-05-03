@@ -19,9 +19,10 @@ protocol DailyIndexPathProvider: class {
     func date(for indexPath: IndexPath) -> Date?
 }
 
+/// Get notified of super cool DailyCollectionView lifecycle events
 protocol DailyCollectionViewDelegate: class {
     func dailyView(_ dailyView: DailyCollectionView, willDisplay cell: DailyCollectionViewCell, forItemAt indexPath: IndexPath)
-    
+
     func willCancelEditing(cell: DailyDataCollectionViewCell, at date: Date, for itemType: MeasurementItems)
     func didCancelEditing(cell: DailyDataCollectionViewCell, at date: Date, for itemType: MeasurementItems)
     func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, mass: Mass)
