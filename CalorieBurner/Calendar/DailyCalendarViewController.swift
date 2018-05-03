@@ -44,11 +44,9 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
         // UICollectionView needs an initial size to lay out the cells. this code is ignored, the one in didLayoutSubviews is used.
         dailyCollectionViewController.dailyView.itemSize =
             CGSize(width: containerView.frame.width * 0.8, height: 250)
-//        dailyCollectionViewController.dailyView.shouldIgnoreScrollingAdjustment = true
-//        calendarView.shouldIgnoreScrollingAdjustment = true
         dailyCollectionViewController.dailyView.dailyScrollDelegate = self
-//        dailyCollectionViewController.scrollToItem(at: self.today, animated: false)
-//        calendarView.selectDates([today])
+        dailyCollectionViewController.scrollToItem(at: self.today, animated: false)
+        calendarView.selectDates([today])
         
         NotificationCenter.default.addObserver(
             self,

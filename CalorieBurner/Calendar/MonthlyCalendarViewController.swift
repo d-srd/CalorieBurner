@@ -48,6 +48,7 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     
     // used for fullDateLabel, i.e. the tiny label just under the calendar
     private let fullDateFormat = "MMMM dd, YYYY"
+    private let monthDateFormat = "MMMM"
     
     let today = Date()
     
@@ -74,22 +75,12 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tap = UIGestureRecognizer(target: self, action: #selector(weekdayTapped(_:)))
-        for label in weekdayLabels {
-            label.isUserInteractionEnabled = true
-            label.addGestureRecognizer(tap)
-        }
-        
-//        calendarView.sectionInset = UIEdgeInsets(top: 15, left: 0, bottom: 15, right: 0)
         calendarView.calendarDelegate = self
         calendarView.calendarDataSource = self
         calendarView.scrollingMode = .stopAtEachSection
-//        calendarView.allowsDateCellStretching = false
         
         setWeekdayLabels()
         setCurrentDateLabel(to: today)
-//        navigationItem.titleView = weekdaysStackView
-//        setDateLabels(to: today)
         
         calendarView.scrollToDate(today)
     }
@@ -99,22 +90,9 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
         fullDateLabel.text = dateFormatter.string(from: date)
     }
     
-    @objc private func weekdayTapped(_ sender: UITapGestureRecognizer) {
-        print("hi there")
-    }
-    
-    // don't think about this one for too long
-    @IBAction func setFirstDayOfWeek(_ sender: UIButton) {
-        switch sender.currentTitle {
-        case "mon"?: firstDayOfWeek = .monday
-        case "tue"?: firstDayOfWeek = .tuesday
-        case "wed"?: firstDayOfWeek = .wednesday
-        case "thu"?: firstDayOfWeek = .thursday
-        case "fri"?: firstDayOfWeek = .friday
-        case "sat"?: firstDayOfWeek = .saturday
-        case "sun"?: firstDayOfWeek = .sunday
-        default: break
-        }
+    private func setCurrentMonthTitle(to date: Date) {
+        dateFormatter.dateFormat = monthDateFormat
+        navigationItem.title = dateFormatter.string(from: date)
     }
     
     private func setWeekdayLabels() {
@@ -126,21 +104,11 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
         for (index, label) in weekdayLabels.rotatedRight(by: startDayDistance).enumerated() {
             label.text = daySymbols[index]
         }
-//        for (index, daySymbol) in daySymbols.rotatedRight(by: startDayDistance).enumerated() {
-//            weekdayLabels[index].text = daySymbol
-//        }
     }
 
     // MARK: JTAppleCalendarViewDataSource
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
-//        return ConfigurationParameters(
-//                    startDate: startDate,
-//                    endDate: endDate,
-//                    generateOutDates: .tillEndOfRow,
-//                    firstDayOfWeek: firstDayOfWeek
-//                )
-//
         return ConfigurationParameters(
             startDate: startDate,
             endDate: endDate,
@@ -240,16 +208,16 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
         return cell
     }
     
-    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
-        guard let date = visibleDates.monthDates.first?.date else { return }
-        
-        dateFormatter.dateFormat = "MMMM yyyy"
-        navigationItem.title = dateFormatter.string(from: date)
-        
-        setCurrentDateLabel(to: date)
-        
-//        setDateLabels(to: date)
-    }
+//    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
+//        guard let date = visibleDates.monthDates.first?.date else { return }
+//
+//        dateFormatter.dateFormat = "MMMM yyyy"
+////        navigationItem.title = dateFormatter.string(from: date)
+//
+////        setCurrentDateLabel(to: date)
+//
+////        setDateLabels(to: date)
+//    }
     
     func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
         return cellState.dateBelongsTo == .thisMonth
@@ -258,6 +226,7 @@ class MonthlyCalendarViewController: UIViewController, JTAppleCalendarViewDelega
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         configure(cell: map(cell), cellState: cellState, animated: true)
         setCurrentDateLabel(to: date)
+        setCurrentMonthTitle(to: date)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {

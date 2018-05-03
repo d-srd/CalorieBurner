@@ -191,10 +191,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XA3-tu-EsW" userLabel="Fake NavBar View">
-                                <rect key="frame" x="0.0" y="64" width="414" height="108"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="100"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VSi-y0-53I">
-                                        <rect key="frame" x="12" y="8" width="390" height="78"/>
+                                        <rect key="frame" x="12" y="8" width="390" height="60"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="XOt-no-MNE" userLabel="Weekdays">
                                                 <rect key="frame" x="0.0" y="0.0" width="390" height="22"/>
@@ -248,8 +248,11 @@
                                                 </constraints>
                                             </stackView>
                                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4rG-8P-rfh" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
-                                                <rect key="frame" x="0.0" y="22" width="390" height="56"/>
+                                                <rect key="frame" x="0.0" y="22" width="390" height="38"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="38" id="uFY-Ul-oi4"/>
+                                                </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Gdm-K2-Rw5">
                                                     <size key="itemSize" width="57" height="43"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -258,14 +261,14 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DayViewCell" id="4ij-HO-AsO" customClass="DailyCalendarViewCell" customModule="CalorieBurner" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="6.666666666666667" width="57" height="43"/>
+                                                        <rect key="frame" x="0.0" y="-2.6666666666666665" width="57" height="43"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                             <rect key="frame" x="0.0" y="0.0" width="57" height="43"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="42l-7C-VoS" customClass="BorderView" customModule="CocoaControls">
-                                                                    <rect key="frame" x="13.666666666666664" y="6.6666666666666679" width="30" height="30.000000000000004"/>
+                                                                    <rect key="frame" x="13.666666666666664" y="4.6666666666666679" width="30" height="30.000000000000004"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="30" id="ONC-Nb-GGK"/>
@@ -278,21 +281,21 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v0l-gc-tju">
-                                                                    <rect key="frame" x="23.333333333333332" y="11.333333333333334" width="10.666666666666668" height="20.666666666666664"/>
+                                                                    <rect key="frame" x="23.333333333333332" y="9.3333333333333339" width="10.666666666666668" height="20.666666666666664"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q7D-L3-IEc" customClass="BorderView" customModule="CocoaControls">
-                                                                    <rect key="frame" x="25.666666666666668" y="38.666666666666664" width="6" height="6"/>
+                                                                    <rect key="frame" x="23.666666666666668" y="37" width="10.000000000000004" height="3"/>
                                                                     <color key="backgroundColor" red="0.82847190309999996" green="0.14788972689999999" blue="0.25993679250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="6" id="L7J-mB-fTV"/>
-                                                                        <constraint firstAttribute="width" constant="6" id="sFr-wG-7Uo"/>
+                                                                        <constraint firstAttribute="height" constant="3" id="L7J-mB-fTV" userLabel="height = 3"/>
+                                                                        <constraint firstAttribute="width" constant="10" id="sFr-wG-7Uo" userLabel="width = 8"/>
                                                                     </constraints>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
-                                                                            <real key="value" value="3"/>
+                                                                            <real key="value" value="2"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                                             <real key="value" value="0.0"/>
@@ -305,9 +308,9 @@
                                                             <constraint firstItem="q7D-L3-IEc" firstAttribute="centerX" secondItem="4ij-HO-AsO" secondAttribute="centerX" id="FKf-rb-9U7"/>
                                                             <constraint firstItem="42l-7C-VoS" firstAttribute="centerX" secondItem="4ij-HO-AsO" secondAttribute="centerX" id="IKh-x3-WLq"/>
                                                             <constraint firstItem="v0l-gc-tju" firstAttribute="centerX" secondItem="4ij-HO-AsO" secondAttribute="centerX" id="UQX-aP-AU7"/>
-                                                            <constraint firstItem="v0l-gc-tju" firstAttribute="centerY" secondItem="4ij-HO-AsO" secondAttribute="centerY" id="XbC-nz-8zb"/>
+                                                            <constraint firstItem="v0l-gc-tju" firstAttribute="centerY" secondItem="4ij-HO-AsO" secondAttribute="centerY" constant="-2" id="XbC-nz-8zb"/>
                                                             <constraint firstItem="42l-7C-VoS" firstAttribute="bottom" secondItem="q7D-L3-IEc" secondAttribute="top" constant="-2" id="qYT-hT-aVc"/>
-                                                            <constraint firstItem="42l-7C-VoS" firstAttribute="centerY" secondItem="4ij-HO-AsO" secondAttribute="centerY" id="wIj-Xi-DLf"/>
+                                                            <constraint firstItem="42l-7C-VoS" firstAttribute="centerY" secondItem="4ij-HO-AsO" secondAttribute="centerY" constant="-2" id="wIj-Xi-DLf"/>
                                                         </constraints>
                                                         <connections>
                                                             <outlet property="dayLabel" destination="v0l-gc-tju" id="RBr-nf-ucJ"/>
@@ -320,13 +323,13 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggL-fn-dEp">
-                                        <rect key="frame" x="0.0" y="88" width="414" height="18"/>
+                                        <rect key="frame" x="0.0" y="70" width="414" height="28"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <color key="textColor" white="0.48017035590000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gtv-Ia-DND" userLabel="Hairline view">
-                                        <rect key="frame" x="0.0" y="107" width="414" height="1"/>
+                                        <rect key="frame" x="0.0" y="99" width="414" height="1"/>
                                         <color key="backgroundColor" red="0.68627450980392157" green="0.68627450980392157" blue="0.69411764705882351" alpha="0.64768835616438358" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="FCv-Km-lpx"/>
@@ -341,7 +344,7 @@
                                     <constraint firstItem="ggL-fn-dEp" firstAttribute="top" secondItem="VSi-y0-53I" secondAttribute="bottom" constant="2" id="QQm-rl-a0k"/>
                                     <constraint firstAttribute="trailing" secondItem="gtv-Ia-DND" secondAttribute="trailing" id="Skv-nw-eJW"/>
                                     <constraint firstAttribute="bottom" secondItem="gtv-Ia-DND" secondAttribute="bottom" id="eog-aa-FsE"/>
-                                    <constraint firstAttribute="height" constant="108" id="kpo-XJ-Iau"/>
+                                    <constraint firstAttribute="height" constant="100" id="kpo-XJ-Iau"/>
                                     <constraint firstItem="gtv-Ia-DND" firstAttribute="leading" secondItem="XA3-tu-EsW" secondAttribute="leading" id="nkY-Ks-kLi"/>
                                     <constraint firstAttribute="trailing" secondItem="ggL-fn-dEp" secondAttribute="trailing" id="q5B-JB-JcU"/>
                                     <constraint firstItem="ggL-fn-dEp" firstAttribute="leading" secondItem="XA3-tu-EsW" secondAttribute="leading" id="uaq-Ry-Git"/>
@@ -349,7 +352,7 @@
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mpe-8Y-h6S">
-                                <rect key="frame" x="0.0" y="172" width="414" height="503"/>
+                                <rect key="frame" x="0.0" y="164" width="414" height="511"/>
                                 <connections>
                                     <segue destination="bgE-bC-Cek" kind="embed" id="bTL-KL-AjN"/>
                                 </connections>
@@ -736,11 +739,11 @@
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="currentContext" id="bgE-bC-Cek" customClass="DailyCollectionViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1DZ-Tj-gq9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="503"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="511"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="w8i-HS-6E0" customClass="DailyCollectionView" customModule="CalorieBurner" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="414" height="483"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="491"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RFM-DM-jge">
                                     <size key="itemSize" width="394" height="408"/>
@@ -750,7 +753,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DailyCell" id="MOi-Sf-Loq" customClass="DailyDataCollectionViewCell" customModule="CalorieBurner" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="37.666666666666664" width="394" height="408"/>
+                                        <rect key="frame" x="0.0" y="41.666666666666664" width="394" height="408"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="394" height="408"/>
@@ -898,7 +901,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EmptyCell" id="4Dm-2K-5yU" customClass="EmptyDailyCollectionViewCell" customModule="CalorieBurner" customModuleProvider="target">
-                                        <rect key="frame" x="404" y="37.666666666666664" width="394" height="408"/>
+                                        <rect key="frame" x="404" y="41.666666666666664" width="394" height="408"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="394" height="408"/>
