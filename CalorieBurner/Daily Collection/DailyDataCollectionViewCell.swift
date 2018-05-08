@@ -87,6 +87,12 @@ class DailyDataCollectionViewCell: DailyCollectionViewCell {
             fillTextField(with: energyBuffer ?? energy)
         }
     }
+    
+    public var note: String? {
+        didSet {
+            notesTextView.text = note
+        }
+    }
 
     // we gotta print out those measurements somehow
     private static let measurementFormatter: MeasurementFormatter = {

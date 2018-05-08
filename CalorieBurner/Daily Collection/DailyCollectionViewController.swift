@@ -71,6 +71,7 @@ extension DailyCollectionViewController: DailyCollectionViewDataSource {
             let cell = dailyView.dequeueReusableCell(withReuseIdentifier: "DailyCell", for: indexPath) as! DailyDataCollectionViewCell
             cell.mass = object.mass?.converted(to: UserDefaults.standard.mass)
             cell.energy = object.energy?.converted(to: UserDefaults.standard.energy)
+            cell.note = object.note
             
             return cell
         }
@@ -104,7 +105,7 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
     
     func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, mass: Mass) {
         do {
-            _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: mass, energy: nil)
+            _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: mass, energy: nil, note: nil)
         } catch {
             print("error updating cell: ", error)
         }
@@ -112,7 +113,7 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
     
     func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, energy: Energy) {
         do {
-            _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: nil, energy: energy)
+            _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: nil, energy: energy, note: nil)
         } catch {
             print("error updating cell: ", error)
         }

@@ -27,7 +27,9 @@ class DailyInputTableViewController: UITableViewController {
             energyTextField.text = energy.flatMap(measurementFormatter.string)
         }
     }
-    private var note: String?
+    private var note: String? {
+        return notesTextView.text
+    }
     
     private let measurementFormatter: MeasurementFormatter = {
         let fmt = MeasurementFormatter()
@@ -57,7 +59,7 @@ class DailyInputTableViewController: UITableViewController {
     
     private func shouldSaveDaily() {
         guard let date = date else { return }
-        try? CoreDataStack.shared.updateOrCreate(at: date, mass: mass, energy: energy)
+        try? CoreDataStack.shared.updateOrCreate(at: date, mass: mass, energy: energy, note: note)
     }
     
     @IBAction func doneButtonWasPressed(_ sender: Any) {

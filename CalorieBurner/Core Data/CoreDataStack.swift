@@ -42,17 +42,15 @@ class CoreDataStack {
     }
     
     /// If a Daily does not exist in the specified date, it is created with the provided values. Otherwise, it is updated with the provided values. Pass nil to not update a single value.
-    func updateOrCreate(at day: Date, mass: Mass?, energy: Energy?) throws -> Daily {
+    func updateOrCreate(at day: Date, mass: Mass?, energy: Energy?, note: String?) throws -> Daily {
         let request = Daily.fetchRequest(in: day)
         
         do {
             if let daily = try viewContext.fetch(request).first {
-                if mass != nil {
-                    daily.mass = mass!
-                }
-                if energy != nil {
-                    daily.energy = energy!
-                }
+                daily.mass = mass ?? daily.mass
+                daily.energy = energy ?? daily.energy
+                daily.note = note ?? daily.note
+                
                 try viewContext.save()
                 
                 return daily
@@ -60,6 +58,7 @@ class CoreDataStack {
                 let daily = Daily(context: viewContext, date: day)
                 daily.mass = mass
                 daily.energy = energy
+                daily.note = note
                 
                 viewContext.insert(daily)
                 try viewContext.save()

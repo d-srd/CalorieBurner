@@ -390,7 +390,7 @@
                         <outlet property="fullDateLabel" destination="ggL-fn-dEp" id="cto-y6-S5n"/>
                         <outlet property="weekdaysStackView" destination="XOt-no-MNE" id="urT-oc-DtI"/>
                         <segue destination="tRm-re-dZv" kind="presentation" identifier="DailyInputSegue" id="5zd-yq-hWa"/>
-                        <segue destination="TtF-Tx-bhm" kind="presentation" identifier="MonthlyCalendarViewSegue" id="Bab-6W-SBZ"/>
+                        <segue destination="TtF-Tx-bhm" kind="presentation" identifier="MonthlyCalendarViewSegue" modalTransitionStyle="crossDissolve" id="Bab-6W-SBZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xvw-fn-NUF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -491,10 +491,9 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tml-j9-dwI">
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter anything interesting here." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tml-j9-dwI">
                                                             <rect key="frame" x="0.0" y="32.333333333333336" width="374" height="111.66666666666666"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
@@ -832,10 +831,9 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ill-2Q-P7h" userLabel="NotesView" customClass="ShadowView" customModule="CocoaControls">
                                                             <rect key="frame" x="0.0" y="201" width="394" height="207"/>
                                                             <subviews>
-                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JHH-c5-w8S">
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter anything interesting here." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JHH-c5-w8S">
                                                                     <rect key="frame" x="8" y="40.666666666666657" width="378" height="158.33333333333334"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                 </textView>
