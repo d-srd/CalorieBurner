@@ -13,26 +13,61 @@ class DailyCalendarViewCell: DayViewCell {
     @IBOutlet weak var existingItemView: UIView!
 }
 
-class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectionViewScrollDelegate {
+class DailyCalendarViewController: CalendarViewController, DailyCollectionViewScrollDelegate {
+    
+    enum Segues: String {
+        case inputVC = "DailyInputSegue"
+        case collectionVC = "DailyCollectionViewSegue"
+        case monthlyCalendarVC = "MonthlyCalendarViewSegue"
+    }
+    
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var fullDateLabel: UILabel!
     var dailyCollectionViewController: DailyCollectionViewController!
+    var currentDate: Date? {
+        get { return calendarView.selectedDates.first }
+        set {
+            guard let date = newValue else { return }
+            calendarView.deselectAllDates()
+            calendarView.scrollToDate(date)
+            calendarView.selectDates([date], triggerSelectionDelegate: true, keepSelectionIfMultiSelectionAllowed: false)
+            dailyCollectionViewController.scrollToItem(at: date, animated: false)
+        }
+    }
+    
+    @IBAction func unwindAction(_ sender: UIStoryboardSegue) {
+        print("HI THERE")
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let dailyCollection = segue.destination as? DailyCollectionViewController {
+        super.prepare(for: segue, sender: sender)
+        
+        guard let identifier = segue.identifier,
+              let identifierCase = Segues.init(rawValue: identifier)
+        else { fatalError("Segue not implemented") }
+        
+        switch identifierCase {
+        case .collectionVC:
+            let dailyCollection = segue.destination as! DailyCollectionViewController
             dailyCollectionViewController = dailyCollection
             dailyCollectionViewController.view.autoresizingMask = []
             dailyCollectionViewController.view.frame = containerView.bounds
-        }
-        if segue.identifier == "DailyInputSegue" {
-            guard let dailyInputVC = segue.destination.childViewControllers.first as? DailyInputTableViewController else { return }
-            dailyInputVC.date = calendarView.selectedDates.first
+            
+        case .inputVC:
+            // there's a navigation controller in here, so we steal its child
+            let inputVC = segue.destination.childViewControllers.first as! DailyInputTableViewController
+            inputVC.date = calendarView.selectedDates.first
+            
+        case .monthlyCalendarVC:
+            let calendarVC = segue.destination.childViewControllers.first as! CalendarViewController
+            calendarVC.configuration = .monthly
+            
         }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-
         dailyCollectionViewController.dailyView.itemSize =
             CGSize(width: containerView.frame.width * 0.8, height: 250)
         dailyCollectionViewController.dailyView.collectionViewLayout.invalidateLayout()
@@ -41,7 +76,10 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // UICollectionView needs an initial size to lay out the cells. this code is ignored, the one in didLayoutSubviews is used.
+        configuration = .weekly
+        setCurrentDateLabel(to: today)
+        
+        // UICollectionView needs an initial size to lay out the cells. this code is esentially ignored, the one in didLayoutSubviews is used.
         dailyCollectionViewController.dailyView.itemSize =
             CGSize(width: containerView.frame.width * 0.8, height: 250)
         dailyCollectionViewController.dailyView.dailyScrollDelegate = self
@@ -84,6 +122,16 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
         dailyCollectionViewController.dailyView.reloadData()
     }
     
+    private func setCurrentDateLabel(to date: Date) {
+        dateFormatter.dateFormat = fullDateFormat
+        fullDateLabel.text = dateFormatter.string(from: date)
+    }
+    
+    private func setCurrentMonthTitle(to date: Date) {
+        dateFormatter.dateFormat = monthDateFormat
+        navigationItem.backBarButtonItem?.title = dateFormatter.string(from: date)
+    }
+    
     func map(_ cell: DayViewCell?) -> DailyCalendarViewCell? {
         return cell as? DailyCalendarViewCell
     }
@@ -119,6 +167,9 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
     override func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         super.calendar(calendar, didSelectDate: date, cell: cell, cellState: cellState)
         
+        setCurrentDateLabel(to: date)
+        setCurrentMonthTitle(to: date)
+        
         dailyCollectionViewController.scrollToItem(at: date, animated: true)
     }
     
@@ -139,6 +190,10 @@ class DailyCalendarViewController: MonthlyCalendarViewController, DailyCollectio
     }
     
     @IBAction func showDailyInputViewController(_ sender: Any) {
-        performSegue(withIdentifier: "DailyInputSegue", sender: sender)
+        performSegue(withIdentifier: Segues.inputVC.rawValue, sender: sender)
+    }
+    
+    @IBAction func showMonthlyCalendar(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: Segues.monthlyCalendarVC.rawValue, sender: sender)
     }
 }
