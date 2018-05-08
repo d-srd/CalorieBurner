@@ -48,6 +48,10 @@ class DailyCollectionViewController: UIViewController {
         return true
     }
     
+    func reloadData() {
+        dailyView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

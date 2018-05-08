@@ -23,6 +23,9 @@
 		842525462054E32F00CA0122 /* DailyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842525452054E32F00CA0122 /* DailyCollectionViewController.swift */; };
 		8436A897206D410000946C32 /* CalorieBurnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436A896206D410000946C32 /* CalorieBurnerTests.swift */; };
 		8436A89F206D425C00946C32 /* UserDefautsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436A89E206D425C00946C32 /* UserDefautsTests.swift */; };
+		84398AFC20A19F0C0061AD69 /* DailyCalendarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84398AFB20A19F0C0061AD69 /* DailyCalendarViewCell.swift */; };
+		84398AFE20A19F2C0061AD69 /* CalendarViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84398AFD20A19F2C0061AD69 /* CalendarViewDataSource.swift */; };
+		84398B0020A19FC10061AD69 /* CalendarMonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84398AFF20A19FC10061AD69 /* CalendarMonthHeaderView.swift */; };
 		843BD0A1205E239D0049DD77 /* DailyCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843BD0A0205E239D0049DD77 /* DailyCalendarViewController.swift */; };
 		843E470A207237BD0041BECB /* DailyCollectionViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E4709207237BD0041BECB /* DailyCollectionViewProtocols.swift */; };
 		84696D8620499FF8002F31B4 /* DailyFetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */; };
@@ -107,6 +110,9 @@
 		8436A896206D410000946C32 /* CalorieBurnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieBurnerTests.swift; sourceTree = "<group>"; };
 		8436A898206D410000946C32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8436A89E206D425C00946C32 /* UserDefautsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefautsTests.swift; sourceTree = "<group>"; };
+		84398AFB20A19F0C0061AD69 /* DailyCalendarViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCalendarViewCell.swift; sourceTree = "<group>"; };
+		84398AFD20A19F2C0061AD69 /* CalendarViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewDataSource.swift; sourceTree = "<group>"; };
+		84398AFF20A19FC10061AD69 /* CalendarMonthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthHeaderView.swift; sourceTree = "<group>"; };
 		843BD0A0205E239D0049DD77 /* DailyCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCalendarViewController.swift; sourceTree = "<group>"; };
 		843E4709207237BD0041BECB /* DailyCollectionViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionViewProtocols.swift; sourceTree = "<group>"; };
 		84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFetchedResultsController.swift; sourceTree = "<group>"; };
@@ -272,7 +278,10 @@
 			isa = PBXGroup;
 			children = (
 				84FC53B8205940E900D20B3C /* DayViewCell.swift */,
+				84398AFB20A19F0C0061AD69 /* DailyCalendarViewCell.swift */,
+				84398AFD20A19F2C0061AD69 /* CalendarViewDataSource.swift */,
 				84FC53902057C79900D20B3C /* CalendarViewController.swift */,
+				84398AFF20A19FC10061AD69 /* CalendarMonthHeaderView.swift */,
 				843BD0A0205E239D0049DD77 /* DailyCalendarViewController.swift */,
 				84123E942093CAF500F5639E /* DailyInputTableViewController.swift */,
 			);
@@ -497,9 +506,11 @@
 				84DF1B8A2074EE890024D924 /* Measurement.swift in Sources */,
 				843E470A207237BD0041BECB /* DailyCollectionViewProtocols.swift in Sources */,
 				841B5AA620436E7300ACAD15 /* ViewController.swift in Sources */,
+				84398B0020A19FC10061AD69 /* CalendarMonthHeaderView.swift in Sources */,
 				84FC53B9205940E900D20B3C /* DayViewCell.swift in Sources */,
 				841B5ABB20445D2300ACAD15 /* DailyDataCollectionViewCell.swift in Sources */,
 				84FC53912057C79900D20B3C /* CalendarViewController.swift in Sources */,
+				84398AFE20A19F2C0061AD69 /* CalendarViewDataSource.swift in Sources */,
 				84FC53BF205CA16B00D20B3C /* UserDefaults.swift in Sources */,
 				84F08540206A27BE00E47042 /* SettingsViewController.swift in Sources */,
 				8498914A2090B74800C0E2EA /* FirstResponder.swift in Sources */,
@@ -509,6 +520,7 @@
 				84696D8620499FF8002F31B4 /* DailyFetchedResultsController.swift in Sources */,
 				84B4984A205163A800DCFA05 /* TDEE.swift in Sources */,
 				84B49846204DC64C00DCFA05 /* CoreDataStack.swift in Sources */,
+				84398AFC20A19F0C0061AD69 /* DailyCalendarViewCell.swift in Sources */,
 				841B5AB920436FA300ACAD15 /* Daily.swift in Sources */,
 				84123E952093CAF500F5639E /* DailyInputTableViewController.swift in Sources */,
 				841B5AA420436E7300ACAD15 /* AppDelegate.swift in Sources */,

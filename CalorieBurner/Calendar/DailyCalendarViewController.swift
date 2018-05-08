@@ -9,8 +9,10 @@
 import UIKit
 import JTAppleCalendar
 
-class DailyCalendarViewCell: DayViewCell {
-    @IBOutlet weak var existingItemView: UIView!
+extension JTAppleCalendarView {
+    func reloadDate(_ date: Date) {
+        self.reloadDates([date])
+    }
 }
 
 class DailyCalendarViewController: CalendarViewController, DailyCollectionViewScrollDelegate {
@@ -37,6 +39,14 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
     
     @IBAction func unwindAction(_ sender: UIStoryboardSegue) {
         print("HI THERE")
+    }
+    
+    @IBAction func showDailyInputViewController(_ sender: Any) {
+        performSegue(withIdentifier: Segues.inputVC.rawValue, sender: sender)
+    }
+    
+    @IBAction func showMonthlyCalendar(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: Segues.monthlyCalendarVC.rawValue, sender: sender)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -73,9 +83,19 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
         dailyCollectionViewController.dailyView.collectionViewLayout.invalidateLayout()
     }
     
+    // easy way to display data when the user exits Daily Input View
+    // the alternative would be to use an unwind segue, but it seems unnecessary
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        dailyCollectionViewController.reloadData()
+        currentDate.flatMap(calendarView.reloadDate)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // make the calendar have a single row
         configuration = .weekly
         setCurrentDateLabel(to: today)
         
@@ -119,7 +139,7 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
     }
     
     @objc private func unitsDidChange(_ notification: Notification) {
-        dailyCollectionViewController.dailyView.reloadData()
+        dailyCollectionViewController.reloadData()
     }
     
     private func setCurrentDateLabel(to date: Date) {
@@ -189,11 +209,5 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
         }
     }
     
-    @IBAction func showDailyInputViewController(_ sender: Any) {
-        performSegue(withIdentifier: Segues.inputVC.rawValue, sender: sender)
-    }
     
-    @IBAction func showMonthlyCalendar(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: Segues.monthlyCalendarVC.rawValue, sender: sender)
-    }
 }

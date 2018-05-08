@@ -17,50 +17,6 @@ protocol DailyCalendarDelegate {
     func doesItemExist(at date: Date) -> Bool
 }
 
-class MonthHeaderView: JTAppleCollectionReusableView {
-    @IBOutlet weak var monthIndicatorLabel: UILabel!
-}
-
-class CalendarViewDataSource: JTAppleCalendarViewDataSource, DateBoundaries {
-    enum Configuration { case weekly, monthly }
-    
-    let dateFormatter = DateFormatter()
-    var configuration: Configuration
-    var firstDayOfWeek: DaysOfWeek = .monday
-    
-    lazy var startDate: Date = {
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.date(from: "2000-01-01")!
-    }()
-    
-    lazy var endDate: Date = {
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.date(from: "2030-12-31")!
-    }()
-    
-    init(configuration: Configuration) {
-        self.configuration = configuration
-    }
-    
-    func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
-        if configuration == .weekly {
-            return ConfigurationParameters(startDate: startDate,
-                                           endDate: endDate,
-                                           numberOfRows: 1,
-                                           generateInDates: .forFirstMonthOnly,
-                                           generateOutDates: .off,
-                                           firstDayOfWeek: firstDayOfWeek,
-                                           hasStrictBoundaries: false)
-        } else {
-            return ConfigurationParameters(startDate: startDate,
-                                           endDate: endDate,
-                                           generateOutDates: .tillEndOfRow,
-                                           firstDayOfWeek: firstDayOfWeek,
-                                           hasStrictBoundaries: false)
-        }
-    }
-}
-
 class CalendarViewController: UIViewController, JTAppleCalendarViewDelegate {
     
     // MARK: Types
@@ -121,18 +77,6 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDelegate {
         }
     }
     
-    // MARK: Functions
-    
-//    @IBAction func unwindToWeeklyCalendar(_ sender: UIStoryboardSegue) {
-//        print("hi there")
-//        print(sender.destination)
-//
-//        if sender.destination is DailyCalendarViewController {
-//            let dailyCalendar = sender.destination as! DailyCalendarViewController
-//            dailyCalendar.currentDate = calendarView.selectedDates.first!
-//        }
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -141,7 +85,6 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDelegate {
         calendarView.scrollingMode = .stopAtEachSection
         
         setWeekdayLabels()
-//        setCurrentDateLabel(to: today)
         
         calendarView.scrollToDate(today)
         
@@ -183,9 +126,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDelegate {
         cell.dayLabel.text = cellState.text
         
         // handle cell selection and animation
-        if calendarView.selectedDates.contains(cellState.date),
-           cellState.dateBelongsTo == .thisMonth
-        {
+        if calendarView.selectedDates.contains(cellState.date), cellState.dateBelongsTo == .thisMonth {
             cell.selectionView.isHidden = false
 
             if animated {
