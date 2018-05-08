@@ -20,7 +20,28 @@ protocol DailyCellDelegate: class {
 
 class DailyCollectionViewCell: UICollectionViewCell { }
 
-class EmptyDailyCollectionViewCell: DailyCollectionViewCell { }
+fileprivate let numberFormatter: NumberFormatter = {
+    let numberFormatter = NumberFormatter()
+    numberFormatter.numberStyle = .decimal
+    numberFormatter.roundingMode = .halfUp
+    numberFormatter.isLenient = true
+    numberFormatter.maximumFractionDigits = 2
+    numberFormatter.roundingIncrement = 0.1
+    numberFormatter.allowsFloats = true
+    numberFormatter.locale = Locale.current
+    
+    return numberFormatter
+}()
+
+fileprivate let measurementFormatter: MeasurementFormatter = {
+    let fmt = MeasurementFormatter()
+    fmt.unitOptions = .providedUnit
+    fmt.unitStyle = .medium
+    fmt.numberFormatter = numberFormatter
+    fmt.locale = Locale.current
+    
+    return fmt
+}()
 
 class DailyDataCollectionViewCell: DailyCollectionViewCell {
     // container view for mass input textfield
@@ -38,79 +59,26 @@ class DailyDataCollectionViewCell: DailyCollectionViewCell {
     
     weak var cellDelegate: DailyCellDelegate?
     
-    // preconfigured UIPickerView with sensible values for picking a mass
-    // the delegate just notifies us of value changes
-    var massPickerView: DailyMassPickerView? {
-        didSet {
-            guard let picker = massPickerView else { return }
-            
-            picker.dailyDelegate = self
-            
-            massTextField.inputView = picker
-        }
-    }
-    
-    // preconfigured UIPickerView with sensible values for picking an energy
-    var energyPickerView: DailyEnergyPickerView? {
-        didSet {
-            guard let picker = energyPickerView else { return }
-            
-            picker.dailyDelegate = self
-            
-            energyTextField.inputView = picker
-        }
-    }
-    
     // this is set by the massPickerView's delegate, i.e. the cell
     public var mass: Measurement<UnitMass>? {
-        didSet {
-            fillTextField(with: mass)
-        }
+        didSet { massTextField.text = mass.flatMap(measurementFormatter.string) }
     }
     
     // useful for cancelling the editing action
-    private var massBuffer: Measurement<UnitMass>? {
-        didSet {
-            fillTextField(with: massBuffer ?? mass)
-        }
-    }
+    private var massBuffer: Measurement<UnitMass>?
     
     // this is set by the energyPickerView's delegate, i.e. this class
     public var energy: Measurement<UnitEnergy>? {
-        didSet {
-            fillTextField(with: energy)
-        }
+        didSet { energyTextField.text = energy.flatMap(measurementFormatter.string) }
     }
     
-    private var energyBuffer: Measurement<UnitEnergy>? {
-        didSet {
-            fillTextField(with: energyBuffer ?? energy)
-        }
-    }
+    private var energyBuffer: Measurement<UnitEnergy>?
     
     public var note: String? {
         didSet {
             notesTextView.text = note
         }
     }
-
-    // we gotta print out those measurements somehow
-    private static let measurementFormatter: MeasurementFormatter = {
-        let fmt = MeasurementFormatter()
-        fmt.unitOptions = .providedUnit
-        fmt.unitStyle = .medium
-        
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.roundingMode = .halfUp
-        numberFormatter.isLenient = true
-        numberFormatter.maximumFractionDigits = 2
-        numberFormatter.roundingIncrement = 0.25
-        
-        fmt.numberFormatter = numberFormatter
-
-        return fmt
-    }()
     
     // add some convenient tap gestures so the user does not have to press the actual textfield to initiate editing
     override func awakeFromNib() {
@@ -129,23 +97,9 @@ class DailyDataCollectionViewCell: DailyCollectionViewCell {
         energyView.addGestureRecognizer(energyGesture)
         notesView.addGestureRecognizer(notesGesture)
         
-        massPickerView = DailyMassPickerView()
-        energyPickerView = DailyEnergyPickerView()
-    }
-    
-    /// Makes the input views display "No data"
-    public func setEmpty() {
-        massTextField.text = "Missing data"
-        energyTextField.text = "Missing data"
-    }
-    
-    // convenience
-    private func fillTextField<T: Unit>(with value: Measurement<T>?) {
-        if T.self == UnitMass.self {
-            massTextField.text = value.flatMap(DailyDataCollectionViewCell.measurementFormatter.string) ?? "Missing data"
-        } else if T.self == UnitEnergy.self {
-            energyTextField.text = value.flatMap(DailyDataCollectionViewCell.measurementFormatter.string) ?? "Missing data"
-        }
+        // look at me. i am the delegate now
+        massTextField.delegate = self
+        energyTextField.delegate = self
     }
     
     @objc private func massTextFieldShouldBecomeFirstResponder(_ sender: Any) {
@@ -161,12 +115,53 @@ class DailyDataCollectionViewCell: DailyCollectionViewCell {
     }
 }
 
-extension DailyDataCollectionViewCell: DailyItemPickerDelegate {
-    func dailyPicker(_ picker: UIPickerView, valueDidChangeTo: Double) {
-        if picker == massPickerView {
-            massBuffer = Measurement<UnitMass>(value: valueDidChangeTo, unit: UserDefaults.standard.mass)
-        } else {
-            energyBuffer = Measurement<UnitEnergy>(value: valueDidChangeTo, unit: UserDefaults.standard.energy)
+extension DailyDataCollectionViewCell: UITextFieldDelegate {
+    func isConvertibleToDecimal(_ string: String) -> Bool {
+        return numberFormatter.number(from: string) != nil
+    }
+    
+    // save the measurements in the buffer, as the textfield's text will clear when it is tapped. if the user cancels editing a textfield (i.e. taps outside of the textfield, or doesnt tap the done button), we can restore it
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == massTextField && mass != nil {
+            massBuffer = mass
+        } else if textField == energyTextField && energy != nil {
+            energyBuffer = energy
+        }
+        
+        return true
+    }
+    
+    // make sure that the input is a decimal number
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard !string.isEmpty else { return true }
+        
+        let currentText = textField.text ?? ""
+        let replacementText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        
+        return isConvertibleToDecimal(replacementText)
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField == massTextField {
+           if let newMeasurementValueString = textField.text, let newMeasurementValue = Double(newMeasurementValueString) {
+            massBuffer?.value = newMeasurementValue
+           }
+            mass = massBuffer
+        } else if textField == energyTextField {
+            if let newMeasurementValueString = textField.text, let newMeasurementValue = Double(newMeasurementValueString) {
+                energyBuffer?.value = newMeasurementValue
+            }
+            energy = energyBuffer
+        }
+        
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == massTextField {
+            cellDelegate?.didEndEditing(cell: self, mass: mass)
+        } else if textField == energyTextField {
+            cellDelegate?.didEndEditing(cell: self, energy: energy)
         }
     }
 }

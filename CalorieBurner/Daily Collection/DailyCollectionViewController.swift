@@ -76,19 +76,14 @@ extension DailyCollectionViewController: DailyCollectionViewDataSource {
             return cell
         }
         
-        let cell = dailyView.dequeueReusableCell(withReuseIdentifier: "EmptyCell", for: indexPath) as! EmptyDailyCollectionViewCell
+        let cell = dailyView.dequeueReusableCell(withReuseIdentifier: "EmptyCell", for: indexPath) as! DailyCollectionViewCell
         return cell
     }
 }
 
 extension DailyCollectionViewController: DailyCollectionViewDelegate {
     func dailyView(_ dailyView: DailyCollectionView, willDisplay cell: DailyCollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? DailyDataCollectionViewCell,
-              let object = fetchedResultsController.object(at: indexPath)
-        else { return }
-        
-        cell.mass = object.mass?.converted(to: UserDefaults.standard.mass)
-        cell.energy = object.energy?.converted(to: UserDefaults.standard.energy)
+        collectionView(dailyView, willDisplay: cell, forItemAt: indexPath)
     }
     
     
@@ -120,13 +115,12 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? DailyDataCollectionViewCell else { return }
+        guard let cell = cell as? DailyDataCollectionViewCell,
+              let object = fetchedResultsController.object(at: indexPath)
+        else { return }
         
-        if let object = fetchedResultsController.object(at: indexPath) {
-            cell.mass = object.mass?.converted(to: UserDefaults.standard.mass)
-            cell.energy = object.energy?.converted(to: UserDefaults.standard.energy)
-        } else {
-            cell.setEmpty()
-        }
+        cell.mass = object.mass?.converted(to: UserDefaults.standard.mass)
+        cell.energy = object.energy?.converted(to: UserDefaults.standard.energy)
+        cell.note = object.note
     }
 }

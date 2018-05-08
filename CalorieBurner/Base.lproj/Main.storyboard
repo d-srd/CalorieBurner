@@ -769,19 +769,23 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="394" height="408"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rye-Oj-rue" userLabel="MassView" customClass="ShadowView" customModule="CocoaControls">
-                                                            <rect key="frame" x="0.0" y="0.0" width="394" height="82.333333333333329"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="394" height="67.333333333333329"/>
                                                             <subviews>
-                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mass" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="czg-Pc-ogX">
-                                                                    <rect key="frame" x="171.66666666666666" y="29" width="51" height="24"/>
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mass" textAlignment="center" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="czg-Pc-ogX">
+                                                                    <rect key="frame" x="60" y="22" width="274" height="24"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="HrJ-9r-rp7"/>
+                                                                    </constraints>
                                                                     <nil key="textColor"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                                    <textInputTraits key="textInputTraits"/>
+                                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad" keyboardAppearance="alert" returnKeyType="next"/>
                                                                 </textField>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
-                                                                <constraint firstItem="czg-Pc-ogX" firstAttribute="centerX" secondItem="rye-Oj-rue" secondAttribute="centerX" id="UEH-es-MXu"/>
-                                                                <constraint firstItem="czg-Pc-ogX" firstAttribute="centerY" secondItem="rye-Oj-rue" secondAttribute="centerY" id="whK-yJ-BE3"/>
+                                                                <constraint firstItem="czg-Pc-ogX" firstAttribute="centerY" secondItem="rye-Oj-rue" secondAttribute="centerY" id="DC5-ho-fts"/>
+                                                                <constraint firstAttribute="trailing" secondItem="czg-Pc-ogX" secondAttribute="trailing" constant="60" id="UDt-Kh-KEl"/>
+                                                                <constraint firstItem="czg-Pc-ogX" firstAttribute="leading" secondItem="rye-Oj-rue" secondAttribute="leading" constant="60" id="q9q-C4-WIM"/>
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
@@ -799,19 +803,23 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cXg-TT-OcM" userLabel="EnergyView" customClass="ShadowView" customModule="CocoaControls">
-                                                            <rect key="frame" x="0.0" y="100.33333333333331" width="394" height="82.666666666666686"/>
+                                                            <rect key="frame" x="0.0" y="85.333333333333314" width="394" height="67.666666666666686"/>
                                                             <subviews>
-                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Energy" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="32a-su-8wh">
-                                                                    <rect key="frame" x="165" y="29.333333333333329" width="64.666666666666686" height="24"/>
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Energy" textAlignment="center" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="32a-su-8wh">
+                                                                    <rect key="frame" x="60" y="22" width="274" height="24"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="nk3-qu-wTX"/>
+                                                                    </constraints>
                                                                     <nil key="textColor"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                                    <textInputTraits key="textInputTraits"/>
+                                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad" keyboardAppearance="alert" returnKeyType="next"/>
                                                                 </textField>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstItem="32a-su-8wh" firstAttribute="centerY" secondItem="cXg-TT-OcM" secondAttribute="centerY" id="4tN-P2-7wg"/>
-                                                                <constraint firstItem="32a-su-8wh" firstAttribute="centerX" secondItem="cXg-TT-OcM" secondAttribute="centerX" id="PRh-Tu-lOF"/>
+                                                                <constraint firstItem="32a-su-8wh" firstAttribute="leading" secondItem="cXg-TT-OcM" secondAttribute="leading" constant="60" id="6bC-pH-iCe"/>
+                                                                <constraint firstAttribute="trailing" secondItem="32a-su-8wh" secondAttribute="trailing" constant="60" id="MR6-sS-1Vb"/>
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
@@ -829,13 +837,13 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ill-2Q-P7h" userLabel="NotesView" customClass="ShadowView" customModule="CocoaControls">
-                                                            <rect key="frame" x="0.0" y="201" width="394" height="207"/>
+                                                            <rect key="frame" x="0.0" y="171" width="394" height="237"/>
                                                             <subviews>
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter anything interesting here." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JHH-c5-w8S">
-                                                                    <rect key="frame" x="8" y="40.666666666666657" width="378" height="158.33333333333334"/>
+                                                                    <rect key="frame" x="8" y="40.666666666666643" width="378" height="188.33333333333337"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert" returnKeyType="done"/>
                                                                 </textView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dY2-yc-9kT">
                                                                     <rect key="frame" x="8" y="8" width="378" height="24"/>
@@ -883,7 +891,7 @@
                                                         <constraint firstItem="Ill-2Q-P7h" firstAttribute="leading" secondItem="PZf-ez-kD7" secondAttribute="leading" id="VHh-PE-o4N"/>
                                                         <constraint firstAttribute="trailing" secondItem="rye-Oj-rue" secondAttribute="trailing" id="Y8D-ME-yRE"/>
                                                         <constraint firstItem="rye-Oj-rue" firstAttribute="leading" secondItem="PZf-ez-kD7" secondAttribute="leading" id="dUf-e2-y4f"/>
-                                                        <constraint firstItem="Ill-2Q-P7h" firstAttribute="height" secondItem="cXg-TT-OcM" secondAttribute="height" multiplier="2.5" id="iae-NF-WNn"/>
+                                                        <constraint firstItem="Ill-2Q-P7h" firstAttribute="height" secondItem="cXg-TT-OcM" secondAttribute="height" multiplier="3.5" id="iae-NF-WNn"/>
                                                         <constraint firstItem="rye-Oj-rue" firstAttribute="top" secondItem="PZf-ez-kD7" secondAttribute="top" id="maJ-RB-eJX"/>
                                                         <constraint firstItem="Ill-2Q-P7h" firstAttribute="top" secondItem="cXg-TT-OcM" secondAttribute="bottom" constant="18" id="rVa-DQ-Khx"/>
                                                     </constraints>
@@ -905,7 +913,7 @@
                                             <outlet property="notesView" destination="Ill-2Q-P7h" id="ZVh-t0-b5B"/>
                                         </connections>
                                     </collectionViewCell>
-                                    <collectionViewCell multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EmptyCell" id="4Dm-2K-5yU" customClass="EmptyDailyCollectionViewCell" customModule="CalorieBurner" customModuleProvider="target">
+                                    <collectionViewCell multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EmptyCell" id="4Dm-2K-5yU" customClass="DailyCollectionViewCell" customModule="CalorieBurner" customModuleProvider="target">
                                         <rect key="frame" x="404" y="41.666666666666664" width="394" height="408"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -957,7 +965,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WvT-Xk-GIi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4470" y="242"/>
+            <point key="canvasLocation" x="4469.5652173913049" y="241.71195652173915"/>
         </scene>
         <!--Diary-->
         <scene sceneID="aEf-rz-CZA">
