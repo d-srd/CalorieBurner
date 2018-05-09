@@ -452,7 +452,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/Calendar/DailyCalendarViewController.swift"
-            timestampString = "547503134.651266"
+            timestampString = "547546033.559301"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "89"
@@ -626,7 +626,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/Calendar/DailyCalendarViewController.swift"
-            timestampString = "547503134.651898"
+            timestampString = "547546033.559502"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "197"
@@ -642,7 +642,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/Calendar/DailyCalendarViewController.swift"
-            timestampString = "547503134.652189"
+            timestampString = "547546033.559554"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "189"
@@ -690,7 +690,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/Calendar/DailyCalendarViewController.swift"
-            timestampString = "547503134.652597"
+            timestampString = "547546033.559623"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "36"
@@ -738,7 +738,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/Calendar/DailyCalendarViewController.swift"
-            timestampString = "547503272.9998699"
+            timestampString = "547546033.559691"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "138"
@@ -754,12 +754,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/Calendar/DailyCalendarViewController.swift"
-            timestampString = "547503283.023321"
+            timestampString = "547546033.5597349"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "139"
             endingLineNumber = "139"
             landmarkName = "keyboardWillHide(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalorieBurner/Calendar/DailyCalendarViewController.swift"
+            timestampString = "547546033.559779"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "viewDidLayoutSubviews()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

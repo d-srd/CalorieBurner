@@ -79,7 +79,7 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
         super.viewDidLayoutSubviews()
         
         dailyCollectionViewController.dailyView.itemSize =
-            CGSize(width: containerView.frame.width * 0.8, height: containerView.frame.height * 0.7)
+            CGSize(width: containerView.frame.width * 0.8, height: containerView.frame.height * 0.8)
         dailyCollectionViewController.dailyView.collectionViewLayout.invalidateLayout()
     }
     

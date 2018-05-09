@@ -8,7 +8,7 @@
 
 import UIKit
 import CocoaControls
-import IQKeyboardManager
+import IQKeyboardManagerSwift
 
 protocol DailyCellDelegate: class {
     func willBeginEditing(cell: DailyDataCollectionViewCell, with inputView: UIView)
@@ -100,6 +100,9 @@ class DailyDataCollectionViewCell: DailyCollectionViewCell {
         // look at me. i am the delegate now
         massTextField.delegate = self
         energyTextField.delegate = self
+        
+        massTextField.keyboardDistanceFromTextField = 10
+        energyTextField.keyboardDistanceFromTextField = 10
     }
     
     @objc private func massTextFieldShouldBecomeFirstResponder(_ sender: Any) {

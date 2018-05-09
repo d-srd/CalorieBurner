@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-import IQKeyboardManager
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,8 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ]
         UserDefaults.standard.register(defaults: defaultUserDefaults)
         
-        IQKeyboardManager.shared().isEnabled = true
-        IQKeyboardManager.shared().shouldResignOnTouchOutside = true
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+//        IQKeyboardManager.shared.enableDebugging = true
         
         return true
     }

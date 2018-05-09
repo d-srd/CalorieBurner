@@ -765,7 +765,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="394" height="408"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PZf-ez-kD7" customClass="IQPreviousNextView">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PZf-ez-kD7" customClass="IQPreviousNextView" customModule="IQKeyboardManagerSwift">
                                                     <rect key="frame" x="0.0" y="0.0" width="394" height="408"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rye-Oj-rue" userLabel="MassView" customClass="ShadowView" customModule="CocoaControls">
