@@ -10,6 +10,7 @@ import UIKit
 
 extension DailyFetchedResultsController: DailyIndexPathProvider { }
 
+/// View Controller preconfigured for displaying a Daily Collection View
 class DailyCollectionViewController: UIViewController {
     @IBOutlet weak var dailyView: DailyCollectionView!
     
@@ -19,7 +20,6 @@ class DailyCollectionViewController: UIViewController {
     let endDate = Calendar.current.date(from: DateComponents(year: 2030, month: 12, day: 31))!
     lazy var dayCount = Calendar.current.dateComponents([.day], from: startDate, to: endDate).day!
     
-    var itemSize: (() -> CGSize)?
     private let defaultItemSize = CGSize(width: 200, height: 88)
     
     private lazy var fetchedResultsController: DailyFetchedResultsController = {
@@ -88,7 +88,7 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
     
     
     func dailyView(_ dailyView: DailyCollectionView, sizeForItemAt date: Date) -> CGSize {
-        return dailyView.itemSize ?? itemSize?() ?? defaultItemSize
+        return dailyView.itemSize ?? defaultItemSize
     }
     
     // TODO: fix saving Dailies

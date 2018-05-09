@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -153,7 +152,7 @@
                                                 <color key="value" name="Healthy Red"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="progress">
-                                                <real key="value" value="0.29999999999999999"/>
+                                                <real key="value" value="0.66400000000000003"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="displaysPercentage" value="YES"/>
                                         </userDefinedRuntimeAttributes>
@@ -716,30 +715,6 @@
             </objects>
             <point key="canvasLocation" x="710" y="958"/>
         </scene>
-        <!--Picker View Controller-->
-        <scene sceneID="GFF-HD-dWK">
-            <objects>
-                <viewController id="aQd-wn-jnj" customClass="PickerViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8sp-xy-2Mu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fFT-Mg-SWb">
-                                <rect key="frame" x="0.0" y="279" width="414" height="162"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            </pickerView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="PW3-W7-6T4"/>
-                    </view>
-                    <connections>
-                        <outlet property="pickerView" destination="fFT-Mg-SWb" id="e5d-gT-HTm"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xBs-84-c5N" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="86" y="1695"/>
-        </scene>
         <!--Daily Collection View Controller-->
         <scene sceneID="7uF-Ca-6g0">
             <objects>
@@ -771,7 +746,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rye-Oj-rue" userLabel="MassView" customClass="ShadowView" customModule="CocoaControls">
                                                             <rect key="frame" x="0.0" y="0.0" width="394" height="67.333333333333329"/>
                                                             <subviews>
-                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mass" textAlignment="center" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="czg-Pc-ogX">
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mass" textAlignment="center" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="czg-Pc-ogX">
                                                                     <rect key="frame" x="60" y="22" width="274" height="24"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="HrJ-9r-rp7"/>
@@ -805,7 +780,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cXg-TT-OcM" userLabel="EnergyView" customClass="ShadowView" customModule="CocoaControls">
                                                             <rect key="frame" x="0.0" y="85.333333333333314" width="394" height="67.666666666666686"/>
                                                             <subviews>
-                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Energy" textAlignment="center" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="32a-su-8wh">
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Energy" textAlignment="center" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="32a-su-8wh">
                                                                     <rect key="frame" x="60" y="22" width="274" height="24"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="nk3-qu-wTX"/>
@@ -839,11 +814,11 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ill-2Q-P7h" userLabel="NotesView" customClass="ShadowView" customModule="CocoaControls">
                                                             <rect key="frame" x="0.0" y="171" width="394" height="237"/>
                                                             <subviews>
-                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter anything interesting here." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JHH-c5-w8S">
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" text="Enter anything interesting here." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JHH-c5-w8S">
                                                                     <rect key="frame" x="8" y="40.666666666666643" width="378" height="188.33333333333337"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert" returnKeyType="done"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert"/>
                                                                 </textView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dY2-yc-9kT">
                                                                     <rect key="frame" x="8" y="8" width="378" height="24"/>
@@ -985,204 +960,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rei-my-XIn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2975" y="-104"/>
-        </scene>
-        <!--Daily Collection View Controller-->
-        <scene sceneID="0aX-9q-VeM">
-            <objects>
-                <viewController modalPresentationStyle="currentContext" id="9bB-oi-3G8" customClass="DailyCollectionViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="btK-NQ-ugw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8kj-x7-bsZ">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" sectionInsetReference="safeArea" id="3ou-b6-PBd">
-                                    <size key="itemSize" width="320" height="120"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DailyCell" id="qZM-hh-WHj" customClass="DailyDataCollectionViewCell" customModule="CalorieBurner" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="20" width="320" height="120"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zOy-xj-9kH" customClass="ShadowView" customModule="CocoaControls">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
-                                                    <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="unS-GE-GsW">
-                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
-                                                            <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r4h-N7-Tqa" userLabel="MassView" customClass="ShadowView" customModule="CocoaControls">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
-                                                                    <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="firstBaseline" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="soW-LY-k2D">
-                                                                            <rect key="frame" x="102.66666666666666" y="15.333333333333334" width="114.66666666666666" height="20.333333333333329"/>
-                                                                            <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mass" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Njt-Rg-XCV">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="53.333333333333336" height="20.333333333333332"/>
-                                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                    <nil key="textColor"/>
-                                                                                    <nil key="highlightedColor"/>
-                                                                                </label>
-                                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wt4-6k-kOu" customClass="BottomBorderTextField" customModule="CalorieBurner" customModuleProvider="target">
-                                                                                    <rect key="frame" x="61.333333333333329" y="2.9999999999999982" width="53.333333333333329" height="17"/>
-                                                                                    <nil key="textColor"/>
-                                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                    <textInputTraits key="textInputTraits"/>
-                                                                                    <userDefinedRuntimeAttributes>
-                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                                            <real key="value" value="4"/>
-                                                                                        </userDefinedRuntimeAttribute>
-                                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                        </userDefinedRuntimeAttribute>
-                                                                                    </userDefinedRuntimeAttributes>
-                                                                                </textField>
-                                                                            </subviews>
-                                                                            <constraints>
-                                                                                <constraint firstItem="Wt4-6k-kOu" firstAttribute="firstBaseline" secondItem="Njt-Rg-XCV" secondAttribute="baseline" id="aM3-Eu-sRZ"/>
-                                                                            </constraints>
-                                                                        </stackView>
-                                                                    </subviews>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <constraints>
-                                                                        <constraint firstItem="soW-LY-k2D" firstAttribute="centerX" secondItem="r4h-N7-Tqa" secondAttribute="centerX" id="Ng4-AJ-wbS"/>
-                                                                        <constraint firstItem="soW-LY-k2D" firstAttribute="centerY" secondItem="r4h-N7-Tqa" secondAttribute="centerY" id="g2t-Yr-8gR"/>
-                                                                    </constraints>
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                                            <size key="value" width="0.0" height="3"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                            <real key="value" value="4"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                                            <real key="value" value="0.59999999999999998"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
-                                                                            <real key="value" value="12"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2XA-TJ-zOL" userLabel="EnergyView" customClass="ShadowView" customModule="CocoaControls">
-                                                                    <rect key="frame" x="0.0" y="69" width="320" height="51"/>
-                                                                    <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="firstBaseline" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="caF-Sr-UIL">
-                                                                            <rect key="frame" x="102.66666666666666" y="15.333333333333327" width="114.66666666666666" height="20.333333333333329"/>
-                                                                            <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Energy" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Pu-vV-a0Z">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="53.333333333333336" height="20.333333333333332"/>
-                                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                    <nil key="textColor"/>
-                                                                                    <nil key="highlightedColor"/>
-                                                                                </label>
-                                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gB0-0m-sEz" customClass="BottomBorderTextField" customModule="CalorieBurner" customModuleProvider="target">
-                                                                                    <rect key="frame" x="61.333333333333329" y="3" width="53.333333333333329" height="17"/>
-                                                                                    <nil key="textColor"/>
-                                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                    <textInputTraits key="textInputTraits"/>
-                                                                                    <userDefinedRuntimeAttributes>
-                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                                            <real key="value" value="1"/>
-                                                                                        </userDefinedRuntimeAttribute>
-                                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                        </userDefinedRuntimeAttribute>
-                                                                                    </userDefinedRuntimeAttributes>
-                                                                                </textField>
-                                                                            </subviews>
-                                                                            <constraints>
-                                                                                <constraint firstItem="gB0-0m-sEz" firstAttribute="firstBaseline" secondItem="3Pu-vV-a0Z" secondAttribute="baseline" id="JTb-Du-BN5"/>
-                                                                            </constraints>
-                                                                        </stackView>
-                                                                    </subviews>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <constraints>
-                                                                        <constraint firstItem="caF-Sr-UIL" firstAttribute="centerX" secondItem="2XA-TJ-zOL" secondAttribute="centerX" id="8eG-vw-D6R"/>
-                                                                        <constraint firstItem="caF-Sr-UIL" firstAttribute="centerY" secondItem="2XA-TJ-zOL" secondAttribute="centerY" id="dWc-ga-NTO"/>
-                                                                    </constraints>
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                                            <size key="value" width="0.0" height="3"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                            <real key="value" value="4"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                                            <real key="value" value="0.59999999999999998"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
-                                                                            <real key="value" value="12"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                </view>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="caF-Sr-UIL" firstAttribute="leading" secondItem="soW-LY-k2D" secondAttribute="leading" id="HmV-PV-aTC"/>
-                                                                <constraint firstItem="caF-Sr-UIL" firstAttribute="trailing" secondItem="soW-LY-k2D" secondAttribute="trailing" id="Q9i-Z7-PNu"/>
-                                                            </constraints>
-                                                        </stackView>
-                                                    </subviews>
-                                                    <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="unS-GE-GsW" secondAttribute="bottom" id="67D-d2-Dei"/>
-                                                        <constraint firstItem="unS-GE-GsW" firstAttribute="leading" secondItem="zOy-xj-9kH" secondAttribute="leading" id="PXq-ZO-X0m"/>
-                                                        <constraint firstAttribute="trailing" secondItem="unS-GE-GsW" secondAttribute="trailing" id="Slg-ib-I4p"/>
-                                                        <constraint firstItem="unS-GE-GsW" firstAttribute="top" secondItem="zOy-xj-9kH" secondAttribute="top" id="j6J-jJ-Dm5"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                            <size key="value" width="0.0" height="0.0"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                            <real key="value" value="0.0"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                            <real key="value" value="0.0"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                            </subviews>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstItem="zOy-xj-9kH" firstAttribute="top" secondItem="qZM-hh-WHj" secondAttribute="top" id="Lap-XI-3HS"/>
-                                            <constraint firstItem="zOy-xj-9kH" firstAttribute="leading" secondItem="qZM-hh-WHj" secondAttribute="leading" id="Mvc-Iy-DBz"/>
-                                            <constraint firstAttribute="bottom" secondItem="zOy-xj-9kH" secondAttribute="bottom" id="N6O-vE-9s3"/>
-                                            <constraint firstAttribute="trailing" secondItem="zOy-xj-9kH" secondAttribute="trailing" id="cTJ-D4-czV"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="energyTextField" destination="gB0-0m-sEz" id="gs4-Ra-SAO"/>
-                                            <outlet property="massTextField" destination="Wt4-6k-kOu" id="3fI-8t-KTn"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="gjQ-WP-i16" firstAttribute="bottom" secondItem="8kj-x7-bsZ" secondAttribute="bottom" id="LkW-3h-X6j"/>
-                            <constraint firstItem="8kj-x7-bsZ" firstAttribute="leading" secondItem="gjQ-WP-i16" secondAttribute="leading" id="a0R-CU-zRd"/>
-                            <constraint firstItem="gjQ-WP-i16" firstAttribute="trailing" secondItem="8kj-x7-bsZ" secondAttribute="trailing" id="gew-z3-Td3"/>
-                            <constraint firstItem="8kj-x7-bsZ" firstAttribute="top" secondItem="btK-NQ-ugw" secondAttribute="top" id="hTb-I7-YaL"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="gjQ-WP-i16"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="eR6-7M-P7u"/>
-                    <connections>
-                        <outlet property="collectionView" destination="8kj-x7-bsZ" id="5eH-Ef-c0a"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5cv-rr-vOc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1613" y="-761"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="YSt-tY-lFl">
@@ -1423,21 +1200,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mlv-aM-0am" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2974" y="887"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="CMf-Q6-WwE">
-            <objects>
-                <viewController id="blo-wN-QNE" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="PHx-Sx-7Ji">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Rrq-cH-U90"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Q6P-tC-V1A" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4551" y="2049"/>
         </scene>
         <!--Monthly Calendar-->
         <scene sceneID="MU6-7f-VNL">
