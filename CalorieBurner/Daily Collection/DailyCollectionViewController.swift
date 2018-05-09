@@ -114,6 +114,14 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
         }
     }
     
+    func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, note: String) {
+        do {
+            _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: nil, energy: nil, note: note)
+        } catch {
+            
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? DailyDataCollectionViewCell,
               let object = fetchedResultsController.object(at: indexPath)

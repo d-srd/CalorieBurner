@@ -10,14 +10,6 @@ import UIKit
 import CocoaControls
 import IQKeyboardManagerSwift
 
-protocol DailyCellDelegate: class {
-    func willBeginEditing(cell: DailyDataCollectionViewCell, with inputView: UIView)
-//    func willCancelEditing(cell: DailyCollectionViewCell, for itemType: MeasurementItems)
-//    func didCancelEditing(cell: DailyCollectionViewCell, for itemType: MeasurementItems)
-    func didEndEditing(cell: DailyDataCollectionViewCell, mass: Mass?)
-    func didEndEditing(cell: DailyDataCollectionViewCell, energy: Energy?)
-}
-
 class DailyCollectionViewCell: UICollectionViewCell { }
 
 fileprivate let numberFormatter: NumberFormatter = {
@@ -59,15 +51,22 @@ class DailyDataCollectionViewCell: DailyCollectionViewCell {
     
     weak var cellDelegate: DailyCellDelegate?
     
-    // this is set by the massPickerView's delegate, i.e. the cell
     public var mass: Measurement<UnitMass>? {
         didSet { massTextField.text = mass.flatMap(measurementFormatter.string) }
     }
     
     // useful for cancelling the editing action
+    // example usage:
+    // 0. a cell with mass text field containing "50 kg" is displayed
+    // 1. user taps text field
+    // 2. mass is copied to massbuffer
+    // 3. text field is cleared along with the mass
+    // 4. user enters some numbers and deletes them, leaving an empty text field
+    // 5. text field is about to resign first responder
+    // 6. mass is copied from massbuffer
+    // 7. initial text in text field is restored
     private var massBuffer: Measurement<UnitMass>?
     
-    // this is set by the energyPickerView's delegate, i.e. this class
     public var energy: Measurement<UnitEnergy>? {
         didSet { energyTextField.text = energy.flatMap(measurementFormatter.string) }
     }
@@ -75,9 +74,7 @@ class DailyDataCollectionViewCell: DailyCollectionViewCell {
     private var energyBuffer: Measurement<UnitEnergy>?
     
     public var note: String? {
-        didSet {
-            notesTextView.text = note
-        }
+        didSet { notesTextView.text = note }
     }
     
     // add some convenient tap gestures so the user does not have to press the actual textfield to initiate editing
@@ -100,6 +97,7 @@ class DailyDataCollectionViewCell: DailyCollectionViewCell {
         // look at me. i am the delegate now
         massTextField.delegate = self
         energyTextField.delegate = self
+        notesTextView.delegate = self
         
         massTextField.keyboardDistanceFromTextField = 10
         energyTextField.keyboardDistanceFromTextField = 10
@@ -166,5 +164,11 @@ extension DailyDataCollectionViewCell: UITextFieldDelegate {
         } else if textField == energyTextField {
             cellDelegate?.didEndEditing(cell: self, energy: energy)
         }
+    }
+}
+
+extension DailyDataCollectionViewCell: UITextViewDelegate {
+    func textViewDidEndEditing(_ textView: UITextView) {
+        cellDelegate?.didEndEditing(cell: self, note: note)
     }
 }

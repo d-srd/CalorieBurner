@@ -170,7 +170,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "196"
-            endingLineNumber = "196">
+            endingLineNumber = "196"
+            landmarkName = "didEndEditing(cell:note:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

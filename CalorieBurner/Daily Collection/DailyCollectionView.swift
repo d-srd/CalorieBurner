@@ -156,9 +156,6 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
 }
 
 extension DailyCollectionView: DailyCellDelegate {
-    func willBeginEditing(cell: DailyDataCollectionViewCell, with inputView: UIView) {
-    }
-    
     func willCancelEditing(cell: DailyDataCollectionViewCell, for itemType: MeasurementItems) {
         guard let indexPath = self.indexPath(for: cell),
               let date = indexPathProvider?.date(for: indexPath)
@@ -191,5 +188,14 @@ extension DailyCollectionView: DailyCellDelegate {
         else { return }
         
         dailyDelegate?.didEndEditing(cell: cell, at: date, energy: energy)
+    }
+    
+    func didEndEditing(cell: DailyDataCollectionViewCell, note: String?) {
+        guard let indexPath = self.indexPath(for: cell),
+              let date = indexPathProvider?.date(for: indexPath),
+              let note = note
+        else { return }
+        
+        dailyDelegate?.didEndEditing(cell: cell, at: date, note: note)
     }
 }

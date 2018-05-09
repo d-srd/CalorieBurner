@@ -27,6 +27,7 @@ protocol DailyCollectionViewDelegate: class {
     func didCancelEditing(cell: DailyDataCollectionViewCell, at date: Date, for itemType: MeasurementItems)
     func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, mass: Mass)
     func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, energy: Energy)
+    func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, note: String)
 }
 
 protocol DailyCollectionViewDataSource: class, DateBoundaries {
