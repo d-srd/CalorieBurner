@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CocoaControls
 
 protocol WeightDeltaDelegate: class {
     func startingWeight(_ weightDeltaView: WeightDeltaView) -> Mass

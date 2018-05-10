@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import CocoaControls
 
 class CRUDViewController: UIViewController {
     private enum DatabaseActionType { case add, delete, print }

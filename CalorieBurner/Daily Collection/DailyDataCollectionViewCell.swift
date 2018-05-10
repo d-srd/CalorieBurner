@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CocoaControls
 import IQKeyboardManagerSwift
 
 class DailyCollectionViewCell: UICollectionViewCell { }
