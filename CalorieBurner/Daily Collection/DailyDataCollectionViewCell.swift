@@ -8,7 +8,7 @@
 
 import UIKit
 import CocoaControls
-import IQKeyboardManager
+import IQKeyboardManagerSwift
 
 protocol DailyCellDelegate: class {
     func willBeginEditing(cell: DailyDataCollectionViewCell, with inputView: UIView)

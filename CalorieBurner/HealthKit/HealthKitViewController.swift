@@ -12,6 +12,7 @@ import HealthKit
 class HealthKitViewController: UIViewController {
     @IBOutlet weak var massTextField: UITextField!
     @IBOutlet weak var energyTextField: UITextField!
+    @IBOutlet weak var datePicker: UIDatePicker!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,7 @@ class HealthKitViewController: UIViewController {
         let mass = HKQuantitySample(
             type: HKObjectType.quantityType(forIdentifier: .bodyMass)!,
             quantity: HKQuantity(unit: HKUnit.gramUnit(with: .kilo), doubleValue: massValue),
-            start: Date(), end: Date()
+            start: datePicker.date, end: datePicker.date
         )
         
         HealthStoreHelper.shared.writeData(sample: mass) { (success, error) in
@@ -41,7 +42,7 @@ class HealthKitViewController: UIViewController {
         
         let energy = HKQuantitySample(type: HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
                                       quantity: HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: energyValue),
-                                      start: Date(), end: Date())
+                                          start: datePicker.date, end: datePicker.date)
         
         HealthStoreHelper.shared.writeData(sample: energy) { (success, error) in
             guard error == nil else { print("error saving: \(error)"); return }

@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-import IQKeyboardManager
+import IQKeyboardManagerSwift
 import HealthKit
 
 // we need a singleton health store, as they are long lived objects
@@ -30,26 +30,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: defaultUserDefaults)
         
         // make the keyboard scared of any text fields
-        IQKeyboardManager.shared().isEnabled = true
+        IQKeyboardManager.shared.enable = true
         
         
+        HealthStoreHelper.shared.requestAuthorization { (success, error) in
+            guard error == nil else {
+                print("oops")
+                return
+            }
+        }
         
         // register long running health observer queries
         let massSample = HKObjectType.quantityType(forIdentifier: .bodyMass)!
-        let query = HKObserverQuery(sampleType: massSample, predicate: nil) { (query, completion, err) in
+        let energySample = HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!
+        
+        let massQuery = HKObserverQuery(sampleType: massSample, predicate: nil) { (query, completion, err) in
             guard err == nil else {
                 print("** An error occurred whilst setting up mass observer query. \(err) Aborting. **")
                 abort()
             }
             
-            self.healthDidUpdate()
+//            self.healthDidUpdate()
             
+            self.handleHealthUpdate(fromQuery: query)
+            completion()
+        }
+        let energyQuery = HKObserverQuery(sampleType: energySample, predicate: nil) { (query, completion, err) in
+            guard err == nil else {
+                print("** An error occurred whilst setting up mass observer query. \(err) Aborting. **")
+                abort()
+            }
+            
+            self.handleHealthUpdate(fromQuery: query)
             completion()
         }
         
-        healthStore.execute(query)
+        healthStore.execute(massQuery)
+        healthStore.execute(energyQuery)
         
-        healthStore.enableBackgroundDelivery(for: massSample, frequency: HKUpdateFrequency.daily) { (success, error) in
+        healthStore.enableBackgroundDelivery(for: massSample, frequency: .daily) { (success, error) in
+            guard error == nil else {
+                print("* error occured setting up background delivery. \(error).*")
+                abort()
+            }
+        }
+        healthStore.enableBackgroundDelivery(for: energySample, frequency: .daily) { (success, error) in
             guard error == nil else {
                 print("* error occured setting up background delivery. \(error).*")
                 abort()
@@ -57,6 +82,82 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return true
+    }
+    
+    private var anchor: HKQueryAnchor?
+    
+    private lazy var anchoredQuery: HKAnchoredObjectQuery = {
+        func anchorUpdateHandler(query: HKAnchoredObjectQuery, samples: [HKSample]?, deletions: [HKDeletedObject]?, newAnchor: HKQueryAnchor?, error: Error?) {
+            guard let samples = samples, let deletions = deletions else { print("error initial"); return }
+            
+            anchor = newAnchor
+            
+            print("Printing samples")
+            for sample in samples {
+                print(sample)
+            }
+            
+            print("Printing deletions")
+            for deletion in deletions {
+                print(deletion)
+            }
+        }
+        
+        let query = HKAnchoredObjectQuery(type: HKObjectType.quantityType(forIdentifier: .bodyMass)!,
+                                          predicate: nil,
+                                          anchor: anchor,
+                                          limit: HKObjectQueryNoLimit,
+                                          resultsHandler: anchorUpdateHandler)
+        query.updateHandler = anchorUpdateHandler
+        
+        return query
+    }()
+    
+    private lazy var statisticsQuery: HKStatisticsCollectionQuery = {
+        func initialResultsHandler(for query: HKStatisticsCollectionQuery, collection: HKStatisticsCollection?, error: Error?) {
+            guard let results = collection else { print("error retrieving values"); return }
+            
+            let endDate = Date()
+            let startDate = Calendar.current.date(byAdding: .month, value: -3, to: endDate)!
+            
+            results.enumerateStatistics(from: startDate, to: endDate) { (statistics, stop) in
+                if let quantity = statistics.sumQuantity() {
+                    let date = statistics.startDate
+                    let value = quantity.doubleValue(for: HKUnit.kilocalorie())
+                    
+                    print("found initial calories: \(value) for date: \(date)")
+                }
+            }
+        }
+        
+        func updateHandler(for query: HKStatisticsCollectionQuery, data: HKStatistics?, collection: HKStatisticsCollection?, error: Error?) {
+            guard let updatedItem = data?.sumQuantity() else { print("error retrieving values"); return }
+            
+            print("found updated calories: \(updatedItem)")
+        }
+        
+        let query = HKStatisticsCollectionQuery(quantityType: HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
+                                                quantitySamplePredicate: nil,
+                                                options: .cumulativeSum,
+                                                anchorDate: Date(timeIntervalSinceReferenceDate: 0),
+                                                intervalComponents: DateComponents(day: 1))
+        query.initialResultsHandler = initialResultsHandler
+        query.statisticsUpdateHandler = updateHandler
+    
+        return query
+    }()
+    
+    private var didExecuteStatisticsQuery = false
+
+    private func handleHealthUpdate(fromQuery query: HKObserverQuery) {
+        guard let objectType = query.objectType else { return }
+        
+        if objectType == HKObjectType.quantityType(forIdentifier: .bodyMass)! {
+            healthStore.execute(anchoredQuery)
+        } else if objectType == HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed) && !didExecuteStatisticsQuery {
+            healthStore.execute(statisticsQuery)
+            didExecuteStatisticsQuery = true
+        }
     }
     
     private func healthDidUpdate() {

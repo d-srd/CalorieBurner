@@ -1050,11 +1050,19 @@
                                     <action selector="saveEnergyToHealthKit:" destination="iG8-tG-kpi" eventType="touchUpInside" id="v27-E3-lBs"/>
                                 </connections>
                             </button>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="GdU-e3-l7k">
+                                <rect key="frame" x="0.0" y="34" width="414" height="162"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="547556462.83307898">
+                                    <!--2018-05-09 11:01:02 +0000-->
+                                </date>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="D2V-D1-qN5"/>
                     </view>
                     <connections>
+                        <outlet property="datePicker" destination="GdU-e3-l7k" id="V9d-ae-EKh"/>
                         <outlet property="energyTextField" destination="eGa-XH-4A5" id="X45-oS-4zM"/>
                         <outlet property="massTextField" destination="kVO-Qi-3mU" id="goo-UG-8jP"/>
                     </connections>

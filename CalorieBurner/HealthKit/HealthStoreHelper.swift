@@ -29,9 +29,7 @@ class HealthStoreHelper {
         }
         
         store.requestAuthorization(toShare: typesToWrite, read: typesToRead) { (success, error) in
-            DispatchQueue.main.async {
-                completion(success, error)
-            }
+            completion(success, error)
         }
     }
     
