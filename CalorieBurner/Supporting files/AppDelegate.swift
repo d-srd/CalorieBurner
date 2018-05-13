@@ -111,7 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return query
     }()
     
-    private lazy var statisticsQuery: HKStatisticsCollectionQuery = {
+    private func makeStatisticsQuery() -> HKStatisticsCollectionQuery {
         let query = HKStatisticsCollectionQuery(quantityType: HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
                                                 quantitySamplePredicate: nil,
                                                 options: .cumulativeSum,
@@ -143,7 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     
         return query
-    }()
+    }
     
     private var didExecuteStatisticsQuery = false
     private var didExecuteAnchoredQuery = false
@@ -155,7 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             healthStore.execute(anchoredQuery)
             didExecuteAnchoredQuery = true
         } else if objectType == HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed) && !didExecuteStatisticsQuery {
-            healthStore.execute(statisticsQuery)
+            healthStore.execute(makeStatisticsQuery())
             didExecuteStatisticsQuery = true
         }
     }
