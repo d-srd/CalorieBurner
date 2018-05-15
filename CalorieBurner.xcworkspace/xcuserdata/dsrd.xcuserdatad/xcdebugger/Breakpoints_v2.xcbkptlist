@@ -788,7 +788,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/Supporting files/AppDelegate.swift"
-            timestampString = "548071764.051653"
+            timestampString = "548081091.067118"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "35"
@@ -836,7 +836,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/Supporting files/AppDelegate.swift"
-            timestampString = "548071764.052279"
+            timestampString = "548081091.067207"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "52"
@@ -859,6 +859,118 @@
             endingLineNumber = "43"
             landmarkName = "saveEnergyToHealthKit(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalorieBurner/HealthKit/HealthStoreHelper.swift"
+            timestampString = "548081091.067294"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "makeEnergyStatisticsQuery(_:processValues:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalorieBurner/HealthKit/HealthStoreHelper.swift"
+            timestampString = "548081091.06782"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "massResults"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CalorieBurner.HealthStoreHelper.(massResults in _81519A21D4A9C8005034CC8EE1814A0F).getter : Swift.Dictionary&lt;Foundation.Date, Swift.Double&gt;"
+                  moduleName = "CalorieBurner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dsrd/Developer/cocoa/CalorieBurner/CalorieBurner/HealthKit/HealthStoreHelper.swift"
+                  timestampString = "548080804.019045"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "80">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CalorieBurner.HealthStoreHelper.(massResults in _81519A21D4A9C8005034CC8EE1814A0F).setter : Swift.Dictionary&lt;Foundation.Date, Swift.Double&gt;"
+                  moduleName = "CalorieBurner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dsrd/Developer/cocoa/CalorieBurner/CalorieBurner/HealthKit/HealthStoreHelper.swift"
+                  timestampString = "548080804.0221291"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "96">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalorieBurner/HealthKit/HealthStoreHelper.swift"
+            timestampString = "548081091.068242"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "energyResults"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CalorieBurner.HealthStoreHelper.(energyResults in _81519A21D4A9C8005034CC8EE1814A0F).getter : Swift.Dictionary&lt;Foundation.Date, Swift.Double&gt;"
+                  moduleName = "CalorieBurner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dsrd/Developer/cocoa/CalorieBurner/CalorieBurner/HealthKit/HealthStoreHelper.swift"
+                  timestampString = "548080804.034902"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "80">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CalorieBurner.HealthStoreHelper.(energyResults in _81519A21D4A9C8005034CC8EE1814A0F).setter : Swift.Dictionary&lt;Foundation.Date, Swift.Double&gt;"
+                  moduleName = "CalorieBurner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dsrd/Developer/cocoa/CalorieBurner/CalorieBurner/HealthKit/HealthStoreHelper.swift"
+                  timestampString = "548080804.037356"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "96">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

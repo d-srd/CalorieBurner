@@ -22,6 +22,9 @@ class HealthStoreHelper {
     private var isAuthorized = false
     private var anchor: HKQueryAnchor?
     
+    private var energyResults = [Date : Double]()
+    private var massResults = [Date : Double]()
+    
     private lazy var statisticsQuery = makeEnergyStatisticsQuery()
     private lazy var anchoredQuery = makeAnchoredMassQuery()
     
@@ -63,9 +66,17 @@ class HealthStoreHelper {
             }
             
             if !wself.didExecuteAnchoredQuery {
-                wself.anchoredQuery = wself.makeAnchoredMassQuery(completion)
+                wself.anchoredQuery = wself.makeAnchoredMassQuery(completion) { results in
+                    self?.massResults.merge(results) { (first, second) in return first }
+                }
                 wself.store.execute(wself.anchoredQuery)
                 wself.didExecuteAnchoredQuery = true
+            } else {
+                wself.store.stop(wself.anchoredQuery)
+                wself.anchoredQuery = wself.makeAnchoredMassQuery(completion) { results in
+                    self?.massResults = results
+                }
+                wself.store.execute(wself.anchoredQuery)
             }
         }
         
@@ -83,7 +94,9 @@ class HealthStoreHelper {
                 wself.didExecuteStatisticsQuery = true
             } else {
                 wself.store.stop(wself.statisticsQuery)
-                wself.statisticsQuery = wself.makeEnergyStatisticsQuery(completion)
+                wself.statisticsQuery = wself.makeEnergyStatisticsQuery(completion) { results in
+                    self?.energyResults = results
+                }
                 wself.store.execute(wself.statisticsQuery)
             }
         }
@@ -108,7 +121,10 @@ class HealthStoreHelper {
                                        withCompletion: completion)
     }
     
-    private func makeEnergyStatisticsQuery(_ completion: (() -> Void)? = nil) -> HKStatisticsCollectionQuery {
+    private func makeEnergyStatisticsQuery(_ completion: (() -> Void)? = nil,
+                                           processValues: (([Date : Double]) -> Void)? = nil)
+        -> HKStatisticsCollectionQuery
+    {
         let query = HKStatisticsCollectionQuery(quantityType: HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
                                                 quantitySamplePredicate: nil,
                                                 options: .cumulativeSum,
@@ -116,58 +132,45 @@ class HealthStoreHelper {
                                                 intervalComponents: DateComponents(day: 1))
         
         query.initialResultsHandler = { [weak self] (query, results, error) in
-            guard let results = results else {
-                print("error retrieving values")
-                return
-            }
-            
-            guard !results.statistics().isEmpty else {
-                print("no initial values for statistics. resetting")
-                return
-            }
+            guard let results = results,                // no results. fail silently
+                  !results.statistics().isEmpty         // results are empty
+            else { return }
             
             let endDate = Date()
             let startDate = Calendar.current.date(byAdding: .month, value: -3, to: endDate)!
+            
+            var caloriesPerDate = [Date : Double]()
             
             results.enumerateStatistics(from: startDate, to: endDate) { (statistics, stop) in
                 if let quantity = statistics.sumQuantity() {
                     let date = statistics.startDate
                     let value = quantity.doubleValue(for: HKUnit.kilocalorie())
-                    
-                    print("found initial calories: \(value) for date: \(date)")
+                    caloriesPerDate[date] = value
                 }
             }
             
+            processValues?(caloriesPerDate)
             completion?()
-        }
-        
-        query.statisticsUpdateHandler = { [weak self] (query, results, collection, error) in
-            //            guard let results = results else {
-            //                print("error updating values")
-            //                return
-            //            }
-            
-            if let value = results?.sumQuantity(), let date = results?.startDate {
-                print("found updated calories: \(value) for date: \(date)")
-            } else {
-                print("no values apparently")
-                print("info dump: ", query, results, collection, error)
-            }
         }
         
         return query
     }
     
-    private func makeAnchoredMassQuery(_ completion: (() -> Void)? = nil) -> HKAnchoredObjectQuery {
+    private func makeAnchoredMassQuery(_ completion: (() -> Void)? = nil,
+                                       processValues: (([Date : Double]) -> Void)? = nil)
+        -> HKAnchoredObjectQuery
+    {
         func anchorUpdateHandler(query: HKAnchoredObjectQuery, samples: [HKSample]?, deletions: [HKDeletedObject]?, newAnchor: HKQueryAnchor?, error: Error?) {
             guard let samples = samples, let deletions = deletions else { print("error initial"); return }
             
+            var values = [Date : Double]()
             anchor = newAnchor
             
-            print("Printing samples")
             for sample in samples {
-                print(sample)
+                values[sample.startDate] = (sample as! HKQuantitySample).quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))
             }
+            
+            processValues?(values)
             
             print("Printing deletions")
             for deletion in deletions {
