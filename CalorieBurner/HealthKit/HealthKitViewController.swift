@@ -49,4 +49,9 @@ class HealthKitViewController: UIViewController {
             print("successfully saved energy")
         }
     }
+    
+    @IBAction func convertData(_ sender: Any) {
+        let entries = HealthStoreHelper.shared.convertAll(in: CoreDataStack.shared.viewContext)
+        print(entries)
+    }
 }

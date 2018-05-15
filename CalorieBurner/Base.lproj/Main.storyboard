@@ -1058,6 +1058,14 @@
                                     <!--2018-05-09 11:01:02 +0000-->
                                 </date>
                             </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIT-Aj-tCl">
+                                <rect key="frame" x="139" y="319" width="53" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="convert"/>
+                                <connections>
+                                    <action selector="convertData:" destination="iG8-tG-kpi" eventType="touchUpInside" id="gVe-On-eUe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="D2V-D1-qN5"/>

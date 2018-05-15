@@ -438,13 +438,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/Core Data/CoreDataStack.swift"
-            timestampString = "546251034.927074"
+            timestampString = "548102511.8508559"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "updateOrCreate(at:mass:energy:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -788,7 +788,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/Supporting files/AppDelegate.swift"
-            timestampString = "548081091.067118"
+            timestampString = "548102511.851567"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "35"
@@ -836,7 +836,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/Supporting files/AppDelegate.swift"
-            timestampString = "548081091.067207"
+            timestampString = "548102511.851725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "52"
@@ -852,7 +852,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/HealthKit/HealthKitViewController.swift"
-            timestampString = "547743099.520576"
+            timestampString = "548102511.851849"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
@@ -868,12 +868,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/HealthKit/HealthStoreHelper.swift"
-            timestampString = "548081091.067294"
+            timestampString = "548102511.852954"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "makeEnergyStatisticsQuery(_:processValues:)"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "makeEnergyStatisticsQuery(completion:didProcessValues:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -884,13 +884,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/HealthKit/HealthStoreHelper.swift"
-            timestampString = "548081091.06782"
+            timestampString = "548102511.853173"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "massResults"
-            landmarkType = "24">
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "HealthStoreHelper"
+            landmarkType = "3">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -932,13 +932,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieBurner/HealthKit/HealthStoreHelper.swift"
-            timestampString = "548081091.068242"
+            timestampString = "548102511.853286"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "energyResults"
-            landmarkType = "24">
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "HealthStoreHelper"
+            landmarkType = "3">
             <Locations>
                <Location
                   shouldBeEnabled = "No"

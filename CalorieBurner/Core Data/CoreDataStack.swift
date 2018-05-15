@@ -41,6 +41,35 @@ class CoreDataStack {
         
     }
     
+    func updateOrCreate(at day: Date, mass: Double?, energy: Double?) throws -> Daily {
+        let request = Daily.fetchRequest(in: day)
+        
+        do {
+            if let daily = try viewContext.fetch(request).first {
+                if mass != nil {
+                    daily.mass = Measurement(value: mass!, unit: UnitMass.kilograms)
+                }
+                if energy != nil {
+                    daily.energy = Measurement(value: energy!, unit: UnitEnergy.kilocalories)
+                }
+                try viewContext.save()
+                
+                return daily
+            } else {
+                let daily = Daily(context: viewContext, date: day)
+                daily.mass = mass.flatMap { Measurement(value: $0, unit: UnitMass.kilograms) }
+                daily.energy = energy.flatMap { Measurement(value: $0, unit: UnitEnergy.kilocalories) }
+                
+                viewContext.insert(daily)
+                try viewContext.save()
+                
+                return daily
+            }
+        } catch {
+            throw error
+        }
+    }
+    
     /// If a Daily does not exist in the specified date, it is created with the provided values. Otherwise, it is updated with the provided values. Pass nil to not update a single value.
     func updateOrCreate(at day: Date, mass: Mass?, energy: Energy?) throws -> Daily {
         let request = Daily.fetchRequest(in: day)

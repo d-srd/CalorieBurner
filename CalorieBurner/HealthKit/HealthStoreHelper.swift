@@ -7,11 +7,12 @@
 //
 
 import HealthKit
+import CoreData
 
 protocol DailyModelConvertible {
     associatedtype Data
     
-    func convert(data: Data) -> Daily
+    func convert(data: Data, context: NSManagedObjectContext) -> Daily
 }
 
 class HealthStoreHelper {
@@ -149,7 +150,7 @@ class HealthStoreHelper {
             
             results.enumerateStatistics(from: startDate, to: endDate) { (statistics, stop) in
                 if let quantity = statistics.sumQuantity() {
-                    let date = statistics.startDate
+                    let date = statistics.startDate.startOfDay
                     let value = quantity.doubleValue(for: HKUnit.kilocalorie())
                     caloriesPerDate[date] = value
                 }
@@ -173,7 +174,7 @@ class HealthStoreHelper {
             anchor = newAnchor
             
             for sample in samples {
-                values[sample.startDate] = (sample as! HKQuantitySample).quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))
+                values[sample.startDate.startOfDay] = (sample as! HKQuantitySample).quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))
             }
             
             valueProcessing?(values)
@@ -195,4 +196,26 @@ class HealthStoreHelper {
         
         return query
     }
+}
+
+extension HealthStoreHelper: DailyModelConvertible {
+    typealias Data = (date: Date, mass: Double?, energy: Double?)
+    
+    func convert(data: Data, context: NSManagedObjectContext) -> Daily {
+        let (date, mass, energy) = data
+        let daily = Daily(context: context, date: date)
+        daily.updateValues(mass: mass, energy: energy)
+        
+        return daily
+    }
+    
+    func convertAll(in context: NSManagedObjectContext) -> [Daily] {
+        let dates = Set(energyResults.keys).union(Set(massResults.keys))
+        return dates
+            .sorted()
+            .map { convert(data: ($0, massResults[$0], energyResults[$0]), context: context) }
+//            .map { ($0, massResults[$0], energyResults[$0]) }
+//            .map { convert(data: $0, context: context) }
+    }
+
 }
