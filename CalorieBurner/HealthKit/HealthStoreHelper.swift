@@ -8,20 +8,33 @@
 
 import HealthKit
 
+protocol DailyModelConvertible {
+    associatedtype Data
+    
+    func convert(data: Data) -> Daily
+}
+
 class HealthStoreHelper {
+    // this should only ever be a single instance across the entire app, according to Apple
     private let store: HKHealthStore
+
     private let typesToRead: Set<HKSampleType>
     private let typesToWrite: Set<HKSampleType>
-    
+
+    // saves some typing
     private let massSample = HKObjectType.quantityType(forIdentifier: .bodyMass)!
     private let energySample = HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!
     
+    // this is necessary for stopping the appropriate queries if it didn't fetch any results
     private var didExecuteAnchoredQuery = false
     private var didExecuteStatisticsQuery = false
     
     private var isAuthorized = false
+    
+    // anchor query uses this so it doesn't have to fetch everything all over again
     private var anchor: HKQueryAnchor?
     
+    // the queries' completion handlers assign their values to these variables when they fetch the appropriate data
     private var energyResults = [Date : Double]()
     private var massResults = [Date : Double]()
     
@@ -30,6 +43,7 @@ class HealthStoreHelper {
     
     private static let defaultTypes = Set([HKObjectType.quantityType(forIdentifier: .bodyMass)!, HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!])
     
+    // healthStore is a global variable, since it's easier to just initialize it elsewhere
     static let shared = HealthStoreHelper(store: healthStore, readingTypes: defaultTypes, writingTypes: defaultTypes)
     
     init(store: HKHealthStore, readingTypes: Set<HKSampleType> = defaultTypes, writingTypes: Set<HKSampleType> = defaultTypes) {
@@ -58,46 +72,38 @@ class HealthStoreHelper {
     func enableBackgroundDelivery() {
         let massQuery = HKObserverQuery(sampleType: massSample,
                                         predicate: nil)
-        { [weak self] (query, completion, error) in
-            guard error == nil, let wself = self else {
-                print("** error occured during observer query completion handler **")
-                print(error!.localizedDescription)
-                abort()
-            }
+        { [unowned self] (query, completion, error) in
+            guard error == nil else { fatalError("mass observer completion handler failed. \(error?.localizedDescription)") }
             
-            if !wself.didExecuteAnchoredQuery {
-                wself.anchoredQuery = wself.makeAnchoredMassQuery(completion) { results in
-                    self?.massResults.merge(results) { (first, second) in return first }
+            if !self.didExecuteAnchoredQuery {
+                self.anchoredQuery = self.makeAnchoredMassQuery(completion: completion) { results in
+                    self.massResults.merge(results) { (first, second) in return first }
                 }
-                wself.store.execute(wself.anchoredQuery)
-                wself.didExecuteAnchoredQuery = true
+                self.store.execute(self.anchoredQuery)
+                self.didExecuteAnchoredQuery = true
             } else {
-                wself.store.stop(wself.anchoredQuery)
-                wself.anchoredQuery = wself.makeAnchoredMassQuery(completion) { results in
-                    self?.massResults = results
+                self.store.stop(self.anchoredQuery)
+                self.anchoredQuery = self.makeAnchoredMassQuery(completion: completion) { results in
+                    self.massResults = results
                 }
-                wself.store.execute(wself.anchoredQuery)
+                self.store.execute(self.anchoredQuery)
             }
         }
         
         let energyQuery = HKObserverQuery(sampleType: energySample,
                                           predicate: nil)
-        { [weak self] (query, completion, error) in
-            guard error == nil, let wself = self else {
-                print("** error occured during observer query completion handler **")
-                print(error!.localizedDescription)
-                abort()
-            }
+        { [unowned self] (query, completion, error) in
+            guard error == nil else { fatalError("energy observer completion handler failed. \(error?.localizedDescription)") }
             
-            if !wself.didExecuteStatisticsQuery {
-                wself.store.execute(wself.statisticsQuery)
-                wself.didExecuteStatisticsQuery = true
+            if !self.didExecuteStatisticsQuery {
+                self.store.execute(self.statisticsQuery)
+                self.didExecuteStatisticsQuery = true
             } else {
-                wself.store.stop(wself.statisticsQuery)
-                wself.statisticsQuery = wself.makeEnergyStatisticsQuery(completion) { results in
-                    self?.energyResults = results
+                self.store.stop(self.statisticsQuery)
+                self.statisticsQuery = self.makeEnergyStatisticsQuery(completion: completion) { results in
+                    self.energyResults = results
                 }
-                wself.store.execute(wself.statisticsQuery)
+                self.store.execute(self.statisticsQuery)
             }
         }
         
@@ -121,8 +127,8 @@ class HealthStoreHelper {
                                        withCompletion: completion)
     }
     
-    private func makeEnergyStatisticsQuery(_ completion: (() -> Void)? = nil,
-                                           processValues: (([Date : Double]) -> Void)? = nil)
+    private func makeEnergyStatisticsQuery(completion: (() -> Void)? = nil,
+                                           didProcessValues valueProcessing: (([Date : Double]) -> Void)? = nil)
         -> HKStatisticsCollectionQuery
     {
         let query = HKStatisticsCollectionQuery(quantityType: HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
@@ -131,7 +137,7 @@ class HealthStoreHelper {
                                                 anchorDate: Date(timeIntervalSinceReferenceDate: 0),
                                                 intervalComponents: DateComponents(day: 1))
         
-        query.initialResultsHandler = { [weak self] (query, results, error) in
+        query.initialResultsHandler = { (query, results, error) in
             guard let results = results,                // no results. fail silently
                   !results.statistics().isEmpty         // results are empty
             else { return }
@@ -149,15 +155,15 @@ class HealthStoreHelper {
                 }
             }
             
-            processValues?(caloriesPerDate)
+            valueProcessing?(caloriesPerDate)
             completion?()
         }
         
         return query
     }
     
-    private func makeAnchoredMassQuery(_ completion: (() -> Void)? = nil,
-                                       processValues: (([Date : Double]) -> Void)? = nil)
+    private func makeAnchoredMassQuery(completion: (() -> Void)? = nil,
+                                       didProcessValues valueProcessing: (([Date : Double]) -> Void)? = nil)
         -> HKAnchoredObjectQuery
     {
         func anchorUpdateHandler(query: HKAnchoredObjectQuery, samples: [HKSample]?, deletions: [HKDeletedObject]?, newAnchor: HKQueryAnchor?, error: Error?) {
@@ -170,7 +176,7 @@ class HealthStoreHelper {
                 values[sample.startDate] = (sample as! HKQuantitySample).quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))
             }
             
-            processValues?(values)
+            valueProcessing?(values)
             
             print("Printing deletions")
             for deletion in deletions {
