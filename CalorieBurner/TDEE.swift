@@ -9,6 +9,9 @@
 import Foundation
 import CoreData
 
+// TODO: actually make this class do something
+// for now it's just a scaffold to guide me through the process
+
 public class TDEEMediator {
     var startDate: Date
     var endDate: Date

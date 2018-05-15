@@ -8,7 +8,7 @@
 
 import JTAppleCalendar
 
-/// Preconfigured Calendar Data Source equipped for dealing with weekly/monthly Calendar Views. Weekly Calendar Views have only a single row, whilst Monthly Calendar Views have multiple.
+/// Preconfigured Calendar Data Source equipped for dealing with weekly/monthly Calendar Views. 
 class CalendarViewDataSource: JTAppleCalendarViewDataSource, DateBoundaries {
     enum Configuration { case weekly, monthly }
     
@@ -30,6 +30,7 @@ class CalendarViewDataSource: JTAppleCalendarViewDataSource, DateBoundaries {
         self.configuration = configuration
     }
     
+    /// A weekly configuration displays only a single row with no overlapping dates. A monthly configuration displays as many rows as it needs — mostly 5-6
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         if configuration == .weekly {
             return ConfigurationParameters(startDate: startDate,

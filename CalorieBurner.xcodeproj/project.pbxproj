@@ -11,7 +11,6 @@
 		84123E952093CAF500F5639E /* DailyInputTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84123E942093CAF500F5639E /* DailyInputTableViewController.swift */; };
 		84123EA02097556300F5639E /* transparentPixel.png in Resources */ = {isa = PBXBuildFile; fileRef = 84123E9F2097556300F5639E /* transparentPixel.png */; };
 		841B5AA420436E7300ACAD15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AA320436E7300ACAD15 /* AppDelegate.swift */; };
-		841B5AA620436E7300ACAD15 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AA520436E7300ACAD15 /* ViewController.swift */; };
 		841B5AA920436E7300ACAD15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841B5AA720436E7300ACAD15 /* Main.storyboard */; };
 		841B5AAC20436E7300ACAD15 /* Database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AAA20436E7300ACAD15 /* Database.xcdatamodeld */; };
 		841B5AAE20436E7300ACAD15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 841B5AAD20436E7300ACAD15 /* Assets.xcassets */; };
@@ -86,7 +85,6 @@
 		84123E9F2097556300F5639E /* transparentPixel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparentPixel.png; sourceTree = "<group>"; };
 		841B5AA020436E7300ACAD15 /* CalorieBurner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalorieBurner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		841B5AA320436E7300ACAD15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		841B5AA520436E7300ACAD15 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		841B5AA820436E7300ACAD15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		841B5AAB20436E7300ACAD15 /* CalorieBurner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CalorieBurner.xcdatamodel; sourceTree = "<group>"; };
 		841B5AAD20436E7300ACAD15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -200,7 +198,6 @@
 				84FC538E2057C71000D20B3C /* Core Data */,
 				84FC538D2057C6F100D20B3C /* Supporting files */,
 				84B49849205163A800DCFA05 /* TDEE.swift */,
-				841B5AA520436E7300ACAD15 /* ViewController.swift */,
 				841B5AA720436E7300ACAD15 /* Main.storyboard */,
 			);
 			path = CalorieBurner;
@@ -473,7 +470,6 @@
 				84F08544206A4A0300E47042 /* DailyCSV.swift in Sources */,
 				84DF1B8A2074EE890024D924 /* Measurement.swift in Sources */,
 				843E470A207237BD0041BECB /* DailyCollectionViewProtocols.swift in Sources */,
-				841B5AA620436E7300ACAD15 /* ViewController.swift in Sources */,
 				84398B0020A19FC10061AD69 /* CalendarMonthHeaderView.swift in Sources */,
 				84FC53B9205940E900D20B3C /* DayViewCell.swift in Sources */,
 				84E2F0C320A4D2A400CB3C05 /* CGRect.swift in Sources */,

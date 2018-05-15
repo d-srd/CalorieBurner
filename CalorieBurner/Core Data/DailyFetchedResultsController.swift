@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+/// Essentially a reimplementation of NSFetchedResultsController, specific to this Core Data scheme. If no object exists for a given indexPath, it returns nil, while the number of rows always remains the same. It allows for interesting interactions with Collection/Table Views.
 class DailyFetchedResultsController {
     private var fetchRequest: NSFetchRequest<Daily>
     private var managedObjectContext: NSManagedObjectContext
@@ -20,7 +21,6 @@ class DailyFetchedResultsController {
     private var dateCache = [Date : IndexPath]()
     
     // used only for the function to get date from indexpath
-    
     private var inverseDateCache = [IndexPath : Date]()
     
     private let prettyDateFormatter: DateFormatter = {
@@ -29,8 +29,6 @@ class DailyFetchedResultsController {
         
         return fmt
     }()
-    
-    lazy var numberOfSections = Calendar.current.dateComponents([.day], from: startingDate, to: endingDate).day!
     
     init(
         fetchRequest: NSFetchRequest<Daily>,
@@ -58,28 +56,23 @@ class DailyFetchedResultsController {
         )
     }
     
+    // process context changes
     @objc private func managedObjectContextDidChange(_ notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
         
-        if let inserts = userInfo[NSInsertedObjectsKey] as? Set<Daily>,
-            inserts.count > 0
-        {
+        if let inserts = userInfo[NSInsertedObjectsKey] as? Set<Daily>, inserts.count > 0 {
             for object in inserts {
                 cache(object)
             }
         }
         
-        if let updates = userInfo[NSUpdatedObjectsKey] as? Set<Daily>,
-            updates.count > 0
-        {
+        if let updates = userInfo[NSUpdatedObjectsKey] as? Set<Daily>, updates.count > 0 {
             for object in updates {
                 cache(object)
             }
         }
         
-        if let deletes = userInfo[NSDeletedObjectsKey] as? Set<Daily>,
-            deletes.count > 0
-        {
+        if let deletes = userInfo[NSDeletedObjectsKey] as? Set<Daily>, deletes.count > 0 {
             for object in deletes {
                 guard let indexPath = dateCache[object.created!] else {
                     continue
@@ -141,10 +134,9 @@ class DailyFetchedResultsController {
     }
     
     
-    // TODO: - move this out of here
+    // this really shouldn't be here, as it's not specifically about the functionality of this class
     func date(for indexPath: IndexPath) -> Date? {
-        let d = Calendar.current.date(byAdding: .day, value: indexPath.row, to: startingDate)
-        return d
+        return Calendar.current.date(byAdding: .day, value: indexPath.row, to: startingDate)
     }
     
     func titleForSection(_ section: Int) -> String? {

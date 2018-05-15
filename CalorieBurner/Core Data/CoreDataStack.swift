@@ -25,7 +25,8 @@ class CoreDataStack {
     let persistentContainer: NSPersistentContainer
     lazy var viewContext = persistentContainer.viewContext
     lazy var backgroundContext = persistentContainer.newBackgroundContext()
-        
+    
+    /// Fetch an entry, or create a new one if one does not already exist. Operates on `viewContext`
     func fetchOrCreate(at day: Date) throws -> Daily {
         let request = Daily.fetchRequest(in: day)
         
@@ -41,7 +42,7 @@ class CoreDataStack {
         
     }
     
-    /// If a Daily does not exist in the specified date, it is created with the provided values. Otherwise, it is updated with the provided values. Pass nil to not update a single value.
+    /// If a Daily does not exist in the specified date, it is created with the provided values. Otherwise, it is updated with the provided values. Pass nil to not update a single value. Operates on `viewContext`
     func updateOrCreate(at day: Date, mass: Mass?, energy: Energy?, note: String?) throws -> Daily {
         let request = Daily.fetchRequest(in: day)
         

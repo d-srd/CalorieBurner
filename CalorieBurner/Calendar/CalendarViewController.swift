@@ -39,6 +39,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDelegate {
     
     // MARK: Properties
     
+    // when the user taps a cell, how long should the text and selection view animation be
     let animationSelectionDuration = 0.3
     
     // used for month, year, and days of week labels
@@ -208,17 +209,6 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDelegate {
         return cell
     }
     
-//    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
-//        guard let date = visibleDates.monthDates.first?.date else { return }
-//
-//        dateFormatter.dateFormat = "MMMM yyyy"
-////        navigationItem.title = dateFormatter.string(from: date)
-//
-////        setCurrentDateLabel(to: date)
-//
-////        setDateLabels(to: date)
-//    }
-    
     func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
         return cellState.dateBelongsTo == .thisMonth
     }
@@ -228,8 +218,6 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDelegate {
         if configuration == .monthly {
             performSegue(withIdentifier: "unwindToWeeklySegue", sender: self)
         }
-//        setCurrentDateLabel(to: date)
-//        setCurrentMonthTitle(to: date)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {

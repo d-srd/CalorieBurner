@@ -194,11 +194,7 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
     }
     
     func dailyView(_ dailyView: DailyCollectionView, willScrollToItemAt date: Date) {
-//        if !calendarView.selectedDates.contains(date) {
-//            calendarView.scrollToDate(date)
-//            calendarView.deselectAllDates()
-//            calendarView.selectDates([date])
-//        }
+        // empty implementation, as this is not an Objective-C protocol with optional methods
     }
     
     func dailyView(_ dailyView: DailyCollectionView, didScrollToItemAt date: Date) {

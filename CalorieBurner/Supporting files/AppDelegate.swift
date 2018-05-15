@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        // lol
+        // prepareXForStorage is a hack to convert the associated object to its actual class var at runtime
+        // as I had issues simply storing its value in UserDefaults
         let defaultUserDefaults: [String : Any] = [
             UserDefaults.massKey : UserDefaults.prepareMassForStorage(UnitMass.kilograms),
             UserDefaults.energyKey : UserDefaults.prepareEnergyForStorage(UnitEnergy.kilocalories),
@@ -26,9 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ]
         UserDefaults.standard.register(defaults: defaultUserDefaults)
         
+        // make text input views afraid of the keyboard.
         IQKeyboardManager.shared.enable = true
+        // automagically resign first responder on touch outside of text input view
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-//        IQKeyboardManager.shared.enableDebugging = true
         
         return true
     }

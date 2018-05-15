@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// OBSOLETE: should not be used. Use a numerical keyboard input instead.
 /// Provides two ranges of numerical values for mass/energy picker views.
 /// The selected value in the first range is used as a step value for the second range.
 final class DailyMeasurementPickerDataSource {

@@ -11,10 +11,12 @@ import CoreData
 /// Representation of a single day containing a mass and an energy
 class Daily: NSManagedObject {
     
+    /// Default fetch request, wrapping an NSFetchRequest call
     public class func makeFetchRequest() -> NSFetchRequest<Daily> {
         return NSFetchRequest<Daily>(entityName: "Daily")
     }
     
+    /// Filter objects by day
     public class func fetchRequest(in date: Date) -> NSFetchRequest<Daily> {
         let request = NSFetchRequest<Daily>(entityName: "Daily")
         request.predicate = isInSameDayPredicate(as: date)
@@ -22,6 +24,7 @@ class Daily: NSManagedObject {
         return request
     }
     
+    // Filter objects by a range of dates
     public class func fetchRequest(in dateRange: (start: Date, end: Date)) -> NSFetchRequest<Daily> {
         let request = NSFetchRequest<Daily>(entityName: "Daily")
         request.predicate = NSPredicate(
@@ -33,6 +36,7 @@ class Daily: NSManagedObject {
         return request
     }
     
+    /// Fetch request for doing arithmetic with the object's properties
     public class func dictionaryFetchRequest(
         in dateRange: (start: Date, end: Date),
         properties: [String]
@@ -46,6 +50,7 @@ class Daily: NSManagedObject {
         return request
     }
     
+    /// A sorted list of all entries
     public class func tableFetchRequest() -> NSFetchRequest<Daily> {
         let request = NSFetchRequest<Daily>(entityName: "Daily")
         request.sortDescriptors = [NSSortDescriptor(key: "created", ascending: false)]
@@ -85,6 +90,7 @@ class Daily: NSManagedObject {
         created = date
     }
     
+    // used solely to filter arithmetic functions in fetch requests
     public static let massExpressionKey = "massValue"
     public static var massExpression = NSExpression(forKeyPath: massExpressionKey)
     public static let averageMassKey = "avgMass"
