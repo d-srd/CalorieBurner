@@ -38,127 +38,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("oops")
                 return
             }
-        }
-        
-        // register long running health observer queries
-        let massSample = HKObjectType.quantityType(forIdentifier: .bodyMass)!
-        let energySample = HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!
-        
-        let massQuery = HKObserverQuery(sampleType: massSample, predicate: nil) { [weak self] (query, completion, err) in
-            guard err == nil else {
-                print("** An error occurred whilst setting up mass observer query. \(err) Aborting. **")
-                abort()
-            }
             
-            self?.handleHealthUpdate(fromQuery: query)
-            completion()
-        }
-        let energyQuery = HKObserverQuery(sampleType: energySample, predicate: nil) { [weak self] (query, completion, err) in
-            guard err == nil else {
-                print("** An error occurred whilst setting up mass observer query. \(err) Aborting. **")
-                abort()
-            }
-            
-            self?.handleHealthUpdate(fromQuery: query)
-            completion()
-        }
-        
-        healthStore.execute(massQuery)
-        healthStore.execute(energyQuery)
-        
-        healthStore.enableBackgroundDelivery(for: massSample, frequency: .immediate) { (success, error) in
-            guard error == nil else {
-                print("* error occured setting up background delivery. \(error).*")
-                abort()
-            }
-        }
-        healthStore.enableBackgroundDelivery(for: energySample, frequency: .immediate) { (success, error) in
-            guard error == nil else {
-                print("* error occured setting up background delivery. \(error).*")
-                abort()
-            }
+            HealthStoreHelper.shared.enableBackgroundDelivery()
         }
         
         return true
     }
     
-    private var anchor: HKQueryAnchor?
     
-    private lazy var anchoredQuery: HKAnchoredObjectQuery = {
-        func anchorUpdateHandler(query: HKAnchoredObjectQuery, samples: [HKSample]?, deletions: [HKDeletedObject]?, newAnchor: HKQueryAnchor?, error: Error?) {
-            guard let samples = samples, let deletions = deletions else { print("error initial"); return }
-            
-            anchor = newAnchor
-            
-            print("Printing samples")
-            for sample in samples {
-                print(sample)
-            }
-            
-            print("Printing deletions")
-            for deletion in deletions {
-                print(deletion)
-            }
-        }
-        
-        let query = HKAnchoredObjectQuery(type: HKObjectType.quantityType(forIdentifier: .bodyMass)!,
-                                          predicate: nil,
-                                          anchor: anchor,
-                                          limit: HKObjectQueryNoLimit,
-                                          resultsHandler: anchorUpdateHandler)
-        query.updateHandler = anchorUpdateHandler
-        
-        return query
-    }()
-    
-    private func makeStatisticsQuery() -> HKStatisticsCollectionQuery {
-        let query = HKStatisticsCollectionQuery(quantityType: HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
-                                                quantitySamplePredicate: nil,
-                                                options: .cumulativeSum,
-                                                anchorDate: Date(timeIntervalSinceReferenceDate: 0),
-                                                intervalComponents: DateComponents(day: 1))
-        
-        query.initialResultsHandler = { (query, results, error) in
-            guard let results = results else { print("error retrieving values"); return }
-            
-            let endDate = Date()
-            let startDate = Calendar.current.date(byAdding: .month, value: -3, to: endDate)!
-            
-            results.enumerateStatistics(from: startDate, to: endDate) { (statistics, stop) in
-                if let quantity = statistics.sumQuantity() {
-                    let date = statistics.startDate
-                    let value = quantity.doubleValue(for: HKUnit.kilocalorie())
-                    
-                    print("found initial calories: \(value) for date: \(date)")
-                }
-            }
-        }
-        
-        query.statisticsUpdateHandler = { (query, data, results, error) in
-            print("updated stats")
-            guard let updatedItem = data?.sumQuantity() else { print("error retrieving values"); return }
-            
-            
-            print("found updated calories: \(updatedItem)")
-        }
-    
-        return query
-    }
-    
-    private var didExecuteStatisticsQuery = false
-    private var didExecuteAnchoredQuery = false
-
-    private func handleHealthUpdate(fromQuery query: HKObserverQuery) {
-        guard let objectType = query.objectType else { return }
-        
-        if objectType == HKObjectType.quantityType(forIdentifier: .bodyMass)! && !didExecuteAnchoredQuery {
-            healthStore.execute(anchoredQuery)
-            didExecuteAnchoredQuery = true
-        } else if objectType == HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed) && !didExecuteStatisticsQuery {
-            healthStore.execute(makeStatisticsQuery())
-            didExecuteStatisticsQuery = true
-        }
-    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
