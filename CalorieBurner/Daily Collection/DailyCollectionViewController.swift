@@ -23,19 +23,16 @@ class DailyCollectionViewController: UIViewController {
     private let defaultItemSize = CGSize(width: 200, height: 88)
     
     private lazy var fetchedResultsController: DailyFetchedResultsController = {
+        // fetch all items in ascending date order
         let request = Daily.tableFetchRequest()
-        let controller = DailyFetchedResultsController(
-            fetchRequest: request,
-            managedObjectContext: viewContext,
-            dateBounds: (startDate, endDate)
-        )
+        let controller = DailyFetchedResultsController(fetchRequest: request,
+                                                       managedObjectContext: viewContext,
+                                                       dateBounds: (startDate, endDate))
         return controller
     }()
         
     func scrollToItem(at date: Date, animated: Bool) {
-        guard let indexPath = fetchedResultsController.indexPath(for: date) else {
-            return
-        }
+        guard let indexPath = fetchedResultsController.indexPath(for: date) else { return }
         
         dailyView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
     }
@@ -92,6 +89,7 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
     }
     
     // TODO: fix saving Dailies
+    // this is a placeholder leftover from previous iterations. to be refactored.
     func willCancelEditing(cell: DailyDataCollectionViewCell, at date: Date, for itemType: MeasurementItems) {
     }
     
@@ -118,7 +116,7 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
         do {
             _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: nil, energy: nil, note: note)
         } catch {
-            
+            print("error updating cell: ", error)
         }
     }
     

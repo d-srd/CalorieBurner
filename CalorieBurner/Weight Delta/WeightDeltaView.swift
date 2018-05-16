@@ -28,14 +28,7 @@ class WeightDeltaView: UIView {
             }
         }
     }
-    @IBOutlet weak var goalWeightTextField: UITextField! {
-        didSet {
-            goalWeightTextField.inputView = massPickerView
-//            goalWeightTextField.inputAccessoryView = massPickerToolbar
-        }
-    }
-    private var massPickerView: DailyMassPickerView?
-//    private var massPickerToolbar: DailyMassPickerToolbar?
+    @IBOutlet weak var goalWeightTextField: UITextField!
     
     weak var delegate: WeightDeltaDelegate? {
         didSet {
@@ -125,30 +118,6 @@ class WeightDeltaView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        goalWeightTextField.inputView = {
-            let picker = DailyMassPickerView()
-            picker.dailyDelegate = self
-            
-            return picker
-        }()
-        
-//        goalWeightTextField.inputAccessoryView = {
-////            let toolbar = DailyMassPickerToolbar()
-//            toolbar.dailyDelegate = self
-//            
-//            // the default title is "next" because the toolbar is used as an input accessory view in
-//            // daily collection view and there is another picker view right after it
-//            toolbar.items?.last?.title = "Done"
-//            
-//            return toolbar
-//        }()
-        
         reloadData()
-    }
-}
-
-extension WeightDeltaView: DailyItemPickerDelegate {
-    func dailyPicker(_ picker: UIPickerView, valueDidChangeTo value: Double) {
-        goalMassBuffer = Mass(value: value, unit: UserDefaults.standard.mass)
     }
 }

@@ -9,6 +9,13 @@
 import Foundation
 
 public extension UserDefaults {
+    
+    // everything related to mass and energy unit storage
+    // is a workaround for not being able to store the values
+    // themselves in UserDefaults
+    // or rather, instances of those class vars can be saved
+    // but comparing them to new instances created during
+    // a different run of the application fails most of the time
     static let massKey = "massUnit"
     static let energyKey = "energyUnit"
     static let dayOfWeekKey = "firstDayOfWeek"

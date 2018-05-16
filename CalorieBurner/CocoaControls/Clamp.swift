@@ -11,3 +11,9 @@ import Foundation
 public func clamp<T: Comparable>(_ item: T, low: T, high: T) -> T {
     return max(low, min(item, high))
 }
+
+public extension Comparable {
+    func clamp(low: Self, high: Self) -> Self {
+        return max(low, min(self, high))
+    }
+}
