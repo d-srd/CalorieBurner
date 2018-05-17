@@ -9,6 +9,12 @@
 import UIKit
 import IQKeyboardManagerSwift
 
+protocol DailyCellDelegate: class {
+    func willBeginEditing(cell: DailyDataCollectionViewCell, with inputView: UIView)
+    func didEndEditing(cell: DailyDataCollectionViewCell, mass: Mass?)
+    func didEndEditing(cell: DailyDataCollectionViewCell, energy: Energy?)
+}
+
 class DailyCollectionViewCell: UICollectionViewCell { }
 
 fileprivate let numberFormatter: NumberFormatter = {

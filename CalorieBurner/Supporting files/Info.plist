@@ -41,5 +41,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSHealthShareUsageDescription</key>
+	<string>We need your permission to read data</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>We need your permission to write data</string>
 </dict>
 </plist>

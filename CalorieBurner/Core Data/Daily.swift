@@ -91,6 +91,11 @@ class Daily: NSManagedObject {
     }
     
     // used solely to filter arithmetic functions in fetch requests
+    public func updateValues(mass newMass: Double?, energy newEnergy: Double?) {
+        mass = newMass.flatMap { Mass(value: $0, unit: .kilograms) } ?? mass
+        energy = newEnergy.flatMap { Energy(value: $0, unit: .kilocalories) } ?? energy
+    }
+    
     public static let massExpressionKey = "massValue"
     public static var massExpression = NSExpression(forKeyPath: massExpressionKey)
     public static let averageMassKey = "avgMass"

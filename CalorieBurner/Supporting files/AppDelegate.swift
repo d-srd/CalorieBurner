@@ -9,17 +9,18 @@
 import UIKit
 import CoreData
 import IQKeyboardManagerSwift
+import HealthKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // prepareXForStorage is a hack to convert the associated object to its actual class var at runtime
         // as I had issues simply storing its value in UserDefaults
+        // put some default values in UserDefaults
         let defaultUserDefaults: [String : Any] = [
             UserDefaults.massKey : UserDefaults.prepareMassForStorage(UnitMass.kilograms),
             UserDefaults.energyKey : UserDefaults.prepareEnergyForStorage(UnitEnergy.kilocalories),
@@ -32,8 +33,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // automagically resign first responder on touch outside of text input view
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
+        
+        HealthStoreHelper.shared.requestAuthorization { (success, error) in
+            guard error == nil else {
+                print("oops")
+                return
+            }
+            
+            HealthStoreHelper.shared.enableBackgroundDelivery()
+        }
+        
         return true
     }
+    
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
