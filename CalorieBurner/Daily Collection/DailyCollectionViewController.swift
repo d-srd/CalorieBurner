@@ -88,14 +88,6 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
         return dailyView.itemSize ?? defaultItemSize
     }
     
-    // TODO: fix saving Dailies
-    // this is a placeholder leftover from previous iterations. to be refactored.
-    func willCancelEditing(cell: DailyDataCollectionViewCell, at date: Date, for itemType: MeasurementItems) {
-    }
-    
-    func didCancelEditing(cell: DailyDataCollectionViewCell, at date: Date, for itemType: MeasurementItems) {
-    }
-    
     func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, mass: Mass) {
         do {
             _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: mass, energy: nil, mood: nil)
@@ -112,10 +104,9 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
         }
     }
     
-    // TODO: - fix this to actually use a mood
-    func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, note: String) {
+    func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, mood: Feelings) {
         do {
-            _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: nil, energy: nil, mood: nil)
+            _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: nil, energy: nil, mood: mood)
         } catch {
             print("error updating cell: ", error)
         }

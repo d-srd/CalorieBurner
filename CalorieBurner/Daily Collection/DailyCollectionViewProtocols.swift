@@ -23,11 +23,9 @@ protocol DailyIndexPathProvider: class {
 protocol DailyCollectionViewDelegate: class {
     func dailyView(_ dailyView: DailyCollectionView, willDisplay cell: DailyCollectionViewCell, forItemAt indexPath: IndexPath)
 
-    func willCancelEditing(cell: DailyDataCollectionViewCell, at date: Date, for itemType: MeasurementItems)
-    func didCancelEditing(cell: DailyDataCollectionViewCell, at date: Date, for itemType: MeasurementItems)
     func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, mass: Mass)
     func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, energy: Energy)
-    func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, note: String)
+    func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, mood: Feelings)
 }
 
 protocol DailyCollectionViewDataSource: class, DateBoundaries {

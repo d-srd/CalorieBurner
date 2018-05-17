@@ -69,19 +69,6 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
     
     // MARK: - Scroll View Delegate
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        guard keyboardDismissMode == .onDrag,
-              let dailyView = scrollView as? DailyCollectionView,
-              let visibleCell = dailyView.visibleCells.first as? DailyDataCollectionViewCell,
-              let indexPath = dailyView.indexPath(for: visibleCell),
-              let date = dailyView.indexPathProvider?.date(for: indexPath)
-        else { return }
-        
-        let itemType: MeasurementItems = visibleCell.massTextField.isEditing ? .mass : .energy
-        
-        dailyDelegate?.willCancelEditing(cell: visibleCell, at: date, for: itemType)
-    }
-    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         guard let dailyView = scrollView as? DailyCollectionView,
               let visibleCell = dailyView.visibleCells.first as? DailyCollectionViewCell,
@@ -156,22 +143,6 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
 }
 
 extension DailyCollectionView: DailyCellDelegate {
-    func willCancelEditing(cell: DailyDataCollectionViewCell, for itemType: MeasurementItems) {
-        guard let indexPath = self.indexPath(for: cell),
-              let date = indexPathProvider?.date(for: indexPath)
-        else { return }
-        
-        dailyDelegate?.willCancelEditing(cell: cell, at: date, for: itemType)
-    }
-    
-    func didCancelEditing(cell: DailyDataCollectionViewCell, for itemType: MeasurementItems) {
-        guard let indexPath = self.indexPath(for: cell),
-              let date = indexPathProvider?.date(for: indexPath)
-        else { return }
-        
-        dailyDelegate?.didCancelEditing(cell: cell, at: date, for: itemType)
-    }
-    
     func didEndEditing(cell: DailyDataCollectionViewCell, mass: Mass?) {
         guard let indexPath = self.indexPath(for: cell),
               let date = indexPathProvider?.date(for: indexPath),
@@ -190,12 +161,12 @@ extension DailyCollectionView: DailyCellDelegate {
         dailyDelegate?.didEndEditing(cell: cell, at: date, energy: energy)
     }
     
-    func didEndEditing(cell: DailyDataCollectionViewCell, note: String?) {
+    func didEndEditing(cell: DailyDataCollectionViewCell, mood: Feelings?) {
         guard let indexPath = self.indexPath(for: cell),
               let date = indexPathProvider?.date(for: indexPath),
-              let note = note
+              let mood = mood
         else { return }
         
-        dailyDelegate?.didEndEditing(cell: cell, at: date, note: note)
+        dailyDelegate?.didEndEditing(cell: cell, at: date, mood: mood)
     }
 }

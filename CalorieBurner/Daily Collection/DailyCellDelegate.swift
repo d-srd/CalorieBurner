@@ -11,5 +11,5 @@ import UIKit
 protocol DailyCellDelegate: class {
     func didEndEditing(cell: DailyDataCollectionViewCell, mass: Mass?)
     func didEndEditing(cell: DailyDataCollectionViewCell, energy: Energy?)
-    func didEndEditing(cell: DailyDataCollectionViewCell, note: String?)
+    func didEndEditing(cell: DailyDataCollectionViewCell, mood: Feelings?)
 }
