@@ -31,8 +31,6 @@ class HealthStoreHelper {
     private var didExecuteAnchoredQuery = false
     private var didExecuteStatisticsQuery = false
     
-    private var isAuthorized = false
-    
     // anchor query uses this so it doesn't have to fetch everything all over again
     private var anchor: HKQueryAnchor?
     
@@ -62,9 +60,8 @@ class HealthStoreHelper {
             return
         }
         
-        store.requestAuthorization(toShare: typesToWrite, read: typesToRead) { [weak self] (success, error) in
+        store.requestAuthorization(toShare: typesToWrite, read: typesToRead) { (success, error) in
             completion(success, error)
-            self?.isAuthorized = true
         }
     }
     
