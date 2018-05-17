@@ -25,6 +25,7 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
     
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var fullDateLabel: UILabel!
+    
     var dailyCollectionViewController: DailyCollectionViewController!
     var currentDate: Date? {
         get { return calendarView.selectedDates.first }
@@ -37,6 +38,7 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
         }
     }
     
+    // wtf
     @IBAction func unwindAction(_ sender: UIStoryboardSegue) {
         print("HI THERE")
     }
@@ -65,7 +67,7 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
             
         case .inputVC:
             // there's a navigation controller in here, so we steal its child
-            let inputVC = segue.destination.childViewControllers.first as! DailyInputTableViewController
+            let inputVC = segue.destination.childViewControllers.first as! DailyInputViewController
             inputVC.date = calendarView.selectedDates.first
             
         case .monthlyCalendarVC:

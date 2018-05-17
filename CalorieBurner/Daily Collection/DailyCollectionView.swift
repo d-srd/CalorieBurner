@@ -144,8 +144,9 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
 }
 
 extension DailyCollectionView: DailyInputViewDelegate {
+    // TODO: - less superviews
     func didEndEditing(_ view: DailyInputView, mass: Mass?) {
-        guard let cell = view.superview as? DailyDataCollectionViewCell,
+        guard let cell = view.superview?.superview as? DailyDataCollectionViewCell,
               let indexPath = self.indexPath(for: cell),
               let date = indexPathProvider?.date(for: indexPath),
               let mass = mass
@@ -155,7 +156,7 @@ extension DailyCollectionView: DailyInputViewDelegate {
     }
     
     func didEndEditing(_ view: DailyInputView, energy: Energy?) {
-        guard let cell = view.superview as? DailyDataCollectionViewCell,
+        guard let cell = view.superview?.superview as? DailyDataCollectionViewCell,
               let indexPath = self.indexPath(for: cell),
               let date = indexPathProvider?.date(for: indexPath),
               let energy = energy
@@ -165,7 +166,7 @@ extension DailyCollectionView: DailyInputViewDelegate {
     }
     
     func didEndEditing(_ view: DailyInputView, mood: Feelings?) {
-        guard let cell = view.superview as? DailyDataCollectionViewCell,
+        guard let cell = view.superview?.superview as? DailyDataCollectionViewCell,
               let indexPath = self.indexPath(for: cell),
               let date = indexPathProvider?.date(for: indexPath),
               let mood = mood

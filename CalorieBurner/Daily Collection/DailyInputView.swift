@@ -159,5 +159,6 @@ extension DailyInputView: UITextFieldDelegate {
 extension DailyInputView: FeelViewDelegate {
     func feelView(_ feelView: FeelView, didChangeMoodTo mood: Feelings) {
         self.mood = mood
+        delegate?.didEndEditing(self, mood: mood)
     }
 }
