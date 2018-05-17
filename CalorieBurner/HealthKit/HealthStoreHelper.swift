@@ -13,6 +13,7 @@ protocol DailyModelConvertible {
     associatedtype Data
     
     func convert(data: Data, context: NSManagedObjectContext) -> Daily
+    func convertAll(in context: NSManagedObjectContext) -> [Daily]
 }
 
 class HealthStoreHelper {
@@ -36,16 +37,18 @@ class HealthStoreHelper {
     private var anchor: HKQueryAnchor?
     
     // the queries' completion handlers assign their values to these variables when they fetch the appropriate data
-    private var energyResults = [Date : Double]()
-    private var massResults = [Date : Double]()
+    private var energyResults = [Date : HKQuantity]()
+    private var massResults = [Date : HKQuantitySample]()
     
     private lazy var statisticsQuery = makeEnergyStatisticsQuery()
     private lazy var anchoredQuery = makeAnchoredMassQuery()
     
     private static let defaultTypes = Set([HKObjectType.quantityType(forIdentifier: .bodyMass)!, HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!])
     
-    // healthStore is a global variable, since it's easier to just initialize it elsewhere
-    static let shared = HealthStoreHelper(store: healthStore, readingTypes: defaultTypes, writingTypes: defaultTypes)
+    // we need a singleton health store, as they are long lived objects
+    static let storeSingleton = HKHealthStore()
+    
+    static let shared = HealthStoreHelper(store: storeSingleton, readingTypes: defaultTypes, writingTypes: defaultTypes)
     
     init(store: HKHealthStore, readingTypes: Set<HKSampleType> = defaultTypes, writingTypes: Set<HKSampleType> = defaultTypes) {
         self.store = store
@@ -77,14 +80,18 @@ class HealthStoreHelper {
             guard error == nil else { fatalError("mass observer completion handler failed. \(error?.localizedDescription)") }
             
             if !self.didExecuteAnchoredQuery {
-                self.anchoredQuery = self.makeAnchoredMassQuery(completion: completion) { results in
+                // remove deleted objects, then merge the results back into the massResults
+                self.anchoredQuery = self.makeAnchoredMassQuery(completion: completion) { results, deletions in
+                    self.massResults = self.massResults.filter { item in
+                        return !deletions.contains(where: { $0.uuid == item.value.uuid })
+                    }
                     self.massResults.merge(results) { (first, second) in return first }
                 }
                 self.store.execute(self.anchoredQuery)
                 self.didExecuteAnchoredQuery = true
             } else {
                 self.store.stop(self.anchoredQuery)
-                self.anchoredQuery = self.makeAnchoredMassQuery(completion: completion) { results in
+                self.anchoredQuery = self.makeAnchoredMassQuery(completion: completion) { results, deletions in
                     self.massResults = results
                 }
                 self.store.execute(self.anchoredQuery)
@@ -129,7 +136,7 @@ class HealthStoreHelper {
     }
     
     private func makeEnergyStatisticsQuery(completion: (() -> Void)? = nil,
-                                           didProcessValues valueProcessing: (([Date : Double]) -> Void)? = nil)
+                                           didProcessValues valueProcessing: (([Date : HKQuantity]) -> Void)? = nil)
         -> HKStatisticsCollectionQuery
     {
         let query = HKStatisticsCollectionQuery(quantityType: HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
@@ -146,13 +153,12 @@ class HealthStoreHelper {
             let endDate = Date()
             let startDate = Calendar.current.date(byAdding: .month, value: -3, to: endDate)!
             
-            var caloriesPerDate = [Date : Double]()
+            var caloriesPerDate = [Date : HKQuantity]()
             
             results.enumerateStatistics(from: startDate, to: endDate) { (statistics, stop) in
                 if let quantity = statistics.sumQuantity() {
                     let date = statistics.startDate.startOfDay
-                    let value = quantity.doubleValue(for: HKUnit.kilocalorie())
-                    caloriesPerDate[date] = value
+                    caloriesPerDate[date] = quantity
                 }
             }
             
@@ -164,25 +170,20 @@ class HealthStoreHelper {
     }
     
     private func makeAnchoredMassQuery(completion: (() -> Void)? = nil,
-                                       didProcessValues valueProcessing: (([Date : Double]) -> Void)? = nil)
+                                       didProcessValues valueProcessing: (([Date : HKQuantitySample], [HKDeletedObject]) -> Void)? = nil)
         -> HKAnchoredObjectQuery
     {
         func anchorUpdateHandler(query: HKAnchoredObjectQuery, samples: [HKSample]?, deletions: [HKDeletedObject]?, newAnchor: HKQueryAnchor?, error: Error?) {
             guard let samples = samples, let deletions = deletions else { print("error initial"); return }
             
-            var values = [Date : Double]()
             anchor = newAnchor
-            
+
+            var values = [Date : HKQuantitySample]()
             for sample in samples {
-                values[sample.startDate.startOfDay] = (sample as! HKQuantitySample).quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))
+                values[sample.startDate.startOfDay] = sample as? HKQuantitySample
             }
             
-            valueProcessing?(values)
-            
-            print("Printing deletions")
-            for deletion in deletions {
-                print(deletion)
-            }
+            valueProcessing?(values, deletions)
             
             completion?()
         }
@@ -213,9 +214,11 @@ extension HealthStoreHelper: DailyModelConvertible {
         let dates = Set(energyResults.keys).union(Set(massResults.keys))
         return dates
             .sorted()
-            .map { convert(data: ($0, massResults[$0], energyResults[$0]), context: context) }
-//            .map { ($0, massResults[$0], energyResults[$0]) }
-//            .map { convert(data: $0, context: context) }
+            .map { date in
+                let massValue = massResults[date]?.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))
+                let energyValue = energyResults[date]?.doubleValue(for: HKUnit.kilocalorie())
+                return convert(data: (date, massValue, energyValue), context: context)
+            }
     }
 
 }

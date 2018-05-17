@@ -11,9 +11,6 @@ import CoreData
 import IQKeyboardManagerSwift
 import HealthKit
 
-// we need a singleton health store, as they are long lived objects
-public let healthStore = HKHealthStore()
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
