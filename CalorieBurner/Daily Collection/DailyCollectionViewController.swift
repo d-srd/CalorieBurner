@@ -66,9 +66,9 @@ extension DailyCollectionViewController: DailyCollectionViewDataSource {
     func dailyView(_ dailyView: DailyCollectionView, cellForItemAt indexPath: IndexPath) -> DailyCollectionViewCell {
         if let object = fetchedResultsController.object(at: indexPath) {
             let cell = dailyView.dequeueReusableCell(withReuseIdentifier: "DailyCell", for: indexPath) as! DailyDataCollectionViewCell
-            cell.mass = object.mass?.converted(to: UserDefaults.standard.mass)
-            cell.energy = object.energy?.converted(to: UserDefaults.standard.energy)
-            cell.mood = object.mood
+            cell.configure(mass: object.mass?.converted(to: UserDefaults.standard.mass),
+                           energy: object.energy?.converted(to: UserDefaults.standard.energy),
+                           mood: object.mood)
             
             return cell
         }
@@ -117,8 +117,8 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
               let object = fetchedResultsController.object(at: indexPath)
         else { return }
         
-        cell.mass = object.mass?.converted(to: UserDefaults.standard.mass)
-        cell.energy = object.energy?.converted(to: UserDefaults.standard.energy)
-        cell.mood = object.mood
+        cell.configure(mass: object.mass?.converted(to: UserDefaults.standard.mass),
+                       energy: object.energy?.converted(to: UserDefaults.standard.energy),
+                       mood: object.mood)
     }
 }

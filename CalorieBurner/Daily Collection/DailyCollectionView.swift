@@ -59,7 +59,8 @@ extension DailyCollectionView: UICollectionViewDataSource {
             fatalError("something went wrong while making a cell")
         }
         
-        (cell as? DailyDataCollectionViewCell)?.cellDelegate = self
+        // ugly as hell
+        (cell as? DailyDataCollectionViewCell)?.dailyInputView.delegate = self
         
         return cell
     }
@@ -142,9 +143,10 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension DailyCollectionView: DailyCellDelegate {
-    func didEndEditing(cell: DailyDataCollectionViewCell, mass: Mass?) {
-        guard let indexPath = self.indexPath(for: cell),
+extension DailyCollectionView: DailyInputViewDelegate {
+    func didEndEditing(_ view: DailyInputView, mass: Mass?) {
+        guard let cell = view.superview as? DailyDataCollectionViewCell,
+              let indexPath = self.indexPath(for: cell),
               let date = indexPathProvider?.date(for: indexPath),
               let mass = mass
         else { return }
@@ -152,8 +154,9 @@ extension DailyCollectionView: DailyCellDelegate {
         dailyDelegate?.didEndEditing(cell: cell, at: date, mass: mass)
     }
     
-    func didEndEditing(cell: DailyDataCollectionViewCell, energy: Energy?) {
-        guard let indexPath = self.indexPath(for: cell),
+    func didEndEditing(_ view: DailyInputView, energy: Energy?) {
+        guard let cell = view.superview as? DailyDataCollectionViewCell,
+              let indexPath = self.indexPath(for: cell),
               let date = indexPathProvider?.date(for: indexPath),
               let energy = energy
         else { return }
@@ -161,8 +164,9 @@ extension DailyCollectionView: DailyCellDelegate {
         dailyDelegate?.didEndEditing(cell: cell, at: date, energy: energy)
     }
     
-    func didEndEditing(cell: DailyDataCollectionViewCell, mood: Feelings?) {
-        guard let indexPath = self.indexPath(for: cell),
+    func didEndEditing(_ view: DailyInputView, mood: Feelings?) {
+        guard let cell = view.superview as? DailyDataCollectionViewCell,
+              let indexPath = self.indexPath(for: cell),
               let date = indexPathProvider?.date(for: indexPath),
               let mood = mood
         else { return }

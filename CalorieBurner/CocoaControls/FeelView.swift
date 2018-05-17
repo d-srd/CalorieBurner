@@ -27,15 +27,12 @@ class FeelView: UIView {
     var activeColor = UIColor.black
     
     var currentMood: Feelings? {
-//        didSet { delegate?.feelView(self, didChangeMoodTo: currentMood) }
         get {
             guard let image = currentImage else { return nil }
             return moodForImage[image]
         } set {
             guard let mood = newValue, let image = imageForMood[mood] else { return }
             currentImage = image
-            
-            delegate?.feelView(self, didChangeMoodTo: mood)
         }
     }
     
@@ -79,8 +76,9 @@ class FeelView: UIView {
     }
     
     @objc private func didTapMoodImage(_ sender: UITapGestureRecognizer) {
-        if let image = sender.view as? UIImageView {
-            currentMood = moodForImage[image]
+        if let image = sender.view as? UIImageView, let mood = moodForImage[image] {
+            currentMood = mood
+            delegate?.feelView(self, didChangeMoodTo: mood)
         }
     }
 }

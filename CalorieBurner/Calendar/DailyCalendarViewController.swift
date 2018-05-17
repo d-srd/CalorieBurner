@@ -79,7 +79,7 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
         super.viewDidLayoutSubviews()
         
         dailyCollectionViewController.dailyView.itemSize =
-            CGSize(width: containerView.frame.width * 0.8, height: containerView.frame.height * 0.8)
+            CGSize(width: containerView.frame.width * 0.8, height: 240)
         dailyCollectionViewController.dailyView.collectionViewLayout.invalidateLayout()
     }
     
@@ -101,7 +101,7 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
         
         // UICollectionView needs an initial size to lay out the cells. this code is esentially ignored, the one in didLayoutSubviews is used.
         dailyCollectionViewController.dailyView.itemSize =
-            CGSize(width: containerView.frame.width * 0.8, height: 250)
+            CGSize(width: containerView.frame.width * 0.8, height: 240)
         dailyCollectionViewController.dailyView.dailyScrollDelegate = self
         dailyCollectionViewController.scrollToItem(at: self.today, animated: false)
         calendarView.selectDates([today])

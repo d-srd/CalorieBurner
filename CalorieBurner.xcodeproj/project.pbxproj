@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		840C6F9920651ECD00535787 /* WeightDeltaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C6F9820651ECD00535787 /* WeightDeltaView.swift */; };
+		840E2FCE20ADB7A900EBDC0E /* DailyInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E2FCD20ADB7A900EBDC0E /* DailyInputView.swift */; };
 		84123E952093CAF500F5639E /* DailyInputTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84123E942093CAF500F5639E /* DailyInputTableViewController.swift */; };
 		84123E982096F92B00F5639E /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84123E972096F92B00F5639E /* HealthKit.framework */; };
 		84123E9B2096FBA900F5639E /* HealthStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84123E9A2096FBA900F5639E /* HealthStoreHelper.swift */; };
@@ -85,6 +86,7 @@
 		119A6DC4BC7977D94DBA1F0C /* Pods_CalorieBurner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CalorieBurner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		840C6F862062320D00535787 /* CocoaControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaControls.framework; path = "../../../Library/Developer/Xcode/DerivedData/CocoaControls-ezcniktufftancgvouvrcyaolfpa/Build/Products/Debug-iphonesimulator/CocoaControls.framework"; sourceTree = "<group>"; };
 		840C6F9820651ECD00535787 /* WeightDeltaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDeltaView.swift; sourceTree = "<group>"; };
+		840E2FCD20ADB7A900EBDC0E /* DailyInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyInputView.swift; sourceTree = "<group>"; };
 		84123E942093CAF500F5639E /* DailyInputTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DailyInputTableViewController.swift; path = "CalorieBurner/Daily Collection/DailyInputTableViewController.swift"; sourceTree = SOURCE_ROOT; };
 		84123E962096F92B00F5639E /* CalorieBurner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CalorieBurner.entitlements; sourceTree = "<group>"; };
 		84123E972096F92B00F5639E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
@@ -328,6 +330,7 @@
 				842525452054E32F00CA0122 /* DailyCollectionViewController.swift */,
 				84AA51AB206FD89F00494049 /* DailyCollectionView.swift */,
 				843E4709207237BD0041BECB /* DailyCollectionViewProtocols.swift */,
+				840E2FCD20ADB7A900EBDC0E /* DailyInputView.swift */,
 			);
 			path = "Daily Collection";
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				84FC53BC205AFA4700D20B3C /* Array.swift in Sources */,
 				84E2F0BF20A4D2A400CB3C05 /* Clamp.swift in Sources */,
 				840C6F9920651ECD00535787 /* WeightDeltaView.swift in Sources */,
+				840E2FCE20ADB7A900EBDC0E /* DailyInputView.swift in Sources */,
 				84E2F0C220A4D2A400CB3C05 /* GradientView.swift in Sources */,
 				84696D8620499FF8002F31B4 /* DailyFetchedResultsController.swift in Sources */,
 				84B4984A205163A800DCFA05 /* TDEE.swift in Sources */,
