@@ -8,7 +8,13 @@
 
 import UIKit
 
-class TodayViewController: UIViewController {
+class HomeViewController: UIViewController {
+    let startDate = Calendar.current.date(from: DateComponents(year: 2018, month: 01, day: 01))!
+    let endDate = Date()
+    lazy var mediator = TDEEMediator(startDate: startDate,
+                                     endDate: endDate,
+                                     context: CoreDataStack.shared.viewContext)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
