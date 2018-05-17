@@ -42,11 +42,10 @@ class DailyDataCollectionViewCell: DailyCollectionViewCell {
     @IBOutlet weak var energyView: ShadowView!
     
     // container view for note input textfield
-    @IBOutlet weak var notesView: ShadowView!
+    @IBOutlet weak var moodView: ShadowView!
     
     @IBOutlet weak var massTextField: UITextField!
     @IBOutlet weak var energyTextField: UITextField!
-    @IBOutlet weak var notesTextView: UITextView!
     
     weak var cellDelegate: DailyCellDelegate?
     
@@ -73,7 +72,7 @@ class DailyDataCollectionViewCell: DailyCollectionViewCell {
     private var energyBuffer: Measurement<UnitEnergy>?
     
     public var note: String? {
-        didSet { notesTextView.text = note }
+        didSet {  }
     }
     
     // add some convenient tap gestures so the user does not have to press the actual textfield to initiate editing
@@ -86,17 +85,17 @@ class DailyDataCollectionViewCell: DailyCollectionViewCell {
         let energyGesture = UITapGestureRecognizer(target: self, action: #selector(energyTextFieldShouldBecomeFirstResponder(_:)))
         energyGesture.cancelsTouchesInView = false
         
-        let notesGesture = UITapGestureRecognizer(target: self, action: #selector(notesTextViewShouldBecomeFirstResponder(_:)))
-        notesGesture.cancelsTouchesInView = false
+//        let notesGesture = UITapGestureRecognizer(target: self, action: #selector(notesTextViewShouldBecomeFirstResponder(_:)))
+//        notesGesture.cancelsTouchesInView = false
         
         massView.addGestureRecognizer(massGesture)
         energyView.addGestureRecognizer(energyGesture)
-        notesView.addGestureRecognizer(notesGesture)
+//        moodView.addGestureRecognizer(notesGesture)
         
         // look at me. i am the delegate now
         massTextField.delegate = self
         energyTextField.delegate = self
-        notesTextView.delegate = self
+//        notesTextView.delegate = self
         
         massTextField.keyboardDistanceFromTextField = 10
         energyTextField.keyboardDistanceFromTextField = 10
@@ -108,10 +107,6 @@ class DailyDataCollectionViewCell: DailyCollectionViewCell {
     
     @objc private func energyTextFieldShouldBecomeFirstResponder(_ sender: Any) {
         energyTextField.becomeFirstResponder()
-    }
-    
-    @objc private func notesTextViewShouldBecomeFirstResponder(_ sender: Any) {
-        notesTextView.becomeFirstResponder()
     }
 }
 
@@ -163,11 +158,5 @@ extension DailyDataCollectionViewCell: UITextFieldDelegate {
         } else if textField == energyTextField {
             cellDelegate?.didEndEditing(cell: self, energy: energy)
         }
-    }
-}
-
-extension DailyDataCollectionViewCell: UITextViewDelegate {
-    func textViewDidEndEditing(_ textView: UITextView) {
-        cellDelegate?.didEndEditing(cell: self, note: note)
     }
 }
