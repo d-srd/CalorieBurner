@@ -68,7 +68,7 @@ extension DailyCollectionViewController: DailyCollectionViewDataSource {
             let cell = dailyView.dequeueReusableCell(withReuseIdentifier: "DailyCell", for: indexPath) as! DailyDataCollectionViewCell
             cell.mass = object.mass?.converted(to: UserDefaults.standard.mass)
             cell.energy = object.energy?.converted(to: UserDefaults.standard.energy)
-            cell.note = object.note
+            cell.mood = object.mood
             
             return cell
         }
@@ -98,7 +98,7 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
     
     func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, mass: Mass) {
         do {
-            _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: mass, energy: nil, note: nil)
+            _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: mass, energy: nil, mood: nil)
         } catch {
             print("error updating cell: ", error)
         }
@@ -106,15 +106,16 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
     
     func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, energy: Energy) {
         do {
-            _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: nil, energy: energy, note: nil)
+            _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: nil, energy: energy, mood: nil)
         } catch {
             print("error updating cell: ", error)
         }
     }
     
+    // TODO: - fix this to actually use a mood
     func didEndEditing(cell: DailyDataCollectionViewCell, at date: Date, note: String) {
         do {
-            _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: nil, energy: nil, note: note)
+            _ = try CoreDataStack.shared.updateOrCreate(at: date, mass: nil, energy: nil, mood: nil)
         } catch {
             print("error updating cell: ", error)
         }
@@ -127,6 +128,6 @@ extension DailyCollectionViewController: DailyCollectionViewDelegate {
         
         cell.mass = object.mass?.converted(to: UserDefaults.standard.mass)
         cell.energy = object.energy?.converted(to: UserDefaults.standard.energy)
-        cell.note = object.note
+        cell.mood = object.mood
     }
 }

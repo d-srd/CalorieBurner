@@ -8,8 +8,21 @@
 
 import CoreData
 
+@objc public enum Feelings: Int {
+    case bad, dissatisfied, neutral, satisfied, happy
+}
+
 /// Representation of a single day containing a mass and an energy
 class Daily: NSManagedObject {
+    
+    // a hack to get around the fact that we can't store optional enums in Core Data
+    public var mood: Feelings? {
+        get {
+            return (moodID?.intValue).flatMap(Feelings.init)
+        } set {
+            moodID = (newValue?.rawValue).flatMap(NSNumber.init)
+        }
+    }
     
     /// Default fetch request, wrapping an NSFetchRequest call
     public class func makeFetchRequest() -> NSFetchRequest<Daily> {

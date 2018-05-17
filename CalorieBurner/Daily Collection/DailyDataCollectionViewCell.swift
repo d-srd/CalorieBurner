@@ -41,8 +41,8 @@ class DailyDataCollectionViewCell: DailyCollectionViewCell {
     // container view for energy input textfield
     @IBOutlet weak var energyView: ShadowView!
     
-    // container view for note input textfield
-    @IBOutlet weak var moodView: ShadowView!
+    // container view for selecting a mood
+    @IBOutlet weak var moodView: FeelView!
     
     @IBOutlet weak var massTextField: UITextField!
     @IBOutlet weak var energyTextField: UITextField!
@@ -71,8 +71,10 @@ class DailyDataCollectionViewCell: DailyCollectionViewCell {
     
     private var energyBuffer: Measurement<UnitEnergy>?
     
-    public var note: String? {
-        didSet {  }
+    public var mood: Feelings? {
+        didSet {
+            moodView.currentMood = mood
+        }
     }
     
     // add some convenient tap gestures so the user does not have to press the actual textfield to initiate editing

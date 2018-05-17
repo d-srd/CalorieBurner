@@ -5,7 +5,7 @@
         <attribute name="energy" optional="YES" attributeType="Transformable" customClassName="Measurement&lt;UnitEnergy&gt;" syncable="YES"/>
         <attribute name="isFromHealthKit" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="mass" optional="YES" attributeType="Transformable" customClassName="Measurement&lt;UnitMass&gt;" syncable="YES"/>
-        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="moodID" optional="YES" attributeType="Integer 16" usesScalarValueType="NO" customClassName="Feelings" syncable="YES"/>
     </entity>
     <elements>
         <element name="Daily" positionX="-63" positionY="-18" width="128" height="120"/>

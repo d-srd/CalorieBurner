@@ -613,7 +613,7 @@
                                             <outlet property="energyView" destination="cXg-TT-OcM" id="xla-MF-PeC"/>
                                             <outlet property="massTextField" destination="czg-Pc-ogX" id="yBT-6V-ApO"/>
                                             <outlet property="massView" destination="rye-Oj-rue" id="NS9-90-GID"/>
-                                            <outlet property="moodView" destination="Ill-2Q-P7h" id="ZVh-t0-b5B"/>
+                                            <outlet property="moodView" destination="N9A-Ud-3Ay" id="WHa-hc-rrz"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EmptyCell" id="4Dm-2K-5yU" customClass="DailyCollectionViewCell" customModule="CalorieBurner" customModuleProvider="target">
@@ -1187,7 +1187,7 @@
         <image name="mood_satisfied" width="38" height="38"/>
         <image name="transparentPixel.png" width="1" height="1"/>
         <namedColor name="Healthy Red">
-            <color red="0.95499998330000002" green="0.31400001049999998" blue="0.41999998690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.16899999976158142" blue="0.36100000143051147" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

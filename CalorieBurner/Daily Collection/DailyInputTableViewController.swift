@@ -58,8 +58,9 @@ class DailyInputTableViewController: UITableViewController {
     }
     
     private func shouldSaveDaily() {
+        // TODO: - make this save mood
         guard let date = date else { return }
-        try? CoreDataStack.shared.updateOrCreate(at: date, mass: mass, energy: energy, note: note)
+        try? CoreDataStack.shared.updateOrCreate(at: date, mass: mass, energy: energy, mood: nil)
     }
     
     @IBAction func doneButtonWasPressed(_ sender: Any) {
