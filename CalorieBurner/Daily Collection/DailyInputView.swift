@@ -110,6 +110,10 @@ extension DailyInputView: UITextFieldDelegate {
         return numberFormatter.number(from: string) != nil
     }
     
+    func isBelowMaxLength(_ string: String) -> Bool {
+        return string.count < 10
+    }
+    
     // save the measurements in the buffer, as the textfield's text will clear when it is tapped. if the user cancels editing a textfield (i.e. taps outside of the textfield, or doesnt tap the done button), we can restore it
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == massTextField && mass != nil {
@@ -128,7 +132,7 @@ extension DailyInputView: UITextFieldDelegate {
         let currentText = textField.text ?? ""
         let replacementText = (currentText as NSString).replacingCharacters(in: range, with: string)
         
-        return isConvertibleToDecimal(replacementText)
+        return isConvertibleToDecimal(replacementText) && isBelowMaxLength(replacementText)
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
