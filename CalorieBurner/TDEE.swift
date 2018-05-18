@@ -13,51 +13,28 @@ import CoreData
 // for now it's just a scaffold to guide me through the process
 
 public class TDEEMediator {
-    var startDate: Date
-    var endDate: Date
-//    let request: NSFetchRequest
+    typealias DateRange = (start: Date, end: Date)
     let context: NSManagedObjectContext
     
-//    lazy var request = Daily.fetchRequest(in: (startDate, endDate))
-    
-    init(startDate: Date, endDate: Date, context: NSManagedObjectContext) {
-        self.startDate = startDate
-        self.endDate = endDate
+    init(context: NSManagedObjectContext) {
         self.context = context
-//        request = Daily.fetchRequest(in: (startDate, endDate))
     }
     
-    func avgMass() -> Double {
-        let request = Daily.dictionaryFetchRequest(in: (startDate, endDate), properties: [Daily.massExpressionKey])
-        request.propertiesToFetch = [Daily.averageMassDescription]
-        request.resultType = .dictionaryResultType
-        
-        let things = try! context.fetch(request)
-        let dict = things[0] as! [String : Double]
-        let value = dict[Daily.averageMassKey]!
-        
-        print(value)
-        
-        return value
+    private func fetchDailies(in dateRange: DateRange) throws -> [Daily] {
+        let request = Daily.fetchRequest(in: dateRange)
+        return try context.fetch(request)
     }
     
-    func sumEnergy() -> Double {
+    func averageMass(in dateRange: DateRange) -> Double? {
+        guard let entries = try? fetchDailies(in: dateRange) else { return nil }
         
-        let request = Daily.dictionaryFetchRequest(in: (startDate, endDate), properties: [Daily.energyExpressionKey])
-        //            request.returnsObjectsAsFaults = false
-        request.propertiesToFetch = [Daily.totalEnergyDescription]
-        //            request.propertiesToGroupBy = ["energy"]
-        request.resultType = .dictionaryResultType
-        //            request.returnsDistinctResults = true
+        return entries.reduce(0) { $0 + ($1.mass?.value ?? 0) } / Double(entries.count)
+    }
+    
+    func sumEnergy(in dateRange: DateRange) -> Double? {
+        guard let entries = try? fetchDailies(in: dateRange) else { return nil }
         
-        let things = try! context.fetch(request)
-        let dict = things[0] as! [String : Double]
-        let value = dict[Daily.totalEnergyKey]!
-        
-        print(value)
-        
-        return value
-        
+        return entries.reduce(0) { $0 + ($1.energy?.value ?? 0) }
     }
 }
 

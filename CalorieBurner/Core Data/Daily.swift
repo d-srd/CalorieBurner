@@ -24,6 +24,15 @@ class Daily: NSManagedObject {
         }
     }
     
+    private var massValue: Double? {
+        return mass?.value
+    }
+    
+    
+    private var energyValue: Double? {
+        return energy?.value
+    }
+    
     /// Default fetch request, wrapping an NSFetchRequest call
     public class func makeFetchRequest() -> NSFetchRequest<Daily> {
         return NSFetchRequest<Daily>(entityName: "Daily")
@@ -45,20 +54,6 @@ class Daily: NSManagedObject {
             argumentArray: [dateRange.start.startOfDay, dateRange.end.endOfDay]
         )
         request.sortDescriptors = [NSSortDescriptor(key: "created", ascending: false)]
-        
-        return request
-    }
-    
-    /// Fetch request for doing arithmetic with the object's properties
-    public class func dictionaryFetchRequest(
-        in dateRange: (start: Date, end: Date),
-        properties: [String]
-        ) -> NSFetchRequest<NSDictionary>
-    {
-        let request = NSFetchRequest<NSDictionary>(entityName: "Daily")
-        request.resultType = .dictionaryResultType
-        request.propertiesToFetch = properties
-        request.predicate = isInDateBetweenPredicate(start: dateRange.start, end: dateRange.end)
         
         return request
     }
@@ -103,39 +98,10 @@ class Daily: NSManagedObject {
         created = date
     }
     
-    // used solely to filter arithmetic functions in fetch requests
     public func updateValues(mass newMass: Double?, energy newEnergy: Double?) {
         mass = newMass.flatMap { Mass(value: $0, unit: .kilograms) } ?? mass
         energy = newEnergy.flatMap { Energy(value: $0, unit: .kilocalories) } ?? energy
     }
-    
-    public static let massExpressionKey = "massValue"
-    public static var massExpression = NSExpression(forKeyPath: massExpressionKey)
-    public static let averageMassKey = "avgMass"
-    
-    public static let energyExpressionKey = "energyValue"
-    public static var energyExpression = NSExpression(forKeyPath: energyExpressionKey)
-    public static let totalEnergyKey = "sumEnergy"
-    
-    public static var averageMassDescription: NSExpressionDescription = {
-        let description = NSExpressionDescription()
-        let avgExpression = NSExpression(forFunction: "average:", arguments: [massExpression])
-        description.expression = avgExpression
-        description.name = averageMassKey
-        description.expressionResultType = .doubleAttributeType
-        
-        return description
-    }()
-    
-    public static var totalEnergyDescription: NSExpressionDescription = {
-        let description = NSExpressionDescription()
-        let sumExpression = NSExpression(forFunction: "sum:", arguments: [energyExpression])
-        description.expression = sumExpression
-        description.name = totalEnergyKey
-        description.expressionResultType = .doubleAttributeType
-        
-        return description
-    }()
     
     public static var dateSortDescriptor = NSSortDescriptor(key: "created", ascending: false)
 }
