@@ -137,13 +137,13 @@ extension DailyInputView: UITextFieldDelegate {
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if textField == massTextField {
-            if let newMeasurementValueString = textField.text, let newMeasurementValue = Double(newMeasurementValueString) {
-                massBuffer?.value = newMeasurementValue
+            if let text = textField.text, let value = Double(text) {
+                massBuffer = Mass(value: value, unit: UserDefaults.standard.mass)
             }
             mass = massBuffer
         } else if textField == energyTextField {
-            if let newMeasurementValueString = textField.text, let newMeasurementValue = Double(newMeasurementValueString) {
-                energyBuffer?.value = newMeasurementValue
+            if let text = textField.text, let value = Double(text) {
+                energyBuffer = Energy(value: value, unit: UserDefaults.standard.energy)
             }
             energy = energyBuffer
         }

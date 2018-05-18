@@ -820,12 +820,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="usk-n2-Gd0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4559" y="1301"/>
+            <point key="canvasLocation" x="5881" y="1300"/>
         </scene>
         <!--Home-->
         <scene sceneID="0Yr-FI-0iS">
             <objects>
-                <viewController id="6ln-Tr-S5t" sceneMemberID="viewController">
+                <viewController id="6ln-Tr-S5t" customClass="HomeViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f0x-LO-hgD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -920,6 +920,14 @@
                                 <color key="textColor" red="0.30840110780000002" green="0.5618229508" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HTv-bz-qrN">
+                                <rect key="frame" x="162" y="242" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="update"/>
+                                <connections>
+                                    <action selector="updateStuff:" destination="6ln-Tr-S5t" eventType="touchUpInside" id="aKs-u9-0Ik"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -946,7 +954,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="puY-Wc-O30" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3514" y="1301"/>
+            <point key="canvasLocation" x="3852" y="1300"/>
         </scene>
         <!--Home-->
         <scene sceneID="fnF-pO-tWw">
@@ -963,7 +971,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mlv-aM-0am" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2975" y="1301"/>
+            <point key="canvasLocation" x="3017" y="1299"/>
         </scene>
         <!--Monthly Calendar-->
         <scene sceneID="MU6-7f-VNL">
@@ -1467,7 +1475,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1jO-Qp-xje" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4009" y="1301"/>
+            <point key="canvasLocation" x="4836" y="1300"/>
         </scene>
     </scenes>
     <resources>
