@@ -163,6 +163,10 @@ class SettingsViewController: UITableViewController {
             tableView.deselectRow(at: selectedRow, animated: true)
         }
     }
+    
+    @IBAction func dismissSelf(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
