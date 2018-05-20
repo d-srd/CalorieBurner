@@ -92,6 +92,7 @@ class DailyInputView: UIView {
         energyTextField.delegate = self
         moodView.delegate = self
         
+        // IQKeyboardManager uses this to place the views
         massTextField.keyboardDistanceFromTextField = 10
         energyTextField.keyboardDistanceFromTextField = 10
     }
@@ -106,11 +107,11 @@ class DailyInputView: UIView {
 }
 
 extension DailyInputView: UITextFieldDelegate {
-    func isConvertibleToDecimal(_ string: String) -> Bool {
+    private func isConvertibleToDecimal(_ string: String) -> Bool {
         return numberFormatter.number(from: string) != nil
     }
     
-    func isBelowMaxLength(_ string: String) -> Bool {
+    private func isBelowMaxLength(_ string: String) -> Bool {
         return string.count < 10
     }
     

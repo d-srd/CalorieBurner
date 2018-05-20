@@ -45,7 +45,6 @@
 		84E2F0C220A4D2A400CB3C05 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2F0BC20A4D2A300CB3C05 /* GradientView.swift */; };
 		84E2F0C320A4D2A400CB3C05 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2F0BD20A4D2A300CB3C05 /* CGRect.swift */; };
 		84E2F0C420A4D2A400CB3C05 /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2F0BE20A4D2A400CB3C05 /* CircleProgressView.swift */; };
-		84EE818F2045B31000E15A74 /* DailyItemPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE818E2045B31000E15A74 /* DailyItemPickerView.swift */; };
 		84F08540206A27BE00E47042 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0853F206A27BE00E47042 /* SettingsViewController.swift */; };
 		84F08544206A4A0300E47042 /* DailyCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F08543206A4A0300E47042 /* DailyCSV.swift */; };
 		84FC53912057C79900D20B3C /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC53902057C79900D20B3C /* CalendarViewController.swift */; };
@@ -127,7 +126,6 @@
 		84E2F0BC20A4D2A300CB3C05 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		84E2F0BD20A4D2A300CB3C05 /* CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 		84E2F0BE20A4D2A400CB3C05 /* CircleProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
-		84EE818E2045B31000E15A74 /* DailyItemPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyItemPickerView.swift; sourceTree = "<group>"; };
 		84F0853F206A27BE00E47042 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		84F08543206A4A0300E47042 /* DailyCSV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCSV.swift; sourceTree = "<group>"; };
 		84FC53902057C79900D20B3C /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -319,7 +317,6 @@
 		84FC53BD205C9F8F00D20B3C /* Daily Collection */ = {
 			isa = PBXGroup;
 			children = (
-				84EE818E2045B31000E15A74 /* DailyItemPickerView.swift */,
 				841B5ABA20445D2300ACAD15 /* DailyDataCollectionViewCell.swift */,
 				84E2F09820A2E5C900CB3C05 /* DailyCellDelegate.swift */,
 				842525452054E32F00CA0122 /* DailyCollectionViewController.swift */,
@@ -526,7 +523,6 @@
 				843BD0A1205E239D0049DD77 /* DailyCalendarViewController.swift in Sources */,
 				84DF1B8C2074EEA50024D924 /* Date.swift in Sources */,
 				841B5AAC20436E7300ACAD15 /* Database.xcdatamodeld in Sources */,
-				84EE818F2045B31000E15A74 /* DailyItemPickerView.swift in Sources */,
 				84795BC720AD7E890035AB8C /* FeelView.swift in Sources */,
 				84123E9D20971C1900F5639E /* HealthKitViewController.swift in Sources */,
 				84123E9B2096FBA900F5639E /* HealthStoreHelper.swift in Sources */,

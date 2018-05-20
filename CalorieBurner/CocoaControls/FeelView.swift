@@ -51,7 +51,7 @@ class FeelView: UIView {
         neutralMoodImage : .neutral,
         satisfiedMoodImage : .satisfied,
         happyMoodImage : .happy
-        ]
+    ]
     
     private lazy var imageForMood = [
         Feelings.bad : badMoodImage,
@@ -66,6 +66,7 @@ class FeelView: UIView {
         
         for image in [badMoodImage, dissatisfiedMoodImage, neutralMoodImage, satisfiedMoodImage, happyMoodImage] {
             // why is this configured here? because it can't be done in IB
+            // a better question might be why this even exists
             image?.image = image?.image?.withRenderingMode(.alwaysTemplate)
             image?.tintColor = inactiveColor
             image?.image = image?.image?.withAlignmentRectInsets(UIEdgeInsets(top: -4, left: -4, bottom: -4, right: -4))
