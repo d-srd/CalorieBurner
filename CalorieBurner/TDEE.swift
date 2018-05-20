@@ -155,11 +155,41 @@ public struct CalorieBrain {
 //        return (mass, energy)
 //    }
     
+    func calculateDeltaMass(from weeks: [Week]) -> Double? {
+        guard !weeks.isEmpty else { return nil }
+        
+        guard weeks.count > 1 else {
+            return weeks.first!.averageMass
+        }
+        
+        let sorted = weeks.sorted { $0.start < $1.start }
+        
+        return weeks[weeks.count - 2].averageMass - weeks[weeks.count - 1].averageMass
+    }
+    
+    func calculateDelta(_ item: MeasurementItems, from weeks: [Week]) -> Double? {
+        guard !weeks.isEmpty else { return nil }
+        
+        guard weeks.count > 1 else {
+            switch item {
+            case .mass: return weeks.first!.averageMass
+            case .energy: return weeks.first!.averageEnergy
+            }
+        }
+        
+        let sorted = weeks.sorted { $0.start < $1.start }
+        
+        switch item {
+        case .mass:
+            return weeks[weeks.count - 1].averageMass - weeks[weeks.count - 2].averageMass
+        case .energy:
+            return weeks[weeks.count - 1].averageEnergy - weeks[weeks.count - 2].averageEnergy
+        }
+        
+    }
 
     func calculateTDEE(from weeks: [Week]) -> Double? {
-        guard !weeks.isEmpty else {
-            return nil
-        }
+        guard !weeks.isEmpty else { return nil }
 
         guard weeks.count > 1 else {
             return weeks.first!.averageEnergy

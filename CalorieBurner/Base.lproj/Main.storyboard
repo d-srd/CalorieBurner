@@ -265,13 +265,13 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="380" height="55"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mass" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxu-f9-syN">
-                                                                            <rect key="frame" x="49" y="17" width="40.5" height="20.5"/>
+                                                                            <rect key="frame" x="49" y="16.5" width="40.5" height="20.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_barbell" translatesAutoresizingMaskIntoConstraints="NO" id="YkT-Aq-ZzW">
-                                                                            <rect key="frame" x="18" y="15.5" width="22" height="22"/>
+                                                                            <rect key="frame" x="18" y="16" width="22" height="22"/>
                                                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="YkT-Aq-ZzW" secondAttribute="height" id="Mhe-fI-mPG"/>
@@ -279,7 +279,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mass" textAlignment="right" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="czg-Pc-ogX">
-                                                                            <rect key="frame" x="299.5" y="14" width="50.5" height="24"/>
+                                                                            <rect key="frame" x="299.5" y="13.5" width="50.5" height="24"/>
                                                                             <nil key="textColor"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                                             <textInputTraits key="textInputTraits" keyboardType="decimalPad" keyboardAppearance="alert" returnKeyType="next"/>
@@ -368,7 +368,7 @@
                                                                             <rect key="frame" x="8" y="40" width="364" height="41"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tio-gU-211">
-                                                                                    <rect key="frame" x="52" y="-1" width="260" height="44"/>
+                                                                                    <rect key="frame" x="52" y="-0.5" width="260" height="44"/>
                                                                                     <subviews>
                                                                                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mood_bad" translatesAutoresizingMaskIntoConstraints="NO" id="NNq-Jp-4jG">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
@@ -924,14 +924,6 @@
                                 <color key="textColor" red="0.30840110780000002" green="0.5618229508" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HTv-bz-qrN">
-                                <rect key="frame" x="162" y="242" width="48" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="update"/>
-                                <connections>
-                                    <action selector="updateStuff:" destination="6ln-Tr-S5t" eventType="touchUpInside" id="aKs-u9-0Ik"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -956,6 +948,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="deltaEnergyLabel" destination="Yvp-uz-4Nd" id="WAL-WX-J8f"/>
+                        <outlet property="deltaMassLabel" destination="kdS-tA-gdl" id="pmb-ec-7Lz"/>
                         <outlet property="tdeeLabel" destination="Bhc-Me-pFi" id="B9m-BS-r0h"/>
                     </connections>
                 </viewController>

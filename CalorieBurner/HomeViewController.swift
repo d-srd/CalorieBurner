@@ -11,11 +11,16 @@ import UIKit
 fileprivate let measurementFormatter: MeasurementFormatter = {
     let fmt = MeasurementFormatter()
     fmt.unitOptions = .providedUnit
+    fmt.numberFormatter.maximumFractionDigits = 1
+    fmt.numberFormatter.roundingMode = .halfUp
+    fmt.numberFormatter.roundingIncrement = 0.1
     return fmt
 }()
 
 class HomeViewController: UIViewController {
     @IBOutlet weak var tdeeLabel: UILabel!
+    @IBOutlet weak var deltaMassLabel: UILabel!
+    @IBOutlet weak var deltaEnergyLabel: UILabel!
     
     let startDate = Calendar.current.date(from: DateComponents(year: 2018, month: 01, day: 01))!
     let endDate = Date()
@@ -26,35 +31,51 @@ class HomeViewController: UIViewController {
     private var energyUnit: UnitEnergy = UserDefaults.standard.energy
     private var massUnit: UnitMass = UserDefaults.standard.mass
     
+    private var weeklyEntries: [Week] {
+        return mediator.transformDailies()
+    }
+    
     private var tdee: Energy? {
-        let transformed = mediator.transformDailies()
-        let value = brain.calculateTDEE(from: transformed)
+        let value = brain.calculateTDEE(from: weeklyEntries)
         return value.map { Energy(value: $0, unit: .kilocalories).converted(to: energyUnit) }
     }
     
-//    private var weeklyMassDelta: Double? {
-//
-//    }
+    private var deltaMass: Mass? {
+        let value =  brain.calculateDelta(.mass, from: weeklyEntries)
+        return value.map { Mass(value: $0, unit: .kilograms).converted(to: massUnit) }
+    }
     
-    @IBAction func updateStuff(_ sender: Any) {
-        print("update")
-        print(mediator.averageMass())
-        print(mediator.sumEnergy())
-        
-        let transformed = mediator.transformDailies()
-        let tdee = brain.calculateTDEE(from: transformed)
-//        let tdee = brain.calculateTDEE(with: try! CoreDataStack.shared.fetchAll())
-        print("tdee: ", tdee)
+    private var deltaEnergy: Energy? {
+        let value = brain.calculateDelta(.energy, from: weeklyEntries)
+        return value.map { Energy(value: $0, unit: .kilocalories).converted(to: energyUnit) }
     }
     
     private func updateTDEELabel() {
         tdeeLabel.text = tdee.map(measurementFormatter.string)
     }
     
+    private func updateDeltaLabel<T>(_ label: UILabel, measurement: Measurement<T>?) {
+        guard let measurement = measurement else { return }
+        
+        switch measurement.value {
+        case ..<0:
+            label.textColor = UIColor.green
+        case 0:
+            label.textColor = UIColor.cyan
+        case 0...:
+            label.textColor = UIColor.red
+        default: fatalError("wtf")
+        }
+        
+        label.text = measurementFormatter.string(from: measurement)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         updateTDEELabel()
+        updateDeltaLabel(deltaMassLabel, measurement: deltaMass)
+        updateDeltaLabel(deltaEnergyLabel, measurement: deltaEnergy)
     }
     
     override func viewDidLoad() {
