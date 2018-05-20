@@ -23,8 +23,6 @@
 		841B5AB920436FA300ACAD15 /* Daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AB820436FA300ACAD15 /* Daily.swift */; };
 		841B5ABB20445D2300ACAD15 /* DailyDataCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5ABA20445D2300ACAD15 /* DailyDataCollectionViewCell.swift */; };
 		842525462054E32F00CA0122 /* DailyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842525452054E32F00CA0122 /* DailyCollectionViewController.swift */; };
-		8436A897206D410000946C32 /* CalorieBurnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436A896206D410000946C32 /* CalorieBurnerTests.swift */; };
-		8436A89F206D425C00946C32 /* UserDefautsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436A89E206D425C00946C32 /* UserDefautsTests.swift */; };
 		84398AFC20A19F0C0061AD69 /* DailyCalendarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84398AFB20A19F0C0061AD69 /* DailyCalendarViewCell.swift */; };
 		84398AFE20A19F2C0061AD69 /* CalendarViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84398AFD20A19F2C0061AD69 /* CalendarViewDataSource.swift */; };
 		84398B0020A19FC10061AD69 /* CalendarMonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84398AFF20A19FC10061AD69 /* CalendarMonthHeaderView.swift */; };
@@ -34,11 +32,10 @@
 		84795BC720AD7E890035AB8C /* FeelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84795BC620AD7E890035AB8C /* FeelView.swift */; };
 		8498914820908F7E00C0E2EA /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8498914720908F7E00C0E2EA /* IQKeyboardManager.bundle */; };
 		8498914A2090B74800C0E2EA /* FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849891492090B74800C0E2EA /* FirstResponder.swift */; };
-		84AA51A4206F79F600494049 /* TDEEMediatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA51A3206F79F600494049 /* TDEEMediatorTests.swift */; };
-		84AA51A6206F7B6800494049 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA51A5206F7B6800494049 /* CoreDataTests.swift */; };
 		84AA51AC206FD89F00494049 /* DailyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA51AB206FD89F00494049 /* DailyCollectionView.swift */; };
 		84B49846204DC64C00DCFA05 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B49845204DC64C00DCFA05 /* CoreDataStack.swift */; };
 		84B4984A205163A800DCFA05 /* TDEE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B49849205163A800DCFA05 /* TDEE.swift */; };
+		84C8934020B1561900590D86 /* CalorieBrainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8933F20B1561900590D86 /* CalorieBrainTests.swift */; };
 		84DF1B8A2074EE890024D924 /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DF1B892074EE890024D924 /* Measurement.swift */; };
 		84DF1B8C2074EEA50024D924 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DF1B8B2074EEA50024D924 /* Date.swift */; };
 		84E2F09920A2E5C900CB3C05 /* DailyCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2F09820A2E5C900CB3C05 /* DailyCellDelegate.swift */; };
@@ -106,9 +103,7 @@
 		841B5ABA20445D2300ACAD15 /* DailyDataCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDataCollectionViewCell.swift; sourceTree = "<group>"; };
 		842525452054E32F00CA0122 /* DailyCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionViewController.swift; sourceTree = "<group>"; };
 		8436A894206D410000946C32 /* CalorieBurnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalorieBurnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8436A896206D410000946C32 /* CalorieBurnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieBurnerTests.swift; sourceTree = "<group>"; };
 		8436A898206D410000946C32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8436A89E206D425C00946C32 /* UserDefautsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefautsTests.swift; sourceTree = "<group>"; };
 		84398AFB20A19F0C0061AD69 /* DailyCalendarViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCalendarViewCell.swift; sourceTree = "<group>"; };
 		84398AFD20A19F2C0061AD69 /* CalendarViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewDataSource.swift; sourceTree = "<group>"; };
 		84398AFF20A19FC10061AD69 /* CalendarMonthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthHeaderView.swift; sourceTree = "<group>"; };
@@ -118,11 +113,11 @@
 		84795BC620AD7E890035AB8C /* FeelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelView.swift; sourceTree = "<group>"; };
 		8498914720908F7E00C0E2EA /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
 		849891492090B74800C0E2EA /* FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstResponder.swift; sourceTree = "<group>"; };
-		84AA51A3206F79F600494049 /* TDEEMediatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDEEMediatorTests.swift; sourceTree = "<group>"; };
-		84AA51A5206F7B6800494049 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 		84AA51AB206FD89F00494049 /* DailyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionView.swift; sourceTree = "<group>"; };
 		84B49845204DC64C00DCFA05 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		84B49849205163A800DCFA05 /* TDEE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDEE.swift; sourceTree = "<group>"; };
+		84C8933E20B1561900590D86 /* CalorieBurnerTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CalorieBurnerTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		84C8933F20B1561900590D86 /* CalorieBrainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieBrainTests.swift; sourceTree = "<group>"; };
 		84DF1B892074EE890024D924 /* Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
 		84DF1B8B2074EEA50024D924 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		84E2F09820A2E5C900CB3C05 /* DailyCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCellDelegate.swift; sourceTree = "<group>"; };
@@ -233,11 +228,9 @@
 		8436A895206D410000946C32 /* CalorieBurnerTests */ = {
 			isa = PBXGroup;
 			children = (
-				84AA51A5206F7B6800494049 /* CoreDataTests.swift */,
-				84AA51A3206F79F600494049 /* TDEEMediatorTests.swift */,
-				8436A896206D410000946C32 /* CalorieBurnerTests.swift */,
-				8436A89E206D425C00946C32 /* UserDefautsTests.swift */,
 				8436A898206D410000946C32 /* Info.plist */,
+				84C8933F20B1561900590D86 /* CalorieBrainTests.swift */,
+				84C8933E20B1561900590D86 /* CalorieBurnerTests-Bridging-Header.h */,
 			);
 			path = CalorieBurnerTests;
 			sourceTree = "<group>";
@@ -409,6 +402,7 @@
 					};
 					8436A893206D410000946C32 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 841B5A9F20436E7300ACAD15;
 					};
@@ -547,10 +541,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84AA51A6206F7B6800494049 /* CoreDataTests.swift in Sources */,
-				84AA51A4206F79F600494049 /* TDEEMediatorTests.swift in Sources */,
-				8436A897206D410000946C32 /* CalorieBurnerTests.swift in Sources */,
-				8436A89F206D425C00946C32 /* UserDefautsTests.swift in Sources */,
+				84C8934020B1561900590D86 /* CalorieBrainTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -743,12 +734,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RW5YX8CCC9;
 				INFOPLIST_FILE = CalorieBurnerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.dinosrdoc.CalorieBurnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CalorieBurnerTests/CalorieBurnerTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CalorieBurner.app/CalorieBurner";
@@ -759,12 +753,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RW5YX8CCC9;
 				INFOPLIST_FILE = CalorieBurnerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.dinosrdoc.CalorieBurnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CalorieBurnerTests/CalorieBurnerTests-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CalorieBurner.app/CalorieBurner";
