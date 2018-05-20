@@ -262,10 +262,10 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="380" height="240"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rye-Oj-rue" userLabel="MassView" customClass="ShadowView" customModule="CalorieBurner" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="380" height="54.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="380" height="55"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mass" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxu-f9-syN">
-                                                                            <rect key="frame" x="49" y="16" width="40.5" height="20.5"/>
+                                                                            <rect key="frame" x="49" y="17" width="40.5" height="20.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -279,7 +279,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mass" textAlignment="right" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="czg-Pc-ogX">
-                                                                            <rect key="frame" x="299.5" y="13" width="50.5" height="24"/>
+                                                                            <rect key="frame" x="299.5" y="14" width="50.5" height="24"/>
                                                                             <nil key="textColor"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                                             <textInputTraits key="textInputTraits" keyboardType="decimalPad" keyboardAppearance="alert" returnKeyType="next"/>
@@ -310,7 +310,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cXg-TT-OcM" userLabel="EnergyView" customClass="ShadowView" customModule="CalorieBurner" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="72.5" width="380" height="54"/>
+                                                                    <rect key="frame" x="0.0" y="73" width="380" height="54"/>
                                                                     <subviews>
                                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Energy" textAlignment="right" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="32a-su-8wh">
                                                                             <rect key="frame" x="286" y="13.5" width="64.5" height="24"/>
@@ -356,7 +356,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ill-2Q-P7h" userLabel="MoodView" customClass="ShadowView" customModule="CalorieBurner" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="144.5" width="380" height="95.5"/>
+                                                                    <rect key="frame" x="0.0" y="145" width="380" height="95"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dY2-yc-9kT">
                                                                             <rect key="frame" x="8" y="8" width="364" height="24"/>
@@ -365,7 +365,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N9A-Ud-3Ay" customClass="FeelView" customModule="CalorieBurner" customModuleProvider="target">
-                                                                            <rect key="frame" x="8" y="40" width="364" height="41.5"/>
+                                                                            <rect key="frame" x="8" y="40" width="364" height="41"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tio-gU-211">
                                                                                     <rect key="frame" x="52" y="-1" width="260" height="44"/>
@@ -810,6 +810,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="dataDeletionCell" destination="Yij-og-fcb" id="Dxe-JZ-qcp"/>
                         <outlet property="exportDataCell" destination="J2S-gQ-0Yz" id="q4U-KR-5w9"/>
                         <outlet property="firstDayOfWeekCell" destination="cXm-BX-7P9" id="rvb-Lv-cCM"/>
                         <outlet property="firstDayOfWeekLabel" destination="h9J-r7-vYD" id="ry1-zo-1uX"/>

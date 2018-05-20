@@ -86,6 +86,13 @@ class CoreDataStack {
         viewContext.delete(daily)
     }
     
+    func deleteLiterallyEveything(yesIKnowWhatIAmDoing condition: Bool) {
+        if condition {
+            guard let dailies = try? fetchAll() else { return }
+            for daily in dailies { viewContext.delete(daily) }
+        }
+    }
+    
     func save() {
         if viewContext.hasChanges {
             do {

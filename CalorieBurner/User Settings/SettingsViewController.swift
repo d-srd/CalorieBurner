@@ -22,6 +22,7 @@ class SettingsViewController: UITableViewController {
     
     @IBOutlet private weak var exportDataCell: UITableViewCell!
     @IBOutlet private weak var importDataCell: UITableViewCell!
+    @IBOutlet private weak var dataDeletionCell: UITableViewCell!
     
     private var cancellationAction: UIAlertAction {
         return UIAlertAction(title: "Cancel", style: .cancel) { [weak self] _ in
@@ -80,6 +81,18 @@ class SettingsViewController: UITableViewController {
 		return controller
 	}()
     
+    private lazy var dataDeletionConfirmationViewController: UIAlertController! = {
+        let controller = UIAlertController(title: "Delete all data",
+                                           message: "Are you sure you want to delete all stored data?",
+                                           preferredStyle: .alert)
+        controller.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+            self.deleteAllData(iAmAbsolutelySureIWantToDeleteAllData: true)
+        }))
+        controller.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        
+        return controller
+    }()
+    
     // map cells to functions they should perform when they are tapped
     // the async call is there because of a bug in iOS - sometimes when
     // a cell is tapped the delegate method "lags out" and presenting a
@@ -113,7 +126,14 @@ class SettingsViewController: UITableViewController {
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 wself.deselectSelectedRow()
-            }}
+        }},
+        
+        dataDeletionCell: { [weak self] in
+            guard let wself = self else { return }
+            DispatchQueue.main.async {
+                wself.present(wself.dataDeletionConfirmationViewController, animated: true, completion: nil)
+            }
+        }
     ]
     
     private let daysOfWeek = Calendar.current.standaloneWeekdaySymbols
@@ -161,6 +181,13 @@ class SettingsViewController: UITableViewController {
     private func deselectSelectedRow() {
         if let selectedRow = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selectedRow, animated: true)
+        }
+    }
+    
+    // TODO: - also delete HealthKit data
+    private func deleteAllData(iAmAbsolutelySureIWantToDeleteAllData condition: Bool) {
+        if condition {
+            CoreDataStack.shared.deleteLiterallyEveything(yesIKnowWhatIAmDoing: true)
         }
     }
     
