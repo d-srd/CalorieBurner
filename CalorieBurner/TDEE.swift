@@ -32,14 +32,34 @@ extension Array {
     }
 }
 
-// TODO: use an actual data structure
-typealias Weeks = [Date : (averageMass: Double, totalEnergy: Double)]
+public struct Week: Hashable {
+    let start: Date
+    let masses: [Double]
+    let energies: [Double]
+    
+    var averageMass: Double {
+        return masses.reduce(0, +) / Double(masses.count)
+    }
+    
+    var averageEnergy: Double {
+        return energies.reduce(0, +) / Double(energies.count)
+    }
+    
+    var totalEnergy: Double {
+        return energies.reduce(0, +)
+    }
+    
+    public var hashValue: Int {
+        return start.hashValue
+    }
+}
+
 typealias DateRange = (start: Date, end: Date)
 
 // TODO: document and explain this
 
 protocol CalorieTransformer: AnyObject {
-    func transformDailies() -> Weeks
+    func transformDailies() -> [Week]
 }
 
 public class TDEEMediator: CalorieTransformer {
@@ -87,14 +107,14 @@ public class TDEEMediator: CalorieTransformer {
             .mapValues { $0.fill(withSize: 7)! }
     }
     
-    func transformDailies() -> Weeks {
+    func transformDailies() -> [Week] {
         guard let entries = try? fetchDailies() else { fatalError("oops") }
         let grouped = groupByWeek(dailies: entries)
         
-        return grouped.mapValues { week in
-            let averageMass = week.reduce(0) { $0 + ($1.mass?.value ?? 0) } / Double(week.count)
-            let sumOfEnergy = week.reduce(0) { $0 + ($1.energy?.value ?? 0) }
-            return (averageMass, sumOfEnergy)
+        return grouped.map { date, dailies in
+            let masses = dailies.compactMap { $0.mass?.converted(to: .kilograms).value }
+            let energies = dailies.compactMap { $0.energy?.converted(to: .kilocalories).value }
+            return Week(start: date, masses: masses, energies: energies)
         }
     }
 }
@@ -136,24 +156,25 @@ public struct CalorieBrain {
 //    }
     
 
-    func calculateTDEE(from weeks: Weeks) -> Double? {
+    func calculateTDEE(from weeks: [Week]) -> Double? {
         guard !weeks.isEmpty else {
             return nil
         }
 
         guard weeks.count > 1 else {
-            return weeks.values.first!.totalEnergy / 7
+            return weeks.first!.averageEnergy
         }
 
-        let thing = weeks
-            .sorted { $0.key.compare($1.key) == .orderedDescending }
-            .map { $0.value }
-        let mass = thing.map { $0.averageMass }
-        let energy = thing.map { $0.totalEnergy }
+        let sorted = weeks.sorted { $0.start < $1.start }
+//        let deltaMass = sorted.last!.averageMass - sorted.first!.averageMass
+//
+//        let energyFromMassDelta = deltaMass * Constants.kCalPerKG
+        let weeklyTDEEs = sorted.map { (week) -> Double in
+            let weeklyDeltaMass = week.masses.last! - week.masses.first!
+            return week.averageEnergy + ((-weeklyDeltaMass * Constants.kCalPerKG) / 7.0)
+        }
 
-        let deltaMass = mass.last! - mass.first!
-
-        return (energy.reduce(0, +) - deltaMass * Constants.kCalPerKG) / (Double(weeks.count) * 7.0)
+        return weeklyTDEEs.reduce(0, +) / Double(weeklyTDEEs.count)
     }
 }
 
