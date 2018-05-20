@@ -93,6 +93,7 @@ class SettingsViewController: UITableViewController {
         return controller
     }()
     
+    // really silly architecture tbh.
     // map cells to functions they should perform when they are tapped
     // the async call is there because of a bug in iOS - sometimes when
     // a cell is tapped the delegate method "lags out" and presenting a

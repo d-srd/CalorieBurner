@@ -24,7 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaultUserDefaults: [String : Any] = [
             UserDefaults.massKey : UserDefaults.prepareMassForStorage(UnitMass.kilograms),
             UserDefaults.energyKey : UserDefaults.prepareEnergyForStorage(UnitEnergy.kilocalories),
-            UserDefaults.dayOfWeekKey : 1
+            UserDefaults.dayOfWeekKey : 1,
+            UserDefaults.onboardingFlowKey : false
         ]
         UserDefaults.standard.register(defaults: defaultUserDefaults)
         
@@ -33,20 +34,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // automagically resign first responder on touch outside of text input view
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
-        
-        HealthStoreHelper.shared.requestAuthorization { (success, error) in
-            guard error == nil else {
-                print("oops")
-                return
-            }
-            
-            HealthStoreHelper.shared.enableBackgroundDelivery()
+        if !UserDefaults.standard.didShowOnboardingFlow {
+            showOnboardingFlow()
         }
+        
+//        HealthStoreHelper.shared.requestAuthorization { (success, error) in
+//            guard error == nil else {
+//                print("oops")
+//                return
+//            }
+//
+//            HealthStoreHelper.shared.enableBackgroundDelivery()
+//        }
         
         return true
     }
     
+    private func showOnboardingFlow() {
+        let onboardingViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController() as! OnboardingViewController
+        onboardingViewController.onDoneButtonTap = {
+            onboardingViewController.dismiss(animated: true, completion: nil)
+            UserDefaults.standard.didShowOnboardingFlow = true
+        }
+        window?.makeKeyAndVisible()
+        window?.rootViewController?.present(onboardingViewController, animated: false, completion: nil)
+    }
     
+//    private func hideOnboardingFlow() {
+//        window?.rootViewController?.dismiss(animated: true, completion: { UserDefaults.standard.didShowOnboardingFlow = true })
+//    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -19,6 +19,7 @@ public extension UserDefaults {
     static let massKey = "massUnit"
     static let energyKey = "energyUnit"
     static let dayOfWeekKey = "firstDayOfWeek"
+    static let onboardingFlowKey = "didShowOnboarding"
     
     private static let massMap = [
         0 : UnitMass.kilograms,
@@ -89,6 +90,14 @@ public extension UserDefaults {
             self.set(newValue, forKey: UserDefaults.dayOfWeekKey)
             NotificationCenter.default.post(name: .FirstDayOfWeekDidChange, object: nil)
             print("set first day of week to: ", newValue)
+        }
+    }
+    
+    public var didShowOnboardingFlow: Bool {
+        get {
+            return self.bool(forKey: UserDefaults.onboardingFlowKey)
+        } set {
+            self.set(newValue, forKey: UserDefaults.onboardingFlowKey)
         }
     }
 }
