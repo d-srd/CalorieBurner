@@ -34,17 +34,15 @@ class OnboardingViewController: UIPageViewController {
 
 extension OnboardingViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let index = pages.index(of: viewController), index != 0 else { return nil }
+        guard let index = pages.index(of: viewController), index != pages.startIndex else { return nil }
         
-        let previous = abs((index - 1) % pages.count)
-        return pages[previous]
+        return pages[index - 1]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let index = pages.index(of: viewController), index != (pages.count - 1) else { return nil }
+        guard let index = pages.index(of: viewController), index != pages.endIndex else { return nil }
         
-        let next = abs((index + 1) % pages.count)
-        return pages[next]
+        return pages[index + 1]
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
