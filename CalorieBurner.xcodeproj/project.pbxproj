@@ -24,6 +24,7 @@
 		841B5ABB20445D2300ACAD15 /* DailyDataCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5ABA20445D2300ACAD15 /* DailyDataCollectionViewCell.swift */; };
 		842525462054E32F00CA0122 /* DailyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842525452054E32F00CA0122 /* DailyCollectionViewController.swift */; };
 		8428967520B2CA500096E1A8 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428967320B2CA500096E1A8 /* UserProfile.swift */; };
+		8428967720B2D2FD0096E1A8 /* CalorieBrainStaticTDEETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428967620B2D2FD0096E1A8 /* CalorieBrainStaticTDEETests.swift */; };
 		84398AFC20A19F0C0061AD69 /* DailyCalendarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84398AFB20A19F0C0061AD69 /* DailyCalendarViewCell.swift */; };
 		84398AFE20A19F2C0061AD69 /* CalendarViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84398AFD20A19F2C0061AD69 /* CalendarViewDataSource.swift */; };
 		84398B0020A19FC10061AD69 /* CalendarMonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84398AFF20A19FC10061AD69 /* CalendarMonthHeaderView.swift */; };
@@ -36,7 +37,7 @@
 		84AA51AC206FD89F00494049 /* DailyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA51AB206FD89F00494049 /* DailyCollectionView.swift */; };
 		84B49846204DC64C00DCFA05 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B49845204DC64C00DCFA05 /* CoreDataStack.swift */; };
 		84B4984A205163A800DCFA05 /* TDEE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B49849205163A800DCFA05 /* TDEE.swift */; };
-		84C8934020B1561900590D86 /* CalorieBrainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8933F20B1561900590D86 /* CalorieBrainTests.swift */; };
+		84C8934020B1561900590D86 /* CalorieBrainRunningTDEETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8933F20B1561900590D86 /* CalorieBrainRunningTDEETests.swift */; };
 		84DF1B8A2074EE890024D924 /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DF1B892074EE890024D924 /* Measurement.swift */; };
 		84DF1B8C2074EEA50024D924 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DF1B8B2074EEA50024D924 /* Date.swift */; };
 		84E2F09920A2E5C900CB3C05 /* DailyCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2F09820A2E5C900CB3C05 /* DailyCellDelegate.swift */; };
@@ -103,6 +104,7 @@
 		841B5ABA20445D2300ACAD15 /* DailyDataCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDataCollectionViewCell.swift; sourceTree = "<group>"; };
 		842525452054E32F00CA0122 /* DailyCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionViewController.swift; sourceTree = "<group>"; };
 		8428967320B2CA500096E1A8 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		8428967620B2D2FD0096E1A8 /* CalorieBrainStaticTDEETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieBrainStaticTDEETests.swift; sourceTree = "<group>"; };
 		8436A894206D410000946C32 /* CalorieBurnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalorieBurnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8436A898206D410000946C32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84398AFB20A19F0C0061AD69 /* DailyCalendarViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCalendarViewCell.swift; sourceTree = "<group>"; };
@@ -118,7 +120,7 @@
 		84B49845204DC64C00DCFA05 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		84B49849205163A800DCFA05 /* TDEE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDEE.swift; sourceTree = "<group>"; };
 		84C8933E20B1561900590D86 /* CalorieBurnerTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CalorieBurnerTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		84C8933F20B1561900590D86 /* CalorieBrainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieBrainTests.swift; sourceTree = "<group>"; };
+		84C8933F20B1561900590D86 /* CalorieBrainRunningTDEETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieBrainRunningTDEETests.swift; sourceTree = "<group>"; };
 		84DF1B892074EE890024D924 /* Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
 		84DF1B8B2074EEA50024D924 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		84E2F09820A2E5C900CB3C05 /* DailyCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCellDelegate.swift; sourceTree = "<group>"; };
@@ -229,7 +231,8 @@
 			isa = PBXGroup;
 			children = (
 				8436A898206D410000946C32 /* Info.plist */,
-				84C8933F20B1561900590D86 /* CalorieBrainTests.swift */,
+				84C8933F20B1561900590D86 /* CalorieBrainRunningTDEETests.swift */,
+				8428967620B2D2FD0096E1A8 /* CalorieBrainStaticTDEETests.swift */,
 				84C8933E20B1561900590D86 /* CalorieBurnerTests-Bridging-Header.h */,
 			);
 			path = CalorieBurnerTests;
@@ -283,8 +286,8 @@
 		84FC538E2057C71000D20B3C /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				8428967320B2CA500096E1A8 /* UserProfile.swift */,
 				84F08542206A499900E47042 /* CSV */,
+				8428967320B2CA500096E1A8 /* UserProfile.swift */,
 				841B5AB820436FA300ACAD15 /* Daily.swift */,
 				84B49845204DC64C00DCFA05 /* CoreDataStack.swift */,
 				84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */,
@@ -541,7 +544,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84C8934020B1561900590D86 /* CalorieBrainTests.swift in Sources */,
+				8428967720B2D2FD0096E1A8 /* CalorieBrainStaticTDEETests.swift in Sources */,
+				84C8934020B1561900590D86 /* CalorieBrainRunningTDEETests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

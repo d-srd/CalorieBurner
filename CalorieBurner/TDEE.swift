@@ -165,7 +165,11 @@ public struct CalorieBrain {
         
     }
     
-    func calculateTDEE(with user: UserProfile) -> Double? {
+    func calculateTDEE(for user: UserRepresentable) -> Double? {
+        return nil
+    }
+    
+    func calculateBMR(for user: UserRepresentable) -> Double? {
         return nil
     }
 

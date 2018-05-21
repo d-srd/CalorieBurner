@@ -29,11 +29,15 @@ import CoreData
     }
 }
 
-protocol UserRepresentable: AnyObject {
+@objc public enum Sex: Int16 {
+    case male, female
+}
+
+protocol UserRepresentable {
     var activityLevel: ActivityLevel { get set }
     var age: Int16 { get set }
     var height: Double { get set }
-    var sex: Bool { get set }
+    var sex: Sex { get set }
 }
 
 public final class UserProfile: NSManagedObject, UserRepresentable {
@@ -42,4 +46,8 @@ public final class UserProfile: NSManagedObject, UserRepresentable {
         set { activityLevelID = newValue.rawValue }
     }
     
+    public var sex: Sex {
+        get { return Sex(rawValue: sexID)! }
+        set { sexID = newValue.rawValue }
+    }
 }

@@ -9,7 +9,7 @@
 import XCTest
 @testable import CalorieBurner
 
-class CalorieBrainTDEETests: XCTestCase {
+class CalorieBrainRunningTDEETests: XCTestCase {
     
     var brain: CalorieBrain!
     
