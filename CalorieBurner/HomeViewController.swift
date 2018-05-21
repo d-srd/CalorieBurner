@@ -101,5 +101,7 @@ class HomeViewController: UIViewController {
         massUnit = UserDefaults.standard.mass
         
         updateTDEELabel()
+        updateDeltaLabel(deltaMassLabel, measurement: deltaMass)
+        updateDeltaLabel(deltaEnergyLabel, measurement: deltaEnergy)
     }
 }

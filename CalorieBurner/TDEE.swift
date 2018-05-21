@@ -9,29 +9,6 @@
 import Foundation
 import CoreData
 
-// TODO: - clean this shit up
-extension Date {
-    var startOfWeek: Date? {
-        return Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
-    }
-}
-
-extension Array {
-    func fill(withSize size: Int) -> [Element]? {
-        guard !isEmpty else { return nil }
-        
-        return (0..<size).map { idx in
-            return self[safe: idx] ?? self[self.indices.last!]
-        }
-    }
-    
-    subscript(safe index: Index) -> Element? {
-        guard indices.contains(index) else { return nil }
-        
-        return self[index]
-    }
-}
-
 public struct Week: Hashable {
     let start: Date
     let masses: [Double]
