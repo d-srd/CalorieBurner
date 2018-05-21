@@ -170,7 +170,26 @@ public struct CalorieBrain {
     }
     
     func calculateBMR(for user: UserRepresentable) -> Double? {
-        return nil
+        guard 0 < user.age, user.age < 150,
+            55 < user.height, user.height < 275,
+            30 < user.weight, user.weight < 350
+            else { return nil }
+        
+        let constant, weight, height, age: Double
+        
+        if user.sex == .male {
+            constant = 88.362
+            weight = 13.397 * user.weight
+            height = 4.799 * user.height
+            age = 5.677 * Double(user.age)
+        } else {
+            constant = 447.593
+            weight = 9.247 * user.weight
+            height = 3.098 * user.height
+            age = 4.330 * Double(user.age)
+        }
+        
+        return constant + weight + height - age
     }
 
     func calculateTDEE(using weeks: [Week]) -> Double? {

@@ -39,7 +39,7 @@ class CalorieBrainRunningTDEETests: XCTestCase {
         
         let tdee = brain.calculateTDEE(using: weeks)
         
-        XCTAssertEqual(tdee, 2500.0, "No change in mass/energy should make the base energy value be the TDEE value")
+        XCTAssertEqual(tdee!, 2500.0, accuracy: 0.0001, "No change in mass/energy should make the base energy value be the TDEE value")
     }
     
     func testNoInputValues() {
@@ -83,7 +83,7 @@ class CalorieBrainRunningTDEETests: XCTestCase {
 
         let tdee = brain.calculateTDEE(using: weeks)!
 
-        XCTAssertEqual(tdee, 3450, "TDEE should be equal to the average calorie consumption over the weeks")
+        XCTAssertEqual(tdee, 3450, accuracy: 0.0001, "TDEE should be equal to the average calorie consumption over the weeks")
     }
     
 }

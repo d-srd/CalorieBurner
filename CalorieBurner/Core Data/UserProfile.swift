@@ -37,6 +37,7 @@ protocol UserRepresentable {
     var activityLevel: ActivityLevel { get set }
     var age: Int16 { get set }
     var height: Double { get set }
+    var weight: Double { get set }
     var sex: Sex { get set }
 }
 
