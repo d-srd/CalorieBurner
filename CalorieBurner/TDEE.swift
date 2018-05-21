@@ -166,7 +166,7 @@ public struct CalorieBrain {
     }
     
     func calculateTDEE(for user: UserRepresentable) -> Double? {
-        return nil
+        return calculateBMR(for: user).map { $0 * user.activityLevel.multiplier }
     }
     
     func calculateBMR(for user: UserRepresentable) -> Double? {

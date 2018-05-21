@@ -13,7 +13,7 @@ import CoreData
 @objc public enum ActivityLevel: Int16 {
     case sedentary, light, moderate, heavy, extreme
     
-    var multiplier: Float {
+    var multiplier: Double {
         switch self {
         case .sedentary:
             return 1.2
