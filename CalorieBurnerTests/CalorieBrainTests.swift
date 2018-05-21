@@ -37,14 +37,14 @@ class CalorieBrainTDEETests: XCTestCase {
             Week(start: week1, masses: Array(repeating: 85, count: 7), energies: Array(repeating: 2500, count: 7))
         ]
         
-        let tdee = brain.calculateTDEE(from: weeks)
+        let tdee = brain.calculateTDEE(using: weeks)
         
         XCTAssertEqual(tdee, 2500.0, "No change in mass/energy should make the base energy value be the TDEE value")
     }
     
     func testNoInputValues() {
         let weeks = [Week]()
-        let tdee = brain.calculateTDEE(from: weeks)
+        let tdee = brain.calculateTDEE(using: weeks)
         
         XCTAssertNil(tdee, "No input values should produce no output values")
     }
@@ -63,7 +63,7 @@ class CalorieBrainTDEETests: XCTestCase {
             Week(start: week3, masses: [81, 82.5, 82.75, 82, 82.5, 82.5, 82.125], energies: energies)
         ]
         
-        let tdee = brain.calculateTDEE(from: weeks)!
+        let tdee = brain.calculateTDEE(using: weeks)!
         
         XCTAssertGreaterThan(tdee, 2200.0, "TDEE should be greater than the average calorie consumption")
     }
@@ -81,7 +81,7 @@ class CalorieBrainTDEETests: XCTestCase {
             Week(start: week3, masses: Array(repeating: 90, count: 7), energies: Array(repeating: 3600, count: 7))
         ]
 
-        let tdee = brain.calculateTDEE(from: weeks)!
+        let tdee = brain.calculateTDEE(using: weeks)!
 
         XCTAssertEqual(tdee, 3450, "TDEE should be equal to the average calorie consumption over the weeks")
     }

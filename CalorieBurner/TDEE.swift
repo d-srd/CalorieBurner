@@ -164,8 +164,12 @@ public struct CalorieBrain {
         }
         
     }
+    
+    func calculateTDEE(with user: UserProfile) -> Double? {
+        return nil
+    }
 
-    func calculateTDEE(from weeks: [Week]) -> Double? {
+    func calculateTDEE(using weeks: [Week]) -> Double? {
         guard !weeks.isEmpty else { return nil }
 
         guard weeks.count > 1 else {
@@ -173,9 +177,6 @@ public struct CalorieBrain {
         }
 
         let sorted = weeks.sorted { $0.start < $1.start }
-//        let deltaMass = sorted.last!.averageMass - sorted.first!.averageMass
-//
-//        let energyFromMassDelta = deltaMass * Constants.kCalPerKG
         let weeklyTDEEs = sorted.map { (week) -> Double in
             let weeklyDeltaMass = week.masses.last! - week.masses.first!
             return week.averageEnergy + ((-weeklyDeltaMass * Constants.kCalPerKG) / 7.0)

@@ -23,6 +23,7 @@
 		841B5AB920436FA300ACAD15 /* Daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AB820436FA300ACAD15 /* Daily.swift */; };
 		841B5ABB20445D2300ACAD15 /* DailyDataCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5ABA20445D2300ACAD15 /* DailyDataCollectionViewCell.swift */; };
 		842525462054E32F00CA0122 /* DailyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842525452054E32F00CA0122 /* DailyCollectionViewController.swift */; };
+		8428967520B2CA500096E1A8 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428967320B2CA500096E1A8 /* UserProfile.swift */; };
 		84398AFC20A19F0C0061AD69 /* DailyCalendarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84398AFB20A19F0C0061AD69 /* DailyCalendarViewCell.swift */; };
 		84398AFE20A19F2C0061AD69 /* CalendarViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84398AFD20A19F2C0061AD69 /* CalendarViewDataSource.swift */; };
 		84398B0020A19FC10061AD69 /* CalendarMonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84398AFF20A19FC10061AD69 /* CalendarMonthHeaderView.swift */; };
@@ -101,6 +102,7 @@
 		841B5AB820436FA300ACAD15 /* Daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daily.swift; sourceTree = "<group>"; };
 		841B5ABA20445D2300ACAD15 /* DailyDataCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDataCollectionViewCell.swift; sourceTree = "<group>"; };
 		842525452054E32F00CA0122 /* DailyCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionViewController.swift; sourceTree = "<group>"; };
+		8428967320B2CA500096E1A8 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		8436A894206D410000946C32 /* CalorieBurnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalorieBurnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8436A898206D410000946C32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84398AFB20A19F0C0061AD69 /* DailyCalendarViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCalendarViewCell.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 		84FC538E2057C71000D20B3C /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				8428967320B2CA500096E1A8 /* UserProfile.swift */,
 				84F08542206A499900E47042 /* CSV */,
 				841B5AB820436FA300ACAD15 /* Daily.swift */,
 				84B49845204DC64C00DCFA05 /* CoreDataStack.swift */,
@@ -525,6 +528,7 @@
 				841B5AAC20436E7300ACAD15 /* Database.xcdatamodeld in Sources */,
 				84795BC720AD7E890035AB8C /* FeelView.swift in Sources */,
 				84123E9D20971C1900F5639E /* HealthKitViewController.swift in Sources */,
+				8428967520B2CA500096E1A8 /* UserProfile.swift in Sources */,
 				84123E9B2096FBA900F5639E /* HealthStoreHelper.swift in Sources */,
 				84FC53C1205CA18900D20B3C /* Notification.swift in Sources */,
 				84AA51AC206FD89F00494049 /* DailyCollectionView.swift in Sources */,
