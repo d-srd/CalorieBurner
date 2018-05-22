@@ -11,6 +11,7 @@ target 'CalorieBurner' do
 
   pod 'IQKeyboardManagerSwift'
   pod 'JTAppleCalendar', '~> 7.0'
+  pod 'Charts'
 
   # Pods for CalorieBurner
 

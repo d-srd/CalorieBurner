@@ -1,20 +1,26 @@
 PODS:
+  - Charts (3.1.1):
+    - Charts/Core (= 3.1.1)
+  - Charts/Core (3.1.1)
   - IQKeyboardManagerSwift (6.0.2)
   - JTAppleCalendar (7.1.5)
 
 DEPENDENCIES:
+  - Charts
   - IQKeyboardManagerSwift
   - JTAppleCalendar (~> 7.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - Charts
     - IQKeyboardManagerSwift
     - JTAppleCalendar
 
 SPEC CHECKSUMS:
+  Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
   IQKeyboardManagerSwift: 59d4b0e140bc546c3c76ae5bb35b3dafd10b8172
   JTAppleCalendar: 2d4f974f9f3c8b4964d51ca1f6e004883c031fbe
 
-PODFILE CHECKSUM: c91992ac7b152767127ecc110ba0f46dfffef98b
+PODFILE CHECKSUM: a366160042f8610ebe9b837de04df091ce5033f9
 
 COCOAPODS: 1.5.0
