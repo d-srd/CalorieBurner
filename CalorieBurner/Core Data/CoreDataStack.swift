@@ -42,12 +42,12 @@ class CoreDataStack {
         
     }
     
-    func fetchLatest() throws -> Daily {
+    func fetchLatest() throws -> Daily? {
         let request = Daily.tableFetchRequest()
         request.fetchLimit = 1
         
         do {
-            return try viewContext.fetch(request)[0]
+            return try viewContext.fetch(request).first
         } catch {
             throw error
         }

@@ -70,7 +70,7 @@ class HomeViewController: UIViewController {
     
     private var currentMass: Mass? {
         let latest = try? CoreDataStack.shared.fetchLatest()
-        return latest?.mass
+        return latest??.mass
     }
     
     lazy var massGoalAlertController: UIAlertController = {
@@ -138,8 +138,9 @@ class HomeViewController: UIViewController {
         
         let progress = completed / startToGoalDelta
         
-        UIView.animate(withDuration: 0.4) { [weak self] in
-            self?.massProgressView.progress = Float(progress)
+        massProgressView.progress = Float(progress)
+        UIView.animate(withDuration: 2) { [weak self] in
+            self?.massProgressView.layoutIfNeeded()
         }
     }
     
