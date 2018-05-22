@@ -42,6 +42,16 @@ class CoreDataStack {
         
     }
     
+    func fetch(betweenStartDate startDate: Date, endDate: Date) throws -> [Daily] {
+        let request = Daily.fetchRequest(in: (startDate, endDate))
+        
+        do {
+            return try viewContext.fetch(request)
+        } catch {
+            throw error
+        }
+    }
+    
     func fetchLatest() throws -> Daily? {
         let request = Daily.tableFetchRequest()
         request.fetchLimit = 1

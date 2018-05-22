@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,22 +19,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EWu-xB-zf7" customClass="LineChartView" customModule="Charts">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4FL-AA-c8K">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EWu-xB-zf7" customClass="LineChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="319.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfD-z9-4SY" customClass="LineChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="327.5" width="375" height="319.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Obb-cl-wqN" firstAttribute="bottom" secondItem="EWu-xB-zf7" secondAttribute="bottom" id="QOK-eD-srF"/>
-                            <constraint firstItem="Obb-cl-wqN" firstAttribute="trailing" secondItem="EWu-xB-zf7" secondAttribute="trailing" id="WzH-5w-lde"/>
-                            <constraint firstItem="EWu-xB-zf7" firstAttribute="leading" secondItem="Obb-cl-wqN" secondAttribute="leading" id="e6P-6a-twY"/>
-                            <constraint firstItem="EWu-xB-zf7" firstAttribute="top" secondItem="Obb-cl-wqN" secondAttribute="top" id="zm2-zw-yIp"/>
+                            <constraint firstItem="4FL-AA-c8K" firstAttribute="trailing" secondItem="Obb-cl-wqN" secondAttribute="trailing" id="AZT-rm-vhk"/>
+                            <constraint firstItem="4FL-AA-c8K" firstAttribute="leading" secondItem="Obb-cl-wqN" secondAttribute="leading" id="k6H-zL-D9S"/>
+                            <constraint firstItem="Obb-cl-wqN" firstAttribute="bottom" secondItem="4FL-AA-c8K" secondAttribute="bottom" id="qaH-mz-uPu"/>
+                            <constraint firstItem="4FL-AA-c8K" firstAttribute="top" secondItem="Obb-cl-wqN" secondAttribute="top" id="sRD-1H-rzA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Obb-cl-wqN"/>
                     </view>
                     <connections>
-                        <outlet property="chartView" destination="EWu-xB-zf7" id="aUR-Ww-U9L"/>
+                        <outlet property="energyChartView" destination="dfD-z9-4SY" id="Mbu-t9-EnB"/>
+                        <outlet property="massChartView" destination="EWu-xB-zf7" id="aUR-Ww-U9L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wFm-oa-qeE" userLabel="First Responder" sceneMemberID="firstResponder"/>
