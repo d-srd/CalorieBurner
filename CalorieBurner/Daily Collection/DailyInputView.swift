@@ -60,13 +60,13 @@ class DailyInputView: UIView {
     // 5. text field is about to resign first responder
     // 6. mass is copied from massbuffer
     // 7. initial text in text field is restored
-    private var massBuffer: Measurement<UnitMass>?
+    private(set) var massBuffer: Measurement<UnitMass>?
     
     public var energy: Measurement<UnitEnergy>? {
         didSet { energyTextField.text = energy.flatMap(measurementFormatter.string) }
     }
     
-    private var energyBuffer: Measurement<UnitEnergy>?
+    private(set) var energyBuffer: Measurement<UnitEnergy>?
     
     public var mood: Feelings? {
         didSet {

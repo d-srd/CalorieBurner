@@ -16,7 +16,7 @@ class DailyInputViewController: UIViewController {
     private func shouldSaveDaily() {
         guard let date = date else { return }
         // TODO: - don't `try?`, `DO`
-        try? CoreDataStack.shared.updateOrCreate(at: date, mass: dailyInputView.mass, energy: dailyInputView.energy, mood: dailyInputView.mood)
+        try? CoreDataStack.shared.updateOrCreate(at: date, mass: dailyInputView.mass ?? dailyInputView.massBuffer, energy: dailyInputView.energy ?? dailyInputView.energyBuffer, mood: dailyInputView.mood)
     }
     
     @IBAction func doneButtonWasPressed(_ sender: Any) {
