@@ -38,6 +38,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var startingMassLabel: UILabel!
     @IBOutlet weak var goalMassLabel: UILabel!
     @IBOutlet weak var currentMassLabel: UILabel!
+    @IBOutlet weak var massProgressPercentageLabel: UILabel!
+    
+    @IBOutlet weak var currentMassLabelLeadingConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var massProgressView: UIProgressView!
     
@@ -50,20 +53,16 @@ class HomeViewController: UIViewController {
     private var energyUnit: UnitEnergy = UserDefaults.standard.energy
     private var massUnit: UnitMass = UserDefaults.standard.mass
     
-    private var oldStartingMass: Mass?
     private var startingMass: Mass? {
         didSet {
             startingMassLabel.text = startingMass.map(measurementFormatter.string)
-            oldStartingMass = oldValue
             setNeedsMassProgressRecalibration()
         }
     }
     
-    private var oldGoalMass: Mass?
     private var goalMass: Mass? {
         didSet {
             goalMassLabel.text = goalMass.map(measurementFormatter.string)
-            oldGoalMass = oldValue
             setNeedsMassProgressRecalibration()
         }
     }
@@ -138,9 +137,32 @@ class HomeViewController: UIViewController {
         
         let progress = completed / startToGoalDelta
         
+        var progressPoint = view.convert(CGPoint(x: CGFloat(progress) * massProgressView.bounds.width, y: 0),
+                                         from: massProgressView)
+        
+        // this progress view is contained in a shadow view. the progress view's frame origin is 0.
+        // to get the actual distance from the left edge of the screen to the progress view, we need
+        // to look at its superview, i.e. a shadow view
+        
+        progressPoint.x -= massProgressView.superview!.frame.minX
+        
+        if progressPoint.x > massProgressView.superview!.frame.minX &&
+           progressPoint.x < (massProgressView.superview!.frame.maxX + currentMassLabel.bounds.width)
+        {
+            progressPoint.x -= currentMassLabel.bounds.width / 2
+        }
+        
         massProgressView.progress = Float(progress)
-        UIView.animate(withDuration: 2) { [weak self] in
-            self?.massProgressView.layoutIfNeeded()
+        
+        // code smell
+        numberFormatter.numberStyle = .percent
+        massProgressPercentageLabel.text = numberFormatter.string(from: NSNumber(value: progress)).map { $0 + " of the way to your goal weight" }
+        numberFormatter.numberStyle = .decimal
+        
+        UIView.animate(withDuration: 0.4) { [weak self] in
+            self?.currentMassLabel.text = measurementFormatter.string(from: current)
+            self?.currentMassLabelLeadingConstraint.constant = progressPoint.x
+            self?.view.layoutIfNeeded()
         }
     }
     

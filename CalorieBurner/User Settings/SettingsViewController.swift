@@ -188,6 +188,7 @@ class SettingsViewController: UITableViewController {
     private func deleteAllData(iAmAbsolutelySureIWantToDeleteAllData condition: Bool) {
         if condition {
             CoreDataStack.shared.deleteLiterallyEveything(yesIKnowWhatIAmDoing: true)
+            try? CoreDataStack.shared.viewContext.save()
         }
     }
     
