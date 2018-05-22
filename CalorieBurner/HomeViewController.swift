@@ -8,21 +8,32 @@
 
 import UIKit
 
+fileprivate let numberFormatter: NumberFormatter = {
+    let numberFormatter = NumberFormatter()
+    numberFormatter.numberStyle = .decimal
+    numberFormatter.roundingMode = .halfUp
+    numberFormatter.isLenient = true
+    numberFormatter.maximumFractionDigits = 2
+    numberFormatter.roundingIncrement = 0.1
+    numberFormatter.allowsFloats = true
+    numberFormatter.locale = Locale.current
+    
+    return numberFormatter
+}()
+
 fileprivate let measurementFormatter: MeasurementFormatter = {
     let fmt = MeasurementFormatter()
     fmt.unitOptions = .providedUnit
-    fmt.numberFormatter.maximumFractionDigits = 1
-    fmt.numberFormatter.roundingMode = .halfUp
-    fmt.numberFormatter.roundingIncrement = 0.1
+    fmt.numberFormatter = numberFormatter
     return fmt
 }()
+
 
 class HomeViewController: UIViewController {
     @IBOutlet weak var tdeeLabel: UILabel!
     
     @IBOutlet weak var deltaMassLabel: UILabel!
     @IBOutlet weak var deltaEnergyLabel: UILabel!
-    
     
     @IBOutlet weak var startingMassLabel: UILabel!
     @IBOutlet weak var goalMassLabel: UILabel!
@@ -38,6 +49,61 @@ class HomeViewController: UIViewController {
     
     private var energyUnit: UnitEnergy = UserDefaults.standard.energy
     private var massUnit: UnitMass = UserDefaults.standard.mass
+    
+    private var oldStartingMass: Mass?
+    private var startingMass: Mass? {
+        didSet {
+            startingMassLabel.text = startingMass.map(measurementFormatter.string)
+            oldStartingMass = oldValue
+            setNeedsMassProgressRecalibration()
+        }
+    }
+    
+    private var oldGoalMass: Mass?
+    private var goalMass: Mass? {
+        didSet {
+            goalMassLabel.text = goalMass.map(measurementFormatter.string)
+            oldGoalMass = oldValue
+            setNeedsMassProgressRecalibration()
+        }
+    }
+    
+    private var currentMass: Mass? {
+        let latest = try? CoreDataStack.shared.fetchLatest()
+        return latest?.mass
+    }
+    
+    lazy var massGoalAlertController: UIAlertController = {
+        let ac = UIAlertController(title: "Set goals", message: nil, preferredStyle: .alert)
+        
+        ac.addTextField() {
+            $0.keyboardType = .decimalPad
+            $0.keyboardAppearance = .dark
+            $0.placeholder = "Starting weight"
+            $0.delegate = self
+        }
+        ac.addTextField() {
+            $0.keyboardType = .decimalPad
+            $0.keyboardAppearance = .dark
+            $0.placeholder = "Goal weight"
+            $0.delegate = self
+        }
+        
+        let doneAction = UIAlertAction(title: "Done", style: .default) { [unowned self, ac] _ in
+            if let startingMassValue = ac.textFields?.first?.text.flatMap(Double.init) {
+                self.startingMass = Mass(value: startingMassValue, unit: self.massUnit)
+            }
+            
+            if let goalMassValue = ac.textFields?.last?.text.flatMap(Double.init) {
+                self.goalMass = Mass(value: goalMassValue, unit: self.massUnit)
+            }
+        }
+        
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        ac.addAction(doneAction)
+        
+        return ac
+    }()
     
     private var weeklyEntries: [Week] {
         return mediator.transformDailies()
@@ -63,6 +129,20 @@ class HomeViewController: UIViewController {
         return view.convert(CGPoint(x: horizontal, y: 0), from: massProgressView)
     }
     
+    private func setNeedsMassProgressRecalibration() {
+        guard let start = startingMass, let goal = goalMass, let current = currentMass
+        else { return }
+        
+        let startToGoalDelta = abs(start.value - goal.value)
+        let completed = abs(start.value - current.value)
+        
+        let progress = completed / startToGoalDelta
+        
+        UIView.animate(withDuration: 0.4) { [weak self] in
+            self?.massProgressView.progress = Float(progress)
+        }
+    }
+    
     private func updateTDEELabel() {
         tdeeLabel.text = tdee.map(measurementFormatter.string)
     }
@@ -81,6 +161,19 @@ class HomeViewController: UIViewController {
         }
         
         label.text = measurementFormatter.string(from: measurement)
+    }
+    
+    @objc private func unitsDidChange(_ sender: Any) {
+        energyUnit = UserDefaults.standard.energy
+        massUnit = UserDefaults.standard.mass
+        
+        updateTDEELabel()
+        updateDeltaLabel(deltaMassLabel, measurement: deltaMass)
+        updateDeltaLabel(deltaEnergyLabel, measurement: deltaEnergy)
+    }
+    
+    @objc private func showMassAlert(_ sender: Any) {
+        present(massGoalAlertController, animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,19 +195,36 @@ class HomeViewController: UIViewController {
                                                selector: #selector(unitsDidChange(_:)),
                                                name: .UnitEnergyChanged,
                                                object: nil)
+        
+        massProgressView.isUserInteractionEnabled = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(showMassAlert(_:)))
+        
+        massProgressView.addGestureRecognizer(tap)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .UnitMassChanged, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UnitEnergyChanged, object: nil)
     }
+}
+
+extension HomeViewController: UITextFieldDelegate {
+    private func isConvertibleToDecimal(_ string: String) -> Bool {
+        return numberFormatter.number(from: string) != nil
+    }
     
-    @objc private func unitsDidChange(_ sender: Any) {
-        energyUnit = UserDefaults.standard.energy
-        massUnit = UserDefaults.standard.mass
+    private func isBelowMaxLength(_ string: String) -> Bool {
+        return string.count < 10
+    }
+    
+    // make sure that the input is a decimal number
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard !string.isEmpty else { return true }
         
-        updateTDEELabel()
-        updateDeltaLabel(deltaMassLabel, measurement: deltaMass)
-        updateDeltaLabel(deltaEnergyLabel, measurement: deltaEnergy)
+        let currentText = textField.text ?? ""
+        let replacementText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        
+        return isConvertibleToDecimal(replacementText) && isBelowMaxLength(replacementText)
     }
 }

@@ -924,16 +924,14 @@
                                 <color key="textColor" red="0.30840110780000002" green="0.5618229508" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="90 kg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyD-ye-zNc">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90 kg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyD-ye-zNc">
                                 <rect key="frame" x="26" y="383" width="44" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="75 kg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xFq-Gl-X7X">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="75 kg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xFq-Gl-X7X">
                                 <rect key="frame" x="307" y="383" width="43" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -953,10 +951,14 @@
                             <constraint firstItem="3b3-Ba-cPY" firstAttribute="centerX" secondItem="wai-PX-21X" secondAttribute="centerX" id="Iu4-tA-iJr"/>
                             <constraint firstItem="Lvz-SK-EA2" firstAttribute="top" secondItem="3b3-Ba-cPY" secondAttribute="bottom" constant="50" id="KIg-g2-AFF"/>
                             <constraint firstItem="wai-PX-21X" firstAttribute="trailing" secondItem="Lvz-SK-EA2" secondAttribute="trailing" constant="26" id="UFT-mA-KQ6"/>
+                            <constraint firstItem="LyD-ye-zNc" firstAttribute="leading" secondItem="owu-N6-efR" secondAttribute="leading" id="UGE-GT-ABC"/>
+                            <constraint firstItem="xFq-Gl-X7X" firstAttribute="trailing" secondItem="owu-N6-efR" secondAttribute="trailing" id="UYr-vw-Hwy"/>
                             <constraint firstItem="DdK-Rm-hhO" firstAttribute="top" secondItem="wai-PX-21X" secondAttribute="top" constant="42" id="b4D-Hp-b37"/>
                             <constraint firstItem="Bhc-Me-pFi" firstAttribute="top" secondItem="DdK-Rm-hhO" secondAttribute="bottom" constant="8" id="bE4-2u-moa"/>
                             <constraint firstItem="Bhc-Me-pFi" firstAttribute="centerX" secondItem="wai-PX-21X" secondAttribute="centerX" id="rzJ-Fc-awj"/>
+                            <constraint firstItem="xFq-Gl-X7X" firstAttribute="top" secondItem="LyD-ye-zNc" secondAttribute="top" id="tId-9Z-a9U"/>
                             <constraint firstItem="Lvz-SK-EA2" firstAttribute="centerX" secondItem="wai-PX-21X" secondAttribute="centerX" id="tle-5B-D3P"/>
+                            <constraint firstItem="LyD-ye-zNc" firstAttribute="top" secondItem="owu-N6-efR" secondAttribute="bottom" constant="19" id="znL-yQ-9Fz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wai-PX-21X"/>
                     </view>

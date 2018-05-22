@@ -42,6 +42,17 @@ class CoreDataStack {
         
     }
     
+    func fetchLatest() throws -> Daily {
+        let request = Daily.tableFetchRequest()
+        request.fetchLimit = 1
+        
+        do {
+            return try viewContext.fetch(request)[0]
+        } catch {
+            throw error
+        }
+    }
+    
     /// If a Daily does not exist in the specified date, it is created with the provided values. Otherwise, it is updated with the provided values. Pass nil to not update a single value. Operates on `viewContext`
     func updateOrCreate(at day: Date, mass: Mass?, energy: Energy?, mood: Feelings?) throws -> Daily {
         let request = Daily.fetchRequest(in: day)
