@@ -1651,7 +1651,7 @@
             </objects>
             <point key="canvasLocation" x="5481" y="1827"/>
         </scene>
-        <!--Charts View Controller-->
+        <!--Charts-->
         <scene sceneID="OJc-7A-dQN">
             <objects>
                 <viewController id="zD3-4T-oP3" customClass="ChartsViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
@@ -1659,30 +1659,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="uxg-BF-e3l">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="s4u-Mn-0Tb">
+                                <rect key="frame" x="24" y="80" width="327" height="522"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="64Y-9n-Tdg" customClass="LineChartView" customModule="Charts">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="273"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4fI-Sd-YgD" customClass="LineChartView" customModule="Charts">
-                                        <rect key="frame" x="0.0" y="281" width="375" height="273"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3bl-f4-DYf">
+                                        <rect key="frame" x="0.0" y="0.0" width="327" height="249"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mass" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zft-Br-mYr">
+                                                <rect key="frame" x="0.0" y="0.0" width="327" height="20.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="64Y-9n-Tdg" customClass="LineChartView" customModule="Charts">
+                                                <rect key="frame" x="0.0" y="28.5" width="327" height="220.5"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qVG-ou-uym">
+                                        <rect key="frame" x="0.0" y="273" width="327" height="249"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Energy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTW-w4-2X0">
+                                                <rect key="frame" x="0.0" y="0.0" width="327" height="20.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4fI-Sd-YgD" customClass="LineChartView" customModule="Charts">
+                                                <rect key="frame" x="0.0" y="28.5" width="327" height="220.5"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="uxg-BF-e3l" firstAttribute="trailing" secondItem="zED-Gm-Pjw" secondAttribute="trailing" id="2df-xq-WzH"/>
-                            <constraint firstItem="zED-Gm-Pjw" firstAttribute="bottom" secondItem="uxg-BF-e3l" secondAttribute="bottom" id="Ke1-Ee-wlt"/>
-                            <constraint firstItem="uxg-BF-e3l" firstAttribute="top" secondItem="zED-Gm-Pjw" secondAttribute="top" id="ahs-zJ-3uf"/>
-                            <constraint firstItem="uxg-BF-e3l" firstAttribute="leading" secondItem="zED-Gm-Pjw" secondAttribute="leading" id="of1-St-EFA"/>
+                            <constraint firstItem="s4u-Mn-0Tb" firstAttribute="top" secondItem="zED-Gm-Pjw" secondAttribute="top" constant="16" id="ANX-pG-JKx"/>
+                            <constraint firstItem="zED-Gm-Pjw" firstAttribute="bottom" secondItem="s4u-Mn-0Tb" secondAttribute="bottom" constant="16" id="C6x-V6-Q9h"/>
+                            <constraint firstItem="zED-Gm-Pjw" firstAttribute="trailing" secondItem="s4u-Mn-0Tb" secondAttribute="trailing" constant="24" id="a1k-1O-ufB"/>
+                            <constraint firstItem="s4u-Mn-0Tb" firstAttribute="leading" secondItem="zED-Gm-Pjw" secondAttribute="leading" constant="24" id="jFZ-xd-8iM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zED-Gm-Pjw"/>
                     </view>
-                    <navigationItem key="navigationItem" id="KpC-yk-M6B"/>
+                    <navigationItem key="navigationItem" title="Charts" id="KpC-yk-M6B"/>
                     <connections>
                         <outlet property="energyChartView" destination="4fI-Sd-YgD" id="3Qc-YH-tAX"/>
                         <outlet property="massChartView" destination="64Y-9n-Tdg" id="fqu-3l-hHb"/>

@@ -60,7 +60,7 @@ class ChartsViewController: UIViewController {
     private func makeData(with entries: [ChartDataEntry], labeled label: String? = nil) -> LineChartData {
         let dataSet = LineChartDataSet(values: entries, label: label)
         dataSet.mode = .cubicBezier
-        dataSet.colors = ChartColorTemplates.vordiplom()
+        dataSet.colors = ChartColorTemplates.joyful()
         dataSet.lineWidth = 5
         return LineChartData(dataSet: dataSet)
     }
@@ -80,7 +80,9 @@ class ChartsViewController: UIViewController {
         massChartView.legend.enabled = false
         energyChartView.legend.enabled = false
         massChartView.xAxis.valueFormatter = formatter
-        energyChartView.xAxis.valueFormatter = formatter        
+        energyChartView.xAxis.valueFormatter = formatter
+        massChartView.chartDescription?.text = nil
+        energyChartView.chartDescription?.text = nil
     }
     
     override func viewWillAppear(_ animated: Bool) {
