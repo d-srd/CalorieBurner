@@ -25,7 +25,7 @@
 		8428967520B2CA500096E1A8 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428967320B2CA500096E1A8 /* UserProfile.swift */; };
 		8428967720B2D2FD0096E1A8 /* CalorieBrainStaticTDEETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428967620B2D2FD0096E1A8 /* CalorieBrainStaticTDEETests.swift */; };
 		8428967B20B44A090096E1A8 /* ChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428967A20B44A090096E1A8 /* ChartsViewController.swift */; };
-		8428967D20B44A110096E1A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8428967C20B44A110096E1A8 /* Main.storyboard */; };
+		8428967D20B44A110096E1A8 /* Charts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8428967C20B44A110096E1A8 /* Charts.storyboard */; };
 		84398AFC20A19F0C0061AD69 /* DailyCalendarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84398AFB20A19F0C0061AD69 /* DailyCalendarViewCell.swift */; };
 		84398AFE20A19F2C0061AD69 /* CalendarViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84398AFD20A19F2C0061AD69 /* CalendarViewDataSource.swift */; };
 		84398B0020A19FC10061AD69 /* CalendarMonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84398AFF20A19FC10061AD69 /* CalendarMonthHeaderView.swift */; };
@@ -106,7 +106,7 @@
 		8428967320B2CA500096E1A8 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		8428967620B2D2FD0096E1A8 /* CalorieBrainStaticTDEETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieBrainStaticTDEETests.swift; sourceTree = "<group>"; };
 		8428967A20B44A090096E1A8 /* ChartsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsViewController.swift; sourceTree = "<group>"; };
-		8428967C20B44A110096E1A8 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8428967C20B44A110096E1A8 /* Charts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Charts.storyboard; sourceTree = "<group>"; };
 		8436A894206D410000946C32 /* CalorieBurnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalorieBurnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8436A898206D410000946C32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84398AFB20A19F0C0061AD69 /* DailyCalendarViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCalendarViewCell.swift; sourceTree = "<group>"; };
@@ -225,7 +225,7 @@
 				84B49849205163A800DCFA05 /* TDEE.swift */,
 				840E2FD120ADEFB400EBDC0E /* HomeViewController.swift */,
 				8428967A20B44A090096E1A8 /* ChartsViewController.swift */,
-				8428967C20B44A110096E1A8 /* Main.storyboard */,
+				8428967C20B44A110096E1A8 /* Charts.storyboard */,
 			);
 			path = CalorieBurner;
 			sourceTree = "<group>";
@@ -439,7 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				841B5AB120436E7300ACAD15 /* LaunchScreen.storyboard in Resources */,
-				8428967D20B44A110096E1A8 /* Main.storyboard in Resources */,
+				8428967D20B44A110096E1A8 /* Charts.storyboard in Resources */,
 				841B5AAE20436E7300ACAD15 /* Assets.xcassets in Resources */,
 				84123EA02097556300F5639E /* transparentPixel.png in Resources */,
 				8498914820908F7E00C0E2EA /* IQKeyboardManager.bundle in Resources */,
