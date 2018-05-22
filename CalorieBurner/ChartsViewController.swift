@@ -9,18 +9,33 @@
 import UIKit
 import Charts
 
+class ShortDateChartFormatter: IAxisValueFormatter {
+    var startDate: Date
+    let formatter: DateFormatter = {
+        let fmt = DateFormatter()
+        fmt.dateFormat = "MMM dd"
+        return fmt
+    }()
+    
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        let date = Calendar.current.date(byAdding: .day, value: Int(value), to: startDate)
+        return formatter.string(from: date!)
+    }
+    
+    init(startDate: Date) {
+        self.startDate = startDate
+    }
+}
+
 class ChartsViewController: UIViewController {
     @IBOutlet weak var massChartView: LineChartView!
     @IBOutlet weak var energyChartView: LineChartView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let startDate = Calendar.current.date(byAdding: .weekOfYear, value: -2, to: Date())!
-        let endDate = Date()
-        
-        guard let dailies = try? CoreDataStack.shared.fetch(betweenStartDate: startDate, endDate: endDate) else { return }
-        
+    let startDate = Calendar.current.date(byAdding: .weekOfYear, value: -2, to: Date())!
+    let endDate = Date()
+    
+    private func fetchLatestData() -> (mass: [ChartDataEntry], energy: [ChartDataEntry])? {
+        guard let dailies = try? CoreDataStack.shared.fetch(betweenStartDate: startDate, endDate: endDate) else { return nil }
         
         var massDataValues = [ChartDataEntry]()
         var energyDataValues = [ChartDataEntry]()
@@ -39,18 +54,37 @@ class ChartsViewController: UIViewController {
         massDataValues.sort { $0.x < $1.x }
         energyDataValues.sort { $0.x < $1.x }
         
-        let massDataSet = LineChartDataSet(values: massDataValues, label: "Weight")
-        massDataSet.mode = .cubicBezier
-        massDataSet.colors = ChartColorTemplates.vordiplom()
-        let massData = LineChartData(dataSet: massDataSet)
+        return (massDataValues, energyDataValues)
+    }
+    
+    private func makeData(with entries: [ChartDataEntry], labeled label: String? = nil) -> LineChartData {
+        let dataSet = LineChartDataSet(values: entries, label: label)
+        dataSet.mode = .cubicBezier
+        dataSet.colors = ChartColorTemplates.vordiplom()
+        dataSet.lineWidth = 5
+        return LineChartData(dataSet: dataSet)
+    }
+    
+    private func updateCharts() {
+        guard let (massData, energyData) = fetchLatestData() else { return }
         
-        let energyDataSet = LineChartDataSet(values: energyDataValues, label: "Energy")
-        energyDataSet.mode = .cubicBezier
-        energyDataSet.colors = ChartColorTemplates.liberty()
-        let energyData = LineChartData(dataSet: energyDataSet)
+        massChartView.data = makeData(with: massData)
+        energyChartView.data = makeData(with: energyData)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        massChartView.data = massData
-        energyChartView.data = energyData
-        
+        let formatter = ShortDateChartFormatter(startDate: startDate)
+
+        massChartView.legend.enabled = false
+        energyChartView.legend.enabled = false
+        massChartView.xAxis.valueFormatter = formatter
+        energyChartView.xAxis.valueFormatter = formatter        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateCharts()
     }
 }
