@@ -10,7 +10,33 @@
 import Foundation
 import CoreData
 
-@objc public enum ActivityLevel: Int16 {
+// Allows Enums to have raw string values and be enumerated into an Array.
+public protocol EnumCollection: Hashable {
+    static func cases() -> AnySequence<Self>
+    static var allValues: [Self] { get }
+}
+
+public extension EnumCollection {
+    public static func cases() -> AnySequence<Self> {
+        return AnySequence { () -> AnyIterator<Self> in
+            var raw = 0
+            return AnyIterator {
+                let current: Self = withUnsafePointer(to: &raw) { $0.withMemoryRebound(to: self, capacity: 1) { $0.pointee } }
+                guard current.hashValue == raw else {
+                    return nil
+                }
+                raw += 1
+                return current
+            }
+        }
+    }
+    
+    public static var allValues: [Self] {
+        return Array(self.cases())
+    }
+}
+
+@objc public enum ActivityLevel: Int16, EnumCollection, CustomStringConvertible {
     case sedentary, light, moderate, heavy, extreme
     
     var multiplier: Double {
@@ -27,10 +53,37 @@ import CoreData
             return 1.9
         }
     }
+    
+    public var description: String {
+        switch self {
+        case .sedentary:
+            return "Sedentary"
+        case .light:
+            return "Light"
+        case .moderate:
+            return "Moderate"
+        case .heavy:
+            return "Heavy"
+        case .extreme:
+            return "Extreme"
+        }
+    }
+    
+    // why :(
+    static var numberOfValues: Int {
+        return allValues.count
+    }
 }
 
-@objc public enum Sex: Int16 {
+@objc public enum Sex: Int16, CustomStringConvertible {
     case male, female
+    
+    public var description: String {
+        switch self {
+        case .male: return "Male"
+        case .female: return "Female"
+        }
+    }
 }
 
 protocol UserRepresentable {

@@ -19,8 +19,16 @@ fileprivate let measurementFormatter: MeasurementFormatter = {
 
 class HomeViewController: UIViewController {
     @IBOutlet weak var tdeeLabel: UILabel!
+    
     @IBOutlet weak var deltaMassLabel: UILabel!
     @IBOutlet weak var deltaEnergyLabel: UILabel!
+    
+    
+    @IBOutlet weak var startingMassLabel: UILabel!
+    @IBOutlet weak var goalMassLabel: UILabel!
+    @IBOutlet weak var currentMassLabel: UILabel!
+    
+    @IBOutlet weak var massProgressView: UIProgressView!
     
     let startDate = Calendar.current.date(from: DateComponents(year: 2018, month: 01, day: 01))!
     let endDate = Date()
@@ -36,18 +44,23 @@ class HomeViewController: UIViewController {
     }
     
     private var tdee: Energy? {
-        let value = brain.calculateTDEE(from: weeklyEntries)
+        let value = brain.calculateTDEE(using: weeklyEntries)
         return value.map { Energy(value: $0, unit: .kilocalories).converted(to: energyUnit) }
     }
     
     private var deltaMass: Mass? {
-        let value =  brain.calculateDelta(.mass, from: weeklyEntries)
+        let value = brain.calculateDelta(.mass, from: weeklyEntries)
         return value.map { Mass(value: $0, unit: .kilograms).converted(to: massUnit) }
     }
     
     private var deltaEnergy: Energy? {
         let value = brain.calculateDelta(.energy, from: weeklyEntries)
         return value.map { Energy(value: $0, unit: .kilocalories).converted(to: energyUnit) }
+    }
+    
+    private var progressPosition: CGPoint {
+        let horizontal = massProgressView.bounds.width * CGFloat(massProgressView.progress)
+        return view.convert(CGPoint(x: horizontal, y: 0), from: massProgressView)
     }
     
     private func updateTDEELabel() {
