@@ -193,6 +193,9 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
         setCurrentMonthTitle(to: date)
         
         dailyCollectionViewController.scrollToItem(at: date, animated: true)
+        
+        // disable adding dailies if they are beyond today
+        navigationItem.rightBarButtonItem?.isEnabled = date < today
     }
     
     func dailyView(_ dailyView: DailyCollectionView, willScrollToItemAt date: Date) {
