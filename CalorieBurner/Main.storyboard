@@ -1601,6 +1601,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="dailyInputView" destination="3eP-fX-4Ss" id="X71-3f-zRc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="64k-f6-wmb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

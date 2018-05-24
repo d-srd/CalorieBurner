@@ -62,6 +62,7 @@ class ChartsViewController: UIViewController {
         dataSet.mode = .cubicBezier
         dataSet.colors = ChartColorTemplates.joyful()
         dataSet.lineWidth = 5
+        
         return LineChartData(dataSet: dataSet)
     }
     

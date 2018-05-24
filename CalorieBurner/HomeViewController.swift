@@ -180,7 +180,8 @@ class HomeViewController: UIViewController {
             label.textColor = UIColor.cyan
         case 0...:
             label.textColor = UIColor.red
-        default: fatalError("wtf")
+        default:
+            label.textColor = UIColor.purple
         }
         
         label.text = measurementFormatter.string(from: measurement)

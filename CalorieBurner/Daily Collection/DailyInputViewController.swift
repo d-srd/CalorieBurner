@@ -8,19 +8,28 @@
 
 import UIKit
 
+protocol DailyInputViewControllerDelegate: AnyObject {
+    func didSaveDaily()
+}
+
 class DailyInputViewController: UIViewController {
     @IBOutlet weak var dailyInputView: DailyInputView!
     
     var date: Date?
+    weak var delegate: DailyInputViewControllerDelegate?
     
     private func shouldSaveDaily() {
         guard let date = date else { return }
         // TODO: - don't `try?`, `DO`
-        try? CoreDataStack.shared.updateOrCreate(at: date, mass: dailyInputView.mass ?? dailyInputView.massBuffer, energy: dailyInputView.energy ?? dailyInputView.energyBuffer, mood: dailyInputView.mood)
+        try? CoreDataStack.shared.updateOrCreate(at: date,
+                                                 mass: dailyInputView.mass ?? dailyInputView.massBuffer,
+                                                 energy: dailyInputView.energy ?? dailyInputView.energyBuffer,
+                                                 mood: dailyInputView.mood)
     }
     
     @IBAction func doneButtonWasPressed(_ sender: Any) {
         shouldSaveDaily()
+        delegate?.didSaveDaily()
         dismiss(animated: true, completion: nil)
     }
     

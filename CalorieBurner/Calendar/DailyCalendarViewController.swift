@@ -38,11 +38,6 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
         }
     }
     
-    // wtf
-    @IBAction func unwindAction(_ sender: UIStoryboardSegue) {
-        print("HI THERE")
-    }
-    
     @IBAction func showDailyInputViewController(_ sender: Any) {
         performSegue(withIdentifier: Segues.inputVC.rawValue, sender: sender)
     }
@@ -69,6 +64,7 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
             // there's a navigation controller in here, so we steal its child
             let inputVC = segue.destination.childViewControllers.first as! DailyInputViewController
             inputVC.date = calendarView.selectedDates.first
+            inputVC.delegate = self
             
         case .monthlyCalendarVC:
             let calendarVC = segue.destination.childViewControllers.first as! CalendarViewController
@@ -90,6 +86,10 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        reloadData()
+    }
+    
+    private func reloadData() {
         dailyCollectionViewController.reloadData()
         currentDate.flatMap(calendarView.reloadDate)
     }
@@ -211,4 +211,10 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
     }
     
     
+}
+
+extension DailyCalendarViewController: DailyInputViewControllerDelegate {
+    func didSaveDaily() {
+        reloadData()
+    }
 }
