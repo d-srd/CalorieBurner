@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// Calendar View Cell with an additional view to indicate the presence/lack of an existing item associated with that particular date. The naming is probably bad.
+/// Calendar View Cell with an additional view to indicate the presence/lack of an existing item associated with that particular date.
 class DailyCalendarViewCell: DayViewCell {
     @IBOutlet weak var existingItemView: UIView!
 }

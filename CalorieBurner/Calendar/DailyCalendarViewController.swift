@@ -9,7 +9,7 @@
 import UIKit
 import JTAppleCalendar
 
-extension JTAppleCalendarView {
+private extension JTAppleCalendarView {
     func reloadDate(_ date: Date) {
         self.reloadDates([date])
     }
@@ -76,13 +76,10 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        dailyCollectionViewController.dailyView.itemSize =
-            CGSize(width: containerView.frame.width * 0.8, height: 240)
+        setDailyVCItemSize()
         dailyCollectionViewController.dailyView.collectionViewLayout.invalidateLayout()
     }
     
-    // easy way to display data when the user exits Daily Input View
-    // the alternative would be to use an unwind segue, but it seems unnecessary
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -94,19 +91,25 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
         currentDate.flatMap(calendarView.reloadDate)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // make the calendar have a single row
-        configuration = .weekly
-        setCurrentDateLabel(to: today)
-        
-        // UICollectionView needs an initial size to lay out the cells. this code is esentially ignored, the one in didLayoutSubviews is used.
+    private func setDailyVCItemSize() {
         dailyCollectionViewController.dailyView.itemSize =
             CGSize(width: containerView.frame.width * 0.8, height: 240)
+    }
+    
+    private func configureDailyVCInitial() {
+        setDailyVCItemSize()
         dailyCollectionViewController.dailyView.dailyScrollDelegate = self
         dailyCollectionViewController.scrollToItem(at: self.today, animated: false)
         calendarView.selectDates([today])
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        configuration = .weekly
+        setCurrentDateLabel(to: today)
+        
+        configureDailyVCInitial()
         
         NotificationCenter.default.addObserver(
             self,
@@ -134,8 +137,7 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
     
-    // this is a hacky way to fix collection view's layout
-    // without it, the content inset would not change and the cell would stay on the upper side of the screen
+    // Fix collection view layout. Without this, the content inset wouldn't change and the cell would stay on the upper side of the screen
     @objc private func keyboardWillHide(_ notification: Notification) {
         dailyCollectionViewController.dailyView.collectionViewLayout.invalidateLayout()
     }
