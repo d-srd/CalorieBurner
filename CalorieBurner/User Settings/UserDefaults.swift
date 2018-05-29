@@ -81,7 +81,7 @@ public extension UserDefaults {
     
     /// User's preferred first day of week, represented numerically. It's the job of the caller to
     /// make sure that the value this property is set to is valid.
-    /// e.g. in USA localization: Sunday - 1, Monday - 2, ... Saturday - 7
+    /// e.g. in USA localization: Sunday = 1, Monday = 2, ... Saturday = 7
     public var firstDayOfWeek: Int {
         get {
             return self.integer(forKey: UserDefaults.dayOfWeekKey)
