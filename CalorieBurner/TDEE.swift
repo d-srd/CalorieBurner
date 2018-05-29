@@ -9,6 +9,8 @@
 import Foundation
 import CoreData
 
+/// Representation of a single week containing mass and energy measurements.
+/// Used internally for TDEE calculations.
 public struct Week: Hashable {
     let start: Date
     let masses: [Double]
@@ -33,14 +35,13 @@ public struct Week: Hashable {
 
 typealias DateRange = (start: Date, end: Date)
 
-// TODO: document and explain this
-
+/// Transform CoreData model to internal model
 protocol CalorieTransformer: AnyObject {
     func transformDailies() -> [Week]
 }
 
+/// Convert CoreData `Daily` entries to `Week`
 public class TDEEMediator: CalorieTransformer {
-    
     private let context: NSManagedObjectContext
     var startDate: Date
     var endDate: Date
@@ -60,18 +61,6 @@ public class TDEEMediator: CalorieTransformer {
         return try context.fetch(request)
     }
     
-    func averageMass() -> Double? {
-        guard let entries = try? fetchDailies() else { return nil }
-        
-        return entries.reduce(0) { $0 + ($1.mass?.value ?? 0) } / Double(entries.count)
-    }
-    
-    func sumEnergy() -> Double? {
-        guard let entries = try? fetchDailies() else { return nil }
-        
-        return entries.reduce(0) { $0 + ($1.energy?.value ?? 0) }
-    }
-    
     private func groupByWeek(dailies: [Daily]) -> [Date : [Daily]] {
         let groupPredicate = { (element: Daily) in
             return element.created!.startOfWeek!
@@ -88,6 +77,7 @@ public class TDEEMediator: CalorieTransformer {
         guard let entries = try? fetchDailies() else { fatalError("oops") }
         let grouped = groupByWeek(dailies: entries)
         
+        // units may not be canonical (kilograms, kilocalories), so we convert them here
         return grouped.map { date, dailies in
             let masses = dailies.compactMap { $0.mass?.converted(to: .kilograms).value }
             let energies = dailies.compactMap { $0.energy?.converted(to: .kilocalories).value }
@@ -97,6 +87,11 @@ public class TDEEMediator: CalorieTransformer {
 }
 
 public struct CalorieBrain {
+    // Kilocalories per gram of fat vary wildly from person to person.
+    // Not to mention that it's very hard to accurately track fat burned
+    // by a single person even with the newest, most specialized tools.
+    // This is a simple way to get an approximation suitable for calculating a range.
+    // In the future, this could be used to correct TDEE calculation offsets
     private struct Constants {
         static let kCalPerGramOfFat = (min: 8.7, max: 9.5)
         static let lipidPercentPerKilogramOfTissue = (min: 0.72, max: 0.87)
@@ -110,39 +105,6 @@ public struct CalorieBrain {
             return (kCalPerKilogramOfTissue.min + kCalPerKilogramOfTissue.max) / 2
         }()
     }
-
-//    private func deltas(from dailies: [Daily]) -> (mass: Double?, energy: Double?)? {
-//        guard !dailies.isEmpty else { return nil }
-//
-//        let weeks = makeWeeks(from: dailies)
-//            .sorted { $0.key < $1.key }
-//            .map { $1 }
-//
-//        let averageWeeklyEnergy = weeks.map { week in
-//            return week.reduce(0) { $0 + ($1.energy?.value ?? 0) } / Double(week.count)
-//        }
-//
-//        let averageWeeklyMass = weeks.map { week in
-//            return week.reduce(0) { $0 + ($1.mass?.value ?? 0) } / Double(week.count)
-//        }
-//
-//        let mass = averageWeeklyMass[averageWeeklyMass.count - 2] - averageWeeklyMass[averageWeeklyMass.count - 1]
-//        let energy = averageWeeklyEnergy[averageWeeklyEnergy.count - 2] - averageWeeklyEnergy[averageWeeklyEnergy.count - 1]
-//
-//        return (mass, energy)
-//    }
-    
-    func calculateDeltaMass(from weeks: [Week]) -> Double? {
-        guard !weeks.isEmpty else { return nil }
-        
-        guard weeks.count > 1 else {
-            return weeks.first!.averageMass
-        }
-        
-        let sorted = weeks.sorted { $0.start < $1.start }
-        
-        return weeks[weeks.count - 2].averageMass - weeks[weeks.count - 1].averageMass
-    }
     
     func calculateDelta(_ item: MeasurementItems, from weeks: [Week]) -> Double? {
         guard !weeks.isEmpty else { return nil }
@@ -154,8 +116,6 @@ public struct CalorieBrain {
             }
         }
         
-        let sorted = weeks.sorted { $0.start < $1.start }
-        
         switch item {
         case .mass:
             return weeks[weeks.count - 1].averageMass - weeks[weeks.count - 2].averageMass
@@ -165,10 +125,14 @@ public struct CalorieBrain {
         
     }
     
+    /// Initial TDEE approximation for a given person. Weekly calculations are more accurate.
     func calculateTDEE(for user: UserRepresentable) -> Double? {
         return calculateBMR(for: user).map { $0 * user.activityLevel.multiplier }
     }
     
+    /// BMR - Basal Metabolic Rate.
+    /// Uses the revised Harris-Benedict equation:
+    /// https://en.wikipedia.org/wiki/Harris–Benedict_equation#cite_note-3
     func calculateBMR(for user: UserRepresentable) -> Double? {
         guard 0 < user.age, user.age < 150,
             55 < user.height, user.height < 275,
