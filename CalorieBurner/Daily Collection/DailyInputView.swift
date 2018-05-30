@@ -31,6 +31,7 @@ fileprivate let measurementFormatter: MeasurementFormatter = {
     return fmt
 }()
 
+// TODO: delete buffers if user deletes all text from textfields
 class DailyInputView: UIView {
     // container view for mass input textfield
     @IBOutlet weak var massView: ShadowView!
@@ -133,7 +134,17 @@ extension DailyInputView: UITextFieldDelegate {
         let currentText = textField.text ?? ""
         let replacementText = (currentText as NSString).replacingCharacters(in: range, with: string)
         
-        return isConvertibleToDecimal(replacementText) && isBelowMaxLength(replacementText)
+        guard isConvertibleToDecimal(replacementText) &&
+              isBelowMaxLength(replacementText)
+        else { return false }
+        
+        if textField == massTextField {
+            massBuffer = Mass(value: Double(replacementText)!, unit: UserDefaults.standard.mass)
+        } else if textField == energyTextField {
+            energyBuffer = Energy(value: Double(replacementText)!, unit: UserDefaults.standard.energy)
+        }
+        
+        return true
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
