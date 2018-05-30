@@ -17,7 +17,7 @@ class CalendarViewDataSource: JTAppleCalendarViewDataSource, DateBoundaries {
     
     let dateFormatter = DateFormatter()
     var configuration: Configuration
-    var firstDayOfWeek: DaysOfWeek = .monday
+    var firstDayOfWeek = DaysOfWeek(rawValue: UserDefaults.standard.firstDayOfWeek)!
     
     // TODO: make sure this doesn't break in certain locales
     var startDate: Date = Calendar.current.date(from: DateComponents(year: 2000, month: 01, day: 01))!
@@ -25,6 +25,23 @@ class CalendarViewDataSource: JTAppleCalendarViewDataSource, DateBoundaries {
     
     init(configuration: Configuration) {
         self.configuration = configuration
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(firstDayOfWeekDidChange(_:)),
+            name: .FirstDayOfWeekDidChange,
+            object: nil
+        )
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .FirstDayOfWeekDidChange, object: nil)
+    }
+    
+    @objc private func firstDayOfWeekDidChange(_ notification: Notification) {
+        let newFirstDayOfWeek = UserDefaults.standard.firstDayOfWeek
+        
+        firstDayOfWeek = DaysOfWeek(rawValue: newFirstDayOfWeek)!
     }
     
     /// Configures weekly view to show a single row with no overlapping dates and monthly views to display all dates with one row per week

@@ -61,7 +61,6 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDelegate {
         return weekdaysStackView.subviews.map { $0 as! UILabel }
     }
     
-    // offset from `Calendar.firstWeekday` by -1
     var firstDayOfWeek: DaysOfWeek {
         get {
             return dataSource.firstDayOfWeek
