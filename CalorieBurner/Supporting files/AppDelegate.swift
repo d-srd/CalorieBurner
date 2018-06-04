@@ -43,6 +43,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             HealthStoreHelper.shared.enableBackgroundDelivery()
         }
         
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let initialTabBarVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RootTabBarController")
+        
+        window?.rootViewController = initialTabBarVC
+        window?.makeKeyAndVisible()
+        
         return true
     }
     
