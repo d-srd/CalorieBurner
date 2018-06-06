@@ -110,36 +110,10 @@ class ChartViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-//        chartView.addConstraints([
-//            NSLayoutConstraint(item: chartView,
-//                               attribute: .top,
-//                               relatedBy: .equal,
-//                               toItem: view,
-//                               attribute: .topMargin,
-//                               multiplier: 1,
-//                               constant: 16),
-//            NSLayoutConstraint(item: chartView,
-//                               attribute: .bottom,
-//                               relatedBy: .equal,
-//                               toItem: view,
-//                               attribute: .bottomMargin,
-//                               multiplier: 1,
-//                               constant: 16),
-//            NSLayoutConstraint(item: chartView,
-//                               attribute: .leading,
-//                               relatedBy: .equal,
-//                               toItem: view,
-//                               attribute: .leadingMargin,
-//                               multiplier: 1,
-//                               constant: 24),
-//            NSLayoutConstraint(item: chartView,
-//                               attribute: .trailing,
-//                               relatedBy: .equal,
-//                               toItem: view,
-//                               attribute: .trailingMargin,
-//                               multiplier: 1,
-//                               constant: 24)
-//            ])
+        chartView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12).isActive = true
+        chartView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12).isActive = true
+        chartView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
+        chartView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
     }
     
     override func viewDidLoad() {
@@ -147,6 +121,7 @@ class ChartViewController: UIViewController {
         
         chartView = LineChartView(frame: view.bounds)
         view.addSubview(chartView)
+        chartView.translatesAutoresizingMaskIntoConstraints = false
         
         chartView.legend.enabled = false
         chartView.xAxis.valueFormatter = formatter
@@ -192,21 +167,13 @@ class ChartsPageViewController: ExpandedPageViewController {
         return [massController, energyController]
     }
     
-    private func fetchViewController(withIdentifier identifier: String) -> UIViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: identifier)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        pageControl?.currentPageIndicatorTintColor = .healthyRed
-        pageControl?.pageIndicatorTintColor = .lightGray
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        
+        pageControl?.currentPageIndicatorTintColor = .healthyRed
+        pageControl?.pageIndicatorTintColor = .lightGray
         
         delegate = self
         dataSource = self
