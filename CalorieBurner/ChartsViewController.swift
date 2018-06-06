@@ -27,6 +27,239 @@ class ShortDateChartFormatter: IAxisValueFormatter {
     }
 }
 
+protocol LineChartViewDelegate: AnyObject, DateBoundaries {
+    associatedtype Data
+    func fetchData(for chartView: LineChartView) -> Data
+    func makeData(for chartView: LineChartView, values: [ChartDataEntry], label: String?) -> LineChartData
+}
+
+extension LineChartViewDelegate {
+    func makeData(for chartView: LineChartView, values: [ChartDataEntry], label: String? = nil) -> LineChartData {
+        let dataSet = LineChartDataSet(values: values, label: label)
+        dataSet.mode = .cubicBezier
+        dataSet.colors = ChartColorTemplates.joyful()
+        dataSet.lineWidth = 5
+        
+        return LineChartData(dataSet: dataSet)
+    }
+}
+
+class CoreDataMediator: LineChartViewDelegate {
+    typealias Data = (mass: [ChartDataEntry], energy: [ChartDataEntry])?
+    
+    var startDate = Calendar.current.date(byAdding: .weekOfYear, value: -2, to: Date())!
+    var endDate = Date()
+    
+    var massData: [ChartDataEntry] = []
+    var energyData: [ChartDataEntry] = []
+    
+    func update(view: LineChartView) {
+        (massData, energyData) = fetchData(for: view) ?? ([], [])
+    }
+    
+    func fetchData(for chartView: LineChartView) -> Data {
+        guard let dailies = try? CoreDataStack.shared.fetch(betweenStartDate: startDate, endDate: endDate) else { return nil }
+        
+        var massDataValues = [ChartDataEntry]()
+        var energyDataValues = [ChartDataEntry]()
+        
+        for daily in dailies {
+            let index = Calendar.current.dateComponents([.day], from: startDate, to: daily.created!).day!
+            if let mass = daily.mass {
+                massDataValues.append(ChartDataEntry(x: Double(index), y: mass.value) )
+            }
+            if let energy = daily.energy {
+                energyDataValues.append(ChartDataEntry(x: Double(index), y: energy.value))
+            }
+        }
+        
+        // charts expects sorted data.
+        massDataValues.sort { $0.x < $1.x }
+        energyDataValues.sort { $0.x < $1.x }
+        
+        return (massDataValues, energyDataValues)
+    }
+}
+
+class ChartViewController: UIViewController {
+    private lazy var formatter = ShortDateChartFormatter(startDate: dataSource?.startDate ?? defaultDate)
+    private let defaultDate = Calendar.current.date(byAdding: .weekOfYear, value: -2, to: Date())!
+    private var chartView: LineChartView!
+    var dataSource: CoreDataMediator?
+    var type: MeasurementItems?
+    
+    private func updateChart() {
+        dataSource?.update(view: chartView)
+        
+        let data: [ChartDataEntry]
+        
+        switch type {
+        case .mass?:
+            guard let _data = dataSource?.massData else { return }
+            data = _data
+        case .energy?:
+            guard let _data = dataSource?.energyData else { return }
+            data = _data
+        default:
+            return
+        }
+        
+        chartView.data = dataSource?.makeData(for: chartView, values: data)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+//        chartView.addConstraints([
+//            NSLayoutConstraint(item: chartView,
+//                               attribute: .top,
+//                               relatedBy: .equal,
+//                               toItem: view,
+//                               attribute: .topMargin,
+//                               multiplier: 1,
+//                               constant: 16),
+//            NSLayoutConstraint(item: chartView,
+//                               attribute: .bottom,
+//                               relatedBy: .equal,
+//                               toItem: view,
+//                               attribute: .bottomMargin,
+//                               multiplier: 1,
+//                               constant: 16),
+//            NSLayoutConstraint(item: chartView,
+//                               attribute: .leading,
+//                               relatedBy: .equal,
+//                               toItem: view,
+//                               attribute: .leadingMargin,
+//                               multiplier: 1,
+//                               constant: 24),
+//            NSLayoutConstraint(item: chartView,
+//                               attribute: .trailing,
+//                               relatedBy: .equal,
+//                               toItem: view,
+//                               attribute: .trailingMargin,
+//                               multiplier: 1,
+//                               constant: 24)
+//            ])
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        chartView = LineChartView(frame: view.bounds)
+        view.addSubview(chartView)
+        
+        chartView.legend.enabled = false
+        chartView.xAxis.valueFormatter = formatter
+        chartView.chartDescription?.text = nil
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateChart()
+    }
+}
+
+class MassChartViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+}
+
+class EnergyChartViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let label = UILabel(frame: CGRect(origin: view.bounds.midPoint,
+                                          size: CGSize(width: 50, height: 20)))
+        label.text = "Your frame looks familiar"
+        label.backgroundColor = UIColor.green
+        
+        view.addSubview(label)
+    }
+}
+
+class ExpandedPageViewController: UIPageViewController {
+    var pageControl: UIPageControl? {
+        return view.subviews.first { $0 is UIPageControl } as? UIPageControl
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let scrollView = view.subviews.first { $0 is UIScrollView }
+        
+        if let scrollView = scrollView, let pageControl = pageControl {
+            scrollView.frame = view.bounds
+            view.bringSubview(toFront: pageControl)
+        }
+    }
+}
+
+class ChartsPageViewController: ExpandedPageViewController {
+    private(set) lazy var pages = makePages()
+    
+    private let pageDataSource = CoreDataMediator()
+    
+    private func makePages() -> [ChartViewController] {
+        let massController = ChartViewController()
+        massController.dataSource = pageDataSource
+        massController.type = .mass
+        let energyController = ChartViewController()
+        energyController.dataSource = pageDataSource
+        energyController.type = .energy
+        
+        return [massController, energyController]
+    }
+    
+    private func fetchViewController(withIdentifier identifier: String) -> UIViewController {
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: identifier)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        pageControl?.currentPageIndicatorTintColor = .healthyRed
+        pageControl?.pageIndicatorTintColor = .lightGray
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .white
+        
+        delegate = self
+        dataSource = self
+        
+        setViewControllers([pages[0]], direction: .forward, animated: false, completion: nil)
+    }
+}
+
+extension ChartsPageViewController: UIPageViewControllerDelegate {
+    
+}
+
+extension ChartsPageViewController: UIPageViewControllerDataSource {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        guard let index = pages.index(of: viewController as! ChartViewController), index != pages.startIndex else { return nil }
+        
+        return pages[pages.index(before: index)]
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard let index = pages.index(of: viewController as! ChartViewController), index != pages.index(before: pages.endIndex) else { return nil }
+        
+        return pages[pages.index(after: index)]
+    }
+    
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+        return pages.count
+    }
+    
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+        return 0
+    }
+}
+
 class ChartsViewController: UIViewController {
     @IBOutlet weak var massChartView: LineChartView!
     @IBOutlet weak var energyChartView: LineChartView!
