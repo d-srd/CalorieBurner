@@ -82,11 +82,19 @@ class CoreDataMediator: LineChartViewDelegate {
 }
 
 class ChartViewController: UIViewController {
+    @IBOutlet private weak var chartView: LineChartView!
+    @IBOutlet private weak var chartTitleLabel: UILabel!
+    
     private lazy var formatter = ShortDateChartFormatter(startDate: dataSource?.startDate ?? defaultDate)
     private let defaultDate = Calendar.current.date(byAdding: .weekOfYear, value: -2, to: Date())!
-    private var chartView: LineChartView!
+    
     var dataSource: CoreDataMediator?
     var type: MeasurementItems?
+    
+    var chartTitle: String? {
+        get { return chartTitleLabel.text }
+        set { chartTitleLabel.text = newValue }
+    }
     
     private func updateChart() {
         dataSource?.update(view: chartView)
@@ -107,21 +115,8 @@ class ChartViewController: UIViewController {
         chartView.data = dataSource?.makeData(for: chartView, values: data)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        chartView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12).isActive = true
-        chartView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12).isActive = true
-        chartView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
-        chartView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        chartView = LineChartView(frame: view.bounds)
-        view.addSubview(chartView)
-        chartView.translatesAutoresizingMaskIntoConstraints = false
         
         chartView.legend.enabled = false
         chartView.xAxis.valueFormatter = formatter
@@ -134,46 +129,44 @@ class ChartViewController: UIViewController {
     }
 }
 
-class ExpandedPageViewController: UIPageViewController {
-    var pageControl: UIPageControl? {
+class ChartsPageViewController: UIPageViewController {
+    private var pageControl: UIPageControl? {
         return view.subviews.first { $0 is UIPageControl } as? UIPageControl
     }
+    
+    private(set) lazy var pages = makePages()
+    
+    private func makePages() -> [ChartViewController] {
+        let massPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChartViewController") as! ChartViewController
+        let energyPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChartViewController") as! ChartViewController
+        
+        massPage.dataSource = pageDataSource
+        massPage.type = .mass
+        // accessing view property of a view controller loads its IBOutlets, which are needed to set the title
+        massPage.view = massPage.view
+        massPage.chartTitle = "Mass"
+        
+        energyPage.dataSource = pageDataSource
+        energyPage.type = .energy
+        energyPage.view = energyPage.view
+        energyPage.chartTitle = "Energy"
+        
+        return [massPage, energyPage]
+    }
+    
+    private let pageDataSource = CoreDataMediator()
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        let scrollView = view.subviews.first { $0 is UIScrollView }
-        
-        if let scrollView = scrollView, let pageControl = pageControl {
-            scrollView.frame = view.bounds
-            view.bringSubview(toFront: pageControl)
-        }
-    }
-}
-
-class ChartsPageViewController: ExpandedPageViewController {
-    private(set) lazy var pages = makePages()
-    
-    private let pageDataSource = CoreDataMediator()
-    
-    private func makePages() -> [ChartViewController] {
-        let massController = ChartViewController()
-        massController.dataSource = pageDataSource
-        massController.type = .mass
-        let energyController = ChartViewController()
-        energyController.dataSource = pageDataSource
-        energyController.type = .energy
-        
-        return [massController, energyController]
+        pageControl?.currentPageIndicatorTintColor = .healthyRed
+        pageControl?.pageIndicatorTintColor = .lightGray
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        
-        pageControl?.currentPageIndicatorTintColor = .healthyRed
-        pageControl?.pageIndicatorTintColor = .lightGray
         
         delegate = self
         dataSource = self

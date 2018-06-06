@@ -1625,6 +1625,46 @@
             </objects>
             <point key="canvasLocation" x="4122" y="3045"/>
         </scene>
+        <!--Chart View Controller-->
+        <scene sceneID="kuC-EO-buF">
+            <objects>
+                <viewController storyboardIdentifier="ChartViewController" id="T09-mP-VM4" customClass="ChartViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jna-Ub-pVH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yi0-uA-mO6" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="26" y="72" width="323" height="583"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiD-8W-ZBN">
+                                <rect key="frame" x="26" y="32" width="323" height="24"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="yi0-uA-mO6" firstAttribute="leading" secondItem="bet-Br-hzL" secondAttribute="leading" constant="26" id="3jl-hv-a6M"/>
+                            <constraint firstItem="fiD-8W-ZBN" firstAttribute="top" secondItem="bet-Br-hzL" secondAttribute="top" constant="12" id="Hfc-i0-joY"/>
+                            <constraint firstItem="fiD-8W-ZBN" firstAttribute="leading" secondItem="yi0-uA-mO6" secondAttribute="leading" id="YgQ-K2-dat"/>
+                            <constraint firstItem="bet-Br-hzL" firstAttribute="bottom" secondItem="yi0-uA-mO6" secondAttribute="bottom" constant="12" id="ark-sE-6va"/>
+                            <constraint firstItem="bet-Br-hzL" firstAttribute="trailing" secondItem="yi0-uA-mO6" secondAttribute="trailing" constant="26" id="eZi-KM-ph0"/>
+                            <constraint firstItem="yi0-uA-mO6" firstAttribute="top" secondItem="fiD-8W-ZBN" secondAttribute="bottom" constant="16" id="hiY-00-JTq"/>
+                            <constraint firstItem="fiD-8W-ZBN" firstAttribute="trailing" secondItem="yi0-uA-mO6" secondAttribute="trailing" id="kbp-Xo-wMq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bet-Br-hzL"/>
+                    </view>
+                    <connections>
+                        <outlet property="chartTitleLabel" destination="fiD-8W-ZBN" id="lA5-iW-JXe"/>
+                        <outlet property="chartView" destination="yi0-uA-mO6" id="L13-1t-U8U"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yIo-GX-MWe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4938.3999999999996" y="3053.5232383808097"/>
+        </scene>
         <!--Charts-->
         <scene sceneID="Yr6-bI-kbV">
             <objects>
