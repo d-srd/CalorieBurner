@@ -33,6 +33,7 @@
 		84506BE220CBD51F00C4246B /* LineChartViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84506BE120CBD51F00C4246B /* LineChartViewDelegate.swift */; };
 		84506BE420CBD53B00C4246B /* CoreDataMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84506BE320CBD53A00C4246B /* CoreDataMediator.swift */; };
 		84506BE620CBD56000C4246B /* ChartsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84506BE520CBD56000C4246B /* ChartsPageViewController.swift */; };
+		84506C0620CD6E2D00C4246B /* EnumCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84506C0520CD6E2D00C4246B /* EnumCollection.swift */; };
 		84696D8620499FF8002F31B4 /* DailyFetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */; };
 		84795BC720AD7E890035AB8C /* FeelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84795BC620AD7E890035AB8C /* FeelView.swift */; };
 		8498914820908F7E00C0E2EA /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8498914720908F7E00C0E2EA /* IQKeyboardManager.bundle */; };
@@ -118,6 +119,7 @@
 		84506BE120CBD51F00C4246B /* LineChartViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartViewDelegate.swift; sourceTree = "<group>"; };
 		84506BE320CBD53A00C4246B /* CoreDataMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMediator.swift; sourceTree = "<group>"; };
 		84506BE520CBD56000C4246B /* ChartsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsPageViewController.swift; sourceTree = "<group>"; };
+		84506C0520CD6E2D00C4246B /* EnumCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumCollection.swift; sourceTree = "<group>"; };
 		84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFetchedResultsController.swift; sourceTree = "<group>"; };
 		84795BC620AD7E890035AB8C /* FeelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelView.swift; sourceTree = "<group>"; };
 		8498914720908F7E00C0E2EA /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 		84FC53BA205AFA2700D20B3C /* Convenience */ = {
 			isa = PBXGroup;
 			children = (
+				84506C0520CD6E2D00C4246B /* EnumCollection.swift */,
 				84FC53BB205AFA4700D20B3C /* Array.swift */,
 				849891492090B74800C0E2EA /* FirstResponder.swift */,
 				84DF1B892074EE890024D924 /* Measurement.swift */,
@@ -515,6 +518,7 @@
 				843E470A207237BD0041BECB /* DailyCollectionViewProtocols.swift in Sources */,
 				84398B0020A19FC10061AD69 /* CalendarMonthHeaderView.swift in Sources */,
 				84FC53B9205940E900D20B3C /* DayViewCell.swift in Sources */,
+				84506C0620CD6E2D00C4246B /* EnumCollection.swift in Sources */,
 				84E2F0C320A4D2A400CB3C05 /* CGRect.swift in Sources */,
 				841B5ABB20445D2300ACAD15 /* DailyDataCollectionViewCell.swift in Sources */,
 				84E2F0C120A4D2A400CB3C05 /* BorderView.swift in Sources */,
