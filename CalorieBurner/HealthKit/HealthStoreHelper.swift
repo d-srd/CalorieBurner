@@ -73,6 +73,22 @@ class HealthStoreHelper {
         store.save(sample, withCompletion: completion)
     }
     
+    func fetchStepCountBetween(dates: DateRange, completionHandler: ((HKStatistics?) -> Void)? = nil) {
+        let query = HKStatisticsQuery(quantityType: SampleTypes.steps,
+                                      quantitySamplePredicate: nil,
+                                      options: .cumulativeSum)
+        { (query, statistics, error) in
+            guard error == nil else {
+                print("Error fetching step count: ", error!)
+                return
+            }
+            
+            completionHandler?(statistics)
+        }
+        
+        store.execute(query)
+    }
+    
     // set up observer queries for both mass and energy
     func enableBackgroundDelivery() {
         let massQuery = HKObserverQuery(sampleType: SampleTypes.mass,

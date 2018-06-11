@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import HealthKit
 
 fileprivate let numberFormatter: NumberFormatter = {
     let numberFormatter = NumberFormatter()
@@ -225,6 +226,19 @@ class HomeViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(showMassAlert(_:)))
         
         massProgressView.addGestureRecognizer(tap)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            HealthStoreHelper.shared.fetchStepCountBetween(dates: (Date(timeIntervalSinceReferenceDate: 0), Date())) {
+                guard let statistics = $0, let totalSteps = statistics.sumQuantity() else { return }
+                let countOfDays = Calendar.current.dateComponents([.day], from: statistics.startDate, to: statistics.endDate).day!
+                let averageStepCount = totalSteps.doubleValue(for: HKUnit.count()) / Double(countOfDays)
+                return
+            }
+        }
     }
     
     deinit {
