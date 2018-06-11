@@ -219,11 +219,10 @@
 				84FC53BA205AFA2700D20B3C /* Convenience */,
 				84FC538F2057C78400D20B3C /* Calendar */,
 				84FC538E2057C71000D20B3C /* Core Data */,
+				847D98F320CEC45F0079433F /* Onboarding */,
 				84FC538D2057C6F100D20B3C /* Supporting files */,
 				84B49849205163A800DCFA05 /* TDEE.swift */,
 				841B5AA720436E7300ACAD15 /* Main.storyboard */,
-				8428966E20B1C3E80096E1A8 /* Onboarding.storyboard */,
-				8428967020B1C7860096E1A8 /* OnboardingViewController.swift */,
 				840E2FD120ADEFB400EBDC0E /* HomeViewController.swift */,
 			);
 			path = CalorieBurner;
@@ -237,6 +236,15 @@
 				84C8933E20B1561900590D86 /* CalorieBurnerTests-Bridging-Header.h */,
 			);
 			path = CalorieBurnerTests;
+			sourceTree = "<group>";
+		};
+		847D98F320CEC45F0079433F /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				8428966E20B1C3E80096E1A8 /* Onboarding.storyboard */,
+				8428967020B1C7860096E1A8 /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		84E2F0C520A4D2AD00CB3C05 /* CocoaControls */ = {
