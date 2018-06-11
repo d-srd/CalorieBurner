@@ -44,15 +44,18 @@ class HealthStoreHelper {
     private lazy var statisticsQuery = makeEnergyStatisticsQuery()
     private lazy var anchoredQuery = makeAnchoredMassQuery()
     
-    private static let defaultReadingTypes = Set([SampleTypes.mass, SampleTypes.energy, SampleTypes.steps])
-    private static let defaultWritingTypes = Set([SampleTypes.mass])
+    private static let defaultReadingTypes: Set = [SampleTypes.mass, SampleTypes.energy, SampleTypes.steps]
+    private static let defaultWritingTypes: Set = [SampleTypes.mass]
     
     // we need a singleton health store, as they are long lived objects
     static let storeSingleton = HKHealthStore()
     
     static let shared = HealthStoreHelper(store: storeSingleton, readingTypes: defaultReadingTypes, writingTypes: defaultWritingTypes)
     
-    init(store: HKHealthStore, readingTypes: Set<HKSampleType> = defaultReadingTypes, writingTypes: Set<HKSampleType> = defaultWritingTypes) {
+    init(store: HKHealthStore,
+         readingTypes: Set<HKSampleType> = defaultReadingTypes,
+         writingTypes: Set<HKSampleType> = defaultWritingTypes)
+    {
         self.store = store
         typesToRead = readingTypes
         typesToWrite = writingTypes
