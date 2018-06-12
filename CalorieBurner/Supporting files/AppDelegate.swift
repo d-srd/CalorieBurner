@@ -52,10 +52,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func showOnboardingFlow() {
         let onboardingViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController() as! OnboardingViewController
-        onboardingViewController.onDoneButtonTap = {
-            onboardingViewController.dismiss(animated: true, completion: nil)
-            UserDefaults.standard.didShowOnboardingFlow = true
-        }
         window?.makeKeyAndVisible()
         window?.rootViewController?.present(onboardingViewController, animated: false, completion: nil)
     }

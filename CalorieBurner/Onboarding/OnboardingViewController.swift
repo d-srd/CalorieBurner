@@ -10,7 +10,6 @@ import UIKit
 
 class OnboardingViewController: UIPageViewController {
     var pages: [UIViewController]!
-    var onDoneButtonTap: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +25,6 @@ class OnboardingViewController: UIPageViewController {
         
         pages = tempPages.compactMap { $0 }
         
-        (pages.last as? PageThreeViewController)?.onDoneButtonTap = onDoneButtonTap
         
         setViewControllers([pages[0]], direction: .forward, animated: false, completion: nil)
     }
@@ -40,20 +38,12 @@ extension OnboardingViewController: UIPageViewControllerDataSource {
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let index = pages.index(of: viewController), index != pages.endIndex else { return nil }
+        guard let index = pages.index(of: viewController), index != pages.endIndex - 1 else { return nil }
         
         return pages[index + 1]
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return pages.count
-    }
-}
-
-class PageThreeViewController: UIViewController {
-    var onDoneButtonTap: (() -> Void)?
-    
-    @IBAction func didTapOkayButton(_ sender: Any) {
-        onDoneButtonTap?()
     }
 }
