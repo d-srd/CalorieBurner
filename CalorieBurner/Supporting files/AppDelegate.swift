@@ -34,9 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // automagically resign first responder on touch outside of text input view
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
-        if !UserDefaults.standard.didShowOnboardingFlow {
-            showOnboardingFlow()
-        }
+        
         
 //        HealthStoreHelper.shared.requestAuthorization { (success, error) in
 //            guard error == nil else {
@@ -53,12 +51,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = initialTabBarVC
         window?.makeKeyAndVisible()
         
+        if !UserDefaults.standard.didShowOnboardingFlow {
+            showOnboardingFlow()
+        }
+        
         return true
     }
     
     private func showOnboardingFlow() {
         let onboardingViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController() as! OnboardingViewController
-        window?.makeKeyAndVisible()
         window?.rootViewController?.present(onboardingViewController, animated: false, completion: nil)
     }
     

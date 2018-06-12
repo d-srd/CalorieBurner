@@ -25,8 +25,15 @@ class OnboardingViewController: UIPageViewController {
         
         pages = tempPages.compactMap { $0 }
         
+        view.backgroundColor = .white
         
         setViewControllers([pages[0]], direction: .forward, animated: false, completion: nil)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        pageControl?.currentPageIndicatorTintColor = .healthyRed
+        pageControl?.pageIndicatorTintColor = .lightGray
     }
 }
 
@@ -44,6 +51,10 @@ extension OnboardingViewController: UIPageViewControllerDataSource {
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+        return 0
+    }
+    
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return pages.count
     }
 }
