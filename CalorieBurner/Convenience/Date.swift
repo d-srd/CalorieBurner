@@ -20,3 +20,9 @@ extension Date {
         return Calendar.current.date(byAdding: components, to: self)!
     }
 }
+
+extension Date {
+    var startOfWeek: Date? {
+        return Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
+    }
+}

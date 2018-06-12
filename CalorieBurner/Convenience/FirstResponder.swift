@@ -8,7 +8,7 @@
 
 import UIKit
 
-// stolen from https://stackoverflow.com/a/27140764/9515505
+// Resource: https://stackoverflow.com/a/27140764/9515505
 
 extension UIResponder {
     private weak static var _currentFirstResponder: UIResponder? = nil

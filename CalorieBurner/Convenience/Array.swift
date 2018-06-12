@@ -48,3 +48,19 @@ extension Array {
         return newSelf
     }
 }
+
+extension Array {
+    func fill(withSize size: Int) -> [Element]? {
+        guard !isEmpty else { return nil }
+        
+        return (0..<size).map { idx in
+            return self[safe: idx] ?? self[self.indices.last!]
+        }
+    }
+    
+    subscript(safe index: Index) -> Element? {
+        guard indices.contains(index) else { return nil }
+        
+        return self[index]
+    }
+}

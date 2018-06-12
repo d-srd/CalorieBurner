@@ -9,7 +9,7 @@
 import UIKit
 import JTAppleCalendar
 
-extension JTAppleCalendarView {
+private extension JTAppleCalendarView {
     func reloadDate(_ date: Date) {
         self.reloadDates([date])
     }
@@ -38,11 +38,6 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
         }
     }
     
-    // wtf
-    @IBAction func unwindAction(_ sender: UIStoryboardSegue) {
-        print("HI THERE")
-    }
-    
     @IBAction func showDailyInputViewController(_ sender: Any) {
         performSegue(withIdentifier: Segues.inputVC.rawValue, sender: sender)
     }
@@ -69,6 +64,7 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
             // there's a navigation controller in here, so we steal its child
             let inputVC = segue.destination.childViewControllers.first as! DailyInputViewController
             inputVC.date = calendarView.selectedDates.first
+            inputVC.delegate = self
             
         case .monthlyCalendarVC:
             let calendarVC = segue.destination.childViewControllers.first as! CalendarViewController
@@ -80,33 +76,40 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        dailyCollectionViewController.dailyView.itemSize =
-            CGSize(width: containerView.frame.width * 0.8, height: 240)
+        setDailyVCItemSize()
         dailyCollectionViewController.dailyView.collectionViewLayout.invalidateLayout()
     }
     
-    // easy way to display data when the user exits Daily Input View
-    // the alternative would be to use an unwind segue, but it seems unnecessary
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        reloadData()
+    }
+    
+    private func reloadData() {
         dailyCollectionViewController.reloadData()
         currentDate.flatMap(calendarView.reloadDate)
+    }
+    
+    private func setDailyVCItemSize() {
+        dailyCollectionViewController.dailyView.itemSize =
+            CGSize(width: containerView.frame.width * 0.8, height: 240)
+    }
+    
+    private func configureDailyVCInitial() {
+        setDailyVCItemSize()
+        dailyCollectionViewController.dailyView.dailyScrollDelegate = self
+        dailyCollectionViewController.scrollToItem(at: self.today, animated: false)
+        calendarView.selectDates([today])
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // make the calendar have a single row
         configuration = .weekly
         setCurrentDateLabel(to: today)
         
-        // UICollectionView needs an initial size to lay out the cells. this code is esentially ignored, the one in didLayoutSubviews is used.
-        dailyCollectionViewController.dailyView.itemSize =
-            CGSize(width: containerView.frame.width * 0.8, height: 240)
-        dailyCollectionViewController.dailyView.dailyScrollDelegate = self
-        dailyCollectionViewController.scrollToItem(at: self.today, animated: false)
-        calendarView.selectDates([today])
+        configureDailyVCInitial()
         
         NotificationCenter.default.addObserver(
             self,
@@ -134,8 +137,7 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
     
-    // this is a hacky way to fix collection view's layout
-    // without it, the content inset would not change and the cell would stay on the upper side of the screen
+    // Fix collection view layout. Without this, the content inset wouldn't change and the cell would stay on the upper side of the screen
     @objc private func keyboardWillHide(_ notification: Notification) {
         dailyCollectionViewController.dailyView.collectionViewLayout.invalidateLayout()
     }
@@ -193,6 +195,9 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
         setCurrentMonthTitle(to: date)
         
         dailyCollectionViewController.scrollToItem(at: date, animated: true)
+        
+        // disable adding dailies if they are beyond today
+        navigationItem.rightBarButtonItem?.isEnabled = date < today
     }
     
     func dailyView(_ dailyView: DailyCollectionView, willScrollToItemAt date: Date) {
@@ -208,4 +213,10 @@ class DailyCalendarViewController: CalendarViewController, DailyCollectionViewSc
     }
     
     
+}
+
+extension DailyCalendarViewController: DailyInputViewControllerDelegate {
+    func didSaveDaily() {
+        reloadData()
+    }
 }

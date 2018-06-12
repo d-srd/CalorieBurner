@@ -17,15 +17,18 @@ protocol DailyModelConvertible {
 }
 
 class HealthStoreHelper {
+    
+    struct SampleTypes {
+        static let mass = HKObjectType.quantityType(forIdentifier: .bodyMass)!
+        static let energy = HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!
+        static let steps = HKObjectType.quantityType(forIdentifier: .stepCount)!
+    }
+    
     // this should only ever be a single instance across the entire app, according to Apple
     private let store: HKHealthStore
 
     private let typesToRead: Set<HKSampleType>
     private let typesToWrite: Set<HKSampleType>
-
-    // saves some typing
-    private let massSample = HKObjectType.quantityType(forIdentifier: .bodyMass)!
-    private let energySample = HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!
     
     // this is necessary for stopping the appropriate queries if it didn't fetch any results
     private var didExecuteAnchoredQuery = false
@@ -41,14 +44,18 @@ class HealthStoreHelper {
     private lazy var statisticsQuery = makeEnergyStatisticsQuery()
     private lazy var anchoredQuery = makeAnchoredMassQuery()
     
-    private static let defaultTypes = Set([HKObjectType.quantityType(forIdentifier: .bodyMass)!, HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!])
+    private static let defaultReadingTypes: Set = [SampleTypes.mass, SampleTypes.energy, SampleTypes.steps]
+    private static let defaultWritingTypes: Set = [SampleTypes.mass]
     
     // we need a singleton health store, as they are long lived objects
     static let storeSingleton = HKHealthStore()
     
-    static let shared = HealthStoreHelper(store: storeSingleton, readingTypes: defaultTypes, writingTypes: defaultTypes)
+    static let shared = HealthStoreHelper(store: storeSingleton, readingTypes: defaultReadingTypes, writingTypes: defaultWritingTypes)
     
-    init(store: HKHealthStore, readingTypes: Set<HKSampleType> = defaultTypes, writingTypes: Set<HKSampleType> = defaultTypes) {
+    init(store: HKHealthStore,
+         readingTypes: Set<HKSampleType> = defaultReadingTypes,
+         writingTypes: Set<HKSampleType> = defaultWritingTypes)
+    {
         self.store = store
         typesToRead = readingTypes
         typesToWrite = writingTypes
@@ -69,9 +76,25 @@ class HealthStoreHelper {
         store.save(sample, withCompletion: completion)
     }
     
+    func fetchStepCountBetween(dates: DateRange, completionHandler: ((HKStatistics?) -> Void)? = nil) {
+        let query = HKStatisticsQuery(quantityType: SampleTypes.steps,
+                                      quantitySamplePredicate: nil,
+                                      options: .cumulativeSum)
+        { (query, statistics, error) in
+            guard error == nil else {
+                print("Error fetching step count: ", error!)
+                return
+            }
+            
+            completionHandler?(statistics)
+        }
+        
+        store.execute(query)
+    }
+    
     // set up observer queries for both mass and energy
     func enableBackgroundDelivery() {
-        let massQuery = HKObserverQuery(sampleType: massSample,
+        let massQuery = HKObserverQuery(sampleType: SampleTypes.mass,
                                         predicate: nil)
         { [unowned self] (query, completion, error) in
             guard error == nil else { fatalError("mass observer completion handler failed. \(error?.localizedDescription)") }
@@ -95,7 +118,7 @@ class HealthStoreHelper {
             }
         }
         
-        let energyQuery = HKObserverQuery(sampleType: energySample,
+        let energyQuery = HKObserverQuery(sampleType: SampleTypes.energy,
                                           predicate: nil)
         { [unowned self] (query, completion, error) in
             guard error == nil else { fatalError("energy observer completion handler failed. \(error?.localizedDescription)") }
@@ -123,11 +146,11 @@ class HealthStoreHelper {
             }
         }
         
-        store.enableBackgroundDelivery(for: massSample,
+        store.enableBackgroundDelivery(for: SampleTypes.mass,
                                        frequency: .immediate,
                                        withCompletion: completion)
         
-        store.enableBackgroundDelivery(for: energySample,
+        store.enableBackgroundDelivery(for: SampleTypes.energy,
                                        frequency: .immediate,
                                        withCompletion: completion)
     }
@@ -136,7 +159,7 @@ class HealthStoreHelper {
                                            didProcessValues valueProcessing: (([Date : HKQuantity]) -> Void)? = nil)
         -> HKStatisticsCollectionQuery
     {
-        let query = HKStatisticsCollectionQuery(quantityType: HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
+        let query = HKStatisticsCollectionQuery(quantityType: SampleTypes.energy,
                                                 quantitySamplePredicate: nil,
                                                 options: .cumulativeSum,
                                                 anchorDate: Date(timeIntervalSinceReferenceDate: 0),

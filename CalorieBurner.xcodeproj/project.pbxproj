@@ -13,23 +13,28 @@
 		840E2FD220ADEFB400EBDC0E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E2FD120ADEFB400EBDC0E /* HomeViewController.swift */; };
 		84123E982096F92B00F5639E /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84123E972096F92B00F5639E /* HealthKit.framework */; };
 		84123E9B2096FBA900F5639E /* HealthStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84123E9A2096FBA900F5639E /* HealthStoreHelper.swift */; };
-		84123E9D20971C1900F5639E /* HealthKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84123E9C20971C1900F5639E /* HealthKitViewController.swift */; };
 		84123EA02097556300F5639E /* transparentPixel.png in Resources */ = {isa = PBXBuildFile; fileRef = 84123E9F2097556300F5639E /* transparentPixel.png */; };
 		841B5AA420436E7300ACAD15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AA320436E7300ACAD15 /* AppDelegate.swift */; };
-		841B5AA920436E7300ACAD15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841B5AA720436E7300ACAD15 /* Main.storyboard */; };
 		841B5AAC20436E7300ACAD15 /* Database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AAA20436E7300ACAD15 /* Database.xcdatamodeld */; };
 		841B5AAE20436E7300ACAD15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 841B5AAD20436E7300ACAD15 /* Assets.xcassets */; };
 		841B5AB120436E7300ACAD15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841B5AAF20436E7300ACAD15 /* LaunchScreen.storyboard */; };
 		841B5AB920436FA300ACAD15 /* Daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5AB820436FA300ACAD15 /* Daily.swift */; };
 		841B5ABB20445D2300ACAD15 /* DailyDataCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B5ABA20445D2300ACAD15 /* DailyDataCollectionViewCell.swift */; };
 		842525462054E32F00CA0122 /* DailyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842525452054E32F00CA0122 /* DailyCollectionViewController.swift */; };
-		8428966F20B1C3E80096E1A8 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8428966E20B1C3E80096E1A8 /* Onboarding.storyboard */; };
-		8428967120B1C7860096E1A8 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428967020B1C7860096E1A8 /* OnboardingViewController.swift */; };
+		8428967520B2CA500096E1A8 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428967320B2CA500096E1A8 /* UserProfile.swift */; };
+		8428967720B2D2FD0096E1A8 /* CalorieBrainStaticTDEETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428967620B2D2FD0096E1A8 /* CalorieBrainStaticTDEETests.swift */; };
+		8428967B20B44A090096E1A8 /* ChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428967A20B44A090096E1A8 /* ChartsViewController.swift */; };
+		8428967F20B46DE70096E1A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8428967E20B46DE60096E1A8 /* Main.storyboard */; };
 		84398AFC20A19F0C0061AD69 /* DailyCalendarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84398AFB20A19F0C0061AD69 /* DailyCalendarViewCell.swift */; };
 		84398AFE20A19F2C0061AD69 /* CalendarViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84398AFD20A19F2C0061AD69 /* CalendarViewDataSource.swift */; };
 		84398B0020A19FC10061AD69 /* CalendarMonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84398AFF20A19FC10061AD69 /* CalendarMonthHeaderView.swift */; };
 		843BD0A1205E239D0049DD77 /* DailyCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843BD0A0205E239D0049DD77 /* DailyCalendarViewController.swift */; };
 		843E470A207237BD0041BECB /* DailyCollectionViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E4709207237BD0041BECB /* DailyCollectionViewProtocols.swift */; };
+		84506BE020CBD4FC00C4246B /* ShortDateChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84506BDF20CBD4FC00C4246B /* ShortDateChartFormatter.swift */; };
+		84506BE220CBD51F00C4246B /* LineChartViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84506BE120CBD51F00C4246B /* LineChartViewDelegate.swift */; };
+		84506BE420CBD53B00C4246B /* CoreDataMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84506BE320CBD53A00C4246B /* CoreDataMediator.swift */; };
+		84506BE620CBD56000C4246B /* ChartsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84506BE520CBD56000C4246B /* ChartsPageViewController.swift */; };
+		84506C0620CD6E2D00C4246B /* EnumCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84506C0520CD6E2D00C4246B /* EnumCollection.swift */; };
 		84696D8620499FF8002F31B4 /* DailyFetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */; };
 		84795BC720AD7E890035AB8C /* FeelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84795BC620AD7E890035AB8C /* FeelView.swift */; };
 		847D991320CFBB930079433F /* ProfileTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D991220CFBB930079433F /* ProfileTableVC.swift */; };
@@ -38,7 +43,7 @@
 		84AA51AC206FD89F00494049 /* DailyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA51AB206FD89F00494049 /* DailyCollectionView.swift */; };
 		84B49846204DC64C00DCFA05 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B49845204DC64C00DCFA05 /* CoreDataStack.swift */; };
 		84B4984A205163A800DCFA05 /* TDEE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B49849205163A800DCFA05 /* TDEE.swift */; };
-		84C8934020B1561900590D86 /* CalorieBrainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8933F20B1561900590D86 /* CalorieBrainTests.swift */; };
+		84C8934020B1561900590D86 /* CalorieBrainRunningTDEETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8933F20B1561900590D86 /* CalorieBrainRunningTDEETests.swift */; };
 		84DF1B8A2074EE890024D924 /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DF1B892074EE890024D924 /* Measurement.swift */; };
 		84DF1B8C2074EEA50024D924 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DF1B8B2074EEA50024D924 /* Date.swift */; };
 		84E2F09920A2E5C900CB3C05 /* DailyCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2F09820A2E5C900CB3C05 /* DailyCellDelegate.swift */; };
@@ -85,18 +90,15 @@
 		08AF3E2415CF65BCB46B7C49 /* Pods-CalorieBurner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalorieBurner.release.xcconfig"; path = "Pods/Target Support Files/Pods-CalorieBurner/Pods-CalorieBurner.release.xcconfig"; sourceTree = "<group>"; };
 		119A6DC4BC7977D94DBA1F0C /* Pods_CalorieBurner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CalorieBurner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		840C6F862062320D00535787 /* CocoaControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaControls.framework; path = "../../../Library/Developer/Xcode/DerivedData/CocoaControls-ezcniktufftancgvouvrcyaolfpa/Build/Products/Debug-iphonesimulator/CocoaControls.framework"; sourceTree = "<group>"; };
-		840C6F9820651ECD00535787 /* WeightDeltaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDeltaView.swift; sourceTree = "<group>"; };
 		840E2FCD20ADB7A900EBDC0E /* DailyInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyInputView.swift; sourceTree = "<group>"; };
 		840E2FCF20ADBFF400EBDC0E /* DailyInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyInputViewController.swift; sourceTree = "<group>"; };
 		840E2FD120ADEFB400EBDC0E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		84123E962096F92B00F5639E /* CalorieBurner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CalorieBurner.entitlements; sourceTree = "<group>"; };
 		84123E972096F92B00F5639E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		84123E9A2096FBA900F5639E /* HealthStoreHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthStoreHelper.swift; sourceTree = "<group>"; };
-		84123E9C20971C1900F5639E /* HealthKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitViewController.swift; sourceTree = "<group>"; };
 		84123E9F2097556300F5639E /* transparentPixel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparentPixel.png; sourceTree = "<group>"; };
 		841B5AA020436E7300ACAD15 /* CalorieBurner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalorieBurner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		841B5AA320436E7300ACAD15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		841B5AA820436E7300ACAD15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		841B5AAB20436E7300ACAD15 /* CalorieBurner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CalorieBurner.xcdatamodel; sourceTree = "<group>"; };
 		841B5AAD20436E7300ACAD15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		841B5AB020436E7300ACAD15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -104,8 +106,10 @@
 		841B5AB820436FA300ACAD15 /* Daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daily.swift; sourceTree = "<group>"; };
 		841B5ABA20445D2300ACAD15 /* DailyDataCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDataCollectionViewCell.swift; sourceTree = "<group>"; };
 		842525452054E32F00CA0122 /* DailyCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionViewController.swift; sourceTree = "<group>"; };
-		8428966E20B1C3E80096E1A8 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
-		8428967020B1C7860096E1A8 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		8428967320B2CA500096E1A8 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		8428967620B2D2FD0096E1A8 /* CalorieBrainStaticTDEETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieBrainStaticTDEETests.swift; sourceTree = "<group>"; };
+		8428967A20B44A090096E1A8 /* ChartsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsViewController.swift; sourceTree = "<group>"; };
+		8428967E20B46DE60096E1A8 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8436A894206D410000946C32 /* CalorieBurnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalorieBurnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8436A898206D410000946C32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84398AFB20A19F0C0061AD69 /* DailyCalendarViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCalendarViewCell.swift; sourceTree = "<group>"; };
@@ -113,6 +117,11 @@
 		84398AFF20A19FC10061AD69 /* CalendarMonthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthHeaderView.swift; sourceTree = "<group>"; };
 		843BD0A0205E239D0049DD77 /* DailyCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCalendarViewController.swift; sourceTree = "<group>"; };
 		843E4709207237BD0041BECB /* DailyCollectionViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionViewProtocols.swift; sourceTree = "<group>"; };
+		84506BDF20CBD4FC00C4246B /* ShortDateChartFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortDateChartFormatter.swift; sourceTree = "<group>"; };
+		84506BE120CBD51F00C4246B /* LineChartViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartViewDelegate.swift; sourceTree = "<group>"; };
+		84506BE320CBD53A00C4246B /* CoreDataMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMediator.swift; sourceTree = "<group>"; };
+		84506BE520CBD56000C4246B /* ChartsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsPageViewController.swift; sourceTree = "<group>"; };
+		84506C0520CD6E2D00C4246B /* EnumCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumCollection.swift; sourceTree = "<group>"; };
 		84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFetchedResultsController.swift; sourceTree = "<group>"; };
 		84795BC620AD7E890035AB8C /* FeelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelView.swift; sourceTree = "<group>"; };
 		847D991220CFBB930079433F /* ProfileTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableVC.swift; sourceTree = "<group>"; };
@@ -122,7 +131,7 @@
 		84B49845204DC64C00DCFA05 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		84B49849205163A800DCFA05 /* TDEE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDEE.swift; sourceTree = "<group>"; };
 		84C8933E20B1561900590D86 /* CalorieBurnerTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CalorieBurnerTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		84C8933F20B1561900590D86 /* CalorieBrainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieBrainTests.swift; sourceTree = "<group>"; };
+		84C8933F20B1561900590D86 /* CalorieBrainRunningTDEETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieBrainRunningTDEETests.swift; sourceTree = "<group>"; };
 		84DF1B892074EE890024D924 /* Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
 		84DF1B8B2074EEA50024D924 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		84E2F09820A2E5C900CB3C05 /* DailyCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCellDelegate.swift; sourceTree = "<group>"; };
@@ -172,19 +181,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		840C6F9720651EB700535787 /* Weight Delta */ = {
-			isa = PBXGroup;
-			children = (
-				840C6F9820651ECD00535787 /* WeightDeltaView.swift */,
-			);
-			path = "Weight Delta";
-			sourceTree = "<group>";
-		};
 		84123E992096FB1500F5639E /* HealthKit */ = {
 			isa = PBXGroup;
 			children = (
 				84123E9A2096FBA900F5639E /* HealthStoreHelper.swift */,
-				84123E9C20971C1900F5639E /* HealthKitViewController.swift */,
 			);
 			path = HealthKit;
 			sourceTree = "<group>";
@@ -216,16 +216,16 @@
 				84E2F0C520A4D2AD00CB3C05 /* CocoaControls */,
 				84F0853E206A27B000E47042 /* User Settings */,
 				84123E992096FB1500F5639E /* HealthKit */,
-				840C6F9720651EB700535787 /* Weight Delta */,
 				84FC53BD205C9F8F00D20B3C /* Daily Collection */,
 				84FC53BA205AFA2700D20B3C /* Convenience */,
 				84FC538F2057C78400D20B3C /* Calendar */,
+				84506BDE20CBD4D700C4246B /* Charts */,
 				84FC538E2057C71000D20B3C /* Core Data */,
 				847D98F320CEC45F0079433F /* Onboarding */,
 				84FC538D2057C6F100D20B3C /* Supporting files */,
 				84B49849205163A800DCFA05 /* TDEE.swift */,
-				841B5AA720436E7300ACAD15 /* Main.storyboard */,
 				840E2FD120ADEFB400EBDC0E /* HomeViewController.swift */,
+				8428967E20B46DE60096E1A8 /* Main.storyboard */,
 			);
 			path = CalorieBurner;
 			sourceTree = "<group>";
@@ -234,20 +234,23 @@
 			isa = PBXGroup;
 			children = (
 				8436A898206D410000946C32 /* Info.plist */,
-				84C8933F20B1561900590D86 /* CalorieBrainTests.swift */,
+				84C8933F20B1561900590D86 /* CalorieBrainRunningTDEETests.swift */,
+				8428967620B2D2FD0096E1A8 /* CalorieBrainStaticTDEETests.swift */,
 				84C8933E20B1561900590D86 /* CalorieBurnerTests-Bridging-Header.h */,
 			);
 			path = CalorieBurnerTests;
 			sourceTree = "<group>";
 		};
-		847D98F320CEC45F0079433F /* Onboarding */ = {
+		84506BDE20CBD4D700C4246B /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				8428966E20B1C3E80096E1A8 /* Onboarding.storyboard */,
-				847D991220CFBB930079433F /* ProfileTableVC.swift */,
-				8428967020B1C7860096E1A8 /* OnboardingViewController.swift */,
+				8428967A20B44A090096E1A8 /* ChartsViewController.swift */,
+				84506BE520CBD56000C4246B /* ChartsPageViewController.swift */,
+				84506BE320CBD53A00C4246B /* CoreDataMediator.swift */,
+				84506BE120CBD51F00C4246B /* LineChartViewDelegate.swift */,
+				84506BDF20CBD4FC00C4246B /* ShortDateChartFormatter.swift */,
 			);
-			path = Onboarding;
+			path = Charts;
 			sourceTree = "<group>";
 		};
 		84E2F0C520A4D2AD00CB3C05 /* CocoaControls */ = {
@@ -299,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				84F08542206A499900E47042 /* CSV */,
+				8428967320B2CA500096E1A8 /* UserProfile.swift */,
 				841B5AB820436FA300ACAD15 /* Daily.swift */,
 				84B49845204DC64C00DCFA05 /* CoreDataStack.swift */,
 				84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */,
@@ -323,6 +327,7 @@
 		84FC53BA205AFA2700D20B3C /* Convenience */ = {
 			isa = PBXGroup;
 			children = (
+				84506C0520CD6E2D00C4246B /* EnumCollection.swift */,
 				84FC53BB205AFA4700D20B3C /* Array.swift */,
 				849891492090B74800C0E2EA /* FirstResponder.swift */,
 				84DF1B892074EE890024D924 /* Measurement.swift */,
@@ -448,10 +453,9 @@
 			files = (
 				841B5AB120436E7300ACAD15 /* LaunchScreen.storyboard in Resources */,
 				841B5AAE20436E7300ACAD15 /* Assets.xcassets in Resources */,
+				8428967F20B46DE70096E1A8 /* Main.storyboard in Resources */,
 				84123EA02097556300F5639E /* transparentPixel.png in Resources */,
 				8498914820908F7E00C0E2EA /* IQKeyboardManager.bundle in Resources */,
-				841B5AA920436E7300ACAD15 /* Main.storyboard in Resources */,
-				8428966F20B1C3E80096E1A8 /* Onboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,11 +494,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CalorieBurner/Pods-CalorieBurner-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
 			);
@@ -511,14 +517,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				84F08544206A4A0300E47042 /* DailyCSV.swift in Sources */,
-				847D991320CFBB930079433F /* ProfileTableVC.swift in Sources */,
+				8428967B20B44A090096E1A8 /* ChartsViewController.swift in Sources */,
 				84DF1B8A2074EE890024D924 /* Measurement.swift in Sources */,
 				843E470A207237BD0041BECB /* DailyCollectionViewProtocols.swift in Sources */,
 				84398B0020A19FC10061AD69 /* CalendarMonthHeaderView.swift in Sources */,
 				84FC53B9205940E900D20B3C /* DayViewCell.swift in Sources */,
+				84506C0620CD6E2D00C4246B /* EnumCollection.swift in Sources */,
 				84E2F0C320A4D2A400CB3C05 /* CGRect.swift in Sources */,
 				841B5ABB20445D2300ACAD15 /* DailyDataCollectionViewCell.swift in Sources */,
 				84E2F0C120A4D2A400CB3C05 /* BorderView.swift in Sources */,
+				84506BE020CBD4FC00C4246B /* ShortDateChartFormatter.swift in Sources */,
 				84FC53912057C79900D20B3C /* CalendarViewController.swift in Sources */,
 				84E2F0C020A4D2A400CB3C05 /* ShadowView.swift in Sources */,
 				84398AFE20A19F2C0061AD69 /* CalendarViewDataSource.swift in Sources */,
@@ -528,9 +536,9 @@
 				84F08540206A27BE00E47042 /* SettingsViewController.swift in Sources */,
 				8498914A2090B74800C0E2EA /* FirstResponder.swift in Sources */,
 				842525462054E32F00CA0122 /* DailyCollectionViewController.swift in Sources */,
+				84506BE620CBD56000C4246B /* ChartsPageViewController.swift in Sources */,
 				84FC53BC205AFA4700D20B3C /* Array.swift in Sources */,
 				84E2F0BF20A4D2A400CB3C05 /* Clamp.swift in Sources */,
-				840C6F9920651ECD00535787 /* WeightDeltaView.swift in Sources */,
 				840E2FCE20ADB7A900EBDC0E /* DailyInputView.swift in Sources */,
 				840E2FD220ADEFB400EBDC0E /* HomeViewController.swift in Sources */,
 				84E2F0C220A4D2A400CB3C05 /* GradientView.swift in Sources */,
@@ -541,14 +549,16 @@
 				841B5AB920436FA300ACAD15 /* Daily.swift in Sources */,
 				841B5AA420436E7300ACAD15 /* AppDelegate.swift in Sources */,
 				843BD0A1205E239D0049DD77 /* DailyCalendarViewController.swift in Sources */,
+				84506BE420CBD53B00C4246B /* CoreDataMediator.swift in Sources */,
 				84DF1B8C2074EEA50024D924 /* Date.swift in Sources */,
 				841B5AAC20436E7300ACAD15 /* Database.xcdatamodeld in Sources */,
 				84795BC720AD7E890035AB8C /* FeelView.swift in Sources */,
-				84123E9D20971C1900F5639E /* HealthKitViewController.swift in Sources */,
+				8428967520B2CA500096E1A8 /* UserProfile.swift in Sources */,
 				84123E9B2096FBA900F5639E /* HealthStoreHelper.swift in Sources */,
 				84FC53C1205CA18900D20B3C /* Notification.swift in Sources */,
 				84AA51AC206FD89F00494049 /* DailyCollectionView.swift in Sources */,
 				84E2F0C420A4D2A400CB3C05 /* CircleProgressView.swift in Sources */,
+				84506BE220CBD51F00C4246B /* LineChartViewDelegate.swift in Sources */,
 				840E2FD020ADBFF400EBDC0E /* DailyInputViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -557,7 +567,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84C8934020B1561900590D86 /* CalorieBrainTests.swift in Sources */,
+				8428967720B2D2FD0096E1A8 /* CalorieBrainStaticTDEETests.swift in Sources */,
+				84C8934020B1561900590D86 /* CalorieBrainRunningTDEETests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,14 +583,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		841B5AA720436E7300ACAD15 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				841B5AA820436E7300ACAD15 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		841B5AAF20436E7300ACAD15 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

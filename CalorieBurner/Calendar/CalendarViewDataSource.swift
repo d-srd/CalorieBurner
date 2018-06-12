@@ -10,27 +10,41 @@ import JTAppleCalendar
 
 /// Preconfigured Calendar Data Source equipped for dealing with weekly/monthly Calendar Views. 
 class CalendarViewDataSource: JTAppleCalendarViewDataSource, DateBoundaries {
-    enum Configuration { case weekly, monthly }
+    enum Configuration {
+        case weekly
+        case monthly
+    }
     
     let dateFormatter = DateFormatter()
     var configuration: Configuration
-    var firstDayOfWeek: DaysOfWeek = .monday
+    var firstDayOfWeek = DaysOfWeek(rawValue: UserDefaults.standard.firstDayOfWeek)!
     
-    lazy var startDate: Date = {
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.date(from: "2000-01-01")!
-    }()
-    
-    lazy var endDate: Date = {
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.date(from: "2030-12-31")!
-    }()
+    // TODO: make sure this doesn't break in certain locales
+    var startDate: Date = Calendar.current.date(from: DateComponents(year: 2000, month: 01, day: 01))!
+    var endDate: Date = Calendar.current.date(from: DateComponents(year: 2030, month: 31, day: 12))!
     
     init(configuration: Configuration) {
         self.configuration = configuration
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(firstDayOfWeekDidChange(_:)),
+            name: .FirstDayOfWeekDidChange,
+            object: nil
+        )
     }
     
-    /// A weekly configuration displays only a single row with no overlapping dates. A monthly configuration displays as many rows as it needs — mostly 5-6
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .FirstDayOfWeekDidChange, object: nil)
+    }
+    
+    @objc private func firstDayOfWeekDidChange(_ notification: Notification) {
+        let newFirstDayOfWeek = UserDefaults.standard.firstDayOfWeek
+        
+        firstDayOfWeek = DaysOfWeek(rawValue: newFirstDayOfWeek)!
+    }
+    
+    /// Configures weekly view to show a single row with no overlapping dates and monthly views to display all dates with one row per week
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         if configuration == .weekly {
             return ConfigurationParameters(startDate: startDate,

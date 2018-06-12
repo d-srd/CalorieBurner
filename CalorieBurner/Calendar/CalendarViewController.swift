@@ -33,39 +33,34 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDelegate {
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     @IBOutlet weak var weekdaysStackView: UIStackView!
     
-    private var weekdayLabels: [UILabel] {
-        return weekdaysStackView.subviews.map { $0 as! UILabel }
-    }
-    
     // MARK: Properties
     
-    // when the user taps a cell, how long should the text and selection view animation be
+    private let dataSource = CalendarViewDataSource(configuration: .weekly)
+
+    /// Duration of animating a selection view (dis)appearing & text color changes, in seconds
     let animationSelectionDuration = 0.3
     
-    // used for month, year, and days of week labels
+    let today = Date()
+    
     let dateFormatter: DateFormatter = {
-        let fmt = DateFormatter()
-        fmt.dateFormat = "yyyy-MM-dd"
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
         
-        return fmt
+        return formatter
     }()
     
-    // used for fullDateLabel, i.e. the tiny label just under the calendar
     let fullDateFormat = "MMMM dd, YYYY"
     let monthDateFormat = "MMMM"
     
-    // weekly or monthly? 
     var configuration: CalendarViewDataSource.Configuration {
         get { return dataSource.configuration }
         set { dataSource.configuration = newValue}
     }
     
-    // provide the calendar with some useful data
-    private let dataSource = CalendarViewDataSource(configuration: .weekly)
+    private var weekdayLabels: [UILabel] {
+        return weekdaysStackView.subviews.map { $0 as! UILabel }
+    }
     
-    let today = Date()
-    
-    // offset from `Calendar.firstWeekday` by -1
     var firstDayOfWeek: DaysOfWeek {
         get {
             return dataSource.firstDayOfWeek
@@ -110,9 +105,10 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDelegate {
     private func setWeekdayLabels() {
         let daySymbols = Calendar.current.shortStandaloneWeekdaySymbols
         
-        // why is this 8 - day.rawValue? Nobody knows. it works.
+        // how many indices to move to get first day of week to the first position in the calendar view
         let startDayDistance = 8 - firstDayOfWeek.rawValue
         
+        // set labels such that the value of `firstDayOfWeek` is in the first label
         for (index, label) in weekdayLabels.rotatedRight(by: startDayDistance).enumerated() {
             label.text = daySymbols[index]
         }
@@ -120,10 +116,10 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDelegate {
 
     // MARK: JTAppleCalendarViewDelegate
     
+    // TODO: separate the inner condition operations into their own methods
     func configure(cell: DayViewCell?, cellState: CellState, animated: Bool) {
         guard let cell = cell else { return }
         
-        // set the correct day index
         cell.dayLabel.text = cellState.text
         
         // handle cell selection and animation

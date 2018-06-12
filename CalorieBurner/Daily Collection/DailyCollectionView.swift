@@ -77,7 +77,7 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
               let date = dailyView.indexPathProvider?.date(for: indexPath)
         else { return }
         
-        dailyScrollDelegate?.dailyView(self, didScrollToItemAt: date)
+        dailyScrollDelegate?.dailyView?(self, didScrollToItemAt: date)
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -90,7 +90,7 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
                   let date = dailyView.indexPathProvider?.date(for: visibleCellIndexPath)
             else { return }
             
-            dailyScrollDelegate?.dailyView(self, willScrollToItemAt: date)
+            dailyScrollDelegate?.dailyView?(self, willScrollToItemAt: date)
         }
             
         // scrolling to the right
@@ -100,7 +100,7 @@ extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
                   let date = dailyView.indexPathProvider?.date(for: visibleCellIndexPath)
             else { return }
             
-            dailyScrollDelegate?.dailyView(self, willScrollToItemAt: date)
+            dailyScrollDelegate?.dailyView?(self, willScrollToItemAt: date)
         }
         
         guard keyboardDismissMode == .onDrag else { return }
