@@ -26,38 +26,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total Daily Estimated Energy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqU-oX-VHI">
-                                <rect key="frame" x="89" y="242" width="196" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Daily Estimated Energy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqU-oX-VHI">
+                                <rect key="frame" x="89.5" y="242" width="195.5" height="63.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0v-Rh-ApH">
-                                <rect key="frame" x="16" y="331" width="343" height="85"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0v-Rh-ApH">
+                                <rect key="frame" x="16" y="331" width="343" height="64.5"/>
                                 <string key="text">Log your weight and consumed calories
 as often as possible to get an accurate estimate.</string>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQN-Jh-ujm">
-                                <rect key="frame" x="24" y="37" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQN-Jh-ujm">
+                                <rect key="frame" x="24" y="38" width="30" height="30"/>
                                 <state key="normal" title="Skip">
                                     <color key="titleColor" red="1" green="0.16862745100000001" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1mW-Rm-Cna">
-                                <rect key="frame" x="327" y="37" width="32" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1mW-Rm-Cna">
+                                <rect key="frame" x="319" y="38" width="32" height="30"/>
                                 <state key="normal" title="Next">
                                     <color key="titleColor" red="1" green="0.16862745100000001" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="K50-dt-mWI" firstAttribute="trailing" secondItem="e0v-Rh-ApH" secondAttribute="trailing" constant="16" id="BUA-1G-PZC"/>
+                            <constraint firstItem="MqU-oX-VHI" firstAttribute="top" secondItem="K50-dt-mWI" secondAttribute="top" constant="222" id="D3L-OD-WSh"/>
+                            <constraint firstItem="MqU-oX-VHI" firstAttribute="centerX" secondItem="K50-dt-mWI" secondAttribute="centerX" id="MjS-Nc-5Ju"/>
+                            <constraint firstItem="fQN-Jh-ujm" firstAttribute="leading" secondItem="K50-dt-mWI" secondAttribute="leading" constant="24" id="U7F-fN-o4d"/>
+                            <constraint firstItem="fQN-Jh-ujm" firstAttribute="top" secondItem="K50-dt-mWI" secondAttribute="top" constant="18" id="abx-gd-a5A"/>
+                            <constraint firstItem="e0v-Rh-ApH" firstAttribute="leading" secondItem="K50-dt-mWI" secondAttribute="leading" constant="16" id="ccf-5D-w3d"/>
+                            <constraint firstItem="K50-dt-mWI" firstAttribute="trailing" secondItem="1mW-Rm-Cna" secondAttribute="trailing" constant="24" id="g48-7w-aT5"/>
+                            <constraint firstItem="1mW-Rm-Cna" firstAttribute="top" secondItem="K50-dt-mWI" secondAttribute="top" constant="18" id="uJV-Tx-rul"/>
+                            <constraint firstItem="e0v-Rh-ApH" firstAttribute="top" secondItem="MqU-oX-VHI" secondAttribute="bottom" constant="26" id="yxk-5c-6JV"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="K50-dt-mWI"/>
                     </view>
                 </viewController>
@@ -73,38 +80,46 @@ as often as possible to get an accurate estimate.</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Health Integration" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ntX-2F-svp">
-                                <rect key="frame" x="87" y="258" width="200" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Health Integration" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ntX-2F-svp">
+                                <rect key="frame" x="87.5" y="258" width="199.5" height="31.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZb-sj-SzF">
-                                <rect key="frame" x="16" y="332" width="343" height="85"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZb-sj-SzF">
+                                <rect key="frame" x="16" y="332" width="343" height="42.5"/>
                                 <string key="text">Tap on the button below to enable
 automatic Health data import.</string>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bro-2F-AeI">
-                                <rect key="frame" x="149" y="517" width="76" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bro-2F-AeI">
+                                <rect key="frame" x="150" y="517" width="75" height="30"/>
                                 <state key="normal" title="Use Health">
                                     <color key="titleColor" red="1" green="0.16862745100000001" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1S-wc-YJU">
-                                <rect key="frame" x="327" y="46" width="32" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1S-wc-YJU">
+                                <rect key="frame" x="319" y="38" width="32" height="30"/>
                                 <state key="normal" title="Next">
                                     <color key="titleColor" red="1" green="0.16862745100000001" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bro-2F-AeI" firstAttribute="leading" secondItem="94J-QO-IUa" secondAttribute="leading" constant="150" id="0fO-RD-DXC"/>
+                            <constraint firstItem="EZb-sj-SzF" firstAttribute="leading" secondItem="94J-QO-IUa" secondAttribute="leading" constant="16" id="54F-Ci-slQ"/>
+                            <constraint firstItem="94J-QO-IUa" firstAttribute="trailing" secondItem="F1S-wc-YJU" secondAttribute="trailing" constant="24" id="6y1-8X-8jQ"/>
+                            <constraint firstItem="EZb-sj-SzF" firstAttribute="top" secondItem="ntX-2F-svp" secondAttribute="bottom" constant="42" id="GRi-ll-NQ6"/>
+                            <constraint firstItem="94J-QO-IUa" firstAttribute="bottom" secondItem="bro-2F-AeI" secondAttribute="bottom" constant="120" id="GY9-Nr-lGe"/>
+                            <constraint firstItem="94J-QO-IUa" firstAttribute="trailing" secondItem="EZb-sj-SzF" secondAttribute="trailing" constant="16" id="IaZ-ps-5gP"/>
+                            <constraint firstItem="F1S-wc-YJU" firstAttribute="top" secondItem="94J-QO-IUa" secondAttribute="top" constant="18" id="M1B-yS-o8Z"/>
+                            <constraint firstItem="94J-QO-IUa" firstAttribute="trailing" secondItem="bro-2F-AeI" secondAttribute="trailing" constant="150" id="Ord-XT-SkT"/>
+                            <constraint firstItem="ntX-2F-svp" firstAttribute="top" secondItem="94J-QO-IUa" secondAttribute="top" constant="238" id="VmL-pc-iIh"/>
+                            <constraint firstItem="ntX-2F-svp" firstAttribute="centerX" secondItem="94J-QO-IUa" secondAttribute="centerX" id="iH9-Gz-2O1"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="94J-QO-IUa"/>
                     </view>
                 </viewController>
@@ -120,30 +135,26 @@ automatic Health data import.</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oEg-zI-1Bm">
-                                <rect key="frame" x="322" y="45" width="37" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oEg-zI-1Bm">
+                                <rect key="frame" x="314" y="38" width="37" height="30"/>
                                 <state key="normal" title="Done">
                                     <color key="titleColor" red="1" green="0.16862745100000001" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVh-4Q-sQ1">
-                                <rect key="frame" x="160" y="51" width="55" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVh-4Q-sQ1">
+                                <rect key="frame" x="160" y="39.5" width="55" height="24"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0hc-aZ-ZjQ">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0hc-aZ-ZjQ">
                                 <rect key="frame" x="0.0" y="128" width="375" height="317"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="ShK-1x-Qp0" kind="embed" id="8ae-XH-b6s"/>
                                 </connections>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5U-gz-vZD">
-                                <rect key="frame" x="16" y="490" width="343" height="76"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5U-gz-vZD">
+                                <rect key="frame" x="16" y="515" width="343" height="52"/>
                                 <string key="text">This information is used to calculate an initial
 daily calorie consumption. It is only stored locally,
 as is all the other data this app uses.</string>
@@ -153,6 +164,19 @@ as is all the other data this app uses.</string>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="idt-kE-FJ2" firstAttribute="trailing" secondItem="t5U-gz-vZD" secondAttribute="trailing" constant="16" id="A8N-wq-Wew"/>
+                            <constraint firstItem="oEg-zI-1Bm" firstAttribute="top" secondItem="idt-kE-FJ2" secondAttribute="top" constant="18" id="LLg-Et-z7i"/>
+                            <constraint firstItem="t5U-gz-vZD" firstAttribute="leading" secondItem="idt-kE-FJ2" secondAttribute="leading" constant="16" id="UHh-ro-b20"/>
+                            <constraint firstItem="idt-kE-FJ2" firstAttribute="trailing" secondItem="oEg-zI-1Bm" secondAttribute="trailing" constant="24" id="ct6-3f-dXy"/>
+                            <constraint firstItem="rVh-4Q-sQ1" firstAttribute="centerX" secondItem="idt-kE-FJ2" secondAttribute="centerX" id="llF-Wc-0eF"/>
+                            <constraint firstItem="0hc-aZ-ZjQ" firstAttribute="leading" secondItem="idt-kE-FJ2" secondAttribute="leading" id="luC-7i-FY9"/>
+                            <constraint firstItem="0hc-aZ-ZjQ" firstAttribute="trailing" secondItem="idt-kE-FJ2" secondAttribute="trailing" id="mEI-Xb-WbC"/>
+                            <constraint firstItem="0hc-aZ-ZjQ" firstAttribute="top" secondItem="idt-kE-FJ2" secondAttribute="top" constant="108" id="nxG-PS-Mda"/>
+                            <constraint firstItem="idt-kE-FJ2" firstAttribute="bottom" secondItem="t5U-gz-vZD" secondAttribute="bottom" constant="100" id="r4K-cR-qXC"/>
+                            <constraint firstItem="t5U-gz-vZD" firstAttribute="top" secondItem="0hc-aZ-ZjQ" secondAttribute="bottom" constant="70" id="uWX-op-H6s"/>
+                            <constraint firstItem="rVh-4Q-sQ1" firstAttribute="baseline" secondItem="oEg-zI-1Bm" secondAttribute="baseline" id="zPU-EB-HZJ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="idt-kE-FJ2"/>
                     </view>
                 </viewController>
@@ -160,10 +184,10 @@ as is all the other data this app uses.</string>
             </objects>
             <point key="canvasLocation" x="720.79999999999995" y="911.69415292353835"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Profile TableVC-->
         <scene sceneID="yLO-RW-6hc">
             <objects>
-                <tableViewController id="ShK-1x-Qp0" sceneMemberID="viewController">
+                <tableViewController id="ShK-1x-Qp0" customClass="ProfileTableVC" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="uPj-qS-6r5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="317"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

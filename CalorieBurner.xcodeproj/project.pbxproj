@@ -32,6 +32,7 @@
 		843E470A207237BD0041BECB /* DailyCollectionViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E4709207237BD0041BECB /* DailyCollectionViewProtocols.swift */; };
 		84696D8620499FF8002F31B4 /* DailyFetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */; };
 		84795BC720AD7E890035AB8C /* FeelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84795BC620AD7E890035AB8C /* FeelView.swift */; };
+		847D991320CFBB930079433F /* ProfileTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D991220CFBB930079433F /* ProfileTableVC.swift */; };
 		8498914820908F7E00C0E2EA /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8498914720908F7E00C0E2EA /* IQKeyboardManager.bundle */; };
 		8498914A2090B74800C0E2EA /* FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849891492090B74800C0E2EA /* FirstResponder.swift */; };
 		84AA51AC206FD89F00494049 /* DailyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA51AB206FD89F00494049 /* DailyCollectionView.swift */; };
@@ -114,6 +115,7 @@
 		843E4709207237BD0041BECB /* DailyCollectionViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionViewProtocols.swift; sourceTree = "<group>"; };
 		84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFetchedResultsController.swift; sourceTree = "<group>"; };
 		84795BC620AD7E890035AB8C /* FeelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelView.swift; sourceTree = "<group>"; };
+		847D991220CFBB930079433F /* ProfileTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableVC.swift; sourceTree = "<group>"; };
 		8498914720908F7E00C0E2EA /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
 		849891492090B74800C0E2EA /* FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstResponder.swift; sourceTree = "<group>"; };
 		84AA51AB206FD89F00494049 /* DailyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionView.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				8428966E20B1C3E80096E1A8 /* Onboarding.storyboard */,
+				847D991220CFBB930079433F /* ProfileTableVC.swift */,
 				8428967020B1C7860096E1A8 /* OnboardingViewController.swift */,
 			);
 			path = Onboarding;
@@ -508,6 +511,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84F08544206A4A0300E47042 /* DailyCSV.swift in Sources */,
+				847D991320CFBB930079433F /* ProfileTableVC.swift in Sources */,
 				84DF1B8A2074EE890024D924 /* Measurement.swift in Sources */,
 				843E470A207237BD0041BECB /* DailyCollectionViewProtocols.swift in Sources */,
 				84398B0020A19FC10061AD69 /* CalendarMonthHeaderView.swift in Sources */,
