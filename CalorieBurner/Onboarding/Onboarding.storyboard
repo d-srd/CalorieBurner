@@ -95,7 +95,7 @@ automatic Health data import.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bro-2F-AeI">
-                                <rect key="frame" x="150" y="517" width="75" height="30"/>
+                                <rect key="frame" x="149.5" y="517" width="76" height="30"/>
                                 <state key="normal" title="Use Health">
                                     <color key="titleColor" red="1" green="0.16862745100000001" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -109,15 +109,14 @@ automatic Health data import.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="bro-2F-AeI" firstAttribute="leading" secondItem="94J-QO-IUa" secondAttribute="leading" constant="150" id="0fO-RD-DXC"/>
                             <constraint firstItem="EZb-sj-SzF" firstAttribute="leading" secondItem="94J-QO-IUa" secondAttribute="leading" constant="16" id="54F-Ci-slQ"/>
                             <constraint firstItem="94J-QO-IUa" firstAttribute="trailing" secondItem="F1S-wc-YJU" secondAttribute="trailing" constant="24" id="6y1-8X-8jQ"/>
                             <constraint firstItem="EZb-sj-SzF" firstAttribute="top" secondItem="ntX-2F-svp" secondAttribute="bottom" constant="42" id="GRi-ll-NQ6"/>
                             <constraint firstItem="94J-QO-IUa" firstAttribute="bottom" secondItem="bro-2F-AeI" secondAttribute="bottom" constant="120" id="GY9-Nr-lGe"/>
                             <constraint firstItem="94J-QO-IUa" firstAttribute="trailing" secondItem="EZb-sj-SzF" secondAttribute="trailing" constant="16" id="IaZ-ps-5gP"/>
                             <constraint firstItem="F1S-wc-YJU" firstAttribute="top" secondItem="94J-QO-IUa" secondAttribute="top" constant="18" id="M1B-yS-o8Z"/>
-                            <constraint firstItem="94J-QO-IUa" firstAttribute="trailing" secondItem="bro-2F-AeI" secondAttribute="trailing" constant="150" id="Ord-XT-SkT"/>
                             <constraint firstItem="ntX-2F-svp" firstAttribute="top" secondItem="94J-QO-IUa" secondAttribute="top" constant="238" id="VmL-pc-iIh"/>
+                            <constraint firstItem="bro-2F-AeI" firstAttribute="centerX" secondItem="94J-QO-IUa" secondAttribute="centerX" id="d3n-Rx-dG9"/>
                             <constraint firstItem="ntX-2F-svp" firstAttribute="centerX" secondItem="94J-QO-IUa" secondAttribute="centerX" id="iH9-Gz-2O1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="94J-QO-IUa"/>
@@ -184,10 +183,10 @@ as is all the other data this app uses.</string>
             </objects>
             <point key="canvasLocation" x="720.79999999999995" y="911.69415292353835"/>
         </scene>
-        <!--Profile TableVC-->
+        <!--Profile Table View Controller-->
         <scene sceneID="yLO-RW-6hc">
             <objects>
-                <tableViewController id="ShK-1x-Qp0" customClass="ProfileTableVC" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="ShK-1x-Qp0" customClass="ProfileTableViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="uPj-qS-6r5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="317"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
