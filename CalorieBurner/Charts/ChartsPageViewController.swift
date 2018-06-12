@@ -9,10 +9,6 @@
 import UIKit
 
 class ChartsPageViewController: UIPageViewController {
-    private var pageControl: UIPageControl? {
-        return view.subviews.first { $0 is UIPageControl } as? UIPageControl
-    }
-    
     private(set) lazy var pages = makePages()
     
     private func makePages() -> [ChartViewController] {
