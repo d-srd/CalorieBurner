@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DIY-e0-YQQ">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,22 +18,22 @@
             </objects>
             <point key="canvasLocation" x="-63" y="152"/>
         </scene>
-        <!--View Controller-->
+        <!--Onboarding View Controller-->
         <scene sceneID="mHU-jo-Mo7">
             <objects>
-                <viewController storyboardIdentifier="PageOne" id="qlF-XW-cfn" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PageOne" id="qlF-XW-cfn" customClass="OnboardingViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yGM-dC-xSd">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Daily Estimated Energy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqU-oX-VHI">
-                                <rect key="frame" x="202.5" y="242" width="195.5" height="63.5"/>
+                                <rect key="frame" x="90" y="242" width="195.5" height="63.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0v-Rh-ApH">
-                                <rect key="frame" x="16" y="331" width="568" height="42.5"/>
+                                <rect key="frame" x="16" y="331" width="343" height="64.5"/>
                                 <string key="text">Log your weight and consumed calories
 as often as possible to get an accurate estimate.</string>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -41,12 +45,18 @@ as often as possible to get an accurate estimate.</string>
                                 <state key="normal" title="Skip">
                                     <color key="titleColor" red="1" green="0.16862745100000001" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapSkipButton:" destination="qlF-XW-cfn" eventType="touchUpInside" id="Bd0-xI-gTZ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1mW-Rm-Cna">
-                                <rect key="frame" x="544" y="38" width="32" height="30"/>
+                                <rect key="frame" x="319" y="38" width="32" height="30"/>
                                 <state key="normal" title="Next">
                                     <color key="titleColor" red="1" green="0.16862745100000001" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapNextButton:" destination="qlF-XW-cfn" eventType="touchUpInside" id="KsZ-KL-S5Z"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -68,22 +78,22 @@ as often as possible to get an accurate estimate.</string>
             </objects>
             <point key="canvasLocation" x="-823.20000000000005" y="911.69415292353835"/>
         </scene>
-        <!--View Controller-->
+        <!--Onboarding View Controller-->
         <scene sceneID="KNF-Id-0VK">
             <objects>
-                <viewController storyboardIdentifier="PageTwo" id="BlV-R9-EGT" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PageTwo" id="BlV-R9-EGT" customClass="OnboardingViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N41-ZB-OR6">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Health Integration" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ntX-2F-svp">
-                                <rect key="frame" x="200.5" y="258" width="199.5" height="31.5"/>
+                                <rect key="frame" x="88" y="258" width="199.5" height="31.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZb-sj-SzF">
-                                <rect key="frame" x="16" y="332" width="568" height="42.5"/>
+                                <rect key="frame" x="16" y="332" width="343" height="42.5"/>
                                 <string key="text">Tap on the button below to enable
 automatic Health data import.</string>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -91,16 +101,22 @@ automatic Health data import.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bro-2F-AeI">
-                                <rect key="frame" x="262" y="450" width="76" height="30"/>
+                                <rect key="frame" x="149.5" y="517" width="76" height="30"/>
                                 <state key="normal" title="Use Health">
                                     <color key="titleColor" red="1" green="0.16862745100000001" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapHealthButton:" destination="BlV-R9-EGT" eventType="touchUpInside" id="5b4-3N-hJh"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1S-wc-YJU">
-                                <rect key="frame" x="544" y="38" width="32" height="30"/>
+                                <rect key="frame" x="319" y="38" width="32" height="30"/>
                                 <state key="normal" title="Next">
                                     <color key="titleColor" red="1" green="0.16862745100000001" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapNextButton:" destination="BlV-R9-EGT" eventType="touchUpInside" id="96g-Zr-bDF"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -122,34 +138,37 @@ automatic Health data import.</string>
             </objects>
             <point key="canvasLocation" x="-63" y="912"/>
         </scene>
-        <!--View Controller-->
+        <!--Onboarding View Controller-->
         <scene sceneID="JI9-xV-Gsm">
             <objects>
-                <viewController storyboardIdentifier="PageThree" id="5hu-Iu-x27" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PageThree" id="5hu-Iu-x27" customClass="OnboardingViewController" customModule="CalorieBurner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="c6Y-0i-ewj">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oEg-zI-1Bm">
-                                <rect key="frame" x="539" y="38" width="37" height="30"/>
+                                <rect key="frame" x="314" y="38" width="37" height="30"/>
                                 <state key="normal" title="Done">
                                     <color key="titleColor" red="1" green="0.16862745100000001" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapDoneButton:" destination="5hu-Iu-x27" eventType="touchUpInside" id="hav-kf-qLY"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVh-4Q-sQ1">
-                                <rect key="frame" x="272.5" y="39.5" width="55" height="24"/>
+                                <rect key="frame" x="160" y="39.5" width="55" height="24"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0hc-aZ-ZjQ">
-                                <rect key="frame" x="0.0" y="128" width="600" height="250"/>
+                                <rect key="frame" x="0.0" y="128" width="375" height="317"/>
                                 <connections>
                                     <segue destination="ShK-1x-Qp0" kind="embed" id="8ae-XH-b6s"/>
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5U-gz-vZD">
-                                <rect key="frame" x="16" y="448" width="568" height="52"/>
+                                <rect key="frame" x="16" y="515" width="343" height="52"/>
                                 <string key="text">This information is used to calculate an initial
 daily calorie consumption. It is only stored locally,
 as is all the other data this app uses.</string>

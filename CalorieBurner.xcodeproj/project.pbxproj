@@ -42,6 +42,7 @@
 		8498747620D00F660027E1F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8498747420D00F660027E1F4 /* Main.storyboard */; };
 		8498747820D00F850027E1F4 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8498747720D00F850027E1F4 /* ProfileTableViewController.swift */; };
 		8498747A20D021950027E1F4 /* UIPageViewController+pageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8498747920D021950027E1F4 /* UIPageViewController+pageControl.swift */; };
+		8498747E20D0F9EF0027E1F4 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8498747D20D0F9EF0027E1F4 /* OnboardingViewController.swift */; };
 		8498914820908F7E00C0E2EA /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8498914720908F7E00C0E2EA /* IQKeyboardManager.bundle */; };
 		8498914A2090B74800C0E2EA /* FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849891492090B74800C0E2EA /* FirstResponder.swift */; };
 		84AA51AC206FD89F00494049 /* DailyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA51AB206FD89F00494049 /* DailyCollectionView.swift */; };
@@ -132,6 +133,7 @@
 		8498747520D00F660027E1F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8498747720D00F850027E1F4 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		8498747920D021950027E1F4 /* UIPageViewController+pageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPageViewController+pageControl.swift"; sourceTree = "<group>"; };
+		8498747D20D0F9EF0027E1F4 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8498914720908F7E00C0E2EA /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
 		849891492090B74800C0E2EA /* FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstResponder.swift; sourceTree = "<group>"; };
 		84AA51AB206FD89F00494049 /* DailyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionView.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 			children = (
 				8498746F20D00F260027E1F4 /* Onboarding.storyboard */,
 				8498746E20D00F260027E1F4 /* OnboardingPageViewController.swift */,
+				8498747D20D0F9EF0027E1F4 /* OnboardingViewController.swift */,
 				8498747720D00F850027E1F4 /* ProfileTableViewController.swift */,
 			);
 			path = Onboarding;
@@ -579,6 +582,7 @@
 				8428967520B2CA500096E1A8 /* UserProfile.swift in Sources */,
 				84123E9B2096FBA900F5639E /* HealthStoreHelper.swift in Sources */,
 				84FC53C1205CA18900D20B3C /* Notification.swift in Sources */,
+				8498747E20D0F9EF0027E1F4 /* OnboardingViewController.swift in Sources */,
 				84AA51AC206FD89F00494049 /* DailyCollectionView.swift in Sources */,
 				84E2F0C420A4D2A400CB3C05 /* CircleProgressView.swift in Sources */,
 				84506BE220CBD51F00C4246B /* LineChartViewDelegate.swift in Sources */,
