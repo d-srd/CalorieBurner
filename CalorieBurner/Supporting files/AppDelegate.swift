@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func showOnboardingFlow() {
-        let onboardingViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController() as! OnboardingViewController
+        let onboardingViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController() as! OnboardingPageViewController
         window?.rootViewController?.present(onboardingViewController, animated: false, completion: nil)
     }
     

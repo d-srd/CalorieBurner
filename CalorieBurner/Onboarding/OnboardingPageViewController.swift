@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OnboardingViewController: UIPageViewController {
+class OnboardingPageViewController: UIPageViewController {
     var pages: [UIViewController]!
     
     override func viewDidLoad() {
@@ -37,7 +37,7 @@ class OnboardingViewController: UIPageViewController {
     }
 }
 
-extension OnboardingViewController: UIPageViewControllerDataSource {
+extension OnboardingPageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = pages.index(of: viewController), index != pages.startIndex else { return nil }
         
