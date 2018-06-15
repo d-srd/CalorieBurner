@@ -60,6 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func showOnboardingFlow() {
         let onboardingViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController() as! OnboardingPageViewController
+        onboardingViewController.onboardingDelegate = self
         window?.rootViewController?.present(onboardingViewController, animated: false, completion: nil)
     }
     
@@ -138,3 +139,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate: OnboardingViewControllerDelegate {
+    func shouldShowPage(after viewController: OnboardingViewController) {
+        print("should show page after: ", viewController)
+    }
+    
+    func shouldSkipOnboardingFlow(_ sender: OnboardingViewController) {
+        print("should skip onboarding")
+    }
+    
+    func didCompleteOnboarding(_ sender: OnboardingViewController) {
+        print("onboarding complete")
+    }
+    
+    func didCompleteHealthKitIntegration(_ sender: OnboardingViewController, data: UserRepresentable) {
+        print("completed healthkit integration")
+    }
+}

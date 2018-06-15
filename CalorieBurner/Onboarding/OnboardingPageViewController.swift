@@ -9,7 +9,8 @@
 import UIKit
 
 class OnboardingPageViewController: UIPageViewController {
-    var pages: [UIViewController]!
+    weak var onboardingDelegate: OnboardingViewControllerDelegate?
+    var pages: [OnboardingViewController]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +24,11 @@ class OnboardingPageViewController: UIPageViewController {
             storyboard?.instantiateViewController(withIdentifier: "PageThree")
         ]
         
-        pages = tempPages.compactMap { $0 }
+        pages = tempPages.compactMap { $0 as? OnboardingViewController }
+        
+        for page in pages {
+            page.delegate = onboardingDelegate
+        }
         
         view.backgroundColor = .white
         
@@ -39,13 +44,13 @@ class OnboardingPageViewController: UIPageViewController {
 
 extension OnboardingPageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let index = pages.index(of: viewController), index != pages.startIndex else { return nil }
+        guard let index = pages.index(of: viewController as! OnboardingViewController), index != pages.startIndex else { return nil }
         
         return pages[index - 1]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let index = pages.index(of: viewController), index != pages.endIndex - 1 else { return nil }
+        guard let index = pages.index(of: viewController as! OnboardingViewController), index != pages.endIndex - 1 else { return nil }
         
         return pages[index + 1]
     }
