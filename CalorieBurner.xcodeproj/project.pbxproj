@@ -60,6 +60,7 @@
 		84E2F0C420A4D2A400CB3C05 /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2F0BE20A4D2A400CB3C05 /* CircleProgressView.swift */; };
 		84F08540206A27BE00E47042 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0853F206A27BE00E47042 /* SettingsViewController.swift */; };
 		84F08544206A4A0300E47042 /* DailyCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F08543206A4A0300E47042 /* DailyCSV.swift */; };
+		84F0C72A20DA45AA0036A916 /* UserRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0C72920DA45AA0036A916 /* UserRepresentable.swift */; };
 		84FC53912057C79900D20B3C /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC53902057C79900D20B3C /* CalendarViewController.swift */; };
 		84FC53B9205940E900D20B3C /* DayViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC53B8205940E900D20B3C /* DayViewCell.swift */; };
 		84FC53BC205AFA4700D20B3C /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC53BB205AFA4700D20B3C /* Array.swift */; };
@@ -152,6 +153,7 @@
 		84E2F0BE20A4D2A400CB3C05 /* CircleProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
 		84F0853F206A27BE00E47042 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		84F08543206A4A0300E47042 /* DailyCSV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCSV.swift; sourceTree = "<group>"; };
+		84F0C72920DA45AA0036A916 /* UserRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepresentable.swift; sourceTree = "<group>"; };
 		84FC53902057C79900D20B3C /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		84FC53B8205940E900D20B3C /* DayViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewCell.swift; sourceTree = "<group>"; };
 		84FC53BB205AFA4700D20B3C /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 			children = (
 				84F08542206A499900E47042 /* CSV */,
 				8428967320B2CA500096E1A8 /* UserProfile.swift */,
+				84F0C72920DA45AA0036A916 /* UserRepresentable.swift */,
 				841B5AB820436FA300ACAD15 /* Daily.swift */,
 				84B49845204DC64C00DCFA05 /* CoreDataStack.swift */,
 				84696D8520499FF8002F31B4 /* DailyFetchedResultsController.swift */,
@@ -587,6 +590,7 @@
 				84E2F0C420A4D2A400CB3C05 /* CircleProgressView.swift in Sources */,
 				84506BE220CBD51F00C4246B /* LineChartViewDelegate.swift in Sources */,
 				840E2FD020ADBFF400EBDC0E /* DailyInputViewController.swift in Sources */,
+				84F0C72A20DA45AA0036A916 /* UserRepresentable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
