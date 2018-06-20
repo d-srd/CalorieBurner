@@ -24,10 +24,15 @@ class HealthStoreHelper {
         static let steps = HKObjectType.quantityType(forIdentifier: .stepCount)!
     }
     
+    struct CharacteristicTypes {
+        static let sex = HKObjectType.characteristicType(forIdentifier: .biologicalSex)!
+        static let dateOfBirthComponents = HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!
+    }
+    
     // this should only ever be a single instance across the entire app, according to Apple
     private let store: HKHealthStore
 
-    private let typesToRead: Set<HKSampleType>
+    private let typesToRead: Set<HKObjectType>
     private let typesToWrite: Set<HKSampleType>
     
     // this is necessary for stopping the appropriate queries if it didn't fetch any results
@@ -44,7 +49,7 @@ class HealthStoreHelper {
     private lazy var statisticsQuery = makeEnergyStatisticsQuery()
     private lazy var anchoredQuery = makeAnchoredMassQuery()
     
-    private static let defaultReadingTypes: Set = [SampleTypes.mass, SampleTypes.energy, SampleTypes.steps]
+    private static let defaultReadingTypes: Set = [SampleTypes.mass, SampleTypes.energy, SampleTypes.steps, CharacteristicTypes.sex, CharacteristicTypes.dateOfBirthComponents]
     private static let defaultWritingTypes: Set = [SampleTypes.mass]
     
     // we need a singleton health store, as they are long lived objects
@@ -53,7 +58,7 @@ class HealthStoreHelper {
     static let shared = HealthStoreHelper(store: storeSingleton, readingTypes: defaultReadingTypes, writingTypes: defaultWritingTypes)
     
     init(store: HKHealthStore,
-         readingTypes: Set<HKSampleType> = defaultReadingTypes,
+         readingTypes: Set<HKObjectType> = defaultReadingTypes,
          writingTypes: Set<HKSampleType> = defaultWritingTypes)
     {
         self.store = store
@@ -97,7 +102,7 @@ class HealthStoreHelper {
         let massQuery = HKObserverQuery(sampleType: SampleTypes.mass,
                                         predicate: nil)
         { [unowned self] (query, completion, error) in
-            guard error == nil else { fatalError("mass observer completion handler failed. \(error?.localizedDescription)") }
+            guard error == nil else { fatalError("mass observer completion handler failed. \(error!.localizedDescription)") }
             
             if !self.didExecuteAnchoredQuery {
                 // remove deleted objects, then merge the results back into the massResults
@@ -121,7 +126,7 @@ class HealthStoreHelper {
         let energyQuery = HKObserverQuery(sampleType: SampleTypes.energy,
                                           predicate: nil)
         { [unowned self] (query, completion, error) in
-            guard error == nil else { fatalError("energy observer completion handler failed. \(error?.localizedDescription)") }
+            guard error == nil else { fatalError("energy observer completion handler failed. \(error!.localizedDescription)") }
             
             if !self.didExecuteStatisticsQuery {
                 self.store.execute(self.statisticsQuery)
@@ -141,7 +146,7 @@ class HealthStoreHelper {
         func completion(success: Bool, error: Error?) {
             guard success else {
                 print("** error occured during background delivery setup completion handler **")
-                print(error?.localizedDescription)
+                print(error!.localizedDescription)
                 abort()
             }
         }
@@ -153,6 +158,22 @@ class HealthStoreHelper {
         store.enableBackgroundDelivery(for: SampleTypes.energy,
                                        frequency: .immediate,
                                        withCompletion: completion)
+    }
+    
+    // TODO: don't use a mock
+    func fetchUserProfile() -> UserRepresentable {
+        let ageComponents = try? store.dateOfBirthComponents()
+        let sexComponent = try? store.biologicalSex().biologicalSex
+        
+        let age: Int? = ageComponents.flatMap {
+            let todayDateComponents = Calendar.current.dateComponents(in: Calendar.current.timeZone, from: Date())
+            let difference = Calendar.current.dateComponents([.year], from: $0, to: todayDateComponents)
+            return difference.year
+        }
+        let sex = sexComponent.flatMap(Sex.init)
+        
+        print("hi. sex: ", sex)
+        return MockUser(activityLevel: .extreme, age: 12, height: 12, weight: 12, sex: .male)
     }
     
     private func makeEnergyStatisticsQuery(completion: (() -> Void)? = nil,
