@@ -9,8 +9,21 @@
 import UIKit
 
 class OnboardingPageViewController: UIPageViewController {
+    
+    typealias AnimationCompletion = (Bool) -> Void
+    
     weak var onboardingDelegate: OnboardingViewControllerDelegate?
-    var pages: [OnboardingViewController]!
+    var pages = [OnboardingViewController]()
+    
+    func showViewController(after viewController: OnboardingViewController,
+                            completionHandler: AnimationCompletion? = nil)
+    {
+        guard let index = pages.index(of: viewController), index != pages.endIndex - 1 else { return }
+        
+        let nextViewController = pages[pages.index(after: index)] as UIViewController
+        
+        setViewControllers([nextViewController], direction: .forward, animated: true, completion: completionHandler)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -32,13 +32,16 @@ class OnboardingViewController: UIViewController {
     }
     
     @IBAction func didTapHealthButton(_ sender: UIButton) {
-        HealthStoreHelper.shared.requestAuthorization { (didShowDialogue, error) in
+        HealthStoreHelper.shared.requestAuthorization { [weak self] (didShowDialogue, error) in
+            guard let wself = self else { return }
             guard didShowDialogue, error == nil else {
                 print("Error setting up HealthKit: ", error!.localizedDescription)
                 return
             }
             
             HealthStoreHelper.shared.enableBackgroundDelivery()
+            let user = HealthStoreHelper.shared.fetchUserProfile()
+            wself.delegate?.didCompleteHealthKitIntegration?(wself, data: user)
         }
     }
 }
