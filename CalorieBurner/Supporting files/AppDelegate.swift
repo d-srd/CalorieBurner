@@ -15,6 +15,8 @@ import HealthKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    lazy var onboardingPageViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController() as? OnboardingPageViewController
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -34,16 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // automagically resign first responder on touch outside of text input view
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
-        
-        
-//        HealthStoreHelper.shared.requestAuthorization { (success, error) in
-//            guard error == nil else {
-//                print("oops")
-//                return
-//            }
-//
-//            HealthStoreHelper.shared.enableBackgroundDelivery()
-//        }
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
         let initialTabBarVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RootTabBarController")
@@ -53,21 +45,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if !UserDefaults.standard.didShowOnboardingFlow {
             showOnboardingFlow()
+//            UserDefaults.standard.didShowOnboardingFlow = true
         }
         
         return true
     }
     
     private func showOnboardingFlow() {
-        let onboardingViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController() as! OnboardingPageViewController
-        onboardingViewController.onboardingDelegate = self
-        window?.rootViewController?.present(onboardingViewController, animated: false, completion: nil)
+        onboardingPageViewController?.onboardingDelegate = self
+        onboardingPageViewController.map { onboarding in
+            window?.rootViewController?.present(onboarding, animated: true, completion: nil)
+        }
     }
     
-//    private func hideOnboardingFlow() {
-//        window?.rootViewController?.dismiss(animated: true, completion: { UserDefaults.standard.didShowOnboardingFlow = true })
-//    }
-
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -141,18 +131,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: OnboardingViewControllerDelegate {
     func shouldShowPage(after viewController: OnboardingViewController) {
-        print("should show page after: ", viewController)
+        onboardingPageViewController?.showViewController(after: viewController)
     }
     
     func shouldSkipOnboardingFlow(_ sender: OnboardingViewController) {
-        print("should skip onboarding")
+        window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     func didCompleteOnboarding(_ sender: OnboardingViewController) {
-        print("onboarding complete")
+        window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     func didCompleteHealthKitIntegration(_ sender: OnboardingViewController, data: UserRepresentable) {
         print("completed healthkit integration")
+        print("data: ", data.description)
     }
 }
