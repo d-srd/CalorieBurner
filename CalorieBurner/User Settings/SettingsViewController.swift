@@ -177,7 +177,7 @@ class SettingsViewController: UITableViewController {
         fmt.dateFormat = "yyyy-MM-dd"
         return fmt
     }()
-    private lazy var csvManager = DailyCSV(measurementFormatter: measurementFormatter, items: [])
+    private lazy var csvManager = DailyCSVExporter(measurementFormatter: measurementFormatter, items: [])
     
     private func deselectSelectedRow() {
         if let selectedRow = tableView.indexPathForSelectedRow {

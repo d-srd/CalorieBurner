@@ -8,14 +8,14 @@
 
 import Foundation
 
-fileprivate let dateFormatter: ISO8601DateFormatter = {
-    let fmt = ISO8601DateFormatter()
-    fmt.formatOptions = .withInternetDateTime
+fileprivate let dateFormatter: DateFormatter = {
+    let fmt = DateFormatter()
+    fmt.dateStyle = .full
     return fmt
 }()
 
-/// Helper for import/export of CSV data from a bunch of Dailies.
-class DailyCSV {
+/// Export `Daily` data to a CSV file
+class DailyCSVExporter {
     
     // initial line of the CSV file -- title of each column
     private let header = "Date; Mass; Energy"
