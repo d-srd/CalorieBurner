@@ -9,6 +9,7 @@
 
 import Foundation
 import CoreData
+import HealthKit
 
 @objc public enum ActivityLevel: Int16, EnumCollection, CustomStringConvertible {
     case sedentary, light, moderate, heavy, extreme
@@ -50,12 +51,26 @@ import CoreData
 }
 
 @objc public enum Sex: Int16, CustomStringConvertible {
-    case male, female
+    case male, female, other
     
     public var description: String {
         switch self {
         case .male: return "Male"
         case .female: return "Female"
+        case .other: return "Other"
+        }
+    }
+    
+    public init?(healthKitSex: HKBiologicalSex) {
+        switch healthKitSex {
+        case .male:
+            self = .male
+        case .female:
+            self = .female
+        case .other:
+            self = .other
+        case .notSet:
+            return nil
         }
     }
 }
@@ -66,6 +81,38 @@ import CoreData
     var height: Double { get set }
     var weight: Double { get set }
     var sex: Sex { get set }
+}
+
+extension UserRepresentable {
+    public var description: String {
+        return """
+        Activity level: \(activityLevel)
+        Age: \(age)
+        Height: \(height)
+        Weight: \(weight)
+        Sex: \(sex)
+        """
+    }
+}
+
+public final class MockUser: UserRepresentable {
+    var activityLevel: ActivityLevel
+    
+    var age: Int16
+    
+    var height: Double
+    
+    var weight: Double
+    
+    var sex: Sex
+    
+    init(activityLevel: ActivityLevel, age: Int16, height: Double, weight: Double, sex: Sex) {
+        self.activityLevel = activityLevel
+        self.age = age
+        self.height = height
+        self.weight = weight
+        self.sex = sex
+    }
 }
 
 public final class UserProfile: NSManagedObject, UserRepresentable {
