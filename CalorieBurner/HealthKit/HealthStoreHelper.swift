@@ -21,6 +21,7 @@ class HealthStoreHelper {
     struct SampleTypes {
         static let mass = HKObjectType.quantityType(forIdentifier: .bodyMass)!
         static let energy = HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!
+        static let height = HKObjectType.quantityType(forIdentifier: .height)!
         static let steps = HKObjectType.quantityType(forIdentifier: .stepCount)!
     }
     
@@ -49,7 +50,7 @@ class HealthStoreHelper {
     private lazy var statisticsQuery = makeEnergyStatisticsQuery()
     private lazy var anchoredQuery = makeAnchoredMassQuery()
     
-    private static let defaultReadingTypes: Set = [SampleTypes.mass, SampleTypes.energy, SampleTypes.steps, CharacteristicTypes.sex, CharacteristicTypes.dateOfBirthComponents]
+    private static let defaultReadingTypes: Set = [SampleTypes.mass, SampleTypes.energy, SampleTypes.steps, SampleTypes.height, CharacteristicTypes.sex, CharacteristicTypes.dateOfBirthComponents]
     private static let defaultWritingTypes: Set = [SampleTypes.mass]
     
     // we need a singleton health store, as they are long lived objects
@@ -81,20 +82,20 @@ class HealthStoreHelper {
         store.save(sample, withCompletion: completion)
     }
     
-    func fetchStepCountBetween(dates: DateRange, completionHandler: ((HKStatistics?) -> Void)? = nil) {
-        let query = HKStatisticsQuery(quantityType: SampleTypes.steps,
-                                      quantitySamplePredicate: nil,
-                                      options: .cumulativeSum)
-        { (query, statistics, error) in
-            guard error == nil else {
-                print("Error fetching step count: ", error!)
-                return
-            }
-            
-            completionHandler?(statistics)
-        }
+    // TODO: don't use a mock
+    func fetchUserProfile() -> UserRepresentable {
+        let ageComponents = try? store.dateOfBirthComponents()
+        let sexComponent = try? store.biologicalSex().biologicalSex
         
-        store.execute(query)
+        let age: Int? = ageComponents.flatMap {
+            let todayDateComponents = Calendar.current.dateComponents(in: Calendar.current.timeZone, from: Date())
+            let difference = Calendar.current.dateComponents([.year], from: $0, to: todayDateComponents)
+            return difference.year
+        }
+        let sex = sexComponent.flatMap(Sex.init)
+        
+        print("hi. sex: ", sex)
+        return MockUser(activityLevel: .extreme, age: 12, height: 12, weight: 12, sex: .male)
     }
     
     // set up observer queries for both mass and energy
@@ -160,22 +161,6 @@ class HealthStoreHelper {
                                        withCompletion: completion)
     }
     
-    // TODO: don't use a mock
-    func fetchUserProfile() -> UserRepresentable {
-        let ageComponents = try? store.dateOfBirthComponents()
-        let sexComponent = try? store.biologicalSex().biologicalSex
-        
-        let age: Int? = ageComponents.flatMap {
-            let todayDateComponents = Calendar.current.dateComponents(in: Calendar.current.timeZone, from: Date())
-            let difference = Calendar.current.dateComponents([.year], from: $0, to: todayDateComponents)
-            return difference.year
-        }
-        let sex = sexComponent.flatMap(Sex.init)
-        
-        print("hi. sex: ", sex)
-        return MockUser(activityLevel: .extreme, age: 12, height: 12, weight: 12, sex: .male)
-    }
-    
     private func makeEnergyStatisticsQuery(completion: (() -> Void)? = nil,
                                            didProcessValues valueProcessing: (([Date : HKQuantity]) -> Void)? = nil)
         -> HKStatisticsCollectionQuery
@@ -237,6 +222,85 @@ class HealthStoreHelper {
         query.updateHandler = anchorUpdateHandler
         
         return query
+    }
+}
+
+extension HealthStoreHelper {
+    func totalStepCount(startingFrom startDate: Date, to endDate: Date, completionHandler: ((Int?) -> Void)?) {
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
+        let query = HKStatisticsQuery(quantityType: SampleTypes.steps,
+                                      quantitySamplePredicate: predicate,
+                                      options: HKStatisticsOptions.cumulativeSum)
+        { (query, statistics, error) in
+            guard error == nil else {
+                print("error fetching step count: ", error!)
+                return
+            }
+            
+            let totalStepCount = (statistics?.sumQuantity()?.doubleValue(for: HKUnit.count())).map(Int.init)
+            completionHandler?(totalStepCount)
+        }
+        
+        store.execute(query)
+    }
+    
+    /// Fetches the total step count in the last 6 months
+    func totalStepCount(completionHandler: ((Int?) -> Void)? = nil) {
+        let currentDate = Date()
+        let startDate = Calendar.current.date(byAdding: .month, value: -6, to: currentDate)!
+        
+        totalStepCount(startingFrom: startDate, to: currentDate, completionHandler: completionHandler)
+    }
+    
+    /// User's average weight in kilograms, or nil if there are no values
+    func averageWeight(startingFrom startDate: Date, to endDate: Date, completionHandler: ((Double?) -> Void)? = nil) {
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
+        let query = HKStatisticsQuery(quantityType: SampleTypes.mass,
+                                      quantitySamplePredicate: predicate,
+                                      options: .discreteAverage)
+        { (query, statistics, error) in
+            guard error == nil else {
+                print("error occured fetching average weight: ", error!.localizedDescription)
+                return
+            }
+            
+            let averageWeight = statistics?.averageQuantity()?.doubleValue(for: HKUnit.gramUnit(with: .kilo))
+            completionHandler?(averageWeight)
+        }
+        
+        store.execute(query)
+    }
+    
+    func averageWeight(_ completionHandler: ((Double?) -> Void)? = nil) {
+        let currentDate = Date()
+        let startDate = Calendar.current.date(byAdding: .month, value: -6, to: currentDate)!
+        
+        averageWeight(startingFrom: startDate, to: currentDate, completionHandler: completionHandler)
+    }
+    
+    func averageHeight(startingFrom startDate: Date, to endDate: Date, completionHandler: ((Double?) -> Void)? = nil) {
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
+        let query = HKStatisticsQuery(quantityType: SampleTypes.height,
+                                      quantitySamplePredicate: predicate,
+                                      options: .discreteAverage)
+        { (query, statistics, error) in
+            guard error == nil else {
+                print("error occured fetching average height: ", error!.localizedDescription)
+                return
+            }
+            
+            let averageHeight = statistics?.averageQuantity()?.doubleValue(for: HKUnit.meterUnit(with: .centi))
+            completionHandler?(averageHeight)
+        }
+        
+        store.execute(query)
+    }
+    
+    func averageHeight(_ completionHandler: ((Double?) -> Void)? = nil) {
+        let currentDate = Date()
+        let startDate = Calendar.current.date(byAdding: .month, value: -6, to: currentDate)!
+        
+        averageHeight(startingFrom: startDate, to: currentDate, completionHandler: completionHandler)
     }
 }
 
