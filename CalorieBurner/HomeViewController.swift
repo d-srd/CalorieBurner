@@ -228,19 +228,6 @@ class HomeViewController: UIViewController {
         massProgressView.addGestureRecognizer(tap)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            HealthStoreHelper.shared.fetchStepCountBetween(dates: (Date(timeIntervalSinceReferenceDate: 0), Date())) {
-                guard let statistics = $0, let totalSteps = statistics.sumQuantity() else { return }
-                let countOfDays = Calendar.current.dateComponents([.day], from: statistics.startDate, to: statistics.endDate).day!
-                let averageStepCount = totalSteps.doubleValue(for: HKUnit.count()) / Double(countOfDays)
-                return
-            }
-        }
-    }
-    
     deinit {
         NotificationCenter.default.removeObserver(self, name: .UnitMassChanged, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UnitEnergyChanged, object: nil)
