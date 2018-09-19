@@ -16,6 +16,9 @@ open class BorderView: UIView {
     }
     
     @IBInspectable
+    public var fooBar = 50
+    
+    @IBInspectable
     public var borderWidth: CGFloat = 0 {
         didSet { layer.borderWidth = borderWidth }
     }
